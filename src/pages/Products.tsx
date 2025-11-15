@@ -62,13 +62,6 @@ export default function Products() {
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
-          <Button
-            variant={selectedCategory === 'all' ? 'default' : 'outline'}
-            onClick={() => handleCategoryChange('all')}
-            className={selectedCategory === 'all' ? 'bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background' : ''}
-          >
-            All Products
-          </Button>
           {categories.map(category => (
             <Button
               key={category}
