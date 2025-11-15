@@ -6,11 +6,8 @@ import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import { Award, Globe, Shield, Zap } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
-
 export default function Index() {
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Snowfall />
       <Navbar />
 
@@ -18,11 +15,7 @@ export default function Index() {
       <section className="relative pt-32 pb-20 px-4 winter-gradient">
         <div className="container mx-auto text-center">
           <div className="mb-8 flex justify-center">
-            <img 
-              src={yetiLogo} 
-              alt="Yeti Peptides Logo" 
-              className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300 rounded-full border-4 border-[hsl(var(--ice-blue))]/30 p-4 bg-card/20"
-            />
+            <img src={yetiLogo} alt="Yeti Peptides Logo" className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300 rounded-full border-4 border-[hsl(var(--ice-blue))]/30 p-4 bg-card/20" />
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(71,217,217,0.5)] [text-shadow:_0_0_30px_rgb(71_217_217_/_40%)]">
             Power. Precision. Performance.
@@ -120,9 +113,7 @@ export default function Index() {
                 99%+
               </div>
               <h3 className="font-semibold mb-2">Purity Guaranteed</h3>
-              <p className="text-sm text-muted-foreground">
-                Third-party tested with COA verification for every batch
-              </p>
+              <p className="text-sm text-muted-foreground">COA verification for every batch</p>
             </div>
 
             <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
@@ -151,6 +142,5 @@ export default function Index() {
       <FAQ />
 
       <Footer />
-    </div>
-  );
+    </div>;
 }
