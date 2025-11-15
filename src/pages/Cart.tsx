@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/contexts/CartContext';
@@ -25,6 +26,8 @@ export default function Cart() {
               </Button>
             </Link>
           </div>
+
+          <Footer />
         </div>
       </div>
     );
@@ -103,6 +106,8 @@ export default function Cart() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
