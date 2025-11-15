@@ -37,6 +37,9 @@ export default function Navbar() {
               <Link to="/products" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
                 Products
               </Link>
+              <Link to="/calculator" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
+                Calculator
+              </Link>
               <Link to="/contact" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
                 Contact
               </Link>
@@ -79,6 +82,13 @@ export default function Navbar() {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Products
+                    </Link>
+                    <Link 
+                      to="/calculator" 
+                      className="text-lg hover:text-[hsl(var(--ice-blue))] transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Calculator
                     </Link>
                     <Link 
                       to="/contact" 
