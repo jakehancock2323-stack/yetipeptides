@@ -172,13 +172,9 @@ export default function Checkout() {
                     <RadioGroupItem value="eth" id="eth" />
                     <Label htmlFor="eth" className="cursor-pointer">Ethereum (ETH)</Label>
                   </div>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <RadioGroupItem value="usdt-trc" id="usdt-trc" />
-                    <Label htmlFor="usdt-trc" className="cursor-pointer">USDT (TRC20)</Label>
-                  </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="usdt-erc" id="usdt-erc" />
-                    <Label htmlFor="usdt-erc" className="cursor-pointer">USDT (ERC20)</Label>
+                    <RadioGroupItem value="usdt" id="usdt" />
+                    <Label htmlFor="usdt" className="cursor-pointer">USDT</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -220,9 +216,13 @@ export default function Checkout() {
                   <span>Subtotal:</span>
                   <span>${getTotalPrice().toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-2xl font-bold pt-2">
+                <div className="flex justify-between text-lg">
+                  <span>Delivery:</span>
+                  <span>$65.00</span>
+                </div>
+                <div className="flex justify-between text-2xl font-bold pt-2 border-t border-border mt-2">
                   <span>Total:</span>
-                  <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+                  <span className="text-[hsl(var(--ice-blue))]">${(getTotalPrice() + 65).toFixed(2)}</span>
                 </div>
               </div>
             </div>
