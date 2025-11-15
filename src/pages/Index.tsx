@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import { Activity, Brain, Dumbbell, Heart, Plus, Sparkles } from 'lucide-react';
+import yetiLogo from '@/assets/yeti-logo.png';
 
 export default function Index() {
   const categories = [
@@ -22,7 +23,14 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 winter-gradient">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+          <div className="mb-8 flex justify-center">
+            <img 
+              src={yetiLogo} 
+              alt="Yeti Peptides Logo" 
+              className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300"
+            />
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
             Power. Precision. Performance.
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
