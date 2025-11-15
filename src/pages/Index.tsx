@@ -106,11 +106,45 @@ export default function Index() {
 
       {/* Why Choose Us Section */}
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[hsl(var(--deep-freeze))]/30">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Researchers Choose Yeti Peptides</h2>
-          <p className="text-lg text-muted-foreground">
-            Join the research community who trust us for their peptide research needs
-          </p>
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Researchers Choose Yeti Peptides</h2>
+            <p className="text-lg text-muted-foreground">
+              Join the research community who trust us for their peptide research needs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
+              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] bg-clip-text text-transparent mb-2">
+                99%+
+              </div>
+              <h3 className="font-semibold mb-2">Purity Guaranteed</h3>
+              <p className="text-sm text-muted-foreground">
+                Third-party tested with COA verification for every batch
+              </p>
+            </div>
+
+            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
+              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent mb-2">
+                24/7
+              </div>
+              <h3 className="font-semibold mb-2">Support Available</h3>
+              <p className="text-sm text-muted-foreground">
+                Expert guidance whenever you need it via email and Discord
+              </p>
+            </div>
+
+            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
+              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--aurora))] to-[hsl(var(--arctic-teal))] bg-clip-text text-transparent mb-2">
+                Fast
+              </div>
+              <h3 className="font-semibold mb-2">Shipping Worldwide</h3>
+              <p className="text-sm text-muted-foreground">
+                Discreet packaging with tracking and temperature control
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
