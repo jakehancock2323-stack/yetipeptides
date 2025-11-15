@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
+import Snowfall from './Snowfall';
 
 interface CartDrawerProps {
   open: boolean;
@@ -17,6 +18,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
     return (
       <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
+          <Snowfall />
           <SheetHeader>
             <SheetTitle>Shopping Cart</SheetTitle>
           </SheetHeader>
@@ -39,6 +41,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto flex flex-col">
+        <Snowfall />
         <SheetHeader>
           <SheetTitle>Shopping Cart ({items.length} items)</SheetTitle>
         </SheetHeader>
