@@ -15,6 +15,8 @@ interface CartContextType {
   clearCart: () => void;
   getTotalPrice: () => number;
   getItemCount: () => number;
+  includeEbook: boolean;
+  setIncludeEbook: (include: boolean) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -25,9 +27,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [includeEbook, setIncludeEbook] = useState<boolean>(() => {
+    const saved = localStorage.getItem('includeEbook');
+    return saved ? JSON.parse(saved) : false;
+  });
+
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
+
+  useEffect(() => {
+    localStorage.setItem('includeEbook', JSON.stringify(includeEbook));
+  }, [includeEbook]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
     setItems(prev => {
@@ -75,7 +86,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clearCart = () => setItems([]);
 
   const getTotalPrice = () => {
-    return items.reduce((total, item) => total + (item.variant.price * item.quantity), 0);
+    const itemsTotal = items.reduce((total, item) => total + (item.variant.price * item.quantity), 0);
+    const ebookPrice = includeEbook ? 4.99 : 0;
+    return itemsTotal + ebookPrice;
   };
 
   const getItemCount = () => {
@@ -90,7 +103,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       updateQuantity,
       clearCart,
       getTotalPrice,
-      getItemCount
+      getItemCount,
+      includeEbook,
+      setIncludeEbook
     }}>
       {children}
     </CartContext.Provider>

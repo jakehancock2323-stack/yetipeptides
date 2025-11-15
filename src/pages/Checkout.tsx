@@ -13,7 +13,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const { items, getTotalPrice, clearCart } = useCart();
+  const { items, getTotalPrice, clearCart, includeEbook } = useCart();
   const [paymentMethod, setPaymentMethod] = useState('btc');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -57,7 +57,8 @@ export default function Checkout() {
       })),
       subtotal: getTotalPrice(),
       deliveryFee: 65,
-      total: getTotalPrice() + 65
+      total: getTotalPrice() + 65,
+      includeEbook
     };
 
     try {
@@ -243,6 +244,18 @@ export default function Checkout() {
                     </div>
                   </div>
                 ))}
+
+                {includeEbook && (
+                  <div className="border-b border-border pb-4">
+                    <div className="flex justify-between mb-1">
+                      <span className="font-semibold">Yeti's E-book – The GLP1 Series</span>
+                      <span>$4.99</span>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Digital Guide × 1
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2 pt-4 border-t border-border">
