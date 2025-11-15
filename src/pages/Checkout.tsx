@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function Checkout() {
     return null;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -42,10 +43,42 @@ export default function Checkout() {
       }
     }
 
-    // Simulate order submission
-    toast.success('Order submitted! Check your email for payment instructions.');
-    clearCart();
-    navigate('/');
+    // Prepare order data
+    const orderData = {
+      customerDetails: formData,
+      paymentMethod,
+      items: items.map(item => ({
+        productName: item.product.name,
+        productCategory: item.product.category,
+        specification: item.variant.specification,
+        quantity: item.quantity,
+        price: item.variant.price,
+        lineTotal: item.variant.price * item.quantity
+      })),
+      subtotal: getTotalPrice(),
+      deliveryFee: 65,
+      total: getTotalPrice() + 65
+    };
+
+    try {
+      // Call the edge function to send email
+      const { error } = await supabase.functions.invoke('send-order-email', {
+        body: orderData
+      });
+
+      if (error) {
+        console.error('Error sending order email:', error);
+        toast.error('Order placed but email notification failed. We have your details.');
+      } else {
+        toast.success('Order submitted! Check your email for payment instructions.');
+      }
+      
+      clearCart();
+      navigate('/');
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      toast.error('There was an error processing your order. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
