@@ -24,9 +24,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="frosted-glass rounded-lg p-6 hover:ice-glow transition-all duration-300">
+    <div className="frosted-glass rounded-lg p-6 hover:ice-glow hover:scale-[1.02] hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 group">
       <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-1">{product.name}</h3>
+        <h3 className="text-xl font-semibold mb-1 group-hover:text-[hsl(var(--ice-blue))] transition-colors">{product.name}</h3>
         <p className="text-sm text-muted-foreground">{product.category}</p>
       </div>
 
