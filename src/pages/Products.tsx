@@ -12,7 +12,9 @@ import { Search } from 'lucide-react';
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>(searchParams.get('category') || 'all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get('category') || 'Weight Loss'
+  );
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -23,17 +25,13 @@ export default function Products() {
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    const matchesCategory = product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    if (category === 'all') {
-      setSearchParams({});
-    } else {
-      setSearchParams({ category });
-    }
+    setSearchParams({ category });
   };
 
   return (
