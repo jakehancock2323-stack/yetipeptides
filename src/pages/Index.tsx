@@ -83,8 +83,8 @@ export default function Index() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Trusted Reputation</h3>
                 <p className="text-muted-foreground">
-                  Built on trust and transparency within the research community. Thousands of 
-                  satisfied researchers trust Yeti Peptides for their critical research needs.
+                  Built on trust and transparency within the research community. Trusted by 
+                  researchers worldwide for their critical research needs.
                 </p>
               </div>
 
@@ -107,23 +107,9 @@ export default function Index() {
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[hsl(var(--deep-freeze))]/30">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Researchers Choose Yeti Peptides</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of researchers who trust us for their peptide research needs
+          <p className="text-lg text-muted-foreground">
+            Join the research community who trust us for their peptide research needs
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-[hsl(var(--ice-blue))] mb-2">100+</div>
-              <div className="text-muted-foreground">Research Compounds</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[hsl(var(--glacier))] mb-2">24/7</div>
-              <div className="text-muted-foreground">Customer Support</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[hsl(var(--aurora))] mb-2">5000+</div>
-              <div className="text-muted-foreground">Satisfied Researchers</div>
-            </div>
-          </div>
         </div>
       </section>
 
