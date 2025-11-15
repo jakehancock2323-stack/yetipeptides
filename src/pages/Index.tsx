@@ -20,10 +20,10 @@ export default function Index() {
             <img 
               src={yetiLogo} 
               alt="Yeti Peptides Logo" 
-              className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300"
+              className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300 rounded-full border-4 border-[hsl(var(--ice-blue))]/30 p-4 bg-card/20"
             />
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(71,217,217,0.5)] [text-shadow:_0_0_30px_rgb(71_217_217_/_40%)]">
             Power. Precision. Performance.
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
