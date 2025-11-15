@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import FAQ from '@/components/FAQ';
 import { Award, Globe, Shield, Zap } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
 
@@ -112,6 +113,8 @@ export default function Index() {
           </p>
         </div>
       </section>
+
+      <FAQ />
 
       <Footer />
     </div>
