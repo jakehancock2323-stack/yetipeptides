@@ -24,13 +24,25 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="frosted-glass rounded-lg p-6 hover:ice-glow hover:scale-[1.02] hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 group">
-      <div className="mb-4">
+    <div className="frosted-glass rounded-lg p-6 hover:ice-glow hover:scale-[1.02] hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 group relative overflow-hidden">
+      {/* Ice shards decoration */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[hsl(var(--ice-blue))]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[hsl(var(--ice-blue))]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[hsl(var(--ice-blue))]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[hsl(var(--ice-blue))]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* Frost crystals */}
+      <div className="absolute top-2 left-2 text-[hsl(var(--ice-blue))]/30 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">❄</div>
+      <div className="absolute top-2 right-2 text-[hsl(var(--ice-blue))]/30 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">❄</div>
+      <div className="absolute bottom-2 left-2 text-[hsl(var(--ice-blue))]/30 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">❄</div>
+      <div className="absolute bottom-2 right-2 text-[hsl(var(--ice-blue))]/30 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">❄</div>
+      
+      <div className="mb-4 relative z-10">
         <h3 className="text-xl font-semibold mb-1 group-hover:text-[hsl(var(--ice-blue))] transition-colors">{product.name}</h3>
         <p className="text-sm text-muted-foreground">{product.category}</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 relative z-10">
         <div>
           <label className="text-sm text-muted-foreground mb-2 block">Specification</label>
           <Select
