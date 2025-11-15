@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import Snowfall from './Snowfall';
@@ -12,7 +13,7 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
-  const { items, removeFromCart, updateQuantity, getTotalPrice } = useCart();
+  const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
 
   if (items.length === 0) {
     return (
@@ -97,6 +98,30 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
         </div>
 
         <div className="border-t border-border pt-4 mt-auto space-y-4">
+          {/* E-book Add-on */}
+          <div className="frosted-glass rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="ebook-addon"
+                checked={includeEbook}
+                onCheckedChange={(checked) => setIncludeEbook(checked as boolean)}
+                className="mt-1"
+              />
+              <div className="flex-1">
+                <label
+                  htmlFor="ebook-addon"
+                  className="text-sm font-semibold cursor-pointer leading-tight block mb-1"
+                >
+                  Yeti's E-book – The GLP1 Series
+                </label>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
+                </p>
+                <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+$4.99</p>
+              </div>
+            </div>
+          </div>
+
           <div className="frosted-glass rounded-lg p-4 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal:</span>

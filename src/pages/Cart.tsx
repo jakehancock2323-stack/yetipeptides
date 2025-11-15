@@ -4,11 +4,12 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 
 export default function Cart() {
-  const { items, removeFromCart, updateQuantity, getTotalPrice } = useCart();
+  const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
 
   if (items.length === 0) {
     return (
@@ -90,6 +91,30 @@ export default function Cart() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* E-book Add-on */}
+          <div className="frosted-glass rounded-lg p-6 mb-6">
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="ebook-addon-cart"
+                checked={includeEbook}
+                onCheckedChange={(checked) => setIncludeEbook(checked as boolean)}
+                className="mt-1"
+              />
+              <div className="flex-1">
+                <label
+                  htmlFor="ebook-addon-cart"
+                  className="text-lg font-semibold cursor-pointer leading-tight block mb-2"
+                >
+                  Yeti's E-book – The GLP1 Series
+                </label>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                  A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
+                </p>
+                <p className="text-xl font-bold text-[hsl(var(--ice-blue))]">+$4.99</p>
+              </div>
+            </div>
           </div>
 
           <div className="frosted-glass rounded-lg p-6">

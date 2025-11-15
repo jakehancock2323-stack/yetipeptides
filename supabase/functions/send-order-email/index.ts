@@ -33,6 +33,7 @@ interface OrderEmailRequest {
   subtotal: number;
   deliveryFee: number;
   total: number;
+  includeEbook?: boolean;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -45,7 +46,7 @@ const handler = async (req: Request): Promise<Response> => {
     const orderData: OrderEmailRequest = await req.json();
     console.log("Received order data:", orderData);
 
-    const { customerDetails, paymentMethod, items, subtotal, deliveryFee, total } = orderData;
+    const { customerDetails, paymentMethod, items, subtotal, deliveryFee, total, includeEbook } = orderData;
 
     // Build order items HTML
     const itemsHTML = items.map(item => `
@@ -58,6 +59,18 @@ const handler = async (req: Request): Promise<Response> => {
         <td style="padding: 12px; text-align: right; font-weight: 600;">$${item.lineTotal.toFixed(2)}</td>
       </tr>
     `).join('');
+
+    // Add e-book row if included
+    const ebookHTML = includeEbook ? `
+      <tr style="border-bottom: 1px solid #eee; background: #f0f9ff;">
+        <td style="padding: 12px;">Yeti's E-book – The GLP1 Series</td>
+        <td style="padding: 12px; color: #666;">Digital Guide</td>
+        <td style="padding: 12px;">PDF Download</td>
+        <td style="padding: 12px; text-align: center;">1</td>
+        <td style="padding: 12px; text-align: right;">$4.99</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">$4.99</td>
+      </tr>
+    ` : '';
 
     const emailHTML = `
       <!DOCTYPE html>
@@ -115,6 +128,7 @@ const handler = async (req: Request): Promise<Response> => {
               </thead>
               <tbody>
                 ${itemsHTML}
+                ${ebookHTML}
               </tbody>
             </table>
 
