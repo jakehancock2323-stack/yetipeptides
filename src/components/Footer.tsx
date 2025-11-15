@@ -24,19 +24,37 @@ export default function Footer() {
         <div className="border-t border-border pt-8">
           <h3 className="text-xl font-bold text-center mb-6">Contact Information</h3>
           <div className="flex flex-wrap justify-center gap-6 mb-6">
-            <a href="mailto:support@yetipeptides.com" className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors">
+            <a 
+              href="mailto:support@yetipeptides.com" 
+              className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Mail className="w-4 h-4" />
               <span className="text-sm">support@yetipeptides.com</span>
             </a>
-            <a href="#" className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors">
+            <a 
+              href="https://discord.gg/YOUR_DISCORD_INVITE" 
+              className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <MessageCircle className="w-4 h-4" />
               <span className="text-sm">Discord</span>
             </a>
-            <a href="#" className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors">
+            <a 
+              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
+              className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Send className="w-4 h-4" />
               <span className="text-sm">Telegram</span>
             </a>
-            <a href="#" className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors">
+            <a 
+              href="/" 
+              className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
+            >
               <Globe className="w-4 h-4" />
               <span className="text-sm">Website</span>
             </a>
