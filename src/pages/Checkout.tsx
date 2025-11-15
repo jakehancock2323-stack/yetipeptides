@@ -74,7 +74,7 @@ export default function Checkout() {
       }
       
       clearCart();
-      navigate('/');
+      navigate('/order-success');
     } catch (error) {
       console.error('Error submitting order:', error);
       toast.error('There was an error processing your order. Please try again.');
