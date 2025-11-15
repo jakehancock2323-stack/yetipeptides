@@ -203,12 +203,12 @@ export default function Checkout() {
                     <Label htmlFor="btc" className="cursor-pointer">Bitcoin (BTC)</Label>
                   </div>
                   <div className="flex items-center space-x-2 mb-2">
-                    <RadioGroupItem value="eth" id="eth" />
-                    <Label htmlFor="eth" className="cursor-pointer">Ethereum (ETH)</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
                     <RadioGroupItem value="usdt" id="usdt" />
                     <Label htmlFor="usdt" className="cursor-pointer">USDT</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="usdc" id="usdc" />
+                    <Label htmlFor="usdc" className="cursor-pointer">USDC</Label>
                   </div>
                 </RadioGroup>
               </div>
