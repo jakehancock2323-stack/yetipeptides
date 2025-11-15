@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Calculator, Copy, RotateCcw } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -10,115 +10,104 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
+type SyringeSize = '0.3ml-30units' | '0.5ml-50units' | '1ml-100units' | '3ml-100units';
+
 export default function PeptideCalculator() {
   const { toast } = useToast();
   
   // Input states
-  const [productName, setProductName] = useState('');
-  const [peptideMass, setPeptideMass] = useState<string>('');
-  const [peptideMassUnit, setPeptideMassUnit] = useState<'mg' | 'mcg'>('mg');
-  const [numberOfVials, setNumberOfVials] = useState<string>('1');
-  const [reconVolume, setReconVolume] = useState<string>('');
-  const [desiredDose, setDesiredDose] = useState<string>('');
-  const [desiredDoseUnit, setDesiredDoseUnit] = useState<'mg' | 'mcg'>('mg');
+  const [syringeSize, setSyringeSize] = useState<SyringeSize>('1ml-100units');
+  const [peptideWeight, setPeptideWeight] = useState<string>('');
+  const [bacWater, setBacWater] = useState<string>('');
+  const [desiredDosageMg, setDesiredDosageMg] = useState<string>('');
+  const [desiredDosageMcg, setDesiredDosageMcg] = useState<string>('');
+  const [showResults, setShowResults] = useState(false);
 
   // Output states
-  const [concentration, setConcentration] = useState<string>('—');
-  const [doseVolume, setDoseVolume] = useState<string>('—');
-  const [dosesPerVial, setDosesPerVial] = useState<string>('—');
-  const [totalDoses, setTotalDoses] = useState<string>('—');
-  const [summary, setSummary] = useState<string>('');
-  const [showWarning, setShowWarning] = useState(false);
+  const [requiredVolumeMl, setRequiredVolumeMl] = useState<number>(0);
+  const [requiredVolumeIU, setRequiredVolumeIU] = useState<number>(0);
+  const [syringeUnits, setSyringeUnits] = useState<number>(100);
+  const [syringeMaxMl, setSyringeMaxMl] = useState<number>(1);
 
-  // Convert to mg for calculations
-  const convertToMg = (value: number, unit: 'mg' | 'mcg') => {
-    return unit === 'mcg' ? value / 1000 : value;
+  // Get syringe specifications
+  const getSyringeSpecs = (size: SyringeSize) => {
+    switch (size) {
+      case '0.3ml-30units':
+        return { maxMl: 0.3, units: 30 };
+      case '0.5ml-50units':
+        return { maxMl: 0.5, units: 50 };
+      case '1ml-100units':
+        return { maxMl: 1.0, units: 100 };
+      case '3ml-100units':
+        return { maxMl: 3.0, units: 100 };
+      default:
+        return { maxMl: 1.0, units: 100 };
+    }
   };
 
-  // Perform calculations
-  useEffect(() => {
-    const mass = parseFloat(peptideMass);
-    const volume = parseFloat(reconVolume);
-    const dose = parseFloat(desiredDose);
-    const vials = parseInt(numberOfVials);
+  const handleCalculate = () => {
+    const weight = parseFloat(peptideWeight);
+    const water = parseFloat(bacWater);
+    
+    // Determine desired dose in mg
+    let doseMg = 0;
+    if (desiredDosageMg) {
+      doseMg = parseFloat(desiredDosageMg);
+    } else if (desiredDosageMcg) {
+      doseMg = parseFloat(desiredDosageMcg) / 1000;
+    }
 
     // Validation
-    if (isNaN(mass) || mass <= 0 || isNaN(volume) || volume <= 0 || isNaN(vials) || vials <= 0) {
-      setConcentration('—');
-      setDoseVolume('—');
-      setDosesPerVial('—');
-      setTotalDoses('—');
-      setSummary('');
-      setShowWarning(false);
+    if (isNaN(weight) || weight <= 0 || isNaN(water) || water <= 0 || doseMg <= 0) {
+      toast({
+        title: "Invalid Input",
+        description: "Please fill in all required fields with valid numbers",
+        variant: "destructive"
+      });
       return;
     }
 
-    // Convert to mg
-    const massInMg = convertToMg(mass, peptideMassUnit);
-    const doseInMg = isNaN(dose) || dose <= 0 ? 0 : convertToMg(dose, desiredDoseUnit);
-
     // Calculate concentration (mg/mL)
-    const concMgMl = massInMg / volume;
-    setConcentration(concMgMl.toFixed(3));
+    const concentration = weight / water;
+    
+    // Calculate required volume (mL)
+    const volumeMl = doseMg / concentration;
+    
+    // Get syringe specs
+    const specs = getSyringeSpecs(syringeSize);
+    
+    // Calculate IU (units on syringe)
+    const volumeIU = (volumeMl / specs.maxMl) * specs.units;
 
-    // Calculate dose volume if dose is provided
-    if (doseInMg > 0) {
-      const doseVol = doseInMg / concMgMl;
-      setDoseVolume(doseVol.toFixed(3));
-
-      // Calculate doses per vial
-      const dosesPerVialCalc = massInMg / doseInMg;
-      setDosesPerVial(dosesPerVialCalc.toFixed(2));
-
-      // Calculate total doses
-      const totalDosesCalc = dosesPerVialCalc * vials;
-      setTotalDoses(totalDosesCalc.toFixed(2));
-
-      // Check if dose exceeds mass
-      if (doseInMg > massInMg) {
-        setShowWarning(true);
-      } else {
-        setShowWarning(false);
-      }
-
-      // Generate summary
-      const productText = productName ? `${productName}: ` : '';
-      const summaryText = `${productText}${mass} ${peptideMassUnit} per vial with ${volume} mL reconstitution gives ${concMgMl.toFixed(3)} mg/mL concentration. Desired dose of ${dose} ${desiredDoseUnit} requires ${doseVol.toFixed(3)} mL. Each vial provides ${dosesPerVialCalc.toFixed(2)} doses, totaling ${totalDosesCalc.toFixed(2)} doses across ${vials} vial${vials > 1 ? 's' : ''}.`;
-      setSummary(summaryText);
-    } else {
-      setDoseVolume('—');
-      setDosesPerVial('—');
-      setTotalDoses('—');
-      setSummary('');
-      setShowWarning(false);
-    }
-  }, [productName, peptideMass, peptideMassUnit, numberOfVials, reconVolume, desiredDose, desiredDoseUnit]);
+    setRequiredVolumeMl(volumeMl);
+    setRequiredVolumeIU(volumeIU);
+    setSyringeUnits(specs.units);
+    setSyringeMaxMl(specs.maxMl);
+    setShowResults(true);
+  };
 
   const handleReset = () => {
-    setProductName('');
-    setPeptideMass('');
-    setPeptideMassUnit('mg');
-    setNumberOfVials('1');
-    setReconVolume('');
-    setDesiredDose('');
-    setDesiredDoseUnit('mg');
-    setConcentration('—');
-    setDoseVolume('—');
-    setDosesPerVial('—');
-    setTotalDoses('—');
-    setSummary('');
-    setShowWarning(false);
+    setSyringeSize('1ml-100units');
+    setPeptideWeight('');
+    setBacWater('');
+    setDesiredDosageMg('');
+    setDesiredDosageMcg('');
+    setShowResults(false);
+    setRequiredVolumeMl(0);
+    setRequiredVolumeIU(0);
   };
 
-  const handleCopySummary = () => {
-    if (summary) {
-      navigator.clipboard.writeText(summary);
-      toast({
-        title: "Copied!",
-        description: "Summary copied to clipboard",
-      });
-    }
+  const handleCopyResults = () => {
+    const resultsText = `Required volume: ${requiredVolumeMl.toFixed(3)} mL\nDraw up: ${requiredVolumeIU.toFixed(1)} IU on a ${syringeUnits}-unit syringe`;
+    navigator.clipboard.writeText(resultsText);
+    toast({
+      title: "Copied!",
+      description: "Results copied to clipboard",
+    });
   };
+
+  // Calculate fill percentage for syringe visualization
+  const fillPercentage = showResults ? Math.min((requiredVolumeIU / syringeUnits) * 100, 100) : 0;
 
   return (
     <div className="min-h-screen flex flex-col winter-gradient">
@@ -147,178 +136,203 @@ export default function PeptideCalculator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-[hsl(var(--ice-blue))]">
                 <Calculator className="w-6 h-6" />
-                Calculator Inputs
+                Peptide Dosage Calculator
               </CardTitle>
               <CardDescription>
-                Enter your peptide vial details below
+                Calculate the correct draw volume on your syringe
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Product Name */}
+            <CardContent className="space-y-5">
+              {/* Syringe Size */}
               <div className="space-y-2">
-                <Label htmlFor="productName">Product Name (Optional)</Label>
-                <Input
-                  id="productName"
-                  type="text"
-                  placeholder="e.g., BPC-157"
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
-                  className="bg-input/50"
-                />
+                <Label htmlFor="syringeSize" className="text-base font-semibold">
+                  Syringe Size (Normally 1 mL):
+                </Label>
+                <Select value={syringeSize} onValueChange={(v: SyringeSize) => setSyringeSize(v)}>
+                  <SelectTrigger id="syringeSize" className="bg-input/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0.3ml-30units">0.3 mL (30 units)</SelectItem>
+                    <SelectItem value="0.5ml-50units">0.5 mL (50 units)</SelectItem>
+                    <SelectItem value="1ml-100units">1 mL (100 units)</SelectItem>
+                    <SelectItem value="3ml-100units">3 mL (100 units)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
-              {/* Peptide Mass */}
+              {/* Peptide Weight */}
               <div className="space-y-2">
-                <Label htmlFor="peptideMass">Peptide Mass Per Vial *</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="peptideMass"
-                    type="number"
-                    placeholder="10"
-                    value={peptideMass}
-                    onChange={(e) => setPeptideMass(e.target.value)}
-                    min="0"
-                    step="any"
-                    className="bg-input/50 flex-1"
-                  />
-                  <Select value={peptideMassUnit} onValueChange={(v: 'mg' | 'mcg') => setPeptideMassUnit(v)}>
-                    <SelectTrigger className="w-24 bg-input/50">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="mg">mg</SelectItem>
-                      <SelectItem value="mcg">mcg</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Number of Vials */}
-              <div className="space-y-2">
-                <Label htmlFor="numberOfVials">Number of Vials *</Label>
+                <Label htmlFor="peptideWeight" className="text-base font-semibold">
+                  Peptide Weight (mg):
+                </Label>
                 <Input
-                  id="numberOfVials"
+                  id="peptideWeight"
                   type="number"
-                  placeholder="1"
-                  value={numberOfVials}
-                  onChange={(e) => setNumberOfVials(e.target.value)}
-                  min="1"
-                  step="1"
-                  className="bg-input/50"
-                />
-              </div>
-
-              {/* Reconstitution Volume */}
-              <div className="space-y-2">
-                <Label htmlFor="reconVolume">Reconstitution Volume Per Vial (mL) *</Label>
-                <Input
-                  id="reconVolume"
-                  type="number"
-                  placeholder="2.0"
-                  value={reconVolume}
-                  onChange={(e) => setReconVolume(e.target.value)}
+                  placeholder="10"
+                  value={peptideWeight}
+                  onChange={(e) => setPeptideWeight(e.target.value)}
                   min="0"
                   step="any"
                   className="bg-input/50"
                 />
               </div>
 
-              {/* Desired Dose */}
+              {/* Bacteriostatic Water */}
               <div className="space-y-2">
-                <Label htmlFor="desiredDose">Desired Dose Per Administration</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="desiredDose"
-                    type="number"
-                    placeholder="500"
-                    value={desiredDose}
-                    onChange={(e) => setDesiredDose(e.target.value)}
-                    min="0"
-                    step="any"
-                    className="bg-input/50 flex-1"
-                  />
-                  <Select value={desiredDoseUnit} onValueChange={(v: 'mg' | 'mcg') => setDesiredDoseUnit(v)}>
-                    <SelectTrigger className="w-24 bg-input/50">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="mg">mg</SelectItem>
-                      <SelectItem value="mcg">mcg</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <Label htmlFor="bacWater" className="text-base font-semibold">
+                  Bacteriostatic Water (mL) - How much BAC water will you add?:
+                </Label>
+                <Input
+                  id="bacWater"
+                  type="number"
+                  placeholder="1"
+                  value={bacWater}
+                  onChange={(e) => setBacWater(e.target.value)}
+                  min="0"
+                  step="any"
+                  className="bg-input/50"
+                />
               </div>
 
-              {/* Warning */}
-              {showWarning && (
-                <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/50">
-                  <p className="text-sm text-destructive">
-                    ⚠️ Warning: Desired dose exceeds peptide mass per vial
-                  </p>
-                </div>
-              )}
+              {/* Desired Dosage (mg) */}
+              <div className="space-y-2">
+                <Label htmlFor="desiredDosageMg" className="text-base font-semibold">
+                  Desired Dosage (mg) - What will your regular dosage be?:
+                </Label>
+                <Input
+                  id="desiredDosageMg"
+                  type="number"
+                  placeholder="1"
+                  value={desiredDosageMg}
+                  onChange={(e) => {
+                    setDesiredDosageMg(e.target.value);
+                    if (e.target.value) setDesiredDosageMcg('');
+                  }}
+                  min="0"
+                  step="any"
+                  className="bg-input/50"
+                />
+              </div>
+
+              {/* Desired Dosage (mcg) */}
+              <div className="space-y-2">
+                <Label htmlFor="desiredDosageMcg" className="text-base font-semibold">
+                  Desired Dosage (mcg) - For lower dosage peptides:
+                </Label>
+                <Input
+                  id="desiredDosageMcg"
+                  type="number"
+                  placeholder="Leave blank if using mg"
+                  value={desiredDosageMcg}
+                  onChange={(e) => {
+                    setDesiredDosageMcg(e.target.value);
+                    if (e.target.value) setDesiredDosageMg('');
+                  }}
+                  min="0"
+                  step="any"
+                  className="bg-input/50"
+                />
+              </div>
 
               {/* Action Buttons */}
               <div className="flex gap-3 pt-4">
                 <Button
+                  onClick={handleCalculate}
+                  variant="default"
+                  className="flex-1 ice-glow"
+                >
+                  Calculate
+                </Button>
+                <Button
                   onClick={handleReset}
                   variant="outline"
-                  className="flex-1 ice-glow hover:bg-muted"
+                  className="ice-glow hover:bg-muted"
                 >
-                  <RotateCcw className="w-4 h-4 mr-2" />
-                  Reset
+                  <RotateCcw className="w-4 h-4" />
                 </Button>
               </div>
             </CardContent>
           </Card>
 
           {/* Results Card */}
-          <Card className="frosted-glass ice-glow mt-6">
-            <CardHeader>
-              <CardTitle className="text-[hsl(var(--glacier))]">Calculated Results</CardTitle>
-              <CardDescription>
-                Real-time calculations based on your inputs
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-muted/30 border border-border/30">
-                  <p className="text-sm text-muted-foreground mb-1">Concentration</p>
-                  <p className="text-2xl font-bold text-[hsl(var(--ice-blue))]">{concentration} mg/mL</p>
-                </div>
-                <div className="p-4 rounded-lg bg-muted/30 border border-border/30">
-                  <p className="text-sm text-muted-foreground mb-1">Dose Volume Needed</p>
-                  <p className="text-2xl font-bold text-[hsl(var(--ice-blue))]">{doseVolume} mL</p>
-                </div>
-                <div className="p-4 rounded-lg bg-muted/30 border border-border/30">
-                  <p className="text-sm text-muted-foreground mb-1">Doses Per Vial</p>
-                  <p className="text-2xl font-bold text-[hsl(var(--glacier))]">{dosesPerVial}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-muted/30 border border-border/30">
-                  <p className="text-sm text-muted-foreground mb-1">Total Doses (All Vials)</p>
-                  <p className="text-2xl font-bold text-[hsl(var(--glacier))]">{totalDoses}</p>
-                </div>
-              </div>
-
-              {/* Summary Box */}
-              {summary && (
-                <div className="mt-6 space-y-3">
-                  <Label>Summary</Label>
-                  <div className="p-4 rounded-lg bg-card border border-border">
-                    <p className="text-sm text-foreground/90 leading-relaxed">{summary}</p>
+          {showResults && (
+            <Card className="frosted-glass ice-glow mt-6">
+              <CardHeader>
+                <CardTitle className="text-[hsl(var(--glacier))]">Results</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Text Results */}
+                <div className="space-y-3">
+                  <div className="text-lg">
+                    <span className="text-muted-foreground">Required volume: </span>
+                    <span className="font-bold text-[hsl(var(--ice-blue))]">
+                      {requiredVolumeMl.toFixed(3)} mL
+                    </span>
                   </div>
-                  <Button
-                    onClick={handleCopySummary}
-                    variant="default"
-                    className="w-full ice-glow"
-                  >
-                    <Copy className="w-4 h-4 mr-2" />
-                    Copy Summary to Clipboard
-                  </Button>
+                  <div className="text-lg">
+                    <span className="text-muted-foreground">Draw up: </span>
+                    <span className="font-bold text-[hsl(var(--ice-blue))]">
+                      {requiredVolumeIU.toFixed(1)} IU
+                    </span>
+                    <span className="text-muted-foreground"> on a {syringeUnits}-unit syringe</span>
+                  </div>
                 </div>
-              )}
-            </CardContent>
-          </Card>
+
+                {/* Visual Syringe */}
+                <div className="space-y-3 pt-4">
+                  <Label>Visual Guide:</Label>
+                  <div className="flex items-center justify-center">
+                    <div className="relative w-full max-w-2xl">
+                      {/* Syringe Container */}
+                      <div className="relative h-16 rounded-r-lg border-2 border-[hsl(var(--ice-blue))] bg-card/50 overflow-hidden">
+                        {/* Filled portion */}
+                        <div 
+                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] transition-all duration-500 opacity-60"
+                          style={{ width: `${fillPercentage}%` }}
+                        />
+                        
+                        {/* Measurement lines */}
+                        <div className="absolute inset-0 flex">
+                          {Array.from({ length: syringeUnits / 10 + 1 }).map((_, i) => {
+                            const position = (i / (syringeUnits / 10)) * 100;
+                            return (
+                              <div
+                                key={i}
+                                className="absolute h-full border-l border-border/30"
+                                style={{ left: `${position}%` }}
+                              >
+                                <span className="absolute -bottom-6 -translate-x-1/2 text-xs text-muted-foreground">
+                                  {i * 10}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      
+                      {/* Label showing IU value */}
+                      <div className="text-center mt-10 pt-2">
+                        <span className="text-xl font-bold text-[hsl(var(--ice-blue))]">
+                          {requiredVolumeIU.toFixed(2)} IU
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Copy Button */}
+                <Button
+                  onClick={handleCopyResults}
+                  variant="outline"
+                  className="w-full ice-glow"
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copy Results to Clipboard
+                </Button>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </main>
 
