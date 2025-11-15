@@ -1,0 +1,108 @@
+import { Link } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
+import Snowfall from '@/components/Snowfall';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useCart } from '@/contexts/CartContext';
+import { Trash2, ShoppingBag } from 'lucide-react';
+
+export default function Cart() {
+  const { items, removeFromCart, updateQuantity, getTotalPrice } = useCart();
+
+  if (items.length === 0) {
+    return (
+      <div className="min-h-screen">
+        <Snowfall />
+        <Navbar />
+        <div className="container mx-auto px-4 pt-32">
+          <div className="max-w-2xl mx-auto text-center py-20">
+            <ShoppingBag className="w-24 h-24 mx-auto mb-6 text-muted-foreground" />
+            <h2 className="text-3xl font-bold mb-4">Your cart is empty</h2>
+            <p className="text-muted-foreground mb-8">Add some products to get started!</p>
+            <Link to="/products">
+              <Button className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background">
+                Browse Products
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen pb-20">
+      <Snowfall />
+      <Navbar />
+
+      <div className="container mx-auto px-4 pt-32">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+          Shopping Cart
+        </h1>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="frosted-glass rounded-lg p-6 mb-6">
+            {items.map((item, index) => (
+              <div
+                key={`${item.product.id}-${item.variant.specification}`}
+                className={`flex flex-col md:flex-row gap-4 items-start md:items-center ${
+                  index !== items.length - 1 ? 'border-b border-border pb-6 mb-6' : ''
+                }`}
+              >
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-1">{item.product.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{item.product.category}</p>
+                  <p className="text-sm">{item.variant.specification}</p>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="number"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) =>
+                        updateQuantity(
+                          item.product.id,
+                          item.variant.specification,
+                          parseInt(e.target.value) || 1
+                        )
+                      }
+                      className="w-20"
+                    />
+                  </div>
+
+                  <div className="text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[100px] text-right">
+                    ${(item.variant.price * item.quantity).toFixed(2)}
+                  </div>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeFromCart(item.product.id, item.variant.specification)}
+                    className="hover:bg-destructive hover:text-destructive-foreground"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="frosted-glass rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6 text-2xl font-bold">
+              <span>Total:</span>
+              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+            </div>
+
+            <Link to="/checkout">
+              <Button className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background" size="lg">
+                Proceed to Checkout
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
