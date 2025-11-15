@@ -49,30 +49,44 @@ export default function Contact() {
                 <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">support@yetipeptides.com</p>
-                </div>
+              <div>
+                <h3 className="font-semibold mb-1">Email</h3>
+                <p className="text-muted-foreground">yetipeptides@protonmail.com</p>
               </div>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
-                  <Send className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Telegram</h3>
-                  <p className="text-muted-foreground">@YetiPeptides</p>
-                </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
+                <Send className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
               </div>
+              <div>
+                <h3 className="font-semibold mb-1">Telegram</h3>
+                <a 
+                  href="https://t.me/yetipeptides" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
+                >
+                  @yetipeptides
+                </a>
+              </div>
+            </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Discord</h3>
-                  <p className="text-muted-foreground">YetiPeptides#1234</p>
-                </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
+                <MessageCircle className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Discord</h3>
+                <a 
+                  href="https://discord.gg/seDb5c9XkM" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
+                >
+                  Join Server
+                </a>
+              </div>
               </div>
             </div>
 

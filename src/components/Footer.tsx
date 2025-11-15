@@ -25,16 +25,16 @@ export default function Footer() {
           <h3 className="text-xl font-bold text-center mb-6">Contact Information</h3>
           <div className="flex flex-wrap justify-center gap-6 mb-6">
             <a 
-              href="mailto:support@yetipeptides.com" 
+              href="mailto:yetipeptides@protonmail.com" 
               className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Mail className="w-4 h-4" />
-              <span className="text-sm">support@yetipeptides.com</span>
+              <span className="text-sm">yetipeptides@protonmail.com</span>
             </a>
             <a 
-              href="https://discord.gg/YOUR_DISCORD_INVITE" 
+              href="https://discord.gg/seDb5c9XkM" 
               className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
               target="_blank"
               rel="noopener noreferrer"
@@ -43,7 +43,7 @@ export default function Footer() {
               <span className="text-sm">Discord</span>
             </a>
             <a 
-              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
+              href="https://t.me/yetipeptides" 
               className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
               target="_blank"
               rel="noopener noreferrer"
