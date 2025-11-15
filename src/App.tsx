@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import AgeVerification from "./components/AgeVerification";
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
@@ -29,6 +30,7 @@ const App = () => {
           <AgeVerification onVerified={() => setIsVerified(true)} />
           {isVerified && (
             <BrowserRouter>
+              <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />
