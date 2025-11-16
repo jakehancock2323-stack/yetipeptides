@@ -40,7 +40,7 @@ export default function OrderSuccess() {
                         <p className="text-foreground/60">{item.specification}</p>
                         <p className="text-foreground/60">Qty: {item.quantity}</p>
                       </div>
-                      <p className="font-medium">R{item.lineTotal.toFixed(2)}</p>
+                      <p className="font-medium">${item.lineTotal.toFixed(2)}</p>
                     </div>
                   ))}
                   {orderData.includeEbook && (
@@ -48,21 +48,21 @@ export default function OrderSuccess() {
                       <div className="flex-1">
                         <p className="font-medium">Yeti's E-book – The GLP1 Series</p>
                       </div>
-                      <p className="font-medium">R4.99</p>
+                      <p className="font-medium">$4.99</p>
                     </div>
                   )}
                   <div className="border-t border-border pt-3 mt-3">
                     <div className="flex justify-between text-sm">
                       <span>Subtotal:</span>
-                      <span>R{orderData.subtotal.toFixed(2)}</span>
+                      <span>${orderData.subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Delivery:</span>
-                      <span>R{orderData.deliveryFee.toFixed(2)}</span>
+                      <span>${orderData.deliveryFee.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between font-bold mt-2">
                       <span>Total:</span>
-                      <span>R{orderData.total.toFixed(2)}</span>
+                      <span>${orderData.total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
