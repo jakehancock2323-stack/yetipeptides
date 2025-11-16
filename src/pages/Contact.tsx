@@ -72,7 +72,7 @@ export default function Contact() {
 
             <div className="mt-8 p-4 bg-[hsl(var(--ice-blue))]/10 rounded-lg border border-[hsl(var(--ice-blue))]/20">
               <p className="text-sm text-center">
-                <strong>Response Time:</strong> We typically respond within 24 hours during business days.
+                <strong>Response Time:</strong> We typically respond within a couple of hours during business days.
               </p>
             </div>
           </div>
