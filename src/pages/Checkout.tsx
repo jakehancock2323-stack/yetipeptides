@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
@@ -23,7 +24,8 @@ export default function Checkout() {
     city: '',
     region: '',
     postcode: '',
-    country: ''
+    country: '',
+    notes: ''
   });
 
   if (items.length === 0) {
@@ -34,8 +36,8 @@ export default function Checkout() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    const requiredFields = Object.entries(formData);
+    // Basic validation (exclude optional notes field)
+    const requiredFields = Object.entries(formData).filter(([key]) => key !== 'notes');
     for (const [key, value] of requiredFields) {
       if (!value.trim()) {
         toast.error(`Please fill in ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
@@ -82,7 +84,7 @@ export default function Checkout() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -194,6 +196,18 @@ export default function Checkout() {
                     required
                   />
                 </div>
+              </div>
+
+              <div>
+                <Label htmlFor="notes">Optional Notes</Label>
+                <Textarea
+                  id="notes"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleChange}
+                  placeholder="Any special instructions or notes for your order..."
+                  className="min-h-[100px]"
+                />
               </div>
 
               <div className="pt-4">

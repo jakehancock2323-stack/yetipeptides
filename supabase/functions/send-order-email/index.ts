@@ -27,6 +27,7 @@ interface OrderEmailRequest {
     region: string;
     postcode: string;
     country: string;
+    notes?: string;
   };
   paymentMethod: string;
   items: OrderItem[];
@@ -112,6 +113,12 @@ const handler = async (req: Request): Promise<Response> => {
                 <td style="padding: 8px 0;"><strong>Payment Method:</strong></td>
                 <td style="padding: 8px 0;">${paymentMethod.toUpperCase()}</td>
               </tr>
+              ${customerDetails.notes ? `
+              <tr>
+                <td style="padding: 8px 0; vertical-align: top;"><strong>Order Notes:</strong></td>
+                <td style="padding: 8px 0; background: #fffacd; padding: 12px; border-radius: 4px; font-style: italic;">${customerDetails.notes}</td>
+              </tr>
+              ` : ''}
             </table>
 
             <h2 style="color: #1a2332; border-bottom: 2px solid #47d9d9; padding-bottom: 10px;">Order Items</h2>
