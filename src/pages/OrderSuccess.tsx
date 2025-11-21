@@ -96,7 +96,7 @@ export default function OrderSuccess() {
                 asChild 
                 className="bg-[#5865F2] hover:bg-[#4752C4] text-white"
               >
-                <a href="https://discord.gg/your-discord-invite" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer">
                   Join Discord Server
                 </a>
               </Button>

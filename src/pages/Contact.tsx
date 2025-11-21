@@ -59,7 +59,7 @@ export default function Contact() {
                 <div>
                   <h3 className="font-semibold mb-1">Discord</h3>
                   <a 
-                    href="https://discord.gg/RFNxjhf2up" 
+                    href="https://discord.gg/seDb5c9XkM"
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
