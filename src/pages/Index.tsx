@@ -52,7 +52,7 @@ export default function Index() {
               Connect with fellow researchers, get instant support, and stay updated on new products and exclusive deals. Our Discord community is active 24/7!
             </p>
             <a 
-              href="https://discord.gg/yetipeptides" 
+              href="https://discord.gg/seDb5c9XkM"
               target="_blank" 
               rel="noopener noreferrer"
             >

@@ -34,7 +34,7 @@ export default function Footer() {
               <span className="text-sm">yetipeptides@protonmail.com</span>
             </a>
             <a 
-              href="https://discord.gg/RFNxjhf2up" 
+              href="https://discord.gg/seDb5c9XkM"
               className="flex items-center gap-2 hover:text-[hsl(var(--ice-blue))] transition-colors"
               target="_blank"
               rel="noopener noreferrer"
