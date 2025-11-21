@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
-import { Award, Globe, Shield, Zap } from 'lucide-react';
+import { Award, Globe, Shield, Zap, MessageCircle } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
 export default function Index() {
   return <div className="min-h-screen">
@@ -34,6 +34,36 @@ export default function Index() {
                 Contact Us
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Discord Community Section */}
+      <section className="py-16 px-4 -mt-10">
+        <div className="container mx-auto max-w-4xl">
+          <div className="frosted-glass rounded-2xl p-8 md:p-12 text-center ice-glow border-2 border-[hsl(var(--ice-blue))]/30">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center mx-auto mb-6">
+              <MessageCircle className="w-8 h-8 text-background" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
+              Join Our Community
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Connect with fellow researchers, get instant support, and stay updated on new products and exclusive deals. Our Discord community is active 24/7!
+            </p>
+            <a 
+              href="https://discord.gg/yetipeptides" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] hover:from-[hsl(var(--ice-blue))]/90 hover:to-[hsl(var(--glacier))]/90 text-background font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <MessageCircle className="mr-2" />
+                Join Discord Server
+              </Button>
+            </a>
           </div>
         </div>
       </section>
