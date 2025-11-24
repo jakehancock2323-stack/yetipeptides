@@ -38,18 +38,18 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute bottom-2 right-2 text-[hsl(var(--ice-blue))]/30 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">❄</div>
       
       <div className="mb-4 relative z-10">
-        <h3 className="text-xl font-semibold mb-1 group-hover:text-[hsl(var(--ice-blue))] transition-colors">{product.name}</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-1 group-hover:text-[hsl(var(--ice-blue))] transition-colors">{product.name}</h3>
         <p className="text-sm text-muted-foreground">{product.category}</p>
       </div>
 
       {product.ingredients && (
         <div className="mb-4 relative z-10">
           <details className="group/details">
-            <summary className="text-sm font-medium text-muted-foreground cursor-pointer hover:text-[hsl(var(--ice-blue))] transition-colors list-none flex items-center gap-2">
+            <summary className="text-sm font-medium text-muted-foreground cursor-pointer hover:text-[hsl(var(--ice-blue))] transition-colors list-none flex items-center gap-2 select-none">
               <span className="inline-block transition-transform group-open/details:rotate-90">▶</span>
-              Key Ingredients
+              Key Ingredients (per vial)
             </summary>
-            <ul className="mt-2 space-y-1 text-xs text-muted-foreground pl-4">
+            <ul className="mt-3 space-y-1.5 text-xs sm:text-sm text-muted-foreground pl-6 pr-2">
               {product.ingredients.map((ingredient, index) => (
                 <li key={index} className="leading-relaxed">• {ingredient}</li>
               ))}
@@ -78,17 +78,17 @@ export default function ProductCard({ product }: ProductCardProps) {
           </Select>
         </div>
 
-        <div className="text-3xl font-bold text-[hsl(var(--ice-blue))]">
+        <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--ice-blue))]">
           ${selectedVariant.price}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <Input
             type="number"
             min="1"
             value={quantity}
             onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-            className="w-20"
+            className="w-full sm:w-20"
           />
           <Button 
             onClick={handleAddToCart}

@@ -66,7 +66,7 @@ export default function Products() {
               key={category}
               variant={selectedCategory === category ? 'default' : 'outline'}
               onClick={() => handleCategoryChange(category)}
-              className={selectedCategory === category ? 'bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background' : ''}
+              className={`text-sm sm:text-base ${selectedCategory === category ? 'bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background' : ''}`}
             >
               {category}
             </Button>

@@ -45,21 +45,21 @@ export default function Cart() {
         </h1>
 
         <div className="max-w-4xl mx-auto">
-          <div className="frosted-glass rounded-lg p-6 mb-6">
+          <div className="frosted-glass rounded-lg p-4 sm:p-6 mb-6">
             {items.map((item, index) => (
               <div
                 key={`${item.product.id}-${item.variant.specification}`}
-                className={`flex flex-col md:flex-row gap-4 items-start md:items-center ${
+                className={`flex flex-col gap-4 ${
                   index !== items.length - 1 ? 'border-b border-border pb-6 mb-6' : ''
                 }`}
               >
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-1">{item.product.name}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-1">{item.product.name}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{item.product.category}</p>
                   <p className="text-sm">{item.variant.specification}</p>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 sm:gap-4 w-full justify-between sm:justify-start">
                   <div className="flex items-center gap-2">
                     <Input
                       type="number"
@@ -72,11 +72,11 @@ export default function Cart() {
                           parseInt(e.target.value) || 1
                         )
                       }
-                      className="w-20"
+                      className="w-16 sm:w-20"
                     />
                   </div>
 
-                  <div className="text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[100px] text-right">
+                  <div className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[80px] sm:min-w-[100px] text-right">
                     ${(item.variant.price * item.quantity).toFixed(2)}
                   </div>
 
@@ -86,7 +86,7 @@ export default function Cart() {
                     onClick={() => removeFromCart(item.product.id, item.variant.specification)}
                     className="hover:bg-destructive hover:text-destructive-foreground"
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Button>
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function Cart() {
           </div>
 
           {/* E-book Add-on */}
-          <div className="frosted-glass rounded-lg p-6 mb-6">
+          <div className="frosted-glass rounded-lg p-4 sm:p-6 mb-6">
             <div className="flex items-start gap-3">
               <Checkbox
                 id="ebook-addon-cart"
@@ -105,20 +105,20 @@ export default function Cart() {
               <div className="flex-1">
                 <label
                   htmlFor="ebook-addon-cart"
-                  className="text-lg font-semibold cursor-pointer leading-tight block mb-2"
+                  className="text-base sm:text-lg font-semibold cursor-pointer leading-tight block mb-2"
                 >
                   Yeti's E-book – The GLP1 Series
                 </label>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                   A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
                 </p>
-                <p className="text-xl font-bold text-[hsl(var(--ice-blue))]">+$4.99</p>
+                <p className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))]">+$4.99</p>
               </div>
             </div>
           </div>
 
-          <div className="frosted-glass rounded-lg p-6">
-            <div className="flex justify-between items-center mb-6 text-2xl font-bold">
+          <div className="frosted-glass rounded-lg p-4 sm:p-6">
+            <div className="flex justify-between items-center mb-6 text-xl sm:text-2xl font-bold">
               <span>Total:</span>
               <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
             </div>
