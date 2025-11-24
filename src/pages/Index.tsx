@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
+import Reviews from '@/components/Reviews';
 import { Award, Globe, Shield, Zap, MessageCircle } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
 export default function Index() {
@@ -168,6 +169,8 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <Reviews />
 
       <FAQ />
 
