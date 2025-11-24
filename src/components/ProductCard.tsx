@@ -42,6 +42,22 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm text-muted-foreground">{product.category}</p>
       </div>
 
+      {product.ingredients && (
+        <div className="mb-4 relative z-10">
+          <details className="group/details">
+            <summary className="text-sm font-medium text-muted-foreground cursor-pointer hover:text-[hsl(var(--ice-blue))] transition-colors list-none flex items-center gap-2">
+              <span className="inline-block transition-transform group-open/details:rotate-90">▶</span>
+              Key Ingredients
+            </summary>
+            <ul className="mt-2 space-y-1 text-xs text-muted-foreground pl-4">
+              {product.ingredients.map((ingredient, index) => (
+                <li key={index} className="leading-relaxed">• {ingredient}</li>
+              ))}
+            </ul>
+          </details>
+        </div>
+      )}
+
       <div className="space-y-4 relative z-10">
         <div>
           <label className="text-sm text-muted-foreground mb-2 block">Specification</label>

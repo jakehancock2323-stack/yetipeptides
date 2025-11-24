@@ -8,6 +8,7 @@ export interface Product {
   name: string;
   category: string;
   variants: ProductVariant[];
+  ingredients?: string[];
 }
 
 export const categories = [
@@ -21,6 +22,23 @@ export const categories = [
 
 export const products: Product[] = [
   // WEIGHT LOSS
+  {
+    id: "lc526",
+    name: "LC526 (Fat Blaster)",
+    category: "Weight Loss",
+    variants: [
+      { specification: "10ml ×10 vials", price: 170 }
+    ],
+    ingredients: [
+      "L-Carnitine – 300 mg",
+      "Methionine – 25 mg",
+      "Inositol – 50 mg",
+      "Choline – 50 mg",
+      "Vitamin B12 – 1 mg",
+      "Vitamin B6 – 50 mg",
+      "NADH – 50 mg"
+    ]
+  },
   {
     id: "adipotide-2mg",
     name: "Adipotide",
@@ -399,6 +417,25 @@ export const products: Product[] = [
   },
 
   // GENERAL HEALTH
+  {
+    id: "shb",
+    name: "SHB (Super Human Blend)",
+    category: "General Health",
+    variants: [
+      { specification: "10ml ×10 vials", price: 123 }
+    ],
+    ingredients: [
+      "L-Arginine – 110 mg",
+      "L-Ornithine – 110 mg",
+      "L-Citrulline – 120 mg",
+      "L-Lysine – 70 mg",
+      "L-Glutamine – 40 mg",
+      "L-Proline – 60 mg",
+      "L-Taurine – 60 mg",
+      "L-Carnitine – 220 mg",
+      "NAC – 75 mg"
+    ]
+  },
   {
     id: "29000-ara",
     name: "29000 ARA",
