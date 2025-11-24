@@ -103,8 +103,8 @@ export default function Checkout() {
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Customer Details Form */}
-          <div className="frosted-glass rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-6">Customer Details</h2>
+          <div className="frosted-glass rounded-lg p-4 sm:p-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">Customer Details</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="fullName">Full Name *</Label>
@@ -152,7 +152,7 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="city">City *</Label>
                   <Input
@@ -175,7 +175,7 @@ export default function Checkout() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="postcode">Postcode *</Label>
                   <Input
@@ -240,8 +240,8 @@ export default function Checkout() {
 
           {/* Order Summary */}
           <div>
-            <div className="frosted-glass rounded-lg p-6 sticky top-32">
-              <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
+            <div className="frosted-glass rounded-lg p-4 sm:p-6 md:sticky md:top-32">
+              <h2 className="text-xl sm:text-2xl font-bold mb-6">Order Summary</h2>
               
               <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto">
                 {items.map((item) => (
