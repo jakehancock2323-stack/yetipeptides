@@ -111,7 +111,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <ShieldCheck className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
-            <span>Lab Tested</span>
+            <span>Certificate of Analysis</span>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <CheckCircle2 className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />

@@ -172,10 +172,6 @@ export default function Checkout() {
                       <span className="text-xs text-muted-foreground">Secure Checkout</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
-                      <span className="text-xs text-muted-foreground">Encrypted Payment</span>
-                    </div>
-                    <div className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
                       <span className="text-xs text-muted-foreground">Safe & Private</span>
                     </div>
