@@ -14,14 +14,21 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
   const { addToCart } = useCart();
 
   const selectedVariant = product.variants[selectedVariantIndex];
 
-  const handleAddToCart = () => {
-    addToCart(product, selectedVariant, quantity);
-    toast.success(`Added ${quantity}x ${product.name} to cart`);
-    setQuantity(1);
+  const handleAddToCart = async () => {
+    setIsAdding(true);
+    try {
+      addToCart(product, selectedVariant, quantity);
+      toast.success(`Added ${quantity}x ${product.name} to cart`);
+      setQuantity(1);
+    } finally {
+      // Brief delay to show loading state
+      setTimeout(() => setIsAdding(false), 300);
+    }
   };
 
   return (
@@ -93,9 +100,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
           <Button 
             onClick={handleAddToCart}
+            disabled={isAdding}
             className="flex-1 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background"
           >
-            Add to Cart
+            {isAdding ? "Adding..." : "Add to Cart"}
           </Button>
         </div>
 
