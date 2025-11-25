@@ -16,6 +16,7 @@ import { Lock, ShieldCheck, CreditCard } from "lucide-react";
 export default function Checkout() {
   const navigate = useNavigate();
   const { items, getTotalPrice, clearCart, includeEbook } = useCart();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("btc");
   const [formData, setFormData] = useState({
     fullName: "",
@@ -37,6 +38,8 @@ export default function Checkout() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
     // Basic validation (exclude optional notes field)
     const requiredFields = Object.entries(formData).filter(([key]) => key !== "notes");
     for (const [key, value] of requiredFields) {
@@ -45,6 +48,8 @@ export default function Checkout() {
         return;
       }
     }
+
+    setIsSubmitting(true);
 
     // Prepare order data
     const orderData = {
@@ -82,6 +87,8 @@ export default function Checkout() {
     } catch (error) {
       console.error("Error submitting order:", error);
       toast.error("There was an error processing your order. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -203,10 +210,11 @@ export default function Checkout() {
 
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background"
                 size="lg"
               >
-                Place Order
+                {isSubmitting ? "Processing Order..." : "Place Order"}
               </Button>
             </form>
           </div>
