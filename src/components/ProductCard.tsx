@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from './ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
+import { CheckCircle2, Truck, Package, ShieldCheck } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -96,6 +97,26 @@ export default function ProductCard({ product }: ProductCardProps) {
           >
             Add to Cart
           </Button>
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="grid grid-cols-2 gap-2 pt-4 border-t border-border/50 mt-4">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Truck className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
+            <span>Tracked Shipping</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Package className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
+            <span>Discreet Package</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <ShieldCheck className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
+            <span>Lab Tested</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
+            <span>99%+ Purity</span>
+          </div>
         </div>
       </div>
     </div>

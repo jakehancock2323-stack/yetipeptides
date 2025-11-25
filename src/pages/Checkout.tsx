@@ -11,6 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { Lock, ShieldCheck, CreditCard } from 'lucide-react';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -212,6 +213,28 @@ export default function Checkout() {
 
               <div className="pt-4">
                 <Label className="text-lg mb-3 block">Payment Method *</Label>
+                
+                {/* Security Badges */}
+                <div className="mb-4 p-4 rounded-lg border border-[hsl(var(--ice-blue))]/30 bg-card/50">
+                  <div className="flex items-center justify-center gap-6 mb-3">
+                    <div className="flex items-center gap-2">
+                      <Lock className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
+                      <span className="text-xs text-muted-foreground">Secure Checkout</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
+                      <span className="text-xs text-muted-foreground">Encrypted Payment</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
+                      <span className="text-xs text-muted-foreground">Safe & Private</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-center text-muted-foreground">
+                    Your payment information is encrypted and secure
+                  </p>
+                </div>
+
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                   <div className="flex items-center space-x-2 mb-2">
                     <RadioGroupItem value="btc" id="btc" />

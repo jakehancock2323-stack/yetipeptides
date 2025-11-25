@@ -40,7 +40,7 @@ export default function Index() {
       </section>
 
       {/* Discord Community Section */}
-      <section className="py-16 px-4 -mt-10">
+      <section className="py-16 px-4 -mt-10 fade-in-up">
         <div className="container mx-auto max-w-4xl">
           <div className="frosted-glass rounded-2xl p-8 md:p-12 text-center ice-glow border-2 border-[hsl(var(--ice-blue))]/30">
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center mx-auto mb-6">
@@ -70,7 +70,7 @@ export default function Index() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 fade-in-up animate-delay-100">
         <div className="container mx-auto">
           <div className="frosted-glass rounded-2xl p-8 md:p-12 max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">About Yeti Peptides</h2>
@@ -129,7 +129,7 @@ export default function Index() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[hsl(var(--deep-freeze))]/30">
+      <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[hsl(var(--deep-freeze))]/30 fade-in-up animate-delay-200">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Researchers Choose Yeti Peptides</h2>
