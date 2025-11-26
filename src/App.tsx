@@ -14,6 +14,11 @@ import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import Contact from "./pages/Contact";
 import PeptideCalculator from "./pages/PeptideCalculator";
+import AboutUs from "./pages/AboutUs";
+import COARequest from "./pages/COARequest";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
+import ShippingReturns from "./pages/ShippingReturns";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,11 +39,16 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/coa-request" element={<COARequest />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/calculator" element={<PeptideCalculator />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/calculator" element={<PeptideCalculator />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-conditions" element={<TermsConditions />} />
+                <Route path="/shipping-returns" element={<ShippingReturns />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

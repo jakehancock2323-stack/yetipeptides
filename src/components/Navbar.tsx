@@ -37,8 +37,11 @@ export default function Navbar() {
               <Link to="/products" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
                 Products
               </Link>
-              <Link to="/calculator" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
-                Calculator
+              <Link to="/about" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
+                About Us
+              </Link>
+              <Link to="/coa-request" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
+                COA Request
               </Link>
               <Link to="/contact" className="hover:text-[hsl(var(--ice-blue))] transition-colors">
                 Contact
@@ -51,6 +54,7 @@ export default function Navbar() {
                 variant="outline" 
                 className="relative"
                 onClick={() => setCartDrawerOpen(true)}
+                aria-label="Shopping Basket"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {itemCount > 0 && (
@@ -84,11 +88,18 @@ export default function Navbar() {
                       Products
                     </Link>
                     <Link 
-                      to="/calculator" 
+                      to="/about" 
                       className="text-lg hover:text-[hsl(var(--ice-blue))] transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Calculator
+                      About Us
+                    </Link>
+                    <Link 
+                      to="/coa-request" 
+                      className="text-lg hover:text-[hsl(var(--ice-blue))] transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      COA Request
                     </Link>
                     <Link 
                       to="/contact" 
@@ -104,7 +115,7 @@ export default function Navbar() {
                       }}
                       className="text-lg hover:text-[hsl(var(--ice-blue))] transition-colors text-left"
                     >
-                      Cart {itemCount > 0 && `(${itemCount})`}
+                      Basket {itemCount > 0 && `(${itemCount})`}
                     </button>
                   </div>
                 </SheetContent>
