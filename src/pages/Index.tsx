@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
 import { CheckCircle2, Globe, ShieldCheck, Package, FileText, Lock } from 'lucide-react';
-import yetiLogo from '@/assets/yeti-logo.png';
+import heroBanner from '@/assets/hero-banner.png';
 import { products } from '@/data/products';
 export default function Index() {
   const featuredProducts = products.slice(0, 6);
@@ -16,23 +16,18 @@ export default function Index() {
       <Snowfall />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 winter-gradient fade-in-up">
-        <div className="container mx-auto text-center">
-          <div className="mb-8 flex justify-center">
+      {/* Hero Section with Banner */}
+      <section className="relative pt-20 pb-12 px-4 fade-in-up">
+        <div className="container mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
             <img 
-              src={yetiLogo} 
-              alt="Yeti Peptides Logo" 
-              className="w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300"
+              src={heroBanner} 
+              alt="Yeti Peptides - Premium Research-Grade Compounds" 
+              className="w-full h-auto object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-            YETI PEPTIDES
-          </h1>
-          <p className="text-2xl md:text-3xl text-foreground mb-8 font-semibold">
-            Premium Research-Grade Compounds
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
             <Link to="/products">
               <Button size="lg" className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background">
                 Browse Products
