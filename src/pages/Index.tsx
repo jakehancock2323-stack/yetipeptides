@@ -9,7 +9,8 @@ import { CheckCircle2, Globe, ShieldCheck, Package, FileText, Lock } from 'lucid
 import heroBanner from '@/assets/hero-banner.png';
 import { products } from '@/data/products';
 export default function Index() {
-  const featuredProducts = products.slice(0, 6);
+  const featuredProductIds = ['lc526', 'retatrutide', 'tirzepatide', 'cagrilintide', 'ghk-cu', 'hgh-somatropin'];
+  const featuredProducts = products.filter(p => featuredProductIds.includes(p.id));
 
   return (
     <div className="min-h-screen">
@@ -17,17 +18,17 @@ export default function Index() {
       <Navbar />
 
       {/* Hero Section with Banner */}
-      <section className="relative pt-20 pb-12 px-4 fade-in-up">
-        <div className="container mx-auto">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+      <section className="relative pt-20 pb-8 px-4 fade-in-up">
+        <div className="container mx-auto max-w-5xl">
+          <div className="relative rounded-xl overflow-hidden shadow-xl">
             <img 
               src={heroBanner} 
               alt="Yeti Peptides - Premium Research-Grade Compounds" 
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover max-h-[300px] md:max-h-[400px]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
           </div>
-          <div className="flex flex-wrap gap-4 justify-center mt-8">
+          <div className="flex flex-wrap gap-3 justify-center mt-6">
             <Link to="/products">
               <Button size="lg" className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background">
                 Browse Products
@@ -119,6 +120,46 @@ export default function Index() {
                 View All Products
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Policies Section */}
+      <section className="py-16 px-4 bg-gradient-to-r from-[hsl(var(--deep-freeze))]/10 to-transparent fade-in-up">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Policies</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="frosted-glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
+                Storage Instructions
+              </h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>• Store lyophilized powder at -20°C, protected from light and moisture</li>
+                <li>• After reconstitution, store at 2-8°C and use within 14 days</li>
+              </ul>
+            </div>
+            <div className="frosted-glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
+                Solubility
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Soluble in sterile water or bacteriostatic water (for research use only)
+              </p>
+            </div>
+            <div className="frosted-glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-destructive">
+                <Package className="w-5 h-5" />
+                Important Information
+              </h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                This product is for laboratory research use only. It is not for human or veterinary use, and is not approved for diagnostic, therapeutic, or medical applications.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Handle according to appropriate laboratory safety procedures.
+              </p>
+            </div>
           </div>
         </div>
       </section>

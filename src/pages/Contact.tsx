@@ -27,12 +27,27 @@ export default function Contact() {
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('Message sent! We will get back to you within 24 hours.');
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      toast.success('Message sent successfully! We will get back to you within 24 hours.');
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again or email us directly at yetipeptides@protonmail.com");
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (field: string, value: string) => {

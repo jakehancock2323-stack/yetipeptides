@@ -31,12 +31,27 @@ export default function COARequest() {
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('COA request submitted! We will email you shortly.');
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-coa-request`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send COA request");
+      }
+
+      toast.success('COA request submitted successfully! We will email you shortly.');
       setFormData({ name: '', email: '', product: '', batchNumber: '', message: '' });
+    } catch (error) {
+      console.error("Error submitting COA request:", error);
+      toast.error("Failed to submit request. Please try again or email us directly at yetipeptides@protonmail.com");
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (field: string, value: string) => {

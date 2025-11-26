@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from './ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
-import { CheckCircle2, Truck, Package, ShieldCheck, FileText, Thermometer, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, Truck, Package, ShieldCheck, FileText, Thermometer, AlertTriangle, ChevronDown } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 
 interface ProductCardProps {
@@ -139,50 +139,59 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Collapsible Information Sections */}
         <div className="mt-4 space-y-2">
-          {/* Reconstitution Guidance */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-3 bg-card/50 hover:bg-card/70 rounded-lg border border-border/50 transition-colors">
-                <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
-                  <span className="text-sm font-medium">Reconstitution Guidance</span>
-                </div>
-                <span className="text-xs text-muted-foreground">▼</span>
-              </div>
+          <Collapsible className="border border-border rounded-lg">
+            <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-accent/50 transition-colors">
+              <span className="font-medium text-sm">Reconstitution Guidance</span>
+              <ChevronDown className="h-4 w-4 transition-transform" />
             </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="p-4 mt-1 bg-card/30 rounded-lg border border-border/30">
-                <p className="text-xs text-muted-foreground leading-relaxed mb-2">
-                  <strong className="text-foreground">Research Use Only:</strong> This information is for laboratory research only and not for human use.
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Reconstitute using bacteriostatic water as preferred by the researcher. Gently swirl to mix; avoid shaking. 
-                  Handle using standard laboratory procedures.
-                </p>
-              </div>
+            <CollapsibleContent className="pt-2 px-4 pb-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                This information is for laboratory research only and not for human use.
+                Reconstitute using bacteriostatic water as preferred by the researcher. 
+                Gently swirl to mix; avoid shaking. Handle using standard laboratory procedures.
+              </p>
             </CollapsibleContent>
           </Collapsible>
 
-          {/* Storage Guidance */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-3 bg-card/50 hover:bg-card/70 rounded-lg border border-border/50 transition-colors">
-                <div className="flex items-center gap-2">
-                  <Thermometer className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
-                  <span className="text-sm font-medium">Storage Guidance</span>
-                </div>
-                <span className="text-xs text-muted-foreground">▼</span>
-              </div>
+          <Collapsible className="border border-border rounded-lg">
+            <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-accent/50 transition-colors">
+              <span className="font-medium text-sm">Storage Instructions</span>
+              <ChevronDown className="h-4 w-4 transition-transform" />
             </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="p-4 mt-1 bg-card/30 rounded-lg border border-border/30">
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Store sealed vials in a cool, dry place away from light. After reconstitution, refrigerate. 
-                  Keep out of direct sunlight. Research use only.
-                </p>
-              </div>
+            <CollapsibleContent className="pt-2 px-4 pb-4">
+              <ul className="text-sm text-muted-foreground space-y-2">
+                <li>• Store lyophilized powder at -20°C, protected from light and moisture</li>
+                <li>• After reconstitution, store at 2-8°C and use within 14 days</li>
+              </ul>
             </CollapsibleContent>
           </Collapsible>
+
+          <Collapsible className="border border-border rounded-lg">
+            <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-accent/50 transition-colors">
+              <span className="font-medium text-sm">Solubility</span>
+              <ChevronDown className="h-4 w-4 transition-transform" />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="pt-2 px-4 pb-4">
+              <p className="text-sm text-muted-foreground">
+                Soluble in sterile water or bacteriostatic water (for research use only)
+              </p>
+            </CollapsibleContent>
+          </Collapsible>
+
+          <div className="border-2 border-destructive/50 rounded-lg p-4 bg-destructive/5">
+            <div className="flex items-start gap-2">
+              <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+              <div>
+                <h4 className="font-semibold text-sm text-destructive mb-1">IMPORTANT INFORMATION:</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  This product is for laboratory research use only. It is not for human or veterinary use, and is not approved for diagnostic, therapeutic, or medical applications.
+                </p>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Handle according to appropriate laboratory safety procedures.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
