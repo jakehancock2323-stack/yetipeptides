@@ -19,6 +19,7 @@ import COARequest from "./pages/COARequest";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import ShippingReturns from "./pages/ShippingReturns";
+import ResearchDisclaimer from "./pages/ResearchDisclaimer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-conditions" element={<TermsConditions />} />
                 <Route path="/shipping-returns" element={<ShippingReturns />} />
+                <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
