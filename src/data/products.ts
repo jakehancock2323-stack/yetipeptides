@@ -12,6 +12,7 @@ export interface Product {
 }
 
 export const categories = [
+  "All",
   "Weight Loss",
   "Cognitive Enhancement",
   "Muscle Growth & Recovery",
