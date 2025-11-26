@@ -137,22 +137,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p className="text-xs text-muted-foreground">Not for Human Consumption</p>
         </div>
 
-        {/* Collapsible Information Sections */}
+        {/* Storage Instructions */}
         <div className="mt-4 space-y-2">
-          <Collapsible className="border border-border rounded-lg">
-            <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-accent/50 transition-colors">
-              <span className="font-medium text-sm">Reconstitution Guidance</span>
-              <ChevronDown className="h-4 w-4 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="pt-2 px-4 pb-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                This information is for laboratory research only and not for human use.
-                Reconstitute using bacteriostatic water as preferred by the researcher. 
-                Gently swirl to mix; avoid shaking. Handle using standard laboratory procedures.
-              </p>
-            </CollapsibleContent>
-          </Collapsible>
-
           <Collapsible className="border border-border rounded-lg">
             <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-accent/50 transition-colors">
               <span className="font-medium text-sm">Storage Instructions</span>
@@ -177,21 +163,6 @@ export default function ProductCard({ product }: ProductCardProps) {
               </p>
             </CollapsibleContent>
           </Collapsible>
-
-          <div className="border-2 border-destructive/50 rounded-lg p-4 bg-destructive/5">
-            <div className="flex items-start gap-2">
-              <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-              <div>
-                <h4 className="font-semibold text-sm text-destructive mb-1">IMPORTANT INFORMATION:</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  This product is for laboratory research use only. It is not for human or veterinary use, and is not approved for diagnostic, therapeutic, or medical applications.
-                </p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Handle according to appropriate laboratory safety procedures.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

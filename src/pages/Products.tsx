@@ -14,7 +14,7 @@ export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>(
-    searchParams.get('category') || 'Weight Loss'
+    searchParams.get('category') || 'All'
   );
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Products() {
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = product.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 

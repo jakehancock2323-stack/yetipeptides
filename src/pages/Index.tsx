@@ -126,40 +126,42 @@ export default function Index() {
 
       {/* Our Policies Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-[hsl(var(--deep-freeze))]/10 to-transparent fade-in-up">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Policies</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="frosted-glass rounded-xl p-6">
-              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
-                Storage Instructions
-              </h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Store lyophilized powder at -20°C, protected from light and moisture</li>
-                <li>• After reconstitution, store at 2-8°C and use within 14 days</li>
-              </ul>
-            </div>
-            <div className="frosted-glass rounded-xl p-6">
-              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
-                Solubility
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Soluble in sterile water or bacteriostatic water (for research use only)
-              </p>
-            </div>
-            <div className="frosted-glass rounded-xl p-6">
-              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-destructive">
-                <Package className="w-5 h-5" />
-                Important Information
-              </h3>
-              <p className="text-sm text-muted-foreground mb-2">
-                This product is for laboratory research use only. It is not for human or veterinary use, and is not approved for diagnostic, therapeutic, or medical applications.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Handle according to appropriate laboratory safety procedures.
-              </p>
-            </div>
+            <Link to="/privacy-policy">
+              <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <ShieldCheck className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-xl font-semibold">Privacy Policy</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Learn how we protect your data and respect your privacy
+                </p>
+              </div>
+            </Link>
+            <Link to="/terms-conditions">
+              <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <FileText className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-xl font-semibold">Terms & Conditions</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Read our terms of service and usage guidelines
+                </p>
+              </div>
+            </Link>
+            <Link to="/shipping-returns">
+              <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <Package className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-xl font-semibold">Shipping & Returns</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Information about delivery and our return policy
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
