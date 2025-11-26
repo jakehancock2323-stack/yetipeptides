@@ -4,25 +4,33 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
-import Reviews from '@/components/Reviews';
-import { Award, Globe, Shield, Zap, MessageCircle } from 'lucide-react';
+import ProductCard from '@/components/ProductCard';
+import { CheckCircle2, Globe, ShieldCheck, Package, FileText, Lock } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
+import { products } from '@/data/products';
 export default function Index() {
-  return <div className="min-h-screen">
+  const featuredProducts = products.slice(0, 6);
+
+  return (
+    <div className="min-h-screen">
       <Snowfall />
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 winter-gradient">
+      <section className="relative pt-32 pb-20 px-4 winter-gradient fade-in-up">
         <div className="container mx-auto text-center">
           <div className="mb-8 flex justify-center">
-            <img src={yetiLogo} alt="Yeti Peptides Logo" className="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300 rounded-full border-4 border-[hsl(var(--ice-blue))]/30 p-4 bg-card/20" />
+            <img 
+              src={yetiLogo} 
+              alt="Yeti Peptides Logo" 
+              className="w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-[0_0_40px_rgba(71,217,217,0.4)] hover:drop-shadow-[0_0_60px_rgba(71,217,217,0.6)] transition-all duration-300"
+            />
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(71,217,217,0.5)] [text-shadow:_0_0_30px_rgb(71_217_217_/_40%)]">
-            Power. Precision. Performance.
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+            YETI PEPTIDES
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Premium Research Peptides & Advanced Wellness Compounds
+          <p className="text-2xl md:text-3xl text-foreground mb-8 font-semibold">
+            Premium Research-Grade Compounds
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/products">
@@ -30,150 +38,99 @@ export default function Index() {
                 Browse Products
               </Button>
             </Link>
-            <Link to="/contact">
+            <Link to="/coa-request">
               <Button size="lg" variant="outline">
-                Contact Us
+                Request COA
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Discord Community Section */}
-      <section className="py-16 px-4 -mt-10 fade-in-up">
+      {/* About Preview Section */}
+      <section className="py-16 px-4 fade-in-up animate-delay-100">
         <div className="container mx-auto max-w-4xl">
-          <div className="frosted-glass rounded-2xl p-8 md:p-12 text-center ice-glow border-2 border-[hsl(var(--ice-blue))]/30">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-8 h-8 text-background" />
+          <div className="frosted-glass rounded-xl p-8">
+            <h2 className="text-3xl font-bold mb-6 text-center">Why Choose Yeti Peptides</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+              <div className="space-y-2">
+                <CheckCircle2 className="w-8 h-8 text-[hsl(var(--ice-blue))] mx-auto" />
+                <h3 className="font-semibold">Research-Grade Compounds</h3>
+                <p className="text-sm text-muted-foreground">99%+ purity with full testing documentation</p>
+              </div>
+              <div className="space-y-2">
+                <FileText className="w-8 h-8 text-[hsl(var(--ice-blue))] mx-auto" />
+                <h3 className="font-semibold">COA Available on Request</h3>
+                <p className="text-sm text-muted-foreground">Complete analytical verification for all products</p>
+              </div>
+              <div className="space-y-2">
+                <Globe className="w-8 h-8 text-[hsl(var(--ice-blue))] mx-auto" />
+                <h3 className="font-semibold">Worldwide Discreet Shipping</h3>
+                <p className="text-sm text-muted-foreground">Fast, tracked delivery to researchers globally</p>
+              </div>
+              <div className="space-y-2">
+                <Lock className="w-8 h-8 text-[hsl(var(--ice-blue))] mx-auto" />
+                <h3 className="font-semibold">Secure Crypto Checkout</h3>
+                <p className="text-sm text-muted-foreground">Private and secure payment processing</p>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
-              Join Our Community
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Connect with fellow researchers, get instant support, and stay updated on new products and exclusive deals. Our Discord community is active 24/7!
-            </p>
-            <a 
-              href="https://discord.gg/seDb5c9XkM"
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] hover:from-[hsl(var(--ice-blue))]/90 hover:to-[hsl(var(--glacier))]/90 text-background font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <MessageCircle className="mr-2" />
-                Join Discord Server
-              </Button>
-            </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-4 fade-in-up animate-delay-100">
+      {/* Trust Badge Strip */}
+      <section className="py-12 px-4 bg-gradient-to-r from-[hsl(var(--deep-freeze))]/20 to-transparent fade-in-up animate-delay-200">
         <div className="container mx-auto">
-          <div className="frosted-glass rounded-2xl p-8 md:p-12 max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">About Yeti Peptides</h2>
-            <p className="text-lg text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Leading the frontier of research peptide distribution with uncompromising quality, 
-              scientific integrity, and customer excellence. Your trusted partner in advanced research compounds.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center mb-4">
-                  <Award className="w-7 h-7 text-background" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Premium Quality</h3>
-                <p className="text-muted-foreground">
-                  Every product is COA-verified and tested to meet the highest research standards. 
-                  We source only from certified laboratories with stringent quality control.
-                </p>
-              </div>
-
-              <div className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[hsl(var(--glacier))] to-[hsl(var(--aurora))] flex items-center justify-center mb-4">
-                  <Globe className="w-7 h-7 text-background" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Worldwide Delivery</h3>
-                <p className="text-muted-foreground">
-                  Discreet, secure shipping to researchers globally. Fast processing and tracking 
-                  for all orders with temperature-controlled packaging.
-                </p>
-              </div>
-
-              <div className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[hsl(var(--aurora))] to-[hsl(var(--arctic-teal))] flex items-center justify-center mb-4">
-                  <Shield className="w-7 h-7 text-background" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Trusted Reputation</h3>
-                <p className="text-muted-foreground">
-                  Built on trust and transparency within the research community. Trusted by 
-                  researchers worldwide for their critical research needs.
-                </p>
-              </div>
-
-              <div className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[hsl(var(--arctic-teal))] to-[hsl(var(--ice-blue))] flex items-center justify-center mb-4">
-                  <Zap className="w-7 h-7 text-background" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Expert Support</h3>
-                <p className="text-muted-foreground">
-                  Our knowledgeable team provides responsive, professional assistance. Get help 
-                  with product selection, storage, and research applications.
-                </p>
-              </div>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              <span className="text-sm font-medium">COA Verified</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Globe className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              <span className="text-sm font-medium">Worldwide Shipping</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              <span className="text-sm font-medium">Secure Checkout</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Package className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              <span className="text-sm font-medium">Discreet Packaging</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FileText className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+              <span className="text-sm font-medium">Research Use Only</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[hsl(var(--deep-freeze))]/30 fade-in-up animate-delay-200">
-        <div className="container mx-auto max-w-5xl">
+      {/* Featured Products Section */}
+      <section className="py-20 px-4 fade-in-up animate-delay-300">
+        <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Researchers Choose Yeti Peptides</h2>
-            <p className="text-lg text-muted-foreground">
-              Join the research community who trust us for their peptide research needs
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
+            <p className="text-lg text-muted-foreground">Explore our most popular research compounds</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
-              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] bg-clip-text text-transparent mb-2">
-                99%+
-              </div>
-              <h3 className="font-semibold mb-2">Purity Guaranteed</h3>
-              <p className="text-sm text-muted-foreground">COA verification for every batch</p>
-            </div>
-
-            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
-              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent mb-2">
-                24/7
-              </div>
-              <h3 className="font-semibold mb-2">Support Available</h3>
-              <p className="text-sm text-muted-foreground">
-                Expert guidance whenever you need it via email and Discord
-              </p>
-            </div>
-
-            <div className="frosted-glass rounded-xl p-6 text-center hover:ice-glow transition-all duration-300">
-              <div className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--aurora))] to-[hsl(var(--arctic-teal))] bg-clip-text text-transparent mb-2">
-                Fast
-              </div>
-              <h3 className="font-semibold mb-2">Shipping Worldwide</h3>
-              <p className="text-sm text-muted-foreground">
-                Discreet packaging with tracking and temperature control
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {featuredProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="text-center">
+            <Link to="/products">
+              <Button size="lg" variant="outline">
+                View All Products
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
-
-      <Reviews />
 
       <FAQ />
 
       <Footer />
-    </div>;
+    </div>
+  );
 }
