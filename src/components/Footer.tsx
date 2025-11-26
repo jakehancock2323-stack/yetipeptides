@@ -60,6 +60,11 @@ export default function Footer() {
                   Shipping & Returns
                 </Link>
               </li>
+              <li>
+                <Link to="/research-disclaimer" className="text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors">
+                  Research Disclaimer
+                </Link>
+              </li>
             </ul>
           </div>
 

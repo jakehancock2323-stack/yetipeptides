@@ -8,7 +8,7 @@ import ProductCard from '@/components/ProductCard';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { products, categories } from '@/data/products';
-import { Search } from 'lucide-react';
+import { Search, ShieldCheck, Lock } from 'lucide-react';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,9 +41,28 @@ export default function Products() {
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(71,217,217,0.5)] [text-shadow:_0_0_30px_rgb(71_217_217_/_40%)]">
-          Research Peptides
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+          Research-Grade Compounds
         </h1>
+        <p className="text-lg text-center text-muted-foreground mb-6 max-w-2xl mx-auto">
+          Premium peptides for laboratory research purposes only
+        </p>
+
+        {/* Trust Badges */}
+        <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
+          <div className="flex items-center gap-2 text-sm">
+            <ShieldCheck className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
+            <span className="text-muted-foreground">COA Verified</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <Lock className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
+            <span className="text-muted-foreground">Secure Crypto Payments</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <ShieldCheck className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
+            <span className="text-muted-foreground">99%+ Purity</span>
+          </div>
+        </div>
 
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-8">

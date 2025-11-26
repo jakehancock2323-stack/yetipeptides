@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { FileText, ShieldCheck } from 'lucide-react';
 import { products } from '@/data/products';
@@ -15,17 +15,16 @@ export default function COARequest() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    product: '',
-    batchNumber: '',
     message: '',
   });
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.product) {
-      toast.error('Please fill in all required fields');
+    if (!formData.name || !formData.email || selectedProducts.length === 0) {
+      toast.error('Please fill in all required fields and select at least one product');
       return;
     }
 
@@ -37,7 +36,10 @@ export default function COARequest() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          products: selectedProducts
+        }),
       });
 
       if (!response.ok) {
@@ -45,7 +47,8 @@ export default function COARequest() {
       }
 
       toast.success('COA request submitted successfully! We will email you shortly.');
-      setFormData({ name: '', email: '', product: '', batchNumber: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
+      setSelectedProducts([]);
     } catch (error) {
       console.error("Error submitting COA request:", error);
       toast.error("Failed to submit request. Please try again or email us directly at yetipeptides@protonmail.com");
@@ -56,6 +59,14 @@ export default function COARequest() {
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleProductToggle = (productName: string) => {
+    setSelectedProducts(prev => 
+      prev.includes(productName) 
+        ? prev.filter(p => p !== productName)
+        : [...prev, productName]
+    );
   };
 
   return (
@@ -110,29 +121,29 @@ export default function COARequest() {
               </div>
 
               <div>
-                <Label htmlFor="product">Product *</Label>
-                <Select value={formData.product} onValueChange={(value) => handleChange('product', value)}>
-                  <SelectTrigger id="product">
-                    <SelectValue placeholder="Select a product" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {products.map((product) => (
-                      <SelectItem key={product.id} value={product.name}>
+                <Label className="mb-3 block">Select Products * (one or more)</Label>
+                <div className="max-h-[300px] overflow-y-auto space-y-2 p-4 rounded-md border border-input bg-background">
+                  {products.map((product) => (
+                    <div key={product.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={product.id}
+                        checked={selectedProducts.includes(product.name)}
+                        onCheckedChange={() => handleProductToggle(product.name)}
+                      />
+                      <label
+                        htmlFor={product.id}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                      >
                         {product.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="batchNumber">Batch Number (Optional)</Label>
-                <Input
-                  id="batchNumber"
-                  value={formData.batchNumber}
-                  onChange={(e) => handleChange('batchNumber', e.target.value)}
-                  placeholder="If known, enter batch number"
-                />
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                {selectedProducts.length > 0 && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Selected: {selectedProducts.join(', ')}
+                  </p>
+                )}
               </div>
 
               <div>

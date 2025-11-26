@@ -5,6 +5,7 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
+import Reviews from '@/components/Reviews';
 import { CheckCircle2, Globe, ShieldCheck, Package, FileText, Lock } from 'lucide-react';
 import heroBanner from '@/assets/hero-banner.png';
 import { products } from '@/data/products';
@@ -124,42 +125,55 @@ export default function Index() {
         </div>
       </section>
 
+      <Reviews />
+
       {/* Our Policies Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-[hsl(var(--deep-freeze))]/10 to-transparent fade-in-up">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-5xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Policies</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link to="/privacy-policy">
               <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <ShieldCheck className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                  <h3 className="text-xl font-semibold">Privacy Policy</h3>
+                <div className="flex flex-col items-center text-center gap-3">
+                  <ShieldCheck className="w-8 h-8 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-lg font-semibold">Privacy Policy</h3>
+                  <p className="text-sm text-muted-foreground">
+                    How we protect your data
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Learn how we protect your data and respect your privacy
-                </p>
               </div>
             </Link>
             <Link to="/terms-conditions">
               <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <FileText className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                  <h3 className="text-xl font-semibold">Terms & Conditions</h3>
+                <div className="flex flex-col items-center text-center gap-3">
+                  <FileText className="w-8 h-8 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-lg font-semibold">Terms & Conditions</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Our terms of service
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Read our terms of service and usage guidelines
-                </p>
               </div>
             </Link>
             <Link to="/shipping-returns">
               <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <Package className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                  <h3 className="text-xl font-semibold">Shipping & Returns</h3>
+                <div className="flex flex-col items-center text-center gap-3">
+                  <Package className="w-8 h-8 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-lg font-semibold">Shipping & Returns</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Delivery information
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Information about delivery and our return policy
-                </p>
+              </div>
+            </Link>
+            <Link to="/research-disclaimer">
+              <div className="frosted-glass rounded-xl p-6 hover:ice-glow hover:border-[hsl(var(--ice-blue))]/50 transition-all duration-300 h-full">
+                <div className="flex flex-col items-center text-center gap-3">
+                  <FileText className="w-8 h-8 text-[hsl(var(--ice-blue))]" />
+                  <h3 className="text-lg font-semibold">Research Disclaimer</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Research use only
+                  </p>
+                </div>
               </div>
             </Link>
           </div>

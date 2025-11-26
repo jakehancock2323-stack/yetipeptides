@@ -11,8 +11,7 @@ const corsHeaders = {
 interface COARequest {
   name: string;
   email: string;
-  product: string;
-  batchNumber?: string;
+  products: string[];
   message?: string;
 }
 
@@ -25,7 +24,9 @@ const handler = async (req: Request): Promise<Response> => {
     const requestData: COARequest = await req.json();
     console.log("Received COA request:", requestData);
 
-    const { name, email, product, batchNumber, message } = requestData;
+    const { name, email, products, message } = requestData;
+
+    const productsList = products.map(p => `<li style="padding: 4px 0;">${p}</li>`).join('');
 
     const emailHTML = `
       <!DOCTYPE html>
@@ -52,15 +53,13 @@ const handler = async (req: Request): Promise<Response> => {
                 <td style="padding: 8px 0;">${email}</td>
               </tr>
               <tr>
-                <td style="padding: 8px 0;"><strong>Product:</strong></td>
-                <td style="padding: 8px 0; font-weight: 600; color: #47d9d9;">${product}</td>
+                <td style="padding: 8px 0; vertical-align: top;"><strong>Products Requested:</strong></td>
+                <td style="padding: 8px 0;">
+                  <ul style="margin: 0; padding-left: 20px; font-weight: 600; color: #47d9d9;">
+                    ${productsList}
+                  </ul>
+                </td>
               </tr>
-              ${batchNumber ? `
-              <tr>
-                <td style="padding: 8px 0;"><strong>Batch Number:</strong></td>
-                <td style="padding: 8px 0;">${batchNumber}</td>
-              </tr>
-              ` : ''}
               ${message ? `
               <tr>
                 <td style="padding: 8px 0; vertical-align: top;"><strong>Additional Information:</strong></td>
@@ -70,7 +69,7 @@ const handler = async (req: Request): Promise<Response> => {
             </table>
 
             <p style="margin-top: 30px; padding: 20px; background: #d4edda; border-left: 4px solid #28a745; border-radius: 4px;">
-              <strong>✅ Action Required:</strong> Please send the COA for <strong>${product}</strong> to <strong>${email}</strong>
+              <strong>✅ Action Required:</strong> Please send the COA for the requested products to <strong>${email}</strong>
             </p>
           </div>
           
@@ -91,7 +90,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Yeti Peptides <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
-        subject: `📄 COA Request: ${product} - ${name}`,
+        subject: `📄 COA Request: ${products.join(', ')} - ${name}`,
         html: emailHTML,
       }),
     });
