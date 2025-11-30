@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Snowfall from "@/components/Snowfall";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -101,6 +102,12 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Secure Checkout – Yeti Peptides | Research Peptide Supplier"
+        description="Complete your research peptide order with secure cryptocurrency payment. Safe, discreet worldwide shipping from UK-based supplier."
+        keywords="secure peptide checkout, buy peptides online, crypto payment peptides, UK peptide supplier"
+        canonical="https://yetipeptides.com/checkout"
+      />
       <Snowfall />
       <Navbar />
 

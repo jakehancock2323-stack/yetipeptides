@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -14,6 +15,12 @@ export default function Cart() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen">
+        <SEO 
+          title="Shopping Cart – Yeti Peptides"
+          description="Review your research peptide order. Premium laboratory-grade peptides with secure checkout. UK & worldwide shipping available."
+          keywords="peptide cart, buy peptides, research peptide checkout"
+          canonical="https://yetipeptides.com/cart"
+        />
         <Snowfall />
         <Navbar />
         <div className="container mx-auto px-4 pt-32">
@@ -36,6 +43,12 @@ export default function Cart() {
 
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Shopping Cart – Yeti Peptides"
+        description="Review your research peptide order. Premium laboratory-grade peptides with secure checkout. UK & worldwide shipping available."
+        keywords="peptide cart, buy peptides, research peptide checkout"
+        canonical="https://yetipeptides.com/cart"
+      />
       <Snowfall />
       <Navbar />
 
