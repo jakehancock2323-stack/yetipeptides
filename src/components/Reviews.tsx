@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const reviews = [
   {
@@ -39,8 +40,40 @@ const reviews = [
 ];
 
 export default function Reviews() {
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Yeti Peptides Research-Grade Peptides",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": reviews.length,
+      "bestRating": "5",
+      "worstRating": "5"
+    },
+    "review": reviews.map(review => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": review.name
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.rating,
+        "bestRating": "5"
+      },
+      "reviewBody": review.text,
+      "datePublished": review.date
+    }))
+  };
+
   return (
     <section className="py-12 sm:py-20 px-4">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(reviewSchema)}
+        </script>
+      </Helmet>
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">

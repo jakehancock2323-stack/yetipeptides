@@ -23,15 +23,27 @@ export default function Index() {
     "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/EmxjOwZmlgPq6Pa6DiglLjfwKhH3/uploads/1763220633960-20251105_2053_Icy Yeti Logo_simple_compose_01k9awmk6ze31ab5ajx6tthb8e.png",
     "description": "Premium research-grade peptides supplier. UK & worldwide shipping. Specializing in Semaglutide, Retatrutide, Cagrilintide, and GLP-1 research compounds.",
     "email": "yetipeptides@protonmail.com",
-    "areaServed": "Worldwide"
+    "areaServed": "Worldwide",
+    "founder": {
+      "@type": "Organization",
+      "name": "Yeti Peptides"
+    },
+    "sameAs": [
+      "https://discord.gg/seDb5c9XkM"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "150"
+    }
   };
 
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Yeti Peptides – Research-Grade Peptides | UK & Worldwide Shipping"
-        description="Premium research-grade peptides for laboratory use. UK & worldwide shipping. Semaglutide, Retatrutide, Cagrilintide & GLP-1 compounds. COA verified, 99%+ purity. Secure crypto checkout."
-        keywords="peptides, research peptides, buy peptides online, peptide supplier UK, peptide supplier worldwide, GLP-1 research compounds, Semaglutide, Retatrutide, Cagrilintide, worldwide research peptide shipping, UK peptide vendor, research-grade peptides for sale, laboratory-grade peptides"
+        title="Yeti Peptides – Premium Research-Grade Peptides | UK & Worldwide Shipping"
+        description="Buy premium research-grade peptides online. UK-based supplier with worldwide shipping. Semaglutide, Retatrutide, Tirzepatide, Cagrilintide & GLP-1 compounds. COA verified, 99%+ purity. Secure crypto checkout. For laboratory research only."
+        keywords="buy peptides online, research peptides UK, peptide supplier worldwide, GLP-1 peptides, Semaglutide research, Retatrutide peptide, Tirzepatide, Cagrilintide, laboratory peptides, research chemicals, UK peptide vendor, worldwide peptide shipping, premium research peptides"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
       />

@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 
@@ -11,6 +12,12 @@ export default function OrderSuccess() {
 
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Order Confirmed – Yeti Peptides"
+        description="Your research peptide order has been successfully placed. Thank you for choosing Yeti Peptides, your trusted UK research supplier."
+        keywords="peptide order confirmation, research peptide purchase"
+        canonical="https://yetipeptides.com/order-success"
+      />
       <Snowfall />
       <Navbar />
 
