@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -56,12 +57,18 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Contact Us - Research Peptide Inquiries | Yeti Peptides"
+        description="Contact Yeti Peptides for research peptide inquiries, COA requests, and support. UK & worldwide peptide supplier. Email, Telegram, and Discord support available."
+        keywords="contact peptide supplier, peptide inquiries, research peptides support, COA request, peptide vendor contact"
+        canonical="https://yetipeptides.com/contact"
+      />
       <Snowfall />
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-          Contact Us
+          Contact Yeti Peptides - Research Peptide Supplier
         </h1>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">

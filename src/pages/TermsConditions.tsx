@@ -1,10 +1,17 @@
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 export default function TermsConditions() {
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Terms & Conditions - Research Peptides Policy | Yeti Peptides"
+        description="Terms and conditions for purchasing research-grade peptides from Yeti Peptides. Read our policies on research use, ordering, shipping, and legal compliance."
+        keywords="peptide terms and conditions, research peptides policy, peptide purchase terms"
+        canonical="https://yetipeptides.com/terms-conditions"
+      />
       <Snowfall />
       <Navbar />
 

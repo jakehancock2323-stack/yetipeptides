@@ -1,11 +1,18 @@
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { AlertTriangle } from 'lucide-react';
 
 export default function ResearchDisclaimer() {
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Research Use Disclaimer - Laboratory Peptides Only"
+        description="Important disclaimer: All peptides are for research use only. Not for human consumption. Read safety information and legal compliance requirements."
+        keywords="research use only, laboratory peptides, research disclaimer, peptide safety information"
+        canonical="https://yetipeptides.com/research-disclaimer"
+      />
       <Snowfall />
       <Navbar />
       

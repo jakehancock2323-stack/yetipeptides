@@ -1,11 +1,18 @@
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Package, Truck, Globe, AlertCircle } from 'lucide-react';
 
 export default function ShippingReturns() {
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Shipping & Returns - Worldwide Research Peptide Delivery"
+        description="Worldwide shipping for research peptides. UK & international delivery with tracking. Discreet packaging, temperature-controlled shipping. Read our returns policy."
+        keywords="worldwide peptide shipping, research peptide delivery, UK peptide shipping, international peptide shipping, peptide returns policy"
+        canonical="https://yetipeptides.com/shipping-returns"
+      />
       <Snowfall />
       <Navbar />
 
