@@ -498,15 +498,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "nad",
-    name: "NAD+",
-    category: "General Health",
-    variants: [
-      { specification: "100mg ×10", price: 88 },
-      { specification: "500mg ×10", price: 135 }
-    ]
-  },
-  {
     id: "snap-8",
     name: "SNAP-8",
     category: "General Health",
