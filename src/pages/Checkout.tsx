@@ -114,8 +114,9 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const calculateDiscount = () => appliedPromo ? calculateSubtotal() * appliedPromo.discount : 0;
-  const calculateTotal = () => calculateSubtotal() + 65 - calculateDiscount();
+  const calculateBeforeDiscount = () => calculateSubtotal() + 65; // Subtotal + delivery
+  const calculateDiscount = () => appliedPromo ? calculateBeforeDiscount() * appliedPromo.discount : 0;
+  const calculateTotal = () => calculateBeforeDiscount() - calculateDiscount();
 
   return (
     <div className="min-h-screen pb-20">
