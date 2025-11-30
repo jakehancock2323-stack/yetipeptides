@@ -33,6 +33,8 @@ interface OrderEmailRequest {
   items: OrderItem[];
   subtotal: number;
   deliveryFee: number;
+  discount: number;
+  promoCode: string | null;
   total: number;
   includeEbook?: boolean;
 }
@@ -47,7 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
     const orderData: OrderEmailRequest = await req.json();
     console.log("Received order data:", orderData);
 
-    const { customerDetails, paymentMethod, items, subtotal, deliveryFee, total, includeEbook } = orderData;
+    const { customerDetails, paymentMethod, items, subtotal, deliveryFee, discount, promoCode, total, includeEbook } = orderData;
 
     // Build order items HTML
     const itemsHTML = items.map(item => `
@@ -149,6 +151,12 @@ const handler = async (req: Request): Promise<Response> => {
                   <td style="padding: 8px 0; font-size: 16px;"><strong>Delivery Fee:</strong></td>
                   <td style="padding: 8px 0; text-align: right; font-size: 16px;">$${deliveryFee.toFixed(2)}</td>
                 </tr>
+                ${promoCode ? `
+                <tr style="background: #d4edda;">
+                  <td style="padding: 8px 0; font-size: 16px; color: #155724;"><strong>🎉 Promo Code (${promoCode.toUpperCase()}):</strong></td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-$${discount.toFixed(2)}</td>
+                </tr>
+                ` : ''}
                 <tr style="border-top: 2px solid #47d9d9;">
                   <td style="padding: 12px 0; font-size: 20px; color: #47d9d9;"><strong>TOTAL:</strong></td>
                   <td style="padding: 12px 0; text-align: right; font-size: 24px; color: #47d9d9; font-weight: bold;">$${total.toFixed(2)}</td>
