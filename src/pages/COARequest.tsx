@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -71,6 +72,12 @@ export default function COARequest() {
 
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="COA Request - Certificate of Analysis | Research Peptides"
+        description="Request Certificates of Analysis (COA) for Yeti Peptides research-grade compounds. HPLC, MS, and analytical data available for all products."
+        keywords="COA request, certificate of analysis, peptide COA, research peptide verification, HPLC analysis, peptide purity testing"
+        canonical="https://yetipeptides.com/coa-request"
+      />
       <Snowfall />
       <Navbar />
 

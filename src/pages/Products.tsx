@@ -5,6 +5,7 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
+import SEO from '@/components/SEO';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { products, categories } from '@/data/products';
@@ -35,17 +36,42 @@ export default function Products() {
     setSearchParams({ category });
   };
 
+  const productsSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": products.map((product, index) => ({
+      "@type": "Product",
+      "position": index + 1,
+      "name": product.name,
+      "description": `Research-grade ${product.name} peptide for laboratory use`,
+      "category": product.category,
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": Math.min(...product.variants.map(v => v.price)),
+        "highPrice": Math.max(...product.variants.map(v => v.price))
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="Buy Research Peptides Online - Premium Laboratory-Grade Compounds"
+        description="Premium research-grade peptides for laboratory use. Semaglutide, Retatrutide, Tirzepatide, Cagrilintide & GLP-1 compounds. UK & worldwide shipping. COA verified, 99%+ purity."
+        keywords="buy peptides online, research peptides, peptide shop, GLP-1 peptides, Semaglutide research, Retatrutide, Tirzepatide, Cagrilintide, laboratory peptides, research chemicals, peptide supplier"
+        canonical="https://yetipeptides.com/products"
+        schema={productsSchema}
+      />
       <Snowfall />
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-          Research-Grade Compounds
+          Buy Research-Grade Peptides Online | UK & Worldwide
         </h1>
         <p className="text-lg text-center text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Premium peptides for laboratory research purposes only
+          Premium laboratory-grade peptides for research purposes only - GLP-1, Semaglutide, Retatrutide & more
         </p>
 
         {/* Trust Badges */}

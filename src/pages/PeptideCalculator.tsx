@@ -3,6 +3,7 @@ import { Calculator, Copy, RotateCcw } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Snowfall from '@/components/Snowfall';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -111,6 +112,12 @@ export default function PeptideCalculator() {
 
   return (
     <div className="min-h-screen flex flex-col winter-gradient">
+      <SEO 
+        title="Peptide Calculator - Research Dosage Calculator Tool"
+        description="Free peptide dosage calculator for research purposes. Calculate peptide concentration, dosing volumes, and doses per vial for laboratory research."
+        keywords="peptide calculator, research peptide dosing, peptide concentration calculator, laboratory peptide calculations"
+        canonical="https://yetipeptides.com/calculator"
+      />
       <Snowfall />
       <Navbar />
       

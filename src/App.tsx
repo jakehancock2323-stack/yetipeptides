@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from "./contexts/CartContext";
 import AgeVerification from "./components/AgeVerification";
 import ScrollToTop from "./components/ScrollToTop";
@@ -28,14 +29,15 @@ const App = () => {
   const [isVerified, setIsVerified] = useState(false);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <CartProvider>
-          <Toaster />
-          <Sonner />
-          <AgeVerification onVerified={() => setIsVerified(true)} />
-          {isVerified && (
-            <BrowserRouter>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <CartProvider>
+            <Toaster />
+            <Sonner />
+            <AgeVerification onVerified={() => setIsVerified(true)} />
+            {isVerified && (
+              <BrowserRouter>
               <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -53,11 +55,12 @@ const App = () => {
                 <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          )}
-        </CartProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+              </BrowserRouter>
+            )}
+          </CartProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

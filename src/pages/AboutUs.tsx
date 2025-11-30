@@ -1,30 +1,37 @@
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Award, Globe, Shield, Zap, FileText, Users, Target } from 'lucide-react';
 
 export default function AboutUs() {
   return (
     <div className="min-h-screen pb-20">
+      <SEO 
+        title="About Us - UK Research Peptide Supplier | Yeti Peptides"
+        description="Yeti Peptides provides research-grade peptides with worldwide shipping. COA verified, 99%+ purity. Supporting researchers with premium laboratory-grade compounds."
+        keywords="peptide supplier UK, research peptides, peptide vendor, laboratory peptides, COA verified peptides, worldwide peptide shipping"
+        canonical="https://yetipeptides.com/about"
+      />
       <Snowfall />
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-          About Yeti Peptides
+          About Yeti Peptides - UK & Worldwide Research Peptide Supplier
         </h1>
 
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Main Description */}
           <div className="frosted-glass rounded-xl p-8">
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              Yeti Peptides provides research-grade compounds with a strong focus on quality, consistency, and transparency. All products are sourced from trusted manufacturers and supported with COAs available on request.
+              Yeti Peptides is a trusted UK-based research peptide supplier providing premium research-grade compounds with a strong focus on quality, consistency, and transparency. All products are sourced from trusted manufacturers and supported with Certificates of Analysis (COAs) available on request.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              We offer worldwide discreet shipping, secure crypto checkout, and responsive support. Our mission is to support researchers with reliable, premium-grade materials while maintaining industry-leading standards.
+              We offer worldwide discreet shipping, secure cryptocurrency checkout, and responsive customer support. Our mission is to support researchers globally with reliable, laboratory-grade materials including GLP-1 peptides, Semaglutide, Retatrutide, Cagrilintide, and other research compounds, while maintaining industry-leading standards.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Every product in our catalogue undergoes rigorous testing to ensure it meets the highest standards of purity and quality. We are committed to transparency and provide Certificates of Analysis (COAs) for all our products upon request.
+              Every peptide product in our catalogue undergoes rigorous testing to ensure it meets the highest standards of purity (99%+) and quality. We are committed to transparency and provide Certificates of Analysis for all our research peptides upon request.
             </p>
           </div>
 

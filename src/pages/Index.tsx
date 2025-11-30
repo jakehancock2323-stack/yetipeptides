@@ -6,15 +6,35 @@ import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
 import Reviews from '@/components/Reviews';
+import SEO from '@/components/SEO';
 import { CheckCircle2, Globe, ShieldCheck, Package, FileText, Lock } from 'lucide-react';
 import heroBanner from '@/assets/hero-banner.png';
 import { products } from '@/data/products';
+
 export default function Index() {
   const featuredProductIds = ['lc526', 'retatrutide', 'tirzepatide', 'cagrilintide', 'ghk-cu', 'hgh-somatropin'];
   const featuredProducts = products.filter(p => featuredProductIds.includes(p.id));
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Yeti Peptides",
+    "url": "https://yetipeptides.com",
+    "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/EmxjOwZmlgPq6Pa6DiglLjfwKhH3/uploads/1763220633960-20251105_2053_Icy Yeti Logo_simple_compose_01k9awmk6ze31ab5ajx6tthb8e.png",
+    "description": "Premium research-grade peptides supplier. UK & worldwide shipping. Specializing in Semaglutide, Retatrutide, Cagrilintide, and GLP-1 research compounds.",
+    "email": "yetipeptides@protonmail.com",
+    "areaServed": "Worldwide"
+  };
+
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Yeti Peptides – Research-Grade Peptides | UK & Worldwide Shipping"
+        description="Premium research-grade peptides for laboratory use. UK & worldwide shipping. Semaglutide, Retatrutide, Cagrilintide & GLP-1 compounds. COA verified, 99%+ purity. Secure crypto checkout."
+        keywords="peptides, research peptides, buy peptides online, peptide supplier UK, peptide supplier worldwide, GLP-1 research compounds, Semaglutide, Retatrutide, Cagrilintide, worldwide research peptide shipping, UK peptide vendor, research-grade peptides for sale, laboratory-grade peptides"
+        canonical="https://yetipeptides.com/"
+        schema={organizationSchema}
+      />
       <Snowfall />
       <Navbar />
 
@@ -24,7 +44,7 @@ export default function Index() {
           <div className="relative rounded-xl overflow-hidden shadow-xl">
             <img 
               src={heroBanner} 
-              alt="Yeti Peptides - Premium Research-Grade Compounds" 
+              alt="Yeti Peptides - Premium Research-Grade Peptides UK Worldwide Shipping Semaglutide Retatrutide Cagrilintide" 
               className="w-full h-auto object-cover max-h-[300px] md:max-h-[400px]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
@@ -48,7 +68,7 @@ export default function Index() {
       <section className="py-16 px-4 fade-in-up animate-delay-100">
         <div className="container mx-auto max-w-4xl">
           <div className="frosted-glass rounded-xl p-8">
-            <h2 className="text-3xl font-bold mb-6 text-center">Why Choose Yeti Peptides</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center">Why Choose Yeti Peptides - UK & Worldwide Research Peptide Supplier</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
               <div className="space-y-2">
                 <CheckCircle2 className="w-8 h-8 text-[hsl(var(--ice-blue))] mx-auto" />
@@ -107,8 +127,8 @@ export default function Index() {
       <section className="py-20 px-4 fade-in-up animate-delay-300">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
-            <p className="text-lg text-muted-foreground">Explore our most popular research compounds</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Research-Grade Peptides for Sale</h2>
+            <p className="text-lg text-muted-foreground">Premium GLP-1 & research compounds - Semaglutide, Retatrutide, Cagrilintide & more</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {featuredProducts.map(product => (
