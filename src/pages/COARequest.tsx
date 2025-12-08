@@ -9,13 +9,14 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
-import { FileText, ShieldCheck } from 'lucide-react';
+import { FileText, ShieldCheck, Clock, Mail } from 'lucide-react';
 import { products } from '@/data/products';
 
 export default function COARequest() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    batchNumber: '',
     message: '',
   });
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -47,8 +48,8 @@ export default function COARequest() {
         throw new Error("Failed to send COA request");
       }
 
-      toast.success('COA request submitted successfully! We will email you shortly.');
-      setFormData({ name: '', email: '', message: '' });
+      toast.success('COA request submitted successfully! We will email you within 24-48 hours.');
+      setFormData({ name: '', email: '', batchNumber: '', message: '' });
       setSelectedProducts([]);
     } catch (error) {
       console.error("Error submitting COA request:", error);
@@ -70,68 +71,110 @@ export default function COARequest() {
     );
   };
 
+  const coaSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "COA Request - Certificate of Analysis",
+    "description": "Request Certificates of Analysis for Yeti Peptides research compounds. COA provided for research-use verification.",
+    "url": "https://yetipeptides.com/coa-request"
+  };
+
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="COA Request - Certificate of Analysis | Research Peptides"
-        description="Request Certificates of Analysis (COA) for Yeti Peptides research-grade compounds. HPLC, MS, and analytical data available for all products."
-        keywords="COA request, certificate of analysis, peptide COA, research peptide verification, HPLC analysis, peptide purity testing"
+        title="COA Request - Certificate of Analysis | Yeti Peptides"
+        description="Request Certificates of Analysis (COA) for research peptide verification. HPLC, MS, and analytical data available for all Yeti Peptides products."
+        keywords="COA request, certificate of analysis, peptide COA, research peptide verification, HPLC analysis, peptide purity testing, laboratory documentation"
         canonical="https://yetipeptides.com/coa-request"
+        schema={coaSchema}
       />
       <Snowfall />
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center mx-auto mb-6">
+        <div className="max-w-3xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-ice-blue to-glacier flex items-center justify-center mx-auto mb-6">
               <FileText className="w-10 h-10 text-background" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-ice-blue to-frost bg-clip-text text-transparent">
               Certificate of Analysis Request
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Certificates of Analysis (COAs) are available on request for all products. Submit the form below and we will email the COA to you.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              COA provided on request for research-use verification. Complete the form below and we will 
+              email the relevant documentation to you.
             </p>
           </div>
 
-          <div className="frosted-glass rounded-xl p-6 md:p-8 mb-6">
-            <div className="flex items-center gap-3 mb-6 p-4 bg-[hsl(var(--ice-blue))]/10 rounded-lg border border-[hsl(var(--ice-blue))]/20">
-              <ShieldCheck className="w-6 h-6 text-[hsl(var(--ice-blue))] flex-shrink-0" />
-              <p className="text-sm text-muted-foreground">
-                All our products are tested and verified for purity and quality. COAs typically contain HPLC, MS, and other analytical data.
-              </p>
+          {/* Info Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="frosted-glass rounded-lg p-4 text-center">
+              <ShieldCheck className="w-8 h-8 text-ice-blue mx-auto mb-2" />
+              <h3 className="font-semibold text-sm mb-1">Verified Data</h3>
+              <p className="text-xs text-muted-foreground">HPLC & MS analysis</p>
             </div>
+            <div className="frosted-glass rounded-lg p-4 text-center">
+              <Clock className="w-8 h-8 text-ice-blue mx-auto mb-2" />
+              <h3 className="font-semibold text-sm mb-1">Quick Response</h3>
+              <p className="text-xs text-muted-foreground">24-48 hour processing</p>
+            </div>
+            <div className="frosted-glass rounded-lg p-4 text-center">
+              <Mail className="w-8 h-8 text-ice-blue mx-auto mb-2" />
+              <h3 className="font-semibold text-sm mb-1">Email Delivery</h3>
+              <p className="text-xs text-muted-foreground">PDF documentation</p>
+            </div>
+          </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Full Name *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  required
-                  placeholder="Your full name"
-                />
+          {/* Form */}
+          <div className="frosted-glass rounded-xl p-6 md:p-8 mb-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                    required
+                    placeholder="Your full name"
+                    className="mt-1.5 bg-secondary/30"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    required
+                    placeholder="your.email@example.com"
+                    className="mt-1.5 bg-secondary/30"
+                  />
+                </div>
               </div>
 
               <div>
-                <Label htmlFor="email">Email Address *</Label>
+                <Label htmlFor="batchNumber">Batch/Lot Number (Optional)</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  required
-                  placeholder="your.email@example.com"
+                  id="batchNumber"
+                  value={formData.batchNumber}
+                  onChange={(e) => handleChange('batchNumber', e.target.value)}
+                  placeholder="e.g., YP-2024-1234"
+                  className="mt-1.5 bg-secondary/30"
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  If you have a specific batch number, include it for exact COA matching
+                </p>
               </div>
 
               <div>
-                <Label className="mb-3 block">Select Products * (one or more)</Label>
-                <div className="max-h-[300px] overflow-y-auto space-y-2 p-4 rounded-md border border-input bg-background">
+                <Label className="mb-3 block">Select Product(s) *</Label>
+                <div className="max-h-[280px] overflow-y-auto space-y-2 p-4 rounded-lg border border-border bg-secondary/20">
                   {products.map((product) => (
-                    <div key={product.id} className="flex items-center space-x-2">
+                    <div key={product.id} className="flex items-center space-x-3 py-1">
                       <Checkbox
                         id={product.id}
                         checked={selectedProducts.includes(product.name)}
@@ -139,16 +182,17 @@ export default function COARequest() {
                       />
                       <label
                         htmlFor={product.id}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                        className="text-sm font-medium leading-none cursor-pointer hover:text-ice-blue transition-colors flex-1"
                       >
                         {product.name}
                       </label>
+                      <span className="text-xs text-muted-foreground">{product.category}</span>
                     </div>
                   ))}
                 </div>
                 {selectedProducts.length > 0 && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Selected: {selectedProducts.join(', ')}
+                  <p className="text-sm text-ice-blue mt-2">
+                    Selected ({selectedProducts.length}): {selectedProducts.join(', ')}
                   </p>
                 )}
               </div>
@@ -159,26 +203,37 @@ export default function COARequest() {
                   id="message"
                   value={formData.message}
                   onChange={(e) => handleChange('message', e.target.value)}
-                  placeholder="Any additional details or questions..."
-                  className="min-h-[100px]"
+                  placeholder="Any additional details, questions, or specific requirements..."
+                  className="min-h-[100px] mt-1.5 bg-secondary/30"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background"
+                className="w-full bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold"
                 size="lg"
               >
-                {isSubmitting ? 'Submitting...' : 'Request COA'}
+                {isSubmitting ? 'Submitting Request...' : 'Submit COA Request'}
               </Button>
             </form>
           </div>
 
-          <div className="frosted-glass rounded-xl p-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              <strong className="text-foreground">Response Time:</strong> COA requests are typically processed within 24-48 hours during business days.
-            </p>
+          {/* Info Box */}
+          <div className="frosted-glass rounded-xl p-6">
+            <h3 className="font-semibold mb-3">What's Included in a COA?</h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li>• <strong className="text-foreground">HPLC Analysis:</strong> Purity verification and impurity profiling</li>
+              <li>• <strong className="text-foreground">Mass Spectrometry:</strong> Molecular weight confirmation</li>
+              <li>• <strong className="text-foreground">Batch Information:</strong> Lot number, production date, expiry</li>
+              <li>• <strong className="text-foreground">Quality Specifications:</strong> Appearance, solubility, peptide content</li>
+            </ul>
+            <div className="mt-4 pt-4 border-t border-border">
+              <p className="text-xs text-muted-foreground">
+                <strong className="text-foreground">Response Time:</strong> COA requests are processed within 24-48 hours during business days. 
+                For urgent requests, please email us directly at yetipeptides@protonmail.com
+              </p>
+            </div>
           </div>
         </div>
       </div>
