@@ -142,7 +142,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <CheckCircle2 className="w-3.5 h-3.5 text-ice-blue" />
-            <span>Batch Verified</span>
+            <span>99%+ Purity</span>
           </div>
         </div>
 
