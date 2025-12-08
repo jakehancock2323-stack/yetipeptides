@@ -16,7 +16,6 @@ export default function COARequest() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    batchNumber: '',
     message: '',
   });
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -49,7 +48,7 @@ export default function COARequest() {
       }
 
       toast.success('COA request submitted successfully! We will email you within 24-48 hours.');
-      setFormData({ name: '', email: '', batchNumber: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       setSelectedProducts([]);
     } catch (error) {
       console.error("Error submitting COA request:", error);
@@ -157,20 +156,6 @@ export default function COARequest() {
               </div>
 
               <div>
-                <Label htmlFor="batchNumber">Batch/Lot Number (Optional)</Label>
-                <Input
-                  id="batchNumber"
-                  value={formData.batchNumber}
-                  onChange={(e) => handleChange('batchNumber', e.target.value)}
-                  placeholder="e.g., YP-2024-1234"
-                  className="mt-1.5 bg-secondary/30"
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  If you have a specific batch number, include it for exact COA matching
-                </p>
-              </div>
-
-              <div>
                 <Label className="mb-3 block">Select Product(s) *</Label>
                 <div className="max-h-[280px] overflow-y-auto space-y-2 p-4 rounded-lg border border-border bg-secondary/20">
                   {products.map((product) => (
@@ -225,7 +210,6 @@ export default function COARequest() {
             <ul className="text-sm text-muted-foreground space-y-2">
               <li>• <strong className="text-foreground">HPLC Analysis:</strong> Purity verification and impurity profiling</li>
               <li>• <strong className="text-foreground">Mass Spectrometry:</strong> Molecular weight confirmation</li>
-              <li>• <strong className="text-foreground">Batch Information:</strong> Lot number, production date, expiry</li>
               <li>• <strong className="text-foreground">Quality Specifications:</strong> Appearance, solubility, peptide content</li>
             </ul>
             <div className="mt-4 pt-4 border-t border-border">
