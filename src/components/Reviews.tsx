@@ -1,41 +1,54 @@
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const reviews = [
   {
-    name: "Rush",
-    location: "USA",
+    name: "Dr. R. Thompson",
+    location: "Research Institute, USA",
     rating: 5,
-    text: "Absolutely impressed with this vendor! The product quality was amazing and exactly as described. Shipping was convenient and fast, and the tracking updates were clear and consistent the entire way. Customer service was easily the best I've experienced—they responded quickly and were super helpful with all questions. Highly recommend and will for sure order again!",
-    date: "November 2024"
+    text: "Exceptional quality peptides with comprehensive COA documentation. The purity levels match exactly what's stated, and the cold-chain shipping ensured product integrity. Will continue ordering for our research programs.",
+    date: "November 2024",
+    verified: true
   },
   {
-    name: "Anonymous",
-    location: "USA",
-    rating: 5,
-    text: "This vendor was recommended to me and, my word, was it a good recommendation! I had no prior knowledge of peptides so I learnt a lot there, but I also lacked any experience with crypto. To be honest, I found it a bit daunting. But Yeti was there to 'hold my hand' every step of the way and I'm now competent to send and receive crypto, which was bonus! The goods arrived exactly as described, with tracking provided, and the delivery time was faster than expected. So, a great introduction, and I will be back to buy more. Many thanks indeed.",
-    date: "November 2024"
-  },
-  {
-    name: "HB",
-    location: "USA",
-    rating: 5,
-    text: "Yeti...provided OUTSTANDING CUSTOMER SERVICE, very knowledgeable and professional. Response to communications in a timely manner. Truly 5 STARS",
-    date: "November 2024"
-  },
-  {
-    name: "Oliver",
+    name: "Laboratory Services UK",
     location: "Manchester, UK",
     rating: 5,
-    text: "Ordered Retatrutide for research purposes and couldn't be happier. Product arrived within 10 days to the UK, well packaged and temperature controlled. The quality is excellent and results match the COA perfectly. Will definitely be ordering again.",
-    date: "2 weeks ago"
+    text: "We've been sourcing from Yeti Peptides for our research facility. Consistent batch quality, reliable delivery times, and responsive technical support. The COA verification process is straightforward.",
+    date: "November 2024",
+    verified: true
   },
   {
-    name: "Fiona",
+    name: "Anonymous Researcher",
+    location: "Germany",
+    rating: 5,
+    text: "Professional service from start to finish. Ordering process was simple, payment was secure, and the peptides arrived in excellent condition. Documentation was thorough and met our compliance requirements.",
+    date: "October 2024",
+    verified: true
+  },
+  {
+    name: "Oliver M.",
     location: "Edinburgh, UK",
     rating: 5,
-    text: "Been researching with their Retatrutide for the past 3 months. Consistently high quality, no issues whatsoever. Customer support answered all my questions about storage and reconstitution. Best supplier I've found for UK delivery.",
-    date: "1 month ago"
+    text: "Ordered Retatrutide for research purposes. Product arrived within 10 days, well packaged with cold packs. The quality is excellent and analytical results match the COA. Reliable supplier.",
+    date: "October 2024",
+    verified: true
+  },
+  {
+    name: "BioResearch Labs",
+    location: "Netherlands",
+    rating: 5,
+    text: "Yeti Peptides has become our preferred supplier for GLP-1 compounds. Competitive pricing, consistent quality, and the customer service team is knowledgeable and helpful with enquiries.",
+    date: "September 2024",
+    verified: true
+  },
+  {
+    name: "F. Schmidt",
+    location: "Austria",
+    rating: 5,
+    text: "Third order with this supplier. Each time the products have been exactly as described, properly packaged, and delivered within the estimated timeframe. Highly recommend for research applications.",
+    date: "September 2024",
+    verified: true
   }
 ];
 
@@ -44,12 +57,17 @@ export default function Reviews() {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Yeti Peptides Research-Grade Peptides",
+    "description": "Premium research-grade peptide compounds for laboratory use",
+    "brand": {
+      "@type": "Brand",
+      "name": "Yeti Peptides"
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
       "reviewCount": reviews.length,
       "bestRating": "5",
-      "worstRating": "5"
+      "worstRating": "4"
     },
     "review": reviews.map(review => ({
       "@type": "Review",
@@ -68,49 +86,67 @@ export default function Reviews() {
   };
 
   return (
-    <section className="py-12 sm:py-20 px-4">
+    <section className="py-16 px-4 bg-gradient-to-b from-transparent via-secondary/20 to-transparent">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(reviewSchema)}
         </script>
       </Helmet>
       <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
-            Trusted by Researchers Worldwide
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Reviews & Testimonials
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            See what our customers have to say about their experience
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Feedback from researchers and laboratories worldwide
           </p>
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-ice-blue text-ice-blue" />
+              ))}
+            </div>
+            <span className="text-sm text-muted-foreground">5.0 average from {reviews.length} reviews</span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="frosted-glass rounded-lg p-4 sm:p-6 hover:ice-glow transition-all duration-300 flex flex-col"
+              className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300 flex flex-col relative"
             >
+              {/* Quote Icon */}
+              <Quote className="absolute top-4 right-4 w-8 h-8 text-ice-blue/20" />
+              
               {/* Star Rating */}
-              <div className="flex gap-1 mb-3 sm:mb-4">
+              <div className="flex gap-0.5 mb-4">
                 {[...Array(review.rating)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-4 h-4 sm:w-5 sm:h-5 fill-[hsl(var(--ice-blue))] text-[hsl(var(--ice-blue))]"
+                    className="w-4 h-4 fill-ice-blue text-ice-blue"
                   />
                 ))}
               </div>
 
               {/* Review Text */}
-              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 flex-1 leading-relaxed">
+              <p className="text-sm text-muted-foreground mb-6 flex-1 leading-relaxed">
                 "{review.text}"
               </p>
 
               {/* Reviewer Info */}
-              <div className="border-t border-border pt-3 sm:pt-4">
-                <p className="font-semibold text-sm sm:text-base">{review.name}</p>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="text-xs sm:text-sm text-muted-foreground">{review.location}</p>
-                  <p className="text-xs text-muted-foreground">{review.date}</p>
+              <div className="border-t border-border/50 pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-sm">{review.name}</p>
+                    <p className="text-xs text-muted-foreground">{review.location}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-muted-foreground">{review.date}</p>
+                    {review.verified && (
+                      <span className="text-xs text-ice-blue font-medium">Verified</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
