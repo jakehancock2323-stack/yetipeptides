@@ -74,6 +74,11 @@ export default function Footer() {
                   Research Disclaimer
                 </Link>
               </li>
+              <li>
+                <Link to="/how-to-pay-crypto" className="text-muted-foreground hover:text-ice-blue transition-colors">
+                  How to Pay with Crypto
+                </Link>
+              </li>
             </ul>
           </div>
 
