@@ -19,8 +19,6 @@ export default function Checkout() {
   const { items, getTotalPrice, clearCart, includeEbook } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("btc");
-  const [promoCode, setPromoCode] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount: number } | null>(null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -68,8 +66,8 @@ export default function Checkout() {
       })),
       subtotal: calculateSubtotal(),
       deliveryFee: 65,
-      discount: calculateDiscount(),
-      promoCode: appliedPromo?.code || null,
+      discount: 0,
+      promoCode: null,
       total: calculateTotal(),
       includeEbook,
     };
@@ -104,18 +102,8 @@ export default function Checkout() {
     }));
   };
 
-  const handleApplyPromo = () => {
-    if (promoCode.toLowerCase() === "jas") {
-      setAppliedPromo({ code: "jas", discount: 0.05 });
-      toast.success("Promo code applied! 5% discount");
-    } else if (promoCode.trim()) {
-      toast.error("Invalid promo code");
-    }
-  };
-
   const calculateSubtotal = () => getTotalPrice();
-  const calculateDiscount = () => appliedPromo ? calculateSubtotal() * appliedPromo.discount : 0;
-  const calculateTotal = () => calculateSubtotal() + 65 - calculateDiscount();
+  const calculateTotal = () => calculateSubtotal() + 65;
 
   return (
     <div className="min-h-screen pb-20">
@@ -281,49 +269,9 @@ export default function Checkout() {
                   <span>Delivery:</span>
                   <span>$65.00</span>
                 </div>
-                {appliedPromo && (
-                  <div className="flex justify-between text-lg text-green-500">
-                    <span>Promo Code ({appliedPromo.code.toUpperCase()}):</span>
-                    <span>-${calculateDiscount().toFixed(2)}</span>
-                  </div>
-                )}
                 <div className="flex justify-between text-2xl font-bold pt-2 border-t border-border mt-2">
                   <span>Total:</span>
                   <span className="text-[hsl(var(--ice-blue))]">${calculateTotal().toFixed(2)}</span>
-                </div>
-              </div>
-
-              {/* Promo Code Section */}
-              <div className="mt-6 pt-6 border-t border-border">
-                <Label htmlFor="promoCode" className="mb-2 block">Promo Code</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="promoCode"
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value)}
-                    placeholder="Enter promo code"
-                    disabled={!!appliedPromo}
-                  />
-                  {appliedPromo ? (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        setAppliedPromo(null);
-                        setPromoCode("");
-                      }}
-                    >
-                      Remove
-                    </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      onClick={handleApplyPromo}
-                      disabled={!promoCode.trim()}
-                    >
-                      Apply
-                    </Button>
-                  )}
                 </div>
               </div>
             </div>
