@@ -16,6 +16,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/products', label: 'Products' },
+    { to: '/how-to-pay-crypto', label: 'Pay with Crypto' },
     { to: '/coa-request', label: 'COA Request' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
