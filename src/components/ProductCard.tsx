@@ -6,6 +6,7 @@ import { Input } from './ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { CheckCircle2, Truck, Package, ShieldCheck, FileText, AlertTriangle, ChevronDown, Beaker, Snowflake } from 'lucide-react';
+import yetiVial from '@/assets/yeti-vial.png';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 
 interface ProductCardProps {
@@ -39,8 +40,19 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-ice-blue/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-ice-blue/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
+      {/* Product Image */}
+      <div className="relative z-10 mb-4 flex justify-center">
+        <div className="w-32 h-40 flex items-center justify-center overflow-hidden">
+          <img 
+            src={yetiVial} 
+            alt={`${product.name} - Yeti Peptides Research Vial`}
+            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      </div>
+
       {/* Product Header */}
-      <div className="mb-4 relative z-10">
+      <div className="mb-4 relative z-10 text-center">
         <h3 className="text-lg sm:text-xl font-bold mb-1 group-hover:text-ice-blue transition-colors">{product.name}</h3>
         <p className="text-xs text-muted-foreground uppercase tracking-wide">{product.category}</p>
       </div>
