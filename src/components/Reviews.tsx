@@ -1,5 +1,7 @@
-import { Star, Quote } from 'lucide-react';
+import { useState } from 'react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { Button } from './ui/button';
 
 const reviews = [
   {
@@ -53,6 +55,22 @@ const reviews = [
 ];
 
 export default function Reviews() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextReview = () => {
+    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+  };
+
+  const prevReview = () => {
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
+  const goToReview = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const review = reviews[currentIndex];
+
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -69,19 +87,19 @@ export default function Reviews() {
       "bestRating": "5",
       "worstRating": "4"
     },
-    "review": reviews.map(review => ({
+    "review": reviews.map(r => ({
       "@type": "Review",
       "author": {
         "@type": "Person",
-        "name": review.name
+        "name": r.name
       },
       "reviewRating": {
         "@type": "Rating",
-        "ratingValue": review.rating,
+        "ratingValue": r.rating,
         "bestRating": "5"
       },
-      "reviewBody": review.text,
-      "datePublished": review.date
+      "reviewBody": r.text,
+      "datePublished": r.date
     }))
   };
 
@@ -92,7 +110,7 @@ export default function Reviews() {
           {JSON.stringify(reviewSchema)}
         </script>
       </Helmet>
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Reviews & Testimonials
@@ -110,47 +128,83 @@ export default function Reviews() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review, index) => (
-            <div
-              key={index}
-              className="frosted-glass rounded-xl p-6 hover:ice-glow transition-all duration-300 flex flex-col relative"
-            >
-              {/* Quote Icon */}
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-ice-blue/20" />
-              
-              {/* Star Rating */}
-              <div className="flex gap-0.5 mb-4">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 fill-ice-blue text-ice-blue"
-                  />
-                ))}
-              </div>
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Buttons */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={prevReview}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 hover:bg-secondary/50"
+            aria-label="Previous review"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </Button>
 
-              {/* Review Text */}
-              <p className="text-sm text-muted-foreground mb-6 flex-1 leading-relaxed">
-                "{review.text}"
-              </p>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={nextReview}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 hover:bg-secondary/50"
+            aria-label="Next review"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </Button>
 
-              {/* Reviewer Info */}
-              <div className="border-t border-border/50 pt-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-sm">{review.name}</p>
-                    <p className="text-xs text-muted-foreground">{review.location}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">{review.date}</p>
-                    {review.verified && (
-                      <span className="text-xs text-ice-blue font-medium">Verified</span>
-                    )}
-                  </div>
-                </div>
+          {/* Review Card */}
+          <div
+            key={currentIndex}
+            className="frosted-glass rounded-xl p-8 md:p-10 relative animate-fade-in"
+          >
+            {/* Quote Icon */}
+            <Quote className="absolute top-6 right-6 w-10 h-10 text-ice-blue/20" />
+            
+            {/* Star Rating */}
+            <div className="flex gap-0.5 mb-6 justify-center">
+              {[...Array(review.rating)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-5 h-5 fill-ice-blue text-ice-blue"
+                />
+              ))}
+            </div>
+
+            {/* Review Text */}
+            <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed text-center">
+              "{review.text}"
+            </p>
+
+            {/* Reviewer Info */}
+            <div className="border-t border-border/50 pt-6 text-center">
+              <p className="font-semibold">{review.name}</p>
+              <p className="text-sm text-muted-foreground">{review.location}</p>
+              <div className="flex items-center justify-center gap-2 mt-2">
+                <span className="text-xs text-muted-foreground">{review.date}</span>
+                {review.verified && (
+                  <>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-xs text-ice-blue font-medium">Verified</span>
+                  </>
+                )}
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-2 mt-6">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToReview(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-ice-blue w-6' 
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                }`}
+                aria-label={`Go to review ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
