@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from './ui/button';
+
+const AUTOPLAY_INTERVAL = 5000; // 5 seconds
 
 const reviews = [
   // Real customer reviews - UK
@@ -90,6 +92,18 @@ const reviews = [
 
 export default function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    }, AUTOPLAY_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   const nextReview = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
@@ -163,7 +177,11 @@ export default function Reviews() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Navigation Buttons */}
           <Button
             variant="ghost"
