@@ -4,10 +4,10 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
+import QuantityInput from '@/components/QuantityInput';
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
@@ -74,22 +74,11 @@ export default function Cart() {
 
                 <div className="flex items-center gap-2 sm:gap-4 w-full justify-between sm:justify-start">
                   <div className="flex items-center gap-2">
-                    <Input
-                      type="text"
-                      inputMode="numeric"
-                      pattern="[0-9]*"
+                    <QuantityInput
                       value={item.quantity}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        if (value === '' || /^\d+$/.test(value)) {
-                          updateQuantity(
-                            item.product.id,
-                            item.variant.specification,
-                            value === '' ? 1 : parseInt(value)
-                          );
-                        }
-                      }}
-                      onFocus={(e) => e.target.select()}
+                      onChange={(qty) =>
+                        updateQuantity(item.product.id, item.variant.specification, qty)
+                      }
                       className="w-16 sm:w-20 text-center"
                     />
                   </div>
