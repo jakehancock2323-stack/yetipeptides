@@ -75,17 +75,22 @@ export default function Cart() {
                 <div className="flex items-center gap-2 sm:gap-4 w-full justify-between sm:justify-start">
                   <div className="flex items-center gap-2">
                     <Input
-                      type="number"
-                      min="1"
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       value={item.quantity}
-                      onChange={(e) =>
-                        updateQuantity(
-                          item.product.id,
-                          item.variant.specification,
-                          parseInt(e.target.value) || 1
-                        )
-                      }
-                      className="w-16 sm:w-20"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value === '' || /^\d+$/.test(value)) {
+                          updateQuantity(
+                            item.product.id,
+                            item.variant.specification,
+                            value === '' ? 1 : parseInt(value)
+                          );
+                        }
+                      }}
+                      onFocus={(e) => e.target.select()}
+                      className="w-16 sm:w-20 text-center"
                     />
                   </div>
 
