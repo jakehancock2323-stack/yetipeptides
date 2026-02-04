@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import Snowfall from './Snowfall';
+import QuantityInput from './QuantityInput';
 
 interface CartDrawerProps {
   open: boolean;
@@ -72,22 +72,11 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-muted-foreground">Qty:</span>
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
+                  <QuantityInput
                     value={item.quantity}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      if (value === '' || /^\d+$/.test(value)) {
-                        updateQuantity(
-                          item.product.id,
-                          item.variant.specification,
-                          value === '' ? 1 : parseInt(value)
-                        );
-                      }
-                    }}
-                    onFocus={(e) => e.target.select()}
+                    onChange={(qty) =>
+                      updateQuantity(item.product.id, item.variant.specification, qty)
+                    }
                     className="w-16 h-8 text-sm text-center"
                   />
                 </div>
