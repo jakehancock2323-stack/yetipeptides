@@ -18,7 +18,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const { items, getTotalPrice, clearCart, includeEbook } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("btc");
+  const [paymentMethod, setPaymentMethod] = useState("usdt");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -199,12 +199,6 @@ export default function Checkout() {
                 </div>
 
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <RadioGroupItem value="btc" id="btc" />
-                    <Label htmlFor="btc" className="cursor-pointer">
-                      Bitcoin (BTC)
-                    </Label>
-                  </div>
                   <div className="flex items-center space-x-2 mb-2">
                     <RadioGroupItem value="usdt" id="usdt" />
                     <Label htmlFor="usdt" className="cursor-pointer">
