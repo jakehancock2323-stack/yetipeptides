@@ -3,10 +3,9 @@ import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from './ui/button';
 
-const AUTOPLAY_INTERVAL = 5000; // 5 seconds
+const AUTOPLAY_INTERVAL = 5000;
 
 const reviews = [
-  // Real customer reviews - UK
   {
     name: "Alusty",
     location: "United Kingdom",
@@ -47,7 +46,6 @@ const reviews = [
     date: "December 2025",
     verified: true
   },
-  // Additional reviews
   {
     name: "Dr. R. Thompson",
     location: "Research Institute, USA",
@@ -94,28 +92,17 @@ export default function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play functionality
   useEffect(() => {
     if (isPaused) return;
-    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % reviews.length);
     }, AUTOPLAY_INTERVAL);
-
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const nextReview = () => {
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
-  };
-
-  const prevReview = () => {
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
-
-  const goToReview = (index: number) => {
-    setCurrentIndex(index);
-  };
+  const nextReview = () => setCurrentIndex((prev) => (prev + 1) % reviews.length);
+  const prevReview = () => setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const goToReview = (index: number) => setCurrentIndex(index);
 
   const review = reviews[currentIndex];
 
@@ -124,10 +111,7 @@ export default function Reviews() {
     "@type": "Product",
     "name": "Yeti Peptides Research-Grade Peptides",
     "description": "Premium research-grade peptide compounds for laboratory use",
-    "brand": {
-      "@type": "Brand",
-      "name": "Yeti Peptides"
-    },
+    "brand": { "@type": "Brand", "name": "Yeti Peptides" },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
@@ -137,121 +121,87 @@ export default function Reviews() {
     },
     "review": reviews.map(r => ({
       "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": r.name
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": r.rating,
-        "bestRating": "5"
-      },
+      "author": { "@type": "Person", "name": r.name },
+      "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": "5" },
       "reviewBody": r.text,
       "datePublished": r.date
     }))
   };
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-transparent via-secondary/20 to-transparent">
+    <section className="py-20 px-4">
       <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(reviewSchema)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(reviewSchema)}</script>
       </Helmet>
       <div className="container mx-auto max-w-3xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Reviews & Testimonials
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Feedback from researchers and laboratories worldwide
-          </p>
-          <div className="flex items-center justify-center gap-2 mt-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">What Researchers Say</h2>
+          <div className="flex items-center justify-center gap-2">
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-ice-blue text-ice-blue" />
+                <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
               ))}
             </div>
-            <span className="text-sm text-muted-foreground">5.0 average from {reviews.length} reviews</span>
+            <span className="text-sm text-muted-foreground">5.0 from {reviews.length} reviews</span>
           </div>
         </div>
 
-        {/* Carousel Container */}
         <div 
           className="relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Navigation Buttons */}
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={prevReview}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 hover:bg-secondary/50"
+            variant="ghost" size="icon" onClick={prevReview}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-14 z-10 hover:bg-secondary/50"
             aria-label="Previous review"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </Button>
 
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={nextReview}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 hover:bg-secondary/50"
+            variant="ghost" size="icon" onClick={nextReview}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-14 z-10 hover:bg-secondary/50"
             aria-label="Next review"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </Button>
 
-          {/* Review Card */}
-          <div
-            key={currentIndex}
-            className="frosted-glass rounded-xl p-8 md:p-10 relative animate-fade-in"
-          >
-            {/* Quote Icon */}
-            <Quote className="absolute top-6 right-6 w-10 h-10 text-ice-blue/20" />
+          <div key={currentIndex} className="frosted-glass rounded-xl p-8 md:p-10 relative animate-fade-in">
+            <Quote className="absolute top-5 right-5 w-8 h-8 text-ice-blue/10" />
             
-            {/* Star Rating */}
-            <div className="flex gap-0.5 mb-6 justify-center">
+            <div className="flex gap-0.5 mb-5 justify-center">
               {[...Array(review.rating)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 fill-ice-blue text-ice-blue"
-                />
+                <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
               ))}
             </div>
 
-            {/* Review Text */}
             <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed text-center">
               "{review.text}"
             </p>
 
-            {/* Reviewer Info */}
-            <div className="border-t border-border/50 pt-6 text-center">
-              <p className="font-semibold">{review.name}</p>
-              <p className="text-sm text-muted-foreground">{review.location}</p>
-              <div className="flex items-center justify-center gap-2 mt-2">
-                <span className="text-xs text-muted-foreground">{review.date}</span>
+            <div className="border-t border-border/20 pt-5 text-center">
+              <p className="font-semibold text-sm">{review.name}</p>
+              <p className="text-xs text-muted-foreground">{review.location}</p>
+              <div className="flex items-center justify-center gap-2 mt-1.5">
+                <span className="text-[11px] text-muted-foreground">{review.date}</span>
                 {review.verified && (
                   <>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-xs text-ice-blue font-medium">Verified</span>
+                    <span className="text-muted-foreground/30">•</span>
+                    <span className="text-[11px] text-ice-blue font-medium">Verified</span>
                   </>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-1.5 mt-5">
             {reviews.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToReview(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-ice-blue w-6' 
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-ice-blue w-6' : 'bg-muted-foreground/20 w-1.5 hover:bg-muted-foreground/40'
                 }`}
                 aria-label={`Go to review ${index + 1}`}
               />

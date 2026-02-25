@@ -2,46 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Yeti Peptides - Dark Winter Theme */
+/* Yeti Peptides - Dark Biotech Theme */
 
 @layer base {
   :root {
-    --background: 220 35% 6%;
+    --background: 220 35% 4%;
     --foreground: 180 15% 96%;
 
-    --card: 220 30% 9%;
+    --card: 220 30% 7%;
     --card-foreground: 180 15% 96%;
 
-    --popover: 220 30% 11%;
+    --popover: 220 30% 9%;
     --popover-foreground: 180 15% 96%;
 
     --primary: 175 85% 55%;
-    --primary-foreground: 220 35% 6%;
+    --primary-foreground: 220 35% 4%;
 
-    --secondary: 220 25% 18%;
+    --secondary: 220 25% 12%;
     --secondary-foreground: 180 15% 96%;
 
-    --muted: 220 20% 14%;
-    --muted-foreground: 180 8% 62%;
+    --muted: 220 20% 10%;
+    --muted-foreground: 180 8% 55%;
 
     --accent: 260 60% 60%;
-    --accent-foreground: 220 35% 6%;
+    --accent-foreground: 220 35% 4%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 180 15% 96%;
 
-    --border: 220 25% 22%;
-    --input: 220 25% 16%;
+    --border: 220 25% 15%;
+    --input: 220 25% 12%;
     --ring: 175 85% 55%;
 
     --radius: 0.5rem;
 
     --ice-blue: 175 85% 55%;
     --frost: 180 40% 88%;
-    --deep-freeze: 230 45% 10%;
+    --deep-freeze: 230 45% 6%;
     --arctic-teal: 170 75% 45%;
     --glacier: 185 90% 65%;
     --aurora: 260 60% 60%;
+    
+    --glow-primary: 175 85% 55%;
+    --glow-accent: 260 60% 60%;
   }
 }
 
@@ -61,15 +64,60 @@
 
 @layer components {
   .frosted-glass {
-    @apply bg-card/40 backdrop-blur-xl border border-border/50;
+    @apply bg-card/60 backdrop-blur-xl border border-border/40;
   }
 
   .ice-glow {
-    box-shadow: 0 0 40px hsl(var(--ice-blue) / 0.4), 0 0 80px hsl(var(--ice-blue) / 0.2), inset 0 0 20px hsl(var(--ice-blue) / 0.1);
+    box-shadow: 0 0 30px hsl(var(--ice-blue) / 0.25), 0 0 60px hsl(var(--ice-blue) / 0.1);
   }
 
   .winter-gradient {
     background: linear-gradient(135deg, hsl(var(--deep-freeze)), hsl(var(--background)));
+  }
+
+  /* Horizontal scan line effect */
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--ice-blue) / 0.4), transparent);
+    animation: scanDown 8s ease-in-out infinite;
+  }
+
+  /* Grid pattern overlay */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(hsl(var(--ice-blue) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--ice-blue) / 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Glowing border on hover */
+  .glow-border {
+    position: relative;
+  }
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--ice-blue) / 0.3), transparent 40%, transparent 60%, hsl(var(--aurora) / 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .glow-border:hover::before {
+    opacity: 1;
   }
 
   .fade-in-up {
@@ -80,17 +128,28 @@
   .animate-delay-100 {
     animation-delay: 0.1s;
   }
-
   .animate-delay-200 {
     animation-delay: 0.2s;
   }
-
   .animate-delay-300 {
     animation-delay: 0.3s;
   }
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  /* Stat counter style */
+  .stat-block {
+    @apply text-center p-6;
+  }
+  .stat-block .stat-value {
+    @apply text-3xl md:text-4xl font-orbitron font-bold text-ice-blue;
+  }
+  .stat-block .stat-label {
+    @apply text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2;
+  }
 }
 
-/* Fade in up animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -102,18 +161,60 @@
   }
 }
 
-/* Snowflake animation */
+@keyframes scanDown {
+  0%, 100% { top: -2px; }
+  50% { top: 100%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Particle animation */
+@keyframes particleDrift {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(90vh) translateX(5px) scale(1);
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(-10px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: hsl(var(--ice-blue));
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  animation: particleDrift linear infinite;
+  box-shadow: 0 0 6px hsl(var(--ice-blue) / 0.5);
+}
+
+/* Snowflake kept for compatibility */
 @keyframes snowfall {
   0% {
     transform: translateY(-10vh) translateX(0);
     opacity: 0;
   }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
   100% {
     transform: translateY(110vh) translateX(20px);
     opacity: 0;
