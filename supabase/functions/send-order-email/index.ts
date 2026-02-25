@@ -30,6 +30,7 @@ interface OrderEmailRequest {
     notes?: string;
   };
   paymentMethod: string;
+  shippingRegion?: string;
   items: OrderItem[];
   subtotal: number;
   deliveryFee: number;
@@ -49,7 +50,7 @@ const handler = async (req: Request): Promise<Response> => {
     const orderData: OrderEmailRequest = await req.json();
     console.log("Received order data:", orderData);
 
-    const { customerDetails, paymentMethod, items, subtotal, deliveryFee, discount, promoCode, total, includeEbook } = orderData;
+    const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, discount, promoCode, total, includeEbook } = orderData;
 
     // Build order items HTML
     const itemsHTML = items.map(item => `
@@ -86,6 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
           <div style="background: linear-gradient(135deg, #1a2332 0%, #0d1520 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
             <h1 style="color: #47d9d9; margin: 0; font-size: 28px;">🎉 New Order Received!</h1>
             <p style="color: #b0c4de; margin: 10px 0 0 0;">Yeti Peptides</p>
+            ${shippingRegion === 'UK Domestic' ? '<p style="color: #fbbf24; margin: 8px 0 0 0; font-weight: 600; font-size: 14px;">📦 UK DOMESTIC ORDER – Ships within UK only</p>' : ''}
           </div>
           
           <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
@@ -114,6 +116,10 @@ const handler = async (req: Request): Promise<Response> => {
               <tr>
                 <td style="padding: 8px 0;"><strong>Payment Method:</strong></td>
                 <td style="padding: 8px 0;">${paymentMethod.toUpperCase()}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0;"><strong>Shipping Region:</strong></td>
+                <td style="padding: 8px 0; font-weight: 600; ${shippingRegion === 'UK Domestic' ? 'color: #f59e0b;' : ''}">${shippingRegion || 'International'}</td>
               </tr>
               ${customerDetails.notes ? `
               <tr>
@@ -186,7 +192,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Yeti Peptides <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
-        subject: `🧪 New Order from ${customerDetails.fullName} - $${total.toFixed(2)}`,
+        subject: `🧪 ${shippingRegion === 'UK Domestic' ? '[UK DOMESTIC] ' : ''}New Order from ${customerDetails.fullName} - $${total.toFixed(2)}`,
         html: emailHTML,
       }),
     });

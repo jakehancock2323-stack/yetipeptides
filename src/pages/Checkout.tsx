@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useCart } from "@/contexts/CartContext";
+import { useRegion } from "@/contexts/RegionContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Lock, ShieldCheck, CreditCard } from "lucide-react";
@@ -18,6 +19,7 @@ import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
 export default function Checkout() {
   const navigate = useNavigate();
   const { items, getTotalPrice, clearCart, includeEbook } = useCart();
+  const { region } = useRegion();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("usdt");
   const [formData, setFormData] = useState({
@@ -57,6 +59,7 @@ export default function Checkout() {
     const orderData = {
       customerDetails: formData,
       paymentMethod,
+      shippingRegion: region,
       items: items.map((item) => ({
         productName: item.product.name,
         productCategory: item.product.category,
