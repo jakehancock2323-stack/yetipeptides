@@ -7,6 +7,7 @@ import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { ShoppingCart } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
+import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
   product: Product;
@@ -54,9 +55,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           <h3 className="text-sm font-semibold leading-tight group-hover:text-ice-blue transition-colors">
             {product.name}
           </h3>
-          <span className="text-lg font-bold text-ice-blue whitespace-nowrap">
-            ${selectedVariant.price}
-          </span>
+          <div className="text-right whitespace-nowrap">
+            <span className="text-lg font-bold text-ice-blue">${selectedVariant.price}</span>
+            <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
+          </div>
         </div>
 
         {/* Ingredients preview */}

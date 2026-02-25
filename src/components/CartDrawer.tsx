@@ -6,6 +6,7 @@ import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import Snowfall from './Snowfall';
 import QuantityInput from './QuantityInput';
+import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
 
 interface CartDrawerProps {
   open: boolean;
@@ -85,6 +86,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                   <p className="font-bold text-[hsl(var(--ice-blue))]">
                     ${(item.variant.price * item.quantity).toFixed(2)}
                   </p>
+                  <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
                 </div>
               </div>
             </div>
@@ -123,8 +125,12 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
             </div>
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
               <span>Total:</span>
-              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+              <div className="text-right">
+                <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+                <p className="text-[10px] text-muted-foreground font-normal">{formatGbpEstimate(getTotalPrice())}</p>
+              </div>
             </div>
+            <p className="text-[10px] text-muted-foreground">{GBP_DISCLAIMER}</p>
           </div>
 
           <Link to="/checkout" onClick={() => onOpenChange(false)}>

@@ -13,6 +13,7 @@ import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Lock, ShieldCheck, CreditCard } from "lucide-react";
+import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -235,7 +236,10 @@ export default function Checkout() {
                   <div key={`${item.product.id}-${item.variant.specification}`} className="border-b border-border pb-4">
                     <div className="flex justify-between mb-1">
                       <span className="font-semibold">{item.product.name}</span>
-                      <span>${(item.variant.price * item.quantity).toFixed(2)}</span>
+                      <div className="text-right">
+                        <span>${(item.variant.price * item.quantity).toFixed(2)}</span>
+                        <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
+                      </div>
                     </div>
                     <div className="text-sm text-muted-foreground">
                       {item.variant.specification} × {item.quantity}
@@ -265,8 +269,12 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-between text-2xl font-bold pt-2 border-t border-border mt-2">
                   <span>Total:</span>
-                  <span className="text-[hsl(var(--ice-blue))]">${calculateTotal().toFixed(2)}</span>
+                  <div className="text-right">
+                    <span className="text-[hsl(var(--ice-blue))]">${calculateTotal().toFixed(2)}</span>
+                    <p className="text-xs text-muted-foreground font-normal">{formatGbpEstimate(calculateTotal())}</p>
+                  </div>
                 </div>
+                <p className="text-[10px] text-muted-foreground mt-3">{GBP_DISCLAIMER}</p>
               </div>
             </div>
           </div>

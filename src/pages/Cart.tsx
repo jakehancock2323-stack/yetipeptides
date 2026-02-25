@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import QuantityInput from '@/components/QuantityInput';
+import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
@@ -83,8 +84,9 @@ export default function Cart() {
                     />
                   </div>
 
-                  <div className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[80px] sm:min-w-[100px] text-right">
-                    ${(item.variant.price * item.quantity).toFixed(2)}
+                  <div className="min-w-[80px] sm:min-w-[100px] text-right">
+                    <p className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))]">${(item.variant.price * item.quantity).toFixed(2)}</p>
+                    <p className="text-[11px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
                   </div>
 
                   <Button
@@ -125,10 +127,14 @@ export default function Cart() {
           </div>
 
           <div className="frosted-glass rounded-lg p-4 sm:p-6">
-            <div className="flex justify-between items-center mb-6 text-xl sm:text-2xl font-bold">
+            <div className="flex justify-between items-center mb-2 text-xl sm:text-2xl font-bold">
               <span>Total:</span>
-              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+              <div className="text-right">
+                <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+                <p className="text-xs text-muted-foreground font-normal">{formatGbpEstimate(getTotalPrice())}</p>
+              </div>
             </div>
+            <p className="text-[10px] text-muted-foreground mb-4">{GBP_DISCLAIMER}</p>
 
             <Link to="/checkout">
               <Button className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background" size="lg">
