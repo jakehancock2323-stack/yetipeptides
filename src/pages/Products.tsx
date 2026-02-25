@@ -28,7 +28,7 @@ export default function Products() {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesRegion = !product.region || product.region === region;
+    const matchesRegion = region === 'UK Domestic' ? product.region === 'UK Domestic' : product.region !== 'UK Domestic';
     return matchesSearch && matchesCategory && matchesRegion;
   });
 
@@ -125,11 +125,19 @@ export default function Products() {
           ))}
         </div>
 
-        {filteredProducts.length === 0 && (
+        {filteredProducts.length === 0 && region === 'UK Domestic' ? (
+          <div className="text-center py-24">
+            <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              UK Domestic stock is not yet available. Check back soon for updates.
+            </p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-muted-foreground">No compounds found matching your search.</p>
           </div>
-        )}
+        ) : null}
 
         {/* Single disclaimer at the bottom */}
         <div className="mt-16 flex items-center justify-center gap-2 text-xs text-muted-foreground">
