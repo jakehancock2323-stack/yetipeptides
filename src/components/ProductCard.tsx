@@ -56,8 +56,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
           <div className="text-right whitespace-nowrap">
-            <span className="text-lg font-bold text-ice-blue">${selectedVariant.price}</span>
-            <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
+            <span className="text-xl font-bold text-ice-blue">${selectedVariant.price}</span>
+            <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
           </div>
         </div>
 
