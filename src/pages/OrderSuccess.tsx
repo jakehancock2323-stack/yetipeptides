@@ -5,12 +5,10 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
-import { useCurrency } from '@/contexts/CurrencyContext';
 
 export default function OrderSuccess() {
   const location = useLocation();
   const orderData = location.state?.orderData;
-  const { formatPrice } = useCurrency();
 
   return (
     <div className="min-h-screen pb-20">
@@ -27,10 +25,10 @@ export default function OrderSuccess() {
         <div className="max-w-3xl mx-auto text-center">
           <div className="frosted-glass rounded-lg p-8 md:p-12">
             <div className="mb-6 flex justify-center">
-              <CheckCircle className="w-20 h-20 text-ice-blue" />
+              <CheckCircle className="w-20 h-20 text-[hsl(var(--ice-blue))]" />
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-ice-blue to-glacier bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
               Thank You for Your Order!
             </h1>
             
@@ -49,7 +47,7 @@ export default function OrderSuccess() {
                         <p className="text-foreground/60">{item.specification}</p>
                         <p className="text-foreground/60">Qty: {item.quantity}</p>
                       </div>
-                      <p className="font-medium">{formatPrice(item.lineTotal)}</p>
+                      <p className="font-medium">${item.lineTotal.toFixed(2)}</p>
                     </div>
                   ))}
                   {orderData.includeEbook && (
@@ -57,21 +55,21 @@ export default function OrderSuccess() {
                       <div className="flex-1">
                         <p className="font-medium">Yeti's E-book – The GLP1 Series</p>
                       </div>
-                      <p className="font-medium">{formatPrice(4.99)}</p>
+                      <p className="font-medium">$4.99</p>
                     </div>
                   )}
                   <div className="border-t border-border pt-3 mt-3">
                     <div className="flex justify-between text-sm">
                       <span>Subtotal:</span>
-                      <span>{formatPrice(orderData.subtotal)}</span>
+                      <span>${orderData.subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Delivery:</span>
-                      <span>{formatPrice(orderData.deliveryFee)}</span>
+                      <span>${orderData.deliveryFee.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between font-bold mt-2">
                       <span>Total:</span>
-                      <span>{formatPrice(orderData.total)}</span>
+                      <span>${orderData.total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -96,7 +94,7 @@ export default function OrderSuccess() {
               </ul>
             </div>
 
-            <div className="bg-gradient-to-r from-ice-blue/20 to-glacier/20 rounded-lg p-6 mb-8 border border-ice-blue/30">
+            <div className="bg-gradient-to-r from-[hsl(var(--ice-blue))]/20 to-[hsl(var(--frost))]/20 rounded-lg p-6 mb-8 border border-[hsl(var(--ice-blue))]/30">
               <h2 className="text-xl font-semibold mb-3">Join Our Community! 🎮</h2>
               <p className="text-foreground/80 mb-4">
                 Connect with other Yeti enthusiasts, get exclusive updates, and be the first to know about new products and special offers on our Discord server.
@@ -112,7 +110,7 @@ export default function OrderSuccess() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background">
+              <Button asChild size="lg" className="bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))]">
                 <Link to="/">Back to Home</Link>
               </Button>
               <Button asChild variant="outline" size="lg">

@@ -5,7 +5,6 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
-import CurrencyToggle from '@/components/CurrencyToggle';
 import SEO from '@/components/SEO';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -77,8 +76,8 @@ export default function Products() {
             Premium laboratory-grade peptides for research purposes only — GLP-1, Semaglutide, Retatrutide & more
           </p>
 
-          {/* Trust badges + Currency toggle */}
-          <div className="flex flex-wrap justify-center items-center gap-5 mb-6">
+          {/* Trust badges inline */}
+          <div className="flex flex-wrap justify-center items-center gap-5 mb-8">
             {[
               { icon: ShieldCheck, label: 'COA Verified' },
               { icon: Lock, label: 'Secure Crypto Payments' },
@@ -91,13 +90,8 @@ export default function Products() {
             ))}
           </div>
 
-          {/* Currency Toggle */}
-          <div className="flex justify-center mb-6">
-            <CurrencyToggle />
-          </div>
-
           {/* Search */}
-          <div className="max-w-lg mx-auto mb-6">
+          <div className="max-w-lg mx-auto mb-8">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input

@@ -6,14 +6,11 @@ import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
-import { useCurrency } from '@/contexts/CurrencyContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import QuantityInput from '@/components/QuantityInput';
-import CurrencyToggle from '@/components/CurrencyToggle';
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
-  const { formatPrice } = useCurrency();
 
   if (items.length === 0) {
     return (
@@ -32,11 +29,12 @@ export default function Cart() {
             <h2 className="text-3xl font-bold mb-4">Your cart is empty</h2>
             <p className="text-muted-foreground mb-8">Add some products to get started!</p>
             <Link to="/products">
-              <Button className="bg-ice-blue hover:bg-ice-blue/90 text-background">
+              <Button className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background">
                 Browse Products
               </Button>
             </Link>
           </div>
+
           <Footer />
         </div>
       </div>
@@ -55,12 +53,9 @@ export default function Cart() {
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-ice-blue to-glacier bg-clip-text text-transparent">
-            Shopping Cart
-          </h1>
-          <CurrencyToggle />
-        </div>
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
+          Shopping Cart
+        </h1>
 
         <div className="max-w-4xl mx-auto">
           <div className="frosted-glass rounded-lg p-4 sm:p-6 mb-6">
@@ -88,8 +83,8 @@ export default function Cart() {
                     />
                   </div>
 
-                  <div className="text-lg sm:text-xl font-bold text-ice-blue min-w-[80px] sm:min-w-[100px] text-right">
-                    {formatPrice(item.variant.price * item.quantity)}
+                  <div className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[80px] sm:min-w-[100px] text-right">
+                    ${(item.variant.price * item.quantity).toFixed(2)}
                   </div>
 
                   <Button
@@ -124,7 +119,7 @@ export default function Cart() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                   A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
                 </p>
-                <p className="text-lg sm:text-xl font-bold text-ice-blue">+{formatPrice(4.99)}</p>
+                <p className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))]">+$4.99</p>
               </div>
             </div>
           </div>
@@ -132,11 +127,11 @@ export default function Cart() {
           <div className="frosted-glass rounded-lg p-4 sm:p-6">
             <div className="flex justify-between items-center mb-6 text-xl sm:text-2xl font-bold">
               <span>Total:</span>
-              <span className="text-ice-blue">{formatPrice(getTotalPrice())}</span>
+              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
             </div>
 
             <Link to="/checkout">
-              <Button className="w-full bg-ice-blue hover:bg-ice-blue/90 text-background" size="lg">
+              <Button className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background" size="lg">
                 Proceed to Checkout
               </Button>
             </Link>

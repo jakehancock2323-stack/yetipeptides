@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
-import { useCurrency } from '@/contexts/CurrencyContext';
 import { Trash2, ShoppingBag } from 'lucide-react';
 import Snowfall from './Snowfall';
 import QuantityInput from './QuantityInput';
@@ -15,7 +14,6 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
-  const { formatPrice } = useCurrency();
 
   if (items.length === 0) {
     return (
@@ -31,7 +29,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
             <p className="text-sm text-muted-foreground mb-6">Add some products to get started!</p>
             <Button 
               onClick={() => onOpenChange(false)}
-              className="bg-ice-blue hover:bg-ice-blue/90 text-background"
+              className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background"
             >
               Continue Shopping
             </Button>
@@ -83,9 +81,9 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                   />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-muted-foreground">{formatPrice(item.variant.price)} each</p>
-                  <p className="font-bold text-ice-blue">
-                    {formatPrice(item.variant.price * item.quantity)}
+                  <p className="text-xs text-muted-foreground">${item.variant.price} each</p>
+                  <p className="font-bold text-[hsl(var(--ice-blue))]">
+                    ${(item.variant.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -113,7 +111,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
                 </p>
-                <p className="text-sm font-bold text-ice-blue mt-2">+{formatPrice(4.99)}</p>
+                <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+$4.99</p>
               </div>
             </div>
           </div>
@@ -121,17 +119,17 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
           <div className="frosted-glass rounded-lg p-4 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal:</span>
-              <span className="font-semibold">{formatPrice(getTotalPrice())}</span>
+              <span className="font-semibold">${getTotalPrice().toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
               <span>Total:</span>
-              <span className="text-ice-blue">{formatPrice(getTotalPrice())}</span>
+              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
             </div>
           </div>
 
           <Link to="/checkout" onClick={() => onOpenChange(false)}>
             <Button 
-              className="w-full bg-ice-blue hover:bg-ice-blue/90 text-background" 
+              className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background" 
               size="lg"
             >
               Proceed to Checkout
