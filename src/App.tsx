@@ -35,7 +35,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <CurrencyProvider>
-          <CartProvider>
+            <CartProvider>
             <Toaster />
             <Sonner />
             <AgeVerification onVerified={() => setIsVerified(true)} />
@@ -61,7 +61,7 @@ const App = () => {
               </Routes>
               </BrowserRouter>
             )}
-          </CartProvider>
+            </CartProvider>
           </CurrencyProvider>
         </TooltipProvider>
       </QueryClientProvider>
