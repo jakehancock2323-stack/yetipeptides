@@ -81,9 +81,9 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                   />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-muted-foreground">£{item.variant.price} each</p>
+                  <p className="text-xs text-muted-foreground">${item.variant.price} each</p>
                   <p className="font-bold text-[hsl(var(--ice-blue))]">
-                    £{(item.variant.price * item.quantity).toFixed(2)}
+                    ${(item.variant.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
                 </p>
-                <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+£4.99</p>
+                <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+$4.99</p>
               </div>
             </div>
           </div>
@@ -119,11 +119,11 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
           <div className="frosted-glass rounded-lg p-4 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal:</span>
-              <span className="font-semibold">£{getTotalPrice().toFixed(2)}</span>
+              <span className="font-semibold">${getTotalPrice().toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
               <span>Total:</span>
-              <span className="text-[hsl(var(--ice-blue))]">£{getTotalPrice().toFixed(2)}</span>
+              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
             </div>
           </div>
 

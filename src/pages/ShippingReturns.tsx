@@ -66,12 +66,12 @@ export default function ShippingReturns() {
                 <h2 className="text-2xl font-semibold">Shipping Costs</h2>
               </div>
               <p className="text-muted-foreground leading-relaxed mb-3">
-                Shipping costs are calculated based on destination and weight. Standard tracked shipping is £65 for most destinations.
+                Shipping costs are calculated based on destination and weight. Standard tracked shipping is $65 USD for most destinations.
               </p>
               <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
                 <li>Express shipping available on request for urgent orders</li>
                 <li>Shipping costs displayed at checkout</li>
-                <li>Free shipping on orders over £500 (select countries)</li>
+                <li>Free shipping on orders over $500 USD (select countries)</li>
               </ul>
             </section>
 

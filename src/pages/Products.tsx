@@ -47,7 +47,7 @@ export default function Products() {
       "category": product.category,
       "offers": {
         "@type": "AggregateOffer",
-        "priceCurrency": "GBP",
+        "priceCurrency": "USD",
         "lowPrice": Math.min(...product.variants.map(v => v.price)),
         "highPrice": Math.max(...product.variants.map(v => v.price))
       }

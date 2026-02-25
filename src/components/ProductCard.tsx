@@ -117,7 +117,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Price Display */}
         <div className="text-2xl sm:text-3xl font-bold text-ice-blue">
-          £{selectedVariant.price}
+          ${selectedVariant.price}
         </div>
 
         {/* Add to Cart */}
