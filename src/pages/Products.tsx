@@ -3,13 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
-import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { products, categories } from '@/data/products';
-import { Search, ShieldCheck, Lock, FlaskConical } from 'lucide-react';
+import { Search, FlaskConical } from 'lucide-react';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -55,7 +53,7 @@ export default function Products() {
   };
 
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen">
       <SEO 
         title="Buy Research Peptides Online – Premium Laboratory-Grade Compounds UK & Worldwide"
         description="Shop premium research-grade peptides for laboratory use. Semaglutide, Retatrutide, Tirzepatide, Cagrilintide, BPC-157, TB-500 & GLP-1 compounds. UK-based supplier with worldwide shipping. COA verified, 99%+ purity. Secure crypto payments."
@@ -66,71 +64,51 @@ export default function Products() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-28 pb-8">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-10">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-ice-blue via-glacier to-aurora bg-clip-text text-transparent">
-            Research Peptides
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            Premium laboratory-grade peptides for research purposes only — GLP-1, Semaglutide, Retatrutide & more
+      <div className="container mx-auto px-4 pt-28 pb-20">
+        {/* Compact Header */}
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Research Peptides</h1>
+          <p className="text-sm text-muted-foreground">
+            Laboratory-grade compounds · 99%+ purity · COA on request
           </p>
+        </div>
 
-          {/* Trust badges inline */}
-          <div className="flex flex-wrap justify-center items-center gap-5 mb-8">
-            {[
-              { icon: ShieldCheck, label: 'COA Verified' },
-              { icon: Lock, label: 'Secure Crypto Payments' },
-              { icon: FlaskConical, label: '99%+ Purity' },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Icon className="w-4 h-4 text-ice-blue" />
-                <span>{label}</span>
-              </div>
-            ))}
+        {/* Search + Filters Row */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <div className="relative sm:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              type="text"
+              placeholder="Search compounds..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10 bg-secondary/20 border-border/30 h-9 text-sm"
+            />
           </div>
-
-          {/* Search */}
-          <div className="max-w-lg mx-auto mb-8">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search compounds..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 bg-secondary/30 border-border/50"
-              />
-            </div>
-          </div>
-
-          {/* Category Filters */}
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-1.5">
             {categories.map(category => (
-              <Button
+              <button
                 key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                size="sm"
                 onClick={() => handleCategoryChange(category)}
-                className={`text-xs ${selectedCategory === category 
-                  ? 'bg-ice-blue hover:bg-ice-blue/90 text-background' 
-                  : 'border-border/50 hover:bg-secondary/50'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  selectedCategory === category 
+                    ? 'bg-ice-blue text-background' 
+                    : 'bg-secondary/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50'
+                }`}
               >
                 {category}
-              </Button>
+              </button>
             ))}
           </div>
         </div>
 
         {/* Results count */}
-        <div className="mb-6">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider">
-            {filteredProducts.length} compound{filteredProducts.length !== 1 ? 's' : ''} found
-          </p>
-        </div>
+        <p className="text-xs text-muted-foreground mb-5">
+          {filteredProducts.length} compound{filteredProducts.length !== 1 ? 's' : ''}
+        </p>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -138,12 +116,17 @@ export default function Products() {
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-lg text-muted-foreground">No compounds found matching your search.</p>
+            <p className="text-muted-foreground">No compounds found matching your search.</p>
           </div>
         )}
+
+        {/* Single disclaimer at the bottom */}
+        <div className="mt-16 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
+          <span>All products are intended for laboratory research use only. Not for human consumption.</span>
+        </div>
       </div>
 
-      <FAQ />
       <Footer />
     </div>
   );
