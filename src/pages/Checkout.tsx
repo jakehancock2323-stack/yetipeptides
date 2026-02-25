@@ -235,7 +235,7 @@ export default function Checkout() {
                   <div key={`${item.product.id}-${item.variant.specification}`} className="border-b border-border pb-4">
                     <div className="flex justify-between mb-1">
                       <span className="font-semibold">{item.product.name}</span>
-                      <span>${(item.variant.price * item.quantity).toFixed(2)}</span>
+                      <span>£{(item.variant.price * item.quantity).toFixed(2)}</span>
                     </div>
                     <div className="text-sm text-muted-foreground">
                       {item.variant.specification} × {item.quantity}
@@ -247,7 +247,7 @@ export default function Checkout() {
                   <div className="border-b border-border pb-4">
                     <div className="flex justify-between mb-1">
                       <span className="font-semibold">Yeti's E-book – The GLP1 Series</span>
-                      <span>$4.99</span>
+                      <span>£4.99</span>
                     </div>
                     <div className="text-sm text-muted-foreground">Digital Guide × 1</div>
                   </div>
@@ -257,15 +257,15 @@ export default function Checkout() {
               <div className="space-y-2 pt-4 border-t border-border">
                 <div className="flex justify-between text-lg">
                   <span>Subtotal:</span>
-                  <span>${calculateSubtotal().toFixed(2)}</span>
+                  <span>£{calculateSubtotal().toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg">
                   <span>Delivery:</span>
-                  <span>$65.00</span>
+                  <span>£65.00</span>
                 </div>
                 <div className="flex justify-between text-2xl font-bold pt-2 border-t border-border mt-2">
                   <span>Total:</span>
-                  <span className="text-[hsl(var(--ice-blue))]">${calculateTotal().toFixed(2)}</span>
+                  <span className="text-[hsl(var(--ice-blue))]">£{calculateTotal().toFixed(2)}</span>
                 </div>
               </div>
             </div>
