@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 const faqs = [
   {
     question: "What payment methods do you accept?",
-    answer: "We accept cryptocurrency payments including Bitcoin (BTC), USDT, and USDC. Payment instructions will be provided after checkout. Crypto payments ensure secure, private transactions for our customers."
+    answer: "We accept cryptocurrency payments including USDT and USDC. Payment instructions will be provided after checkout. Crypto payments ensure secure, private transactions for our customers."
   },
   {
     question: "What are shipping costs and delivery times?",
@@ -48,28 +48,26 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-12 sm:py-20 px-4 border-t border-border">
+    <section className="py-20 px-4 border-t border-border/20">
       <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
-      <div className="container mx-auto max-w-4xl">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] bg-clip-text text-transparent">
+      <div className="container mx-auto max-w-3xl">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           Frequently Asked Questions
         </h2>
-        <p className="text-center text-muted-foreground mb-8 sm:mb-12 text-sm sm:text-base">
+        <p className="text-center text-muted-foreground mb-10 text-sm">
           Find answers to common questions about ordering, shipping, and payments
         </p>
         
-        <div className="frosted-glass rounded-lg p-4 sm:p-6">
+        <div className="frosted-glass rounded-xl p-5 md:p-6">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left hover:text-[hsl(var(--ice-blue))] transition-colors text-sm sm:text-base">
+              <AccordionItem key={index} value={`item-${index}`} className="border-border/20">
+                <AccordionTrigger className="text-left hover:text-ice-blue transition-colors text-sm py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm sm:text-base">
+                <AccordionContent className="text-muted-foreground text-sm pb-4">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
