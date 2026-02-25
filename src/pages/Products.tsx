@@ -7,7 +7,8 @@ import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
 import { Input } from '@/components/ui/input';
 import { products, categories } from '@/data/products';
-import { Search, FlaskConical } from 'lucide-react';
+import { Search, FlaskConical, MapPin } from 'lucide-react';
+import { useRegion } from '@/contexts/RegionContext';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     searchParams.get('category') || 'All'
   );
+  const { region } = useRegion();
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -26,7 +28,8 @@ export default function Products() {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesRegion = !product.region || product.region === region;
+    return matchesSearch && matchesCategory && matchesRegion;
   });
 
   const handleCategoryChange = (category: string) => {
@@ -65,6 +68,14 @@ export default function Products() {
       <Navbar />
 
       <div className="container mx-auto px-4 pt-28 pb-20">
+        {/* UK Domestic Banner */}
+        {region === 'UK Domestic' && (
+          <div className="mb-6 flex items-center gap-2 px-4 py-3 rounded-lg bg-ice-blue/10 border border-ice-blue/20">
+            <MapPin className="w-4 h-4 text-ice-blue flex-shrink-0" />
+            <span className="text-sm font-medium text-ice-blue">UK Domestic Stock – Ships within UK only.</span>
+          </div>
+        )}
+
         {/* Compact Header */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Research Peptides</h1>

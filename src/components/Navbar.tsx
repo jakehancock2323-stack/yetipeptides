@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { useState } from 'react';
 import CartDrawer from './CartDrawer';
+import RegionToggle from './RegionToggle';
 import yetiLogo from '@/assets/yeti-logo.png';
 
 export default function Navbar() {
@@ -56,8 +57,11 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Cart & Mobile Menu */}
+            {/* Region Toggle + Cart & Mobile Menu */}
             <div className="flex items-center gap-2">
+              <div className="hidden sm:block">
+                <RegionToggle />
+              </div>
               <Button 
                 variant="ghost" 
                 size="icon"
@@ -82,6 +86,9 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] bg-background/95 backdrop-blur-2xl">
                   <div className="flex flex-col gap-2 mt-8">
+                    <div className="px-4 pb-3 sm:hidden">
+                      <RegionToggle />
+                    </div>
                     {navLinks.map(link => (
                       <Link 
                         key={link.to}

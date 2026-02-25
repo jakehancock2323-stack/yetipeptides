@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from "./contexts/CartContext";
+import { RegionProvider } from "./contexts/RegionContext";
 import AgeVerification from "./components/AgeVerification";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
@@ -34,6 +35,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <CartProvider>
+          <RegionProvider>
             <Toaster />
             <Sonner />
             <AgeVerification onVerified={() => setIsVerified(true)} />
@@ -59,6 +61,7 @@ const App = () => {
               </Routes>
               </BrowserRouter>
             )}
+          </RegionProvider>
           </CartProvider>
         </TooltipProvider>
       </QueryClientProvider>

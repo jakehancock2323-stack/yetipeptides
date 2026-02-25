@@ -3,10 +3,13 @@ export interface ProductVariant {
   price: number;
 }
 
+export type Region = 'International' | 'UK Domestic';
+
 export interface Product {
   id: string;
   name: string;
   category: string;
+  region?: Region;
   variants: ProductVariant[];
   ingredients?: string[];
 }
