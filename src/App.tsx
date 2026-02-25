@@ -34,35 +34,35 @@ const App = () => {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <CartProvider>
           <RegionProvider>
-            <Toaster />
-            <Sonner />
-            <AgeVerification onVerified={() => setIsVerified(true)} />
-            {isVerified && (
-              <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/coa-request" element={<COARequest />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/calculator" element={<PeptideCalculator />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-conditions" element={<TermsConditions />} />
-                <Route path="/shipping-returns" element={<ShippingReturns />} />
-                <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
-                <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              </BrowserRouter>
-            )}
+            <CartProvider>
+              <Toaster />
+              <Sonner />
+              <AgeVerification onVerified={() => setIsVerified(true)} />
+              {isVerified && (
+                <BrowserRouter>
+                  <ScrollToTop />
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/coa-request" element={<COARequest />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/calculator" element={<PeptideCalculator />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/order-success" element={<OrderSuccess />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/terms-conditions" element={<TermsConditions />} />
+                    <Route path="/shipping-returns" element={<ShippingReturns />} />
+                    <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
+                    <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              )}
+            </CartProvider>
           </RegionProvider>
-          </CartProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </HelmetProvider>
