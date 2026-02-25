@@ -58,8 +58,8 @@ const handler = async (req: Request): Promise<Response> => {
         <td style="padding: 12px; color: #666;">${item.productCategory}</td>
         <td style="padding: 12px;">${item.specification}</td>
         <td style="padding: 12px; text-align: center;">${item.quantity}</td>
-        <td style="padding: 12px; text-align: right;">$${item.price.toFixed(2)}</td>
-        <td style="padding: 12px; text-align: right; font-weight: 600;">$${item.lineTotal.toFixed(2)}</td>
+        <td style="padding: 12px; text-align: right;">£${item.price.toFixed(2)}</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">£${item.lineTotal.toFixed(2)}</td>
       </tr>
     `).join('');
 
@@ -70,8 +70,8 @@ const handler = async (req: Request): Promise<Response> => {
         <td style="padding: 12px; color: #666;">Digital Guide</td>
         <td style="padding: 12px;">PDF Download</td>
         <td style="padding: 12px; text-align: center;">1</td>
-        <td style="padding: 12px; text-align: right;">$4.99</td>
-        <td style="padding: 12px; text-align: right; font-weight: 600;">$4.99</td>
+        <td style="padding: 12px; text-align: right;">£4.99</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">£4.99</td>
       </tr>
     ` : '';
 
@@ -145,21 +145,21 @@ const handler = async (req: Request): Promise<Response> => {
               <table style="width: 100%;">
                 <tr>
                   <td style="padding: 8px 0; font-size: 16px;"><strong>Subtotal:</strong></td>
-                  <td style="padding: 8px 0; text-align: right; font-size: 16px;">$${subtotal.toFixed(2)}</td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px;">£${subtotal.toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-size: 16px;"><strong>Delivery Fee:</strong></td>
-                  <td style="padding: 8px 0; text-align: right; font-size: 16px;">$${deliveryFee.toFixed(2)}</td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px;">£${deliveryFee.toFixed(2)}</td>
                 </tr>
                 ${promoCode ? `
                 <tr style="background: #d4edda;">
                   <td style="padding: 8px 0; font-size: 16px; color: #155724;"><strong>🎉 Promo Code (${promoCode.toUpperCase()}):</strong></td>
-                  <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-$${discount.toFixed(2)}</td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-£${discount.toFixed(2)}</td>
                 </tr>
                 ` : ''}
                 <tr style="border-top: 2px solid #47d9d9;">
                   <td style="padding: 12px 0; font-size: 20px; color: #47d9d9;"><strong>TOTAL:</strong></td>
-                  <td style="padding: 12px 0; text-align: right; font-size: 24px; color: #47d9d9; font-weight: bold;">$${total.toFixed(2)}</td>
+                  <td style="padding: 12px 0; text-align: right; font-size: 24px; color: #47d9d9; font-weight: bold;">£${total.toFixed(2)}</td>
                 </tr>
               </table>
             </div>
@@ -186,7 +186,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Yeti Peptides <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
-        subject: `🧪 New Order from ${customerDetails.fullName} - $${total.toFixed(2)}`,
+        subject: `🧪 New Order from ${customerDetails.fullName} - £${total.toFixed(2)}`,
         html: emailHTML,
       }),
     });

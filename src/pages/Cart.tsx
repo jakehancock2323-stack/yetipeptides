@@ -84,7 +84,7 @@ export default function Cart() {
                   </div>
 
                   <div className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))] min-w-[80px] sm:min-w-[100px] text-right">
-                    ${(item.variant.price * item.quantity).toFixed(2)}
+                    £{(item.variant.price * item.quantity).toFixed(2)}
                   </div>
 
                   <Button
@@ -119,7 +119,7 @@ export default function Cart() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                   A concise digital guide explaining the GLP-1 family, mechanisms, and research use.
                 </p>
-                <p className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))]">+$4.99</p>
+                <p className="text-lg sm:text-xl font-bold text-[hsl(var(--ice-blue))]">+£4.99</p>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function Cart() {
           <div className="frosted-glass rounded-lg p-4 sm:p-6">
             <div className="flex justify-between items-center mb-6 text-xl sm:text-2xl font-bold">
               <span>Total:</span>
-              <span className="text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
+              <span className="text-[hsl(var(--ice-blue))]">£{getTotalPrice().toFixed(2)}</span>
             </div>
 
             <Link to="/checkout">
