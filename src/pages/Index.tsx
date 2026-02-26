@@ -8,6 +8,7 @@ import FAQ from '@/components/FAQ';
 import ProductCard from '@/components/ProductCard';
 import Reviews from '@/components/Reviews';
 import SEO from '@/components/SEO';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { 
   FileText, Lock, Globe, FlaskConical, Package,
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X
@@ -62,7 +63,7 @@ export default function Index() {
       <Snowfall />
       <Navbar />
 
-      {/* Discord Banner — Top of page */}
+      {/* Discord Banner */}
       {showDiscordBanner && (
         <div className="pt-[60px]">
           <div className="relative bg-[#5865F2] py-2.5 px-4">
@@ -92,9 +93,8 @@ export default function Index() {
       )}
       {!showDiscordBanner && <div className="pt-[60px]" />}
 
-      {/* Hero Section — Full-bleed cinematic */}
+      {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background image with heavy overlay */}
         <div className="absolute inset-0">
           <img 
             src={heroBanner} 
@@ -105,7 +105,6 @@ export default function Index() {
           <div className="absolute inset-0 grid-overlay" />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center pt-20">
           <div className="fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ice-blue/20 bg-ice-blue/5 mb-8">
@@ -163,44 +162,50 @@ export default function Index() {
       </section>
 
       {/* Trust Badge Strip */}
-      <section className="py-5 border-y border-border/20 bg-secondary/20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {[
-              { icon: FileText, label: 'COA Available' },
-              { icon: Lock, label: 'Secure Checkout' },
-              { icon: Globe, label: 'Worldwide Shipping' },
-              { icon: FlaskConical, label: 'Research Use Only' },
-              { icon: Package, label: 'Discreet Packaging' },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2">
-                <Icon className="w-4 h-4 text-ice-blue" />
-                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
-              </div>
-            ))}
+      <AnimateOnScroll animation="fade-in">
+        <section className="py-5 border-y border-border/20 bg-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {[
+                { icon: FileText, label: 'COA Available' },
+                { icon: Lock, label: 'Secure Checkout' },
+                { icon: Globe, label: 'Worldwide Shipping' },
+                { icon: FlaskConical, label: 'Research Use Only' },
+                { icon: Package, label: 'Discreet Packaging' },
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2">
+                  <Icon className="w-4 h-4 text-ice-blue" />
+                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimateOnScroll>
 
       {/* Featured Products */}
-      <section className="py-20 px-4 fade-in-up">
+      <section className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Featured Compounds</h2>
-              <p className="text-muted-foreground max-w-lg">
-                Premium GLP-1 peptides and research compounds — COA verified, 99%+ purity
-              </p>
+          <AnimateOnScroll>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3">Featured Compounds</h2>
+                <p className="text-muted-foreground max-w-lg">
+                  Premium GLP-1 peptides and research compounds — COA verified, 99%+ purity
+                </p>
+              </div>
+              <Link to="/products">
+                <Button variant="outline" className="gap-2 border-border hover:bg-secondary/50">
+                  View All <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
             </div>
-            <Link to="/products">
-              <Button variant="outline" className="gap-2 border-border hover:bg-secondary/50">
-                View All <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
+            {featuredProducts.map((product, i) => (
+              <AnimateOnScroll key={product.id} delay={i * 100}>
+                <ProductCard product={product} />
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -209,21 +214,25 @@ export default function Index() {
       {/* Why Trust Us */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Trust Yeti Peptides?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Committed to quality, transparency, and professional service for the research community
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Trust Yeti Peptides?</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Committed to quality, transparency, and professional service for the research community
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {trustFeatures.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="frosted-glass rounded-xl p-6 glow-border hover:bg-card/80 transition-all duration-300 group">
-                <div className="w-10 h-10 rounded-lg bg-ice-blue/10 flex items-center justify-center mb-4 group-hover:bg-ice-blue/20 transition-colors">
-                  <Icon className="w-5 h-5 text-ice-blue" />
+            {trustFeatures.map(({ icon: Icon, title, desc }, i) => (
+              <AnimateOnScroll key={title} delay={i * 80} animation="scale-in">
+                <div className="frosted-glass rounded-xl p-6 glow-border hover:bg-card/80 transition-all duration-300 group h-full">
+                  <div className="w-10 h-10 rounded-lg bg-ice-blue/10 flex items-center justify-center mb-4 group-hover:bg-ice-blue/20 transition-colors">
+                    <Icon className="w-5 h-5 text-ice-blue" />
+                  </div>
+                  <h3 className="text-base font-semibold mb-2">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
                 </div>
-                <h3 className="text-base font-semibold mb-2">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -231,24 +240,27 @@ export default function Index() {
 
       <Reviews />
 
-
-      {/* Policies — minimal grid */}
+      {/* Policies */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Policies & Information</h2>
+          <AnimateOnScroll>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Policies & Information</h2>
+          </AnimateOnScroll>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {[
               { to: '/privacy-policy', icon: Lock, label: 'Privacy Policy' },
               { to: '/terms-conditions', icon: FileText, label: 'Terms & Conditions' },
               { to: '/shipping-returns', icon: Package, label: 'Shipping & Returns' },
               { to: '/research-disclaimer', icon: FlaskConical, label: 'Research Disclaimer' },
-            ].map(({ to, icon: Icon, label }) => (
-              <Link key={to} to={to}>
-                <div className="frosted-glass rounded-lg p-5 hover:bg-card/80 glow-border transition-all duration-300 text-center h-full flex flex-col items-center justify-center gap-3">
-                  <Icon className="w-6 h-6 text-ice-blue" />
-                  <span className="text-sm font-medium">{label}</span>
-                </div>
-              </Link>
+            ].map(({ to, icon: Icon, label }, i) => (
+              <AnimateOnScroll key={to} delay={i * 100} animation="fade-up">
+                <Link to={to}>
+                  <div className="frosted-glass rounded-lg p-5 hover:bg-card/80 glow-border transition-all duration-300 text-center h-full flex flex-col items-center justify-center gap-3">
+                    <Icon className="w-6 h-6 text-ice-blue" />
+                    <span className="text-sm font-medium">{label}</span>
+                  </div>
+                </Link>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>

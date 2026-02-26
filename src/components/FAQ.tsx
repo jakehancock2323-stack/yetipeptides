@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Helmet } from 'react-helmet-async';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 
 const faqs = [
   {
@@ -53,27 +54,31 @@ export default function FAQ() {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
       <div className="container mx-auto max-w-3xl">
-        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-center text-muted-foreground mb-10 text-sm">
-          Find answers to common questions about ordering, shipping, and payments
-        </p>
+        <AnimateOnScroll>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-center text-muted-foreground mb-10 text-sm">
+            Find answers to common questions about ordering, shipping, and payments
+          </p>
+        </AnimateOnScroll>
         
-        <div className="frosted-glass rounded-xl p-5 md:p-6">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-border/20">
-                <AccordionTrigger className="text-left hover:text-ice-blue transition-colors text-sm py-4">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm pb-4">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+        <AnimateOnScroll delay={150} animation="scale-in">
+          <div className="frosted-glass rounded-xl p-5 md:p-6">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-border/20">
+                  <AccordionTrigger className="text-left hover:text-ice-blue transition-colors text-sm py-4">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm pb-4">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );
