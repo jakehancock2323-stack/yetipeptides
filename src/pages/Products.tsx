@@ -5,6 +5,7 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
 import { products, categories } from '@/data/products';
 import { Search, FlaskConical, MapPin } from 'lucide-react';
@@ -70,48 +71,54 @@ export default function Products() {
       <div className="container mx-auto px-4 pt-28 pb-20">
         {/* UK Domestic Banner */}
         {region === 'UK Domestic' && (
-          <div className="mb-6 flex items-center gap-2 px-4 py-3 rounded-lg bg-ice-blue/10 border border-ice-blue/20">
-            <MapPin className="w-4 h-4 text-ice-blue flex-shrink-0" />
-            <span className="text-sm font-medium text-ice-blue">UK Domestic Stock – Ships within UK only.</span>
-          </div>
+          <AnimateOnScroll animation="fade-in">
+            <div className="mb-6 flex items-center gap-2 px-4 py-3 rounded-lg bg-ice-blue/10 border border-ice-blue/20">
+              <MapPin className="w-4 h-4 text-ice-blue flex-shrink-0" />
+              <span className="text-sm font-medium text-ice-blue">UK Domestic Stock – Ships within UK only.</span>
+            </div>
+          </AnimateOnScroll>
         )}
 
         {/* Compact Header */}
-        <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Research Peptides</h1>
-          <p className="text-sm text-muted-foreground">
-            Laboratory-grade compounds · 99%+ purity · COA on request
-          </p>
-        </div>
+        <AnimateOnScroll>
+          <div className="mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Research Peptides</h1>
+            <p className="text-sm text-muted-foreground">
+              Laboratory-grade compounds · 99%+ purity · COA on request
+            </p>
+          </div>
+        </AnimateOnScroll>
 
         {/* Search + Filters Row */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-8">
-          <div className="relative sm:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
-            <Input
-              type="text"
-              placeholder="Search compounds..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-10 bg-secondary/20 border-border/30 h-9 text-sm"
-            />
+        <AnimateOnScroll delay={100}>
+          <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            <div className="relative sm:w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                type="text"
+                placeholder="Search compounds..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-10 bg-secondary/20 border-border/30 h-9 text-sm"
+              />
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                    selectedCategory === category 
+                      ? 'bg-ice-blue text-background' 
+                      : 'bg-secondary/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                  selectedCategory === category 
-                    ? 'bg-ice-blue text-background' 
-                    : 'bg-secondary/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
+        </AnimateOnScroll>
 
         {/* Results count */}
         <p className="text-xs text-muted-foreground mb-5">
@@ -120,30 +127,36 @@ export default function Products() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+          {filteredProducts.map((product, i) => (
+            <AnimateOnScroll key={product.id} delay={i * 60} animation="scale-in">
+              <ProductCard product={product} />
+            </AnimateOnScroll>
           ))}
         </div>
 
         {filteredProducts.length === 0 && region === 'UK Domestic' ? (
-          <div className="text-center py-24">
-            <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              UK Domestic stock is not yet available. Check back soon for updates.
-            </p>
-          </div>
+          <AnimateOnScroll animation="fade-in">
+            <div className="text-center py-24">
+              <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                UK Domestic stock is not yet available. Check back soon for updates.
+              </p>
+            </div>
+          </AnimateOnScroll>
         ) : filteredProducts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-muted-foreground">No compounds found matching your search.</p>
           </div>
         ) : null}
 
-        {/* Single disclaimer at the bottom */}
-        <div className="mt-16 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-          <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
-          <span>All products are intended for laboratory research use only. Not for human consumption.</span>
-        </div>
+        {/* Disclaimer */}
+        <AnimateOnScroll animation="fade-in" delay={200}>
+          <div className="mt-16 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
+            <span>All products are intended for laboratory research use only. Not for human consumption.</span>
+          </div>
+        </AnimateOnScroll>
       </div>
 
       <Footer />

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from './ui/button';
+import AnimateOnScroll from './AnimateOnScroll';
 
 const AUTOPLAY_INTERVAL = 5000;
 
@@ -134,80 +135,84 @@ export default function Reviews() {
         <script type="application/ld+json">{JSON.stringify(reviewSchema)}</script>
       </Helmet>
       <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">What Researchers Say</h2>
-          <div className="flex items-center justify-center gap-2">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
-              ))}
+        <AnimateOnScroll>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What Researchers Say</h2>
+            <div className="flex items-center justify-center gap-2">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
+                ))}
+              </div>
+              <span className="text-sm text-muted-foreground">5.0 from {reviews.length} reviews</span>
             </div>
-            <span className="text-sm text-muted-foreground">5.0 from {reviews.length} reviews</span>
           </div>
-        </div>
+        </AnimateOnScroll>
 
-        <div 
-          className="relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <Button
-            variant="ghost" size="icon" onClick={prevReview}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-14 z-10 hover:bg-secondary/50"
-            aria-label="Previous review"
+        <AnimateOnScroll delay={150} animation="scale-in">
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
+            <Button
+              variant="ghost" size="icon" onClick={prevReview}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-14 z-10 hover:bg-secondary/50"
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
 
-          <Button
-            variant="ghost" size="icon" onClick={nextReview}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-14 z-10 hover:bg-secondary/50"
-            aria-label="Next review"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </Button>
+            <Button
+              variant="ghost" size="icon" onClick={nextReview}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-14 z-10 hover:bg-secondary/50"
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
 
-          <div key={currentIndex} className="frosted-glass rounded-xl p-8 md:p-10 relative animate-fade-in">
-            <Quote className="absolute top-5 right-5 w-8 h-8 text-ice-blue/10" />
-            
-            <div className="flex gap-0.5 mb-5 justify-center">
-              {[...Array(review.rating)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
-              ))}
-            </div>
+            <div key={currentIndex} className="frosted-glass rounded-xl p-8 md:p-10 relative animate-fade-in">
+              <Quote className="absolute top-5 right-5 w-8 h-8 text-ice-blue/10" />
+              
+              <div className="flex gap-0.5 mb-5 justify-center">
+                {[...Array(review.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-ice-blue text-ice-blue" />
+                ))}
+              </div>
 
-            <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed text-center">
-              "{review.text}"
-            </p>
+              <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed text-center">
+                "{review.text}"
+              </p>
 
-            <div className="border-t border-border/20 pt-5 text-center">
-              <p className="font-semibold text-sm">{review.name}</p>
-              <p className="text-xs text-muted-foreground">{review.location}</p>
-              <div className="flex items-center justify-center gap-2 mt-1.5">
-                <span className="text-[11px] text-muted-foreground">{review.date}</span>
-                {review.verified && (
-                  <>
-                    <span className="text-muted-foreground/30">•</span>
-                    <span className="text-[11px] text-ice-blue font-medium">Verified</span>
-                  </>
-                )}
+              <div className="border-t border-border/20 pt-5 text-center">
+                <p className="font-semibold text-sm">{review.name}</p>
+                <p className="text-xs text-muted-foreground">{review.location}</p>
+                <div className="flex items-center justify-center gap-2 mt-1.5">
+                  <span className="text-[11px] text-muted-foreground">{review.date}</span>
+                  {review.verified && (
+                    <>
+                      <span className="text-muted-foreground/30">•</span>
+                      <span className="text-[11px] text-ice-blue font-medium">Verified</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex justify-center gap-1.5 mt-5">
-            {reviews.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToReview(index)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-ice-blue w-6' : 'bg-muted-foreground/20 w-1.5 hover:bg-muted-foreground/40'
-                }`}
-                aria-label={`Go to review ${index + 1}`}
-              />
-            ))}
+            <div className="flex justify-center gap-1.5 mt-5">
+              {reviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToReview(index)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    index === currentIndex ? 'bg-ice-blue w-6' : 'bg-muted-foreground/20 w-1.5 hover:bg-muted-foreground/40'
+                  }`}
+                  aria-label={`Go to review ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );
