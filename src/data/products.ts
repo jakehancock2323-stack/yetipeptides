@@ -363,7 +363,6 @@ export const products: Product[] = [
     category: "Muscle Growth & Recovery",
     variants: [
       { specification: "2mg ×10", price: 109 },
-      { specification: "5mg ×10", price: 149 },
       { specification: "10mg ×10", price: 236 }
     ]
   },
