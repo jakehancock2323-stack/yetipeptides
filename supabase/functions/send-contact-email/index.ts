@@ -25,6 +25,21 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { name, email, message } = contactData;
 
+    if (!name || !email || !message) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields: name, email, and message" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email address" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const emailHTML = `
       <!DOCTYPE html>
       <html>
