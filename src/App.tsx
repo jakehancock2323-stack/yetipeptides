@@ -17,7 +17,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import Contact from "./pages/Contact";
 import PeptideCalculator from "./pages/PeptideCalculator";
 import AboutUs from "./pages/AboutUs";
-import COARequest from "./pages/COARequest";
+
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import ShippingReturns from "./pages/ShippingReturns";
@@ -46,7 +46,7 @@ const App = () => {
                     <Route path="/" element={<Index />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/about" element={<AboutUs />} />
-                    <Route path="/coa-request" element={<COARequest />} />
+                    
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/calculator" element={<PeptideCalculator />} />
                     <Route path="/cart" element={<Cart />} />

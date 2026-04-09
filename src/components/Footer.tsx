@@ -49,7 +49,7 @@ export default function Footer() {
               {[
                 { to: '/', label: 'Home' },
                 { to: '/products', label: 'Products' },
-                { to: '/coa-request', label: 'COA Request' },
+                
                 { to: '/about', label: 'About Us' },
                 { to: '/contact', label: 'Contact' },
               ].map(link => (

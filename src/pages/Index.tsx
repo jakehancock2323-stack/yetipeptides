@@ -132,11 +132,6 @@ export default function Index() {
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
-            <Link to="/coa-request">
-              <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 px-8">
-                Request COA
-              </Button>
-            </Link>
           </div>
 
           {/* Stats strip */}
@@ -167,7 +162,7 @@ export default function Index() {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {[
-                { icon: FileText, label: 'COA Available' },
+                { icon: FlaskConical, label: 'Quality Verified' },
                 { icon: Lock, label: 'Secure Checkout' },
                 { icon: Globe, label: 'Worldwide Shipping' },
                 { icon: FlaskConical, label: 'Research Use Only' },
