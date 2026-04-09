@@ -12,6 +12,7 @@ export interface Product {
   region?: Region;
   variants: ProductVariant[];
   ingredients?: string[];
+  outOfStock?: boolean;
 }
 
 export const categories = [
@@ -271,6 +272,7 @@ export const products: Product[] = [
     id: "hgh-somatropin",
     name: "HGH Somatropin",
     category: "Muscle Growth & Recovery",
+    outOfStock: true,
     variants: [
       { specification: "10iu ×10", price: 99 },
       { specification: "12iu ×10", price: 110 },
@@ -378,6 +380,7 @@ export const products: Product[] = [
     id: "thymosin-alpha1",
     name: "Thymosin Alpha-1",
     category: "Muscle Growth & Recovery",
+    outOfStock: true,
     variants: [
       { specification: "5mg ×10", price: 137 },
       { specification: "10mg ×10", price: 208 }
@@ -397,6 +400,7 @@ export const products: Product[] = [
     id: "melanotan-2",
     name: "Melanotan 2",
     category: "Sexual Health",
+    outOfStock: true,
     variants: [
       { specification: "10mg ×10", price: 99 }
     ]

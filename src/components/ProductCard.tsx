@@ -41,11 +41,16 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={yetiVial} 
           alt={`${product.name} - Research Vial`}
-          className="w-20 h-28 object-contain transition-transform duration-500 group-hover:scale-110"
+          className={`w-20 h-28 object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
         />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
           {product.category}
         </span>
+        {product.outOfStock && (
+          <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
+            Out of Stock
+          </span>
+        )}
       </div>
 
       {/* Content */}
@@ -100,22 +105,35 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Add to cart */}
         <div className="flex items-center gap-2 mt-auto">
-          <Input
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-            className="w-14 bg-secondary/20 border-border/20 h-8 text-xs text-center"
-          />
-          <Button 
-            onClick={handleAddToCart}
-            disabled={isAdding}
-            size="sm"
-            className="flex-1 bg-ice-blue hover:bg-ice-blue/90 text-background font-medium h-8 text-xs gap-1.5"
-          >
-            <ShoppingCart className="w-3.5 h-3.5" />
-            {isAdding ? "Added!" : "Add to Cart"}
-          </Button>
+          {product.outOfStock ? (
+            <Button 
+              disabled
+              size="sm"
+              className="flex-1 h-8 text-xs"
+              variant="outline"
+            >
+              Out of Stock
+            </Button>
+          ) : (
+            <>
+              <Input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                className="w-14 bg-secondary/20 border-border/20 h-8 text-xs text-center"
+              />
+              <Button 
+                onClick={handleAddToCart}
+                disabled={isAdding}
+                size="sm"
+                className="flex-1 bg-ice-blue hover:bg-ice-blue/90 text-background font-medium h-8 text-xs gap-1.5"
+              >
+                <ShoppingCart className="w-3.5 h-3.5" />
+                {isAdding ? "Added!" : "Add to Cart"}
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>
