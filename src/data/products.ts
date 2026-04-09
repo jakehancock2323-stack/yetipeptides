@@ -640,9 +640,9 @@ export const products: Product[] = [
     currency: "GBP",
     outOfStock: true,
     variants: [
-      { specification: "Tiffany Blue", price: 16 },
-      { specification: "Red", price: 16 },
-      { specification: "Deep Purple", price: 16 }
+      { specification: "Tiffany Blue", price: 15 },
+      { specification: "Red", price: 15 },
+      { specification: "Deep Purple", price: 15 }
     ]
   },
   {
