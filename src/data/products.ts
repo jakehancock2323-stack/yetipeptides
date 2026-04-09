@@ -621,5 +621,18 @@ export const products: Product[] = [
       { specification: "10mg ×10", price: 142 },
       { specification: "50mg ×10", price: 451 }
     ]
+  },
+
+  // UK DOMESTIC
+  {
+    id: "v1-pen",
+    name: "V1 Injection Pen",
+    category: "Other / Speciality",
+    region: "UK Domestic",
+    variants: [
+      { specification: "Tiffany Blue", price: 22 },
+      { specification: "Red", price: 22 },
+      { specification: "Deep Purple", price: 22 }
+    ]
   }
 ];
