@@ -631,10 +631,11 @@ export const products: Product[] = [
     name: "V1 Injection Pen",
     category: "Other / Speciality",
     region: "UK Domestic",
+    currency: "GBP",
     variants: [
-      { specification: "Tiffany Blue", price: 22 },
-      { specification: "Red", price: 22 },
-      { specification: "Deep Purple", price: 22 }
+      { specification: "Tiffany Blue", price: 16 },
+      { specification: "Red", price: 16 },
+      { specification: "Deep Purple", price: 16 }
     ]
   }
 ];
