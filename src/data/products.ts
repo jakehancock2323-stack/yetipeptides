@@ -27,6 +27,12 @@ export const categories = [
   "Other / Speciality"
 ];
 
+export const domesticCategories = [
+  "All",
+  "Peptides",
+  "Peptide Supplies"
+];
+
 export const products: Product[] = [
   // WEIGHT LOSS
   {
@@ -629,7 +635,7 @@ export const products: Product[] = [
   {
     id: "v1-pen",
     name: "V1 Injection Pen",
-    category: "Other / Speciality",
+    category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
     variants: [
