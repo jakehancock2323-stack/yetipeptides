@@ -13,6 +13,8 @@ export interface Product {
   variants: ProductVariant[];
   ingredients?: string[];
   outOfStock?: boolean;
+  image?: string;
+  currency?: 'USD' | 'GBP';
 }
 
 export const categories = [
