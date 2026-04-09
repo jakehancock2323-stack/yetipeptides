@@ -7,6 +7,7 @@ import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { ShoppingCart } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
+import v1PenImage from '@/assets/v1-pen.png';
 import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
@@ -20,6 +21,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
   const selectedVariant = product.variants[selectedVariantIndex];
+  const isGbp = product.currency === 'GBP';
+  const currencySymbol = isGbp ? '£' : '$';
+  const productImage = product.id === 'v1-pen' ? v1PenImage : yetiVial;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
@@ -32,16 +36,15 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
   };
 
-  const lowestPrice = Math.min(...product.variants.map(v => v.price));
-
   return (
     <div className="group rounded-xl border border-border/20 bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col">
       {/* Image */}
       <div className="relative bg-secondary/10 flex items-center justify-center py-6">
         <img 
-          src={yetiVial} 
-          alt={`${product.name} - Research Vial`}
+          src={productImage} 
+          alt={`${product.name} - Research Product`}
           className={`w-20 h-28 object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
+          loading="lazy"
         />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
           {product.category}
@@ -61,8 +64,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
           <div className="text-right whitespace-nowrap">
-            <span className="text-xl font-bold text-ice-blue">${selectedVariant.price}</span>
-            <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
+            <span className="text-xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
+            {!isGbp && (
+              <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
+            )}
           </div>
         </div>
 
@@ -92,7 +97,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <SelectContent>
               {product.variants.map((variant, index) => (
                 <SelectItem key={index} value={index.toString()} className="text-xs">
-                  {variant.specification} — ${variant.price}
+                  {variant.specification} — {currencySymbol}{variant.price}
                 </SelectItem>
               ))}
             </SelectContent>
