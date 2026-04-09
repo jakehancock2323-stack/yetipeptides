@@ -43,7 +43,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`w-20 h-28 object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`${product.id === 'v1-pen' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">

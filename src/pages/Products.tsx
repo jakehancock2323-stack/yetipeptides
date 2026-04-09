@@ -7,7 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
-import { products, categories } from '@/data/products';
+import { products, categories, domesticCategories } from '@/data/products';
 import { Search, FlaskConical, MapPin } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
 
@@ -18,6 +18,7 @@ export default function Products() {
     searchParams.get('category') || 'All'
   );
   const { region } = useRegion();
+  const activeCategories = region === 'UK Domestic' ? domesticCategories : categories;
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -25,6 +26,10 @@ export default function Products() {
       setSelectedCategory(category);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    setSelectedCategory('All');
+  }, [region]);
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
@@ -103,7 +108,7 @@ export default function Products() {
               />
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {categories.map(category => (
+              {activeCategories.map(category => (
                 <button
                   key={category}
                   onClick={() => handleCategoryChange(category)}
