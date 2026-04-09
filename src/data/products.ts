@@ -643,5 +643,15 @@ export const products: Product[] = [
       { specification: "Red", price: 16 },
       { specification: "Deep Purple", price: 16 }
     ]
+  },
+  {
+    id: "3ml-pen-cartridge",
+    name: "3mL Pen Cartridge",
+    category: "Peptide Supplies",
+    region: "UK Domestic",
+    currency: "GBP",
+    variants: [
+      { specification: "1 cartridge", price: 1 }
+    ]
   }
 ];
