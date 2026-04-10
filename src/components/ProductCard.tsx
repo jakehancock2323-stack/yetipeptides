@@ -9,6 +9,7 @@ import { ShoppingCart } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
+import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
@@ -24,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const selectedVariant = product.variants[selectedVariantIndex];
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : yetiVial;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
