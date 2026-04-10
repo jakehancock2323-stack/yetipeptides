@@ -41,23 +41,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group rounded-xl border border-border/20 bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col">
       {/* Image */}
-      <div className="relative bg-secondary/10 flex items-center justify-center py-6 overflow-hidden">
-        {product.image ? (
-          <img 
-            src={productImage} 
-            alt={`${product.name} - Research Product`}
-            className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
-            style={{ maskImage: 'radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at center, black 40%, transparent 100%)' }}
-            loading="lazy"
-          />
-        ) : (
-          <img 
-            src={productImage} 
-            alt={`${product.name} - Research Product`}
-            className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
-            loading="lazy"
-          />
-        )}
+      <div className="relative bg-secondary/10 flex items-center justify-center py-6">
+        <img 
+          src={productImage} 
+          alt={`${product.name} - Research Product`}
+          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
+          loading="lazy"
+        />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
           {product.category}
         </span>
