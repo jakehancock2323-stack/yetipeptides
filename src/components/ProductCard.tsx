@@ -9,6 +9,7 @@ import { ShoppingCart } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
+import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
@@ -24,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const selectedVariant = product.variants[selectedVariantIndex];
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : yetiVial;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
@@ -44,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">

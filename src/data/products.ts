@@ -655,5 +655,16 @@ export const products: Product[] = [
     variants: [
       { specification: "1 cartridge", price: 1 }
     ]
+  },
+  {
+    id: "hospira-bac-water",
+    name: "Hospira Bacteriostatic Water",
+    category: "Peptide Supplies",
+    region: "UK Domestic",
+    currency: "GBP",
+    variants: [
+      { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12 }
+    ],
+    image: "hospira-bac-water"
   }
 ];
