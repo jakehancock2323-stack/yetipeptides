@@ -231,39 +231,3 @@
   animation: snowfall linear infinite;
   pointer-events: none;
 }
-
-/* 17TRACK Widget Dark Theme Override */
-#YQContainer {
-  background: hsl(var(--background)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
-#YQContainer * {
-  color: hsl(var(--foreground)) !important;
-  border-color: hsl(var(--border)) !important;
-}
-
-#YQContainer .yqc-top,
-#YQContainer .yq-top-bar {
-  display: none !important;
-}
-
-#YQContainer .yq-body,
-#YQContainer .yq-main,
-#YQContainer .yq-result,
-#YQContainer .yq-item,
-#YQContainer .yq-bdy,
-#YQContainer div {
-  background: hsl(var(--background)) !important;
-}
-
-#YQContainer a {
-  color: hsl(var(--primary)) !important;
-}
-
-#YQContainer .yq-btn,
-#YQContainer button {
-  background: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
-  border: none !important;
-}

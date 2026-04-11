@@ -19,9 +19,6 @@ export default function TrackOrder() {
       scriptLoaded.current = true;
     };
     document.body.appendChild(script);
-    return () => {
-      // Don't remove — 17track expects it to persist
-    };
   }, []);
 
   const handleTrack = () => {
@@ -62,7 +59,7 @@ export default function TrackOrder() {
             </h1>
             <p className="text-muted-foreground text-lg">
               Enter your tracking number below to check the status of your shipment. 
-              Supports 3,200+ carriers worldwide including USPS, Royal Mail, DHL, FedEx, and more.
+              Supports all major carriers worldwide including USPS, Royal Mail, DHL, FedEx, and more.
             </p>
           </div>
 
@@ -87,18 +84,7 @@ export default function TrackOrder() {
             
             <div 
               id="YQContainer" 
-              className="mt-6 min-h-[100px] rounded-lg overflow-hidden
-                [&_*]:!font-sans
-                [&_.yq-header]:!bg-transparent [&_.yq-header]:!border-none
-                [&_.yq-main]:!bg-[hsl(var(--background))] [&_.yq-main]:!text-[hsl(var(--foreground))]
-                [&_.yq-body]:!bg-[hsl(var(--background))]
-                [&_.yq-result]:!bg-[hsl(var(--background))]
-                [&_iframe]:!bg-[hsl(var(--background))]
-              "
-              style={{ 
-                colorScheme: 'dark',
-                background: 'hsl(var(--background))',
-              }}
+              className="mt-6 min-h-[100px] rounded-lg overflow-hidden"
               ref={containerRef} 
             />
           </div>
