@@ -19,7 +19,7 @@ export default function Navbar() {
     { to: '/', label: 'Home' },
     { to: '/products', label: 'Products' },
     { to: '/how-to-pay-crypto', label: 'How to Pay' },
-    
+    { to: '/track-order', label: 'Track Order' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
   ];
