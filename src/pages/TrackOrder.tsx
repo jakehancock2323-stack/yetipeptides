@@ -37,7 +37,7 @@ export default function TrackOrder() {
             <iframe
               className="w-full border-0"
               src="https://parcelsapp.com/widget?backgroundColorButton=%230ea5e9&colorButton=%23ffffff&borderRadiusButton=8px&borderRadiusInput=8px&borderInput=1px%20solid%20%23334155&placeholder=Enter%20your%20tracking%20number&textButton=Track%20Package&widgetWrapBorder=none&widgetWrapBorderRadius=8px"
-              style={{ minWidth: '312px', minHeight: '210px', width: '100%' }}
+              style={{ minWidth: '312px', minHeight: '250px', width: '100%' }}
               title="Package Tracking Widget"
             />
           </div>
