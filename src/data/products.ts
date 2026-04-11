@@ -490,15 +490,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "glutathione",
-    name: "Glutathione",
-    category: "General Health",
-    variants: [
-      { specification: "600mg ×10", price: 83 },
-      { specification: "1500mg ×10", price: 137 }
-    ]
-  },
-  {
     id: "hyaluronic-acid",
     name: "Hyaluronic Acid",
     category: "General Health",
