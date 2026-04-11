@@ -3,8 +3,38 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Package } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function TrackOrder() {
+  const [trackingNumber, setTrackingNumber] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scriptLoaded = useRef(false);
+
+  useEffect(() => {
+    if (scriptLoaded.current) return;
+    const script = document.createElement('script');
+    script.src = '//www.17track.net/externalcall.js';
+    script.async = true;
+    script.onload = () => {
+      scriptLoaded.current = true;
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  const handleTrack = () => {
+    if (!trackingNumber.trim()) return;
+    const YQV5 = (window as any).YQV5;
+    if (YQV5) {
+      YQV5.trackSingle({
+        YQ_ContainerId: 'YQContainer',
+        YQ_Height: 560,
+        YQ_Fc: '0',
+        YQ_Lang: 'en',
+        YQ_Num: trackingNumber.trim(),
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen pb-20">
       <SEO 
@@ -34,14 +64,29 @@ export default function TrackOrder() {
           </div>
 
           <div className="frosted-glass rounded-xl p-6 md:p-8">
-            <div className="parcels-widget" style={{ minWidth: '300px', minHeight: '400px', width: '100%' }}>
-              <iframe
-                src="https://parcelsapp.com/tracking-widget?backgroundColorButton=%2306d6a0&colorButton=%23091017&borderRadiusButton=8px&borderRadiusInput=8px&borderInput=1px%20solid%20%23334155&placeholder=Enter%20your%20tracking%20number&textButton=Track%20Package&widgetWrapBorder=none&widgetWrapBorderRadius=8px&backgroundColorInput=%230d1a2a&colorInput=%23e0f2f1"
-                style={{ width: '100%', height: '400px', border: 'none' }}
-                title="Package Tracking Widget"
-                allow="clipboard-read; clipboard-write"
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleTrack()}
+                placeholder="Enter your tracking number"
+                className="flex-1 px-4 py-3 rounded-lg bg-background/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ice-blue))] transition-all"
+                maxLength={50}
               />
+              <button
+                onClick={handleTrack}
+                className="px-6 py-3 rounded-lg bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] text-background font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
+              >
+                Track Package
+              </button>
             </div>
+            
+            <div 
+              id="YQContainer" 
+              className="mt-6 min-h-[100px] rounded-lg overflow-hidden"
+              ref={containerRef} 
+            />
           </div>
 
           <div className="mt-8 frosted-glass rounded-xl p-6 md:p-8">
