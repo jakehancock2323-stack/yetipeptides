@@ -1,6 +1,7 @@
 export interface ProductVariant {
   specification: string;
   price: number;
+  outOfStock?: boolean;
 }
 
 export type Region = 'International' | 'UK Domestic';
@@ -179,9 +180,10 @@ export const products: Product[] = [
     id: "semax",
     name: "Semax",
     category: "Cognitive Enhancement",
+    outOfStock: true,
     variants: [
-      { specification: "5mg ×10", price: 99 },
-      { specification: "11mg ×10", price: 123 }
+      { specification: "5mg ×10", price: 99, outOfStock: true },
+      { specification: "11mg ×10", price: 123, outOfStock: true }
     ]
   },
 
@@ -337,7 +339,7 @@ export const products: Product[] = [
     category: "Muscle Growth & Recovery",
     variants: [
       { specification: "10mg ×10", price: 114 },
-      { specification: "40mg ×10", price: 279 }
+      { specification: "40mg ×10", price: 279, outOfStock: true }
     ]
   },
   {
@@ -400,6 +402,7 @@ export const products: Product[] = [
     id: "melanotan-1",
     name: "Melanotan 1",
     category: "Sexual Health",
+    outOfStock: true,
     variants: [
       { specification: "10mg ×10", price: 99 }
     ]
@@ -515,10 +518,9 @@ export const products: Product[] = [
     id: "nad-plus",
     name: "NAD+",
     category: "General Health",
-    outOfStock: true,
     variants: [
-      { specification: "100mg ×10 vials", price: 88 },
-      { specification: "500mg ×10 vials", price: 135 },
+      { specification: "100mg ×10 vials", price: 88, outOfStock: true },
+      { specification: "500mg ×10 vials", price: 135, outOfStock: true },
       { specification: "1000mg ×10 vials", price: 210 }
     ]
   },
@@ -546,7 +548,7 @@ export const products: Product[] = [
     category: "Other / Speciality",
     variants: [
       { specification: "5mg ×10", price: 99 },
-      { specification: "50mg ×10", price: 146 }
+      { specification: "50mg ×10", price: 146, outOfStock: true }
     ]
   },
   {
