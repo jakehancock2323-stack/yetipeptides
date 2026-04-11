@@ -23,6 +23,7 @@ import TermsConditions from "./pages/TermsConditions";
 import ShippingReturns from "./pages/ShippingReturns";
 import ResearchDisclaimer from "./pages/ResearchDisclaimer";
 import HowToPayCrypto from "./pages/HowToPayCrypto";
+import TrackOrder from "./pages/TrackOrder";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => {
                     <Route path="/shipping-returns" element={<ShippingReturns />} />
                     <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                     <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
+                    <Route path="/track-order" element={<TrackOrder />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </BrowserRouter>
