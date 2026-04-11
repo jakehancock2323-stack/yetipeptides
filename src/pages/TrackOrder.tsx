@@ -85,7 +85,22 @@ export default function TrackOrder() {
               </button>
             </div>
             
-            <div id="YQContainer" className="mt-6 min-h-[100px] [&>*]:!bg-transparent [&_*]:!font-sans" ref={containerRef} />
+            <div 
+              id="YQContainer" 
+              className="mt-6 min-h-[100px] rounded-lg overflow-hidden
+                [&_*]:!font-sans
+                [&_.yq-header]:!bg-transparent [&_.yq-header]:!border-none
+                [&_.yq-main]:!bg-[hsl(var(--background))] [&_.yq-main]:!text-[hsl(var(--foreground))]
+                [&_.yq-body]:!bg-[hsl(var(--background))]
+                [&_.yq-result]:!bg-[hsl(var(--background))]
+                [&_iframe]:!bg-[hsl(var(--background))]
+              "
+              style={{ 
+                colorScheme: 'dark',
+                background: 'hsl(var(--background))',
+              }}
+              ref={containerRef} 
+            />
           </div>
 
           <div className="mt-8 frosted-glass rounded-xl p-6 md:p-8">
