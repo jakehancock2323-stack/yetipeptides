@@ -23,6 +23,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
   const selectedVariant = product.variants[selectedVariantIndex];
+  const isProductOutOfStock = product.outOfStock;
+  const isVariantOutOfStock = selectedVariant.outOfStock;
+  const isCurrentlyOutOfStock = isProductOutOfStock || isVariantOutOfStock;
+  const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
   const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : yetiVial;
@@ -45,13 +49,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${product.outOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
           {product.category}
         </span>
-        {product.outOfStock && (
+        {allVariantsOutOfStock && (
           <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             Out of Stock
           </span>
@@ -98,8 +102,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             </SelectTrigger>
             <SelectContent>
               {product.variants.map((variant, index) => (
-                <SelectItem key={index} value={index.toString()} className="text-xs">
-                  {variant.specification} — {currencySymbol}{variant.price}
+                <SelectItem key={index} value={index.toString()} className={`text-xs ${variant.outOfStock ? 'text-muted-foreground line-through' : ''}`}>
+                  {variant.specification} — {currencySymbol}{variant.price}{variant.outOfStock ? ' (Out of Stock)' : ''}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -112,14 +116,14 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Add to cart */}
         <div className="flex items-center gap-2 mt-auto">
-          {product.outOfStock ? (
+          {isCurrentlyOutOfStock ? (
             <Button 
               disabled
               size="sm"
               className="flex-1 h-8 text-xs"
               variant="outline"
             >
-              Out of Stock
+              {isProductOutOfStock ? 'Out of Stock' : 'Variant Out of Stock'}
             </Button>
           ) : (
             <>
