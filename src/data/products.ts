@@ -515,6 +515,7 @@ export const products: Product[] = [
     id: "nad-plus",
     name: "NAD+",
     category: "General Health",
+    outOfStock: true,
     variants: [
       { specification: "100mg ×10 vials", price: 88 },
       { specification: "500mg ×10 vials", price: 135 },
