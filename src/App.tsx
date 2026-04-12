@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from "./contexts/CartContext";
 import { RegionProvider } from "./contexts/RegionContext";
 import AgeVerification from "./components/AgeVerification";
+import BootScreen from "./components/BootScreen";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
@@ -30,6 +31,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isVerified, setIsVerified] = useState(false);
+  const [isBooted, setIsBooted] = useState(false);
 
   return (
     <HelmetProvider>
@@ -40,7 +42,8 @@ const App = () => {
               <Toaster />
               <Sonner />
               <AgeVerification onVerified={() => setIsVerified(true)} />
-              {isVerified && (
+              {isVerified && !isBooted && <BootScreen onComplete={() => setIsBooted(true)} />}
+              {isVerified && isBooted && (
                 <BrowserRouter>
                   <ScrollToTop />
                   <Routes>
