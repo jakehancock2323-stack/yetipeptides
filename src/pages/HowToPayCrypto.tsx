@@ -421,6 +421,71 @@ export default function HowToPayCrypto() {
           </div>
         </section>
 
+        {/* Section 8: Middleman Service */}
+        <section className="px-4 py-12">
+          <div className="container mx-auto max-w-5xl">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-full bg-[hsl(var(--aurora))]/20 flex items-center justify-center">
+                <span className="text-[hsl(var(--aurora))] font-bold">8</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold">Middleman Service (Escrow)</h2>
+            </div>
+
+            <div className="frosted-glass rounded-2xl p-8 border border-[hsl(var(--aurora))]/20">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-14 h-14 rounded-xl bg-[hsl(var(--aurora))]/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-7 h-7 text-[hsl(var(--aurora))]" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">What is the Middleman Service?</h3>
+                  <p className="text-muted-foreground">
+                    For added security, we offer a <strong className="text-foreground">Middleman (Escrow) Service</strong> — a trusted third-party holds your payment until you confirm receipt of your order. This protects both buyer and seller.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
+                <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Users className="w-4 h-4 text-[hsl(var(--aurora))]" />
+                    <span className="text-sm font-semibold">Step 1</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">You send payment to the middleman's escrow wallet instead of directly to us.</p>
+                </div>
+                <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Send className="w-4 h-4 text-[hsl(var(--aurora))]" />
+                    <span className="text-sm font-semibold">Step 2</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">We ship your order. The middleman holds the funds securely during transit.</p>
+                </div>
+                <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <CheckCircle2 className="w-4 h-4 text-[hsl(var(--aurora))]" />
+                    <span className="text-sm font-semibold">Step 3</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Once you receive and verify your order, the middleman releases the payment to us.</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[hsl(var(--aurora))]/10 border border-[hsl(var(--aurora))]/20">
+                <p className="text-sm text-center">
+                  <strong className="text-[hsl(var(--aurora))]">🛡️ Want to use the Middleman Service?</strong>{' '}
+                  Contact us at{' '}
+                  <a href="mailto:yetipeptides@protonmail.com" className="text-ice-blue hover:underline font-mono">
+                    yetipeptides@protonmail.com
+                  </a>{' '}
+                  or reach out on{' '}
+                  <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="text-ice-blue hover:underline">
+                    Discord
+                  </a>{' '}
+                  before placing your order to arrange escrow.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Quick Recap */}
         <section className="px-4 py-16">
           <div className="container mx-auto max-w-4xl">
