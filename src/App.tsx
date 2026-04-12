@@ -31,6 +31,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isVerified, setIsVerified] = useState(false);
+  const [isBooted, setIsBooted] = useState(false);
 
   return (
     <HelmetProvider>
