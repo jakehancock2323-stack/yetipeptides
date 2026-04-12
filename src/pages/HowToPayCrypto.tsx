@@ -1,4 +1,4 @@
-import { Wallet, Download, Shield, ArrowRight, Send, Clock, Mail, CheckCircle2, Snowflake, CreditCard } from 'lucide-react';
+import { Wallet, Download, Shield, ArrowRight, Send, Clock, Mail, CheckCircle2, Snowflake, CreditCard, Users, ShieldCheck } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
