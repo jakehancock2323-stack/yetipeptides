@@ -9,6 +9,7 @@ import ProductCard from '@/components/ProductCard';
 import Reviews from '@/components/Reviews';
 import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
+import AnimatedCounter from '@/components/AnimatedCounter';
 import { 
   FileText, Lock, Globe, FlaskConical, Package,
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X
@@ -137,15 +138,15 @@ export default function Index() {
           {/* Stats strip */}
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-0 max-w-3xl mx-auto fade-in-up animate-delay-400">
             <div className="stat-block border-r border-border/30">
-              <div className="stat-value">99%+</div>
+              <div className="stat-value"><AnimatedCounter end={99} suffix="%+" /></div>
               <div className="stat-label">Purity</div>
             </div>
             <div className="stat-block border-r border-border/30 md:border-r">
-              <div className="stat-value">150+</div>
+              <div className="stat-value"><AnimatedCounter end={150} suffix="+" /></div>
               <div className="stat-label">Reviews</div>
             </div>
             <div className="stat-block border-r border-border/30">
-              <div className="stat-value">50+</div>
+              <div className="stat-value"><AnimatedCounter end={50} suffix="+" /></div>
               <div className="stat-label">Compounds</div>
             </div>
             <div className="stat-block">

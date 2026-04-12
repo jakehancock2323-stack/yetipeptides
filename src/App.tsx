@@ -9,6 +9,8 @@ import { CartProvider } from "./contexts/CartContext";
 import { RegionProvider } from "./contexts/RegionContext";
 import AgeVerification from "./components/AgeVerification";
 import BootScreen from "./components/BootScreen";
+import BackToTop from "./components/BackToTop";
+import PageTransition from "./components/PageTransition";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
@@ -46,6 +48,7 @@ const App = () => {
               {isVerified && isBooted && (
                 <BrowserRouter>
                   <ScrollToTop />
+                  <BackToTop />
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/products" element={<Products />} />
