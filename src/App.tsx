@@ -48,6 +48,7 @@ const App = () => {
               {isVerified && isBooted && (
                 <BrowserRouter>
                   <ScrollToTop />
+                  <BackToTop />
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/products" element={<Products />} />
