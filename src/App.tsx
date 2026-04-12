@@ -42,7 +42,8 @@ const App = () => {
               <Toaster />
               <Sonner />
               <AgeVerification onVerified={() => setIsVerified(true)} />
-              {isVerified && (
+              {isVerified && !isBooted && <BootScreen onComplete={() => setIsBooted(true)} />}
+              {isVerified && isBooted && (
                 <BrowserRouter>
                   <ScrollToTop />
                   <Routes>
