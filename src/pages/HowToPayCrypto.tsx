@@ -428,7 +428,7 @@ export default function HowToPayCrypto() {
               <div className="w-10 h-10 rounded-full bg-[hsl(var(--aurora))]/20 flex items-center justify-center">
                 <span className="text-[hsl(var(--aurora))] font-bold">8</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Middleman Service (Escrow)</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Middleman Service</h2>
             </div>
 
             <div className="frosted-glass rounded-2xl p-8 border border-[hsl(var(--aurora))]/20">
@@ -437,40 +437,64 @@ export default function HowToPayCrypto() {
                   <ShieldCheck className="w-7 h-7 text-[hsl(var(--aurora))]" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">What is the Middleman Service?</h3>
+                  <h3 className="text-lg font-semibold mb-2">Don't Want to Use Crypto? No Problem.</h3>
                   <p className="text-muted-foreground">
-                    For added security, we offer a <strong className="text-foreground">Middleman (Escrow) Service</strong> — a trusted third-party holds your payment until you confirm receipt of your order. This protects both buyer and seller.
+                    We understand crypto isn't for everyone — especially if you're new to it or simply find it too much hassle. While crypto remains our primary payment method for the safety of both parties, we've introduced a <strong className="text-foreground">Middleman Service</strong> so you can pay using methods you're already familiar with.
                   </p>
                 </div>
+              </div>
+
+              <div className="mb-6">
+                <h4 className="font-semibold mb-3">How It Works</h4>
+                <p className="text-muted-foreground mb-4">
+                  Our trusted middleman handles the crypto side for you. You simply pay them using a familiar payment method, and they convert and send the crypto payment to us on your behalf.
+                </p>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4 mb-6">
                 <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
                   <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-[hsl(var(--aurora))]" />
+                    <CreditCard className="w-4 h-4 text-[hsl(var(--aurora))]" />
                     <span className="text-sm font-semibold">Step 1</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">You send payment to the middleman's escrow wallet instead of directly to us.</p>
+                  <p className="text-sm text-muted-foreground">Place your order as normal on our website and note your order total.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
                   <div className="flex items-center gap-2 mb-2">
                     <Send className="w-4 h-4 text-[hsl(var(--aurora))]" />
                     <span className="text-sm font-semibold">Step 2</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">We ship your order. The middleman holds the funds securely during transit.</p>
+                  <p className="text-sm text-muted-foreground">Contact the middleman directly to arrange payment using one of the accepted methods below.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-secondary/30 border border-border/30">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 className="w-4 h-4 text-[hsl(var(--aurora))]" />
                     <span className="text-sm font-semibold">Step 3</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">Once you receive and verify your order, the middleman releases the payment to us.</p>
+                  <p className="text-sm text-muted-foreground">Once payment is confirmed, the middleman sends the crypto to us and your order is processed.</p>
                 </div>
+              </div>
+
+              <div className="mb-6">
+                <h4 className="font-semibold mb-3">Accepted Payment Methods</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {['PayPal', 'Venmo', 'CashApp', 'Zelle'].map((method) => (
+                    <div key={method} className="p-3 rounded-lg bg-secondary/30 border border-border/30 text-center">
+                      <span className="text-sm font-medium">{method}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-secondary/20 border border-border/30 mb-4">
+                <p className="text-sm text-muted-foreground">
+                  <strong className="text-foreground">ℹ️ Small Service Fee:</strong> A small fee applies for this service, which is communicated directly when you reach out. This is completely fair given the time and effort involved in handling the conversion.
+                </p>
               </div>
 
               <div className="p-4 rounded-xl bg-[hsl(var(--aurora))]/10 border border-[hsl(var(--aurora))]/20">
                 <p className="text-sm text-center">
-                  <strong className="text-[hsl(var(--aurora))]">🛡️ Want to use the Middleman Service?</strong>{' '}
+                  <strong className="text-[hsl(var(--aurora))]">🛡️ Ready to use the Middleman Service?</strong>{' '}
                   Contact us at{' '}
                   <a href="mailto:yetipeptides@protonmail.com" className="text-ice-blue hover:underline font-mono">
                     yetipeptides@protonmail.com
@@ -479,7 +503,7 @@ export default function HowToPayCrypto() {
                   <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="text-ice-blue hover:underline">
                     Discord
                   </a>{' '}
-                  before placing your order to arrange escrow.
+                  to get started.
                 </p>
               </div>
             </div>
