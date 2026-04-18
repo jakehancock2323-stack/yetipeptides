@@ -221,7 +221,7 @@ export const products: Product[] = [
     name: "CJC-1295 no DAC + Ipamorelin",
     category: "Muscle Growth & Recovery",
     variants: [
-      { specification: "×10", price: 154 }
+      { specification: "10mg ×10", price: 154 }
     ]
   },
   {
