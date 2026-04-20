@@ -363,7 +363,7 @@ export default function PeptideCalculator() {
                       <Input
                         id="customVol"
                         type="number"
-                        placeholder="e.g. 2.0"
+                        placeholder=""
                         value={customVolumeMl}
                         onChange={(e) => setCustomVolumeMl(e.target.value)}
                         min="0"
