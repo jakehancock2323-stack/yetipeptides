@@ -280,7 +280,7 @@ export default function PeptideCalculator() {
                     <Input
                       id="customMg"
                       type="number"
-                      placeholder="e.g. 7.5"
+                      placeholder=""
                       value={customPeptideMg}
                       onChange={(e) => { setCustomPeptideMg(e.target.value); if (e.target.value) setPeptideMg(null); }}
                       min="0"
