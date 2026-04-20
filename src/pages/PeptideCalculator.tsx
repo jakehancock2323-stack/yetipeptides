@@ -236,21 +236,23 @@ export default function PeptideCalculator() {
 
             <div className="space-y-5">
               {/* Step 1: Syringe size */}
-              <Card className="frosted-glass ice-glow">
-                <CardContent className="pt-6">
-                  <StepHeader number={1} title="Select your syringe size" />
-                  <Select value={syringeSize} onValueChange={(v: SyringeSize) => setSyringeSize(v)}>
-                    <SelectTrigger className="bg-input/50 h-12">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {SYRINGE_OPTIONS.map(opt => (
-                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </CardContent>
-              </Card>
+              <AnimateOnScroll animation="fade-up" delay={50}>
+                <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
+                  <CardContent className="pt-6">
+                    <StepHeader number={1} title="Select your syringe size" />
+                    <Select value={syringeSize} onValueChange={(v: SyringeSize) => setSyringeSize(v)}>
+                      <SelectTrigger className="bg-input/50 h-12 transition-all hover:border-[hsl(var(--ice-blue))]/60">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SYRINGE_OPTIONS.map(opt => (
+                          <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
 
               {/* Step 2: Peptide amount */}
               <Card className="frosted-glass ice-glow">
