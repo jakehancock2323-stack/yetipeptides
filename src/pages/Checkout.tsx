@@ -403,6 +403,12 @@ export default function Checkout() {
                     <span>Delivery</span>
                     <span>{currencySymbol}{deliveryFee.toFixed(2)}</span>
                   </div>
+                  {btcFee > 0 && (
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>BTC Processing Fee (4%)</span>
+                      <span>{currencySymbol}{btcFee.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="h-px bg-gradient-to-r from-transparent via-[hsl(var(--ice-blue))]/20 to-transparent my-2" />
                   <div className="flex justify-between items-end">
                     <span className="text-base font-bold">Total</span>
