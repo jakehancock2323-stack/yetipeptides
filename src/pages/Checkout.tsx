@@ -74,8 +74,15 @@ export default function Checkout() {
   };
 
   const isUK = region === 'UK Domestic';
+  const allItemsUKDomestic = items.length > 0 && items.every(item => item.product.region === 'UK Domestic');
+  const paypalAvailable = allItemsUKDomestic;
   const deliveryFee = isUK ? 5 : 65;
   const currencySymbol = isUK ? '£' : '$';
+
+  // Safety: if PayPal becomes unavailable, reset selection
+  if (paymentMethod === 'paypal' && !paypalAvailable) {
+    setPaymentMethod('usdt');
+  }
 
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
@@ -301,7 +308,7 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground mt-0.5">Secure third-party escrow for added protection</p>
                   </div>
                 </label>
-                {isUK && (
+                {paypalAvailable && (
                   <label htmlFor="paypal" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'paypal' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
                     <RadioGroupItem value="paypal" id="paypal" />
                     <div>
