@@ -132,7 +132,7 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const calculateTotal = () => calculateSubtotal() + 65;
+  const calculateTotal = () => calculateSubtotal() + deliveryFee;
 
   return (
     <div className="min-h-screen pb-20">
