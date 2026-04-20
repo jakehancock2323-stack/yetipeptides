@@ -83,15 +83,16 @@ export default function PeptideCalculator() {
     return { mcg: v, mg: v / 1000 };
   }, [doseValue, doseUnit]);
 
-  // Smart recommendations: pick the BEST common BAC volume (smallest volume
-  // that lands the draw in the ideal 5–25 unit window), then show the
-  // adjacent smaller and larger common volumes as alternatives. Mirrors the
-  // pattern used by industry calculators: 3 cards, "Best" centered, one
-  // more concentrated, one more diluted.
+  // Smart recommendations: pick BEST as the common BAC volume whose draw is
+  // closest to the IDEAL_TARGET_UNITS (~10 IU) while staying ≤ MAX (25 IU).
+  // Then show the next-smaller and next-larger common volumes as neighbors.
+  // Mirrors industry calculators: 3 cards, "Best" centered on the sweet spot.
   const recommendations = useMemo(() => {
     if (effectivePeptideMg <= 0 || dose.mg <= 0) return [];
 
-    // Compute the syringe-unit draw each common BAC volume would produce
+    const IDEAL_TARGET_UNITS = 10;
+    const MAX_UNITS = 25;
+
     const evaluated = COMMON_BAC_VOLUMES_ML.map(volumeMl => {
       const concentration = effectivePeptideMg / volumeMl; // mg/mL
       const volumePerDoseMl = dose.mg / concentration;
@@ -101,25 +102,17 @@ export default function PeptideCalculator() {
 
     if (evaluated.length === 0) return [];
 
-    // Pick BEST: smallest volume whose draw lands in the ideal window.
-    // Falls back to the option closest to that window if none qualify.
-    let bestIdx = evaluated.findIndex(
-      o => o.units >= IDEAL_UNITS_MIN && o.units <= IDEAL_UNITS_MAX
+    // BEST = closest to IDEAL while ≤ MAX. If everything > MAX, pick smallest draw.
+    const underMax = evaluated.filter(o => o.units <= MAX_UNITS);
+    const pool = underMax.length > 0 ? underMax : evaluated;
+    const best = pool.reduce((a, b) =>
+      Math.abs(b.units - IDEAL_TARGET_UNITS) < Math.abs(a.units - IDEAL_TARGET_UNITS) ? b : a
     );
-    if (bestIdx === -1) {
-      // Closest to the ideal window
-      bestIdx = evaluated.reduce((bi, o, i) => {
-        const dist = (u: number) =>
-          u < IDEAL_UNITS_MIN ? IDEAL_UNITS_MIN - u : u > IDEAL_UNITS_MAX ? u - IDEAL_UNITS_MAX : 0;
-        return dist(o.units) < dist(evaluated[bi].units) ? i : bi;
-      }, 0);
-    }
+    const bestIdx = evaluated.findIndex(o => o.volumeMl === best.volumeMl);
 
-    // Build neighbor set: [smaller, BEST, larger] — fall back gracefully at edges
     const indices = new Set<number>([bestIdx]);
     if (bestIdx - 1 >= 0) indices.add(bestIdx - 1);
     if (bestIdx + 1 < evaluated.length) indices.add(bestIdx + 1);
-    // If at an edge, try to keep 3 cards by extending the other side
     if (indices.size < 3) {
       if (bestIdx === 0 && bestIdx + 2 < evaluated.length) indices.add(bestIdx + 2);
       else if (bestIdx === evaluated.length - 1 && bestIdx - 2 >= 0) indices.add(bestIdx - 2);
