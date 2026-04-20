@@ -74,6 +74,8 @@ export default function Checkout() {
   };
 
   const isUK = region === 'UK Domestic';
+  const allItemsUKDomestic = items.length > 0 && items.every(item => item.product.region === 'UK Domestic');
+  const paypalAvailable = allItemsUKDomestic;
   const deliveryFee = isUK ? 5 : 65;
   const currencySymbol = isUK ? '£' : '$';
 
