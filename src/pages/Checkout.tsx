@@ -418,7 +418,7 @@ export default function Checkout() {
               <span className="block">
                 You're about to submit your order for{" "}
                 <span className="font-bold text-foreground">{currencySymbol}{calculateTotal().toFixed(2)}</span>{" "}
-                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod}</span>.
+                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod === 'paypal' ? 'PayPal' : paymentMethod}</span>.
               </span>
               <span className="block text-xs">
                 After confirming, you'll receive an email with payment instructions. This action cannot be undone.
