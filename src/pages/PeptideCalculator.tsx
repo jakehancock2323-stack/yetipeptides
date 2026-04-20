@@ -23,8 +23,12 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Common BAC water amounts to test for "easy dosing" suggestions
-const CANDIDATE_VOLUMES_ML = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5];
+// Target "clean" unit values that make at-a-glance dosing easy on a syringe
+const CLEAN_UNIT_TARGETS = [5, 10, 20, 25, 40, 50];
+// Practical BAC water volume bounds (mL)
+const MIN_VOLUME_ML = 0.5;
+const MAX_VOLUME_ML = 5;
+type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
   number: number;
