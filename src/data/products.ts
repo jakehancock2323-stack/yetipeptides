@@ -645,7 +645,6 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    outOfStock: true,
     variants: [
       { specification: "1 cartridge", price: 1 }
     ]
