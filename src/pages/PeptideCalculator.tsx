@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Snowfall from '@/components/Snowfall';
 import SEO from '@/components/SEO';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
