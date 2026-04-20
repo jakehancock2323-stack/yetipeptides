@@ -103,6 +103,7 @@ export default function Checkout() {
       })),
       subtotal: calculateSubtotal(),
       deliveryFee,
+      processingFee: btcFee,
       discount: 0,
       promoCode: null,
       total: calculateTotal(),
