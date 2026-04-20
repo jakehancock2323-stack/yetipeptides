@@ -24,17 +24,14 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Target syringe unit values we optimize for. We back-solve the BAC water
-// volume that produces these exact unit draws, so every recommendation
-// lands on a clean, easy-to-measure mark on the syringe.
-const TARGET_UNITS: { units: number; label: string; sublabel: string }[] = [
-  { units: 10, label: 'Best Precision', sublabel: 'Recommended' },
-  { units: 5,  label: 'Low Volume Injection', sublabel: 'Smallest draw' },
-  { units: 20, label: 'More Diluted', sublabel: 'Easier measuring' },
-  { units: 25, label: 'Most Diluted', sublabel: 'Largest draw' },
-];
-const MIN_VOLUME_ML = 0.5;
-const MAX_VOLUME_ML = 10;
+// Common BAC water volumes researchers actually use. We pick the BEST from
+// this list (smallest volume that gives a clean ~5–25 unit draw), then show
+// the next-smaller and next-larger neighbors so users can trade off
+// concentration vs. dose precision.
+const COMMON_BAC_VOLUMES_ML = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5];
+// Preferred draw window — narrow, accurate, easy to read on the syringe.
+const IDEAL_UNITS_MIN = 5;
+const IDEAL_UNITS_MAX = 25;
 type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
@@ -86,50 +83,60 @@ export default function PeptideCalculator() {
     return { mcg: v, mg: v / 1000 };
   }, [doseValue, doseUnit]);
 
-  // Smart recommendations: back-solve the BAC water volume needed to make
-  // each TARGET unit draw deliver the user's exact dose. This guarantees
-  // every recommendation lands on a clean, easy-to-read mark.
-  //
-  // Math:  units = (dose_mg / (peptide_mg / volume_ml)) / syringe_maxMl * syringe_units
-  // solve for volume_ml:
-  //   volume_ml = (peptide_mg * targetUnits * syringe_maxMl) / (dose_mg * syringe_units)
-  //   (which simplifies to (peptide_mg * targetUnits) / (dose_mcg * 10) for a 1mL/100u syringe)
+  // Smart recommendations: pick the BEST common BAC volume (smallest volume
+  // that lands the draw in the ideal 5–25 unit window), then show the
+  // adjacent smaller and larger common volumes as alternatives. Mirrors the
+  // pattern used by industry calculators: 3 cards, "Best" centered, one
+  // more concentrated, one more diluted.
   const recommendations = useMemo(() => {
     if (effectivePeptideMg <= 0 || dose.mg <= 0) return [];
 
-    return TARGET_UNITS.map(({ units: targetUnits, label, sublabel }) => {
-      const rawVolumeMl =
-        (effectivePeptideMg * targetUnits * syringeSpec.maxMl) /
-        (dose.mg * syringeSpec.units);
-      // Round to 1 decimal for clean values; prefer whole numbers when very close
-      const rounded1 = Math.round(rawVolumeMl * 10) / 10;
-      const volumeMl =
-        Math.abs(rounded1 - Math.round(rounded1)) < 0.05
-          ? Math.round(rounded1)
-          : rounded1;
-
-      // Recompute exact units with the rounded volume so display is consistent
-      const concentration = effectivePeptideMg / volumeMl;
+    // Compute the syringe-unit draw each common BAC volume would produce
+    const evaluated = COMMON_BAC_VOLUMES_ML.map(volumeMl => {
+      const concentration = effectivePeptideMg / volumeMl; // mg/mL
       const volumePerDoseMl = dose.mg / concentration;
-      const actualUnits =
-        (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
+      const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
+      return { volumeMl, units, concentration, fitsSyringe: units > 0 && units <= syringeSpec.units };
+    }).filter(o => o.fitsSyringe);
 
-      const inRange = volumeMl >= MIN_VOLUME_ML && volumeMl <= MAX_VOLUME_ML;
-      const fitsSyringe = actualUnits > 0 && actualUnits <= syringeSpec.units;
+    if (evaluated.length === 0) return [];
 
-      return {
-        targetUnits,
-        label,
-        sublabel,
-        volumeMl,
-        units: actualUnits,
-        concentration,
-        mcgPerUnit: dose.mcg / actualUnits,
-        unitsPerTenth: (0.1 / syringeSpec.maxMl) * syringeSpec.units, // units per 0.1 mL
-        valid: inRange && fitsSyringe,
-        isBest: targetUnits === 10,
-      };
-    }).filter(r => r.valid);
+    // Pick BEST: smallest volume whose draw lands in the ideal window.
+    // Falls back to the option closest to that window if none qualify.
+    let bestIdx = evaluated.findIndex(
+      o => o.units >= IDEAL_UNITS_MIN && o.units <= IDEAL_UNITS_MAX
+    );
+    if (bestIdx === -1) {
+      // Closest to the ideal window
+      bestIdx = evaluated.reduce((bi, o, i) => {
+        const dist = (u: number) =>
+          u < IDEAL_UNITS_MIN ? IDEAL_UNITS_MIN - u : u > IDEAL_UNITS_MAX ? u - IDEAL_UNITS_MAX : 0;
+        return dist(o.units) < dist(evaluated[bi].units) ? i : bi;
+      }, 0);
+    }
+
+    // Build neighbor set: [smaller, BEST, larger] — fall back gracefully at edges
+    const indices = new Set<number>([bestIdx]);
+    if (bestIdx - 1 >= 0) indices.add(bestIdx - 1);
+    if (bestIdx + 1 < evaluated.length) indices.add(bestIdx + 1);
+    // If at an edge, try to keep 3 cards by extending the other side
+    if (indices.size < 3) {
+      if (bestIdx === 0 && bestIdx + 2 < evaluated.length) indices.add(bestIdx + 2);
+      else if (bestIdx === evaluated.length - 1 && bestIdx - 2 >= 0) indices.add(bestIdx - 2);
+    }
+
+    return Array.from(indices)
+      .sort((a, b) => a - b)
+      .map(i => {
+        const o = evaluated[i];
+        return {
+          volumeMl: o.volumeMl,
+          units: o.units,
+          concentration: o.concentration,
+          mcgPerUnit: dose.mcg / o.units,
+          isBest: i === bestIdx,
+        };
+      });
   }, [effectivePeptideMg, dose, syringeSpec]);
 
   // Active calculation (uses custom volume if provided, else the "Best Precision" 10-unit pick)
@@ -267,12 +274,12 @@ export default function PeptideCalculator() {
                     <StepHeader number={2} title="Select peptide amount (mg)" />
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
                       {PEPTIDE_AMOUNTS.map((amt, i) => {
-                        const isActive = peptideMg === amt && !customPeptideMg;
+                        const isActive = peptideMg === amt;
                         return (
                           <button
                             key={amt}
                             type="button"
-                            onClick={() => { setPeptideMg(amt); setCustomPeptideMg(''); }}
+                            onClick={() => setPeptideMg(amt)}
                             style={{ animationDelay: `${i * 40}ms` }}
                             className={cn(
                               'h-11 sm:h-12 rounded-lg border font-orbitron text-sm font-semibold transition-all duration-200 animate-fade-in hover:scale-105 active:scale-95',
@@ -285,20 +292,6 @@ export default function PeptideCalculator() {
                           </button>
                         );
                       })}
-                    </div>
-                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                      <Label htmlFor="customMg" className="text-sm text-muted-foreground whitespace-nowrap">Or custom (mg):</Label>
-                      <Input
-                        id="customMg"
-                        type="number"
-                        inputMode="decimal"
-                        placeholder=""
-                        value={customPeptideMg}
-                        onChange={(e) => { setCustomPeptideMg(e.target.value); if (e.target.value) setPeptideMg(null); }}
-                        min="0"
-                        step="any"
-                        className="bg-input/50"
-                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -398,7 +391,7 @@ export default function PeptideCalculator() {
                               Smart mixing recommendations
                             </span>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {recommendations.map((rec, idx) => {
                               const customVal = parseFloat(customVolumeMl);
                               const isSelected = !isNaN(customVal) && customVal === rec.volumeMl;
@@ -406,37 +399,32 @@ export default function PeptideCalculator() {
                               const highlight = isSelected || isAutoBest;
                               return (
                                 <button
-                                  key={rec.targetUnits}
+                                  key={rec.volumeMl}
                                   type="button"
                                   onClick={() => applyRecommendation(rec.volumeMl)}
                                   style={{ animationDelay: `${idx * 80}ms` }}
                                   className={cn(
-                                    'p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
+                                    'relative p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
                                     highlight
                                       ? 'bg-[hsl(var(--ice-blue))]/15 border-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
                                       : 'bg-input/40 border-border/50 hover:border-[hsl(var(--ice-blue))]/50 hover:shadow-[0_0_15px_hsl(var(--ice-blue)/0.2)]'
                                   )}
                                 >
-                                  <div className="flex items-center justify-between mb-1.5">
-                                    <span className="text-xs uppercase tracking-wider font-orbitron font-semibold text-[hsl(var(--glacier))]">
-                                      {rec.label}
+                                  {rec.isBest && (
+                                    <span className="absolute -top-2 right-2 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] text-[hsl(var(--deep-freeze))] font-bold shadow-[0_0_10px_hsl(var(--ice-blue)/0.6)]">
+                                      Best
                                     </span>
-                                    {rec.isBest && (
-                                      <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[hsl(var(--glacier))]/20 text-[hsl(var(--glacier))] animate-pulse">
-                                        Auto
-                                      </span>
-                                    )}
+                                  )}
+                                  <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))] mb-1.5">
+                                    {rec.volumeMl} mL <span className="text-xs text-muted-foreground font-normal">water</span>
                                   </div>
-                                  <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
-                                    {rec.volumeMl} mL <span className="text-xs text-muted-foreground font-normal">BAC water</span>
+                                  <div className="flex justify-between text-xs text-foreground/80">
+                                    <span className="text-muted-foreground">Measure:</span>
+                                    <span className="font-semibold text-[hsl(var(--ice-blue))]">{rec.units.toFixed(rec.units % 1 === 0 ? 0 : 1)} IU</span>
                                   </div>
-                                  <div className="text-xs text-foreground/80 mt-1">
-                                    <span className="font-semibold text-[hsl(var(--ice-blue))]">{rec.targetUnits} units</span>
-                                    {' = '}
+                                  <div className="flex justify-between text-xs text-foreground/80 mt-0.5">
+                                    <span className="text-muted-foreground">Sample size:</span>
                                     <span className="font-semibold">{dose.mcg} mcg</span>
-                                  </div>
-                                  <div className="text-[11px] text-muted-foreground mt-0.5">
-                                    {rec.sublabel} • 1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
                                   </div>
                                 </button>
                               );
