@@ -79,6 +79,11 @@ export default function Checkout() {
   const deliveryFee = isUK ? 5 : 65;
   const currencySymbol = isUK ? '£' : '$';
 
+  // Safety: if PayPal becomes unavailable, reset selection
+  if (paymentMethod === 'paypal' && !paypalAvailable) {
+    setPaymentMethod('usdt');
+  }
+
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
     setConfirmOpen(false);
