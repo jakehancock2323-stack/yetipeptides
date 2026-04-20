@@ -295,32 +295,58 @@ export default function PeptideCalculator() {
               <Card className="frosted-glass ice-glow">
                 <CardContent className="pt-6">
                   <StepHeader number={3} title="Enter desired dose" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="doseMcg" className="flex items-center gap-1.5 text-sm">
-                        Dose (mcg)
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Info className="w-3.5 h-3.5 text-muted-foreground" />
-                          </TooltipTrigger>
-                          <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
-                        </Tooltip>
-                      </Label>
-                      <Input
-                        id="doseMcg"
-                        type="number"
-                        placeholder="e.g. 250"
-                        value={doseMcg}
-                        onChange={(e) => setDoseMcg(e.target.value)}
-                        min="0"
-                        step="any"
-                        className="bg-input/50 h-12"
-                      />
+                  <div className="space-y-3">
+                    {/* Unit toggle */}
+                    <div className="inline-flex rounded-lg border border-border/50 bg-input/30 p-1">
+                      {(['mcg', 'mg'] as DoseUnit[]).map(u => (
+                        <button
+                          key={u}
+                          type="button"
+                          onClick={() => setDoseUnit(u)}
+                          className={cn(
+                            'px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all',
+                            doseUnit === u
+                              ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/30 to-[hsl(var(--glacier))]/20 text-[hsl(var(--ice-blue))] shadow-[0_0_10px_hsl(var(--ice-blue)/0.3)]'
+                              : 'text-muted-foreground hover:text-foreground'
+                          )}
+                        >
+                          {u}
+                        </button>
+                      ))}
                     </div>
-                    <div className="space-y-2">
-                      <Label className="text-sm">Equivalent (mg)</Label>
-                      <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))]">
-                        {dose.mg > 0 ? `${dose.mg.toFixed(4)} mg` : '—'}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="doseValue" className="flex items-center gap-1.5 text-sm">
+                          Dose ({doseUnit})
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Info className="w-3.5 h-3.5 text-muted-foreground" />
+                            </TooltipTrigger>
+                            <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
+                          </Tooltip>
+                        </Label>
+                        <Input
+                          id="doseValue"
+                          type="number"
+                          placeholder=""
+                          value={doseValue}
+                          onChange={(e) => setDoseValue(e.target.value)}
+                          min="0"
+                          step="any"
+                          className="bg-input/50 h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-sm">
+                          Equivalent ({doseUnit === 'mcg' ? 'mg' : 'mcg'})
+                        </Label>
+                        <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))]">
+                          {dose.mg > 0
+                            ? doseUnit === 'mcg'
+                              ? `${dose.mg.toFixed(4)} mg`
+                              : `${dose.mcg.toFixed(2)} mcg`
+                            : '—'}
+                        </div>
                       </div>
                     </div>
                   </div>
