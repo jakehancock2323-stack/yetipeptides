@@ -391,7 +391,7 @@ export default function PeptideCalculator() {
                               Smart mixing recommendations
                             </span>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {recommendations.map((rec, idx) => {
                               const customVal = parseFloat(customVolumeMl);
                               const isSelected = !isNaN(customVal) && customVal === rec.volumeMl;
@@ -399,37 +399,32 @@ export default function PeptideCalculator() {
                               const highlight = isSelected || isAutoBest;
                               return (
                                 <button
-                                  key={rec.targetUnits}
+                                  key={rec.volumeMl}
                                   type="button"
                                   onClick={() => applyRecommendation(rec.volumeMl)}
                                   style={{ animationDelay: `${idx * 80}ms` }}
                                   className={cn(
-                                    'p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
+                                    'relative p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
                                     highlight
                                       ? 'bg-[hsl(var(--ice-blue))]/15 border-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
                                       : 'bg-input/40 border-border/50 hover:border-[hsl(var(--ice-blue))]/50 hover:shadow-[0_0_15px_hsl(var(--ice-blue)/0.2)]'
                                   )}
                                 >
-                                  <div className="flex items-center justify-between mb-1.5">
-                                    <span className="text-xs uppercase tracking-wider font-orbitron font-semibold text-[hsl(var(--glacier))]">
-                                      {rec.label}
+                                  {rec.isBest && (
+                                    <span className="absolute -top-2 right-2 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] text-[hsl(var(--deep-freeze))] font-bold shadow-[0_0_10px_hsl(var(--ice-blue)/0.6)]">
+                                      Best
                                     </span>
-                                    {rec.isBest && (
-                                      <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[hsl(var(--glacier))]/20 text-[hsl(var(--glacier))] animate-pulse">
-                                        Auto
-                                      </span>
-                                    )}
+                                  )}
+                                  <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))] mb-1.5">
+                                    {rec.volumeMl} mL <span className="text-xs text-muted-foreground font-normal">water</span>
                                   </div>
-                                  <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
-                                    {rec.volumeMl} mL <span className="text-xs text-muted-foreground font-normal">BAC water</span>
+                                  <div className="flex justify-between text-xs text-foreground/80">
+                                    <span className="text-muted-foreground">Measure:</span>
+                                    <span className="font-semibold text-[hsl(var(--ice-blue))]">{rec.units.toFixed(rec.units % 1 === 0 ? 0 : 1)} IU</span>
                                   </div>
-                                  <div className="text-xs text-foreground/80 mt-1">
-                                    <span className="font-semibold text-[hsl(var(--ice-blue))]">{rec.targetUnits} units</span>
-                                    {' = '}
+                                  <div className="flex justify-between text-xs text-foreground/80 mt-0.5">
+                                    <span className="text-muted-foreground">Sample size:</span>
                                     <span className="font-semibold">{dose.mcg} mcg</span>
-                                  </div>
-                                  <div className="text-[11px] text-muted-foreground mt-0.5">
-                                    {rec.sublabel} • 1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
                                   </div>
                                 </button>
                               );
