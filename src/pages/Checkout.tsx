@@ -302,6 +302,13 @@ export default function Checkout() {
                   <RadioGroupItem value="usdc" id="usdc" />
                   <span className="text-sm font-medium">USDC</span>
                 </label>
+                <label htmlFor="btc" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'btc' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                  <RadioGroupItem value="btc" id="btc" />
+                  <div>
+                    <span className="text-sm font-medium">BTC (Bitcoin)</span>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
+                  </div>
+                </label>
                 <label htmlFor="middleman" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'middleman' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
                   <RadioGroupItem value="middleman" id="middleman" />
                   <div>
