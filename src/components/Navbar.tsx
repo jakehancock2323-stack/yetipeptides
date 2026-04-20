@@ -25,6 +25,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/products', label: 'Products' },
+    { to: '/calculator', label: 'Calculator' },
     { to: '/how-to-pay-crypto', label: 'How to Pay' },
     { to: '/track-order', label: 'Track Order' },
     { to: '/about', label: 'About' },
