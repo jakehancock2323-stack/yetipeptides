@@ -216,9 +216,9 @@ export default function PeptideCalculator() {
         <main className="flex-1 container mx-auto px-4 py-24 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[hsl(var(--ice-blue))]/10 border border-[hsl(var(--ice-blue))]/30 mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))]" />
+            <AnimateOnScroll animation="fade-up" className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[hsl(var(--ice-blue))]/10 border border-[hsl(var(--ice-blue))]/30 mb-4 animate-fade-in">
+                <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))] animate-pulse" />
                 <span className="text-xs uppercase tracking-widest text-[hsl(var(--ice-blue))]">Research Tool</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
@@ -232,7 +232,7 @@ export default function PeptideCalculator() {
                   ⚠️ For research-use calculations only. Not medical advice.
                 </p>
               </div>
-            </div>
+            </AnimateOnScroll>
 
             <div className="space-y-5">
               {/* Step 1: Syringe size */}
