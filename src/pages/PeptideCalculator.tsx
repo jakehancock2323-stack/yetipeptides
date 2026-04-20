@@ -479,54 +479,89 @@ export default function PeptideCalculator() {
                     </div>
                   </div>
 
-                  {/* Syringe visualization */}
+                  {/* Ruler-style syringe scale */}
                   <div className="space-y-3 pt-2">
-                    <Label className="text-sm">Syringe visual — draw to <span className="text-[hsl(var(--ice-blue))] font-bold">{activeCalc.units.toFixed(1)} units</span></Label>
-                    <div className="relative pt-2 pb-10">
-                      {/* Plunger end */}
-                      <div className="absolute left-0 top-2 bottom-10 w-2 bg-gradient-to-b from-muted to-muted-foreground/30 rounded-l" />
-                      {/* Barrel */}
-                      <div className="relative ml-2 h-14 rounded-r-xl border-2 border-[hsl(var(--ice-blue))] bg-card/50 overflow-hidden">
-                        {/* Fill */}
-                        <div
-                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-[hsl(var(--ice-blue))]/70 to-[hsl(var(--glacier))]/70 transition-all duration-700 ease-out"
-                          style={{ width: `${fillPercentage}%` }}
-                        />
-                        {/* Tick marks */}
-                        <div className="absolute inset-0">
-                          {Array.from({ length: syringeSpec.units / 5 + 1 }).map((_, i) => {
-                            const position = (i / (syringeSpec.units / 5)) * 100;
-                            const isMajor = i % 2 === 0;
-                            return (
-                              <div
-                                key={i}
-                                className={cn(
-                                  'absolute top-0 border-l',
-                                  isMajor ? 'h-full border-border/60' : 'h-1/2 border-border/30'
-                                )}
-                                style={{ left: `${position}%` }}
-                              >
-                                {isMajor && (
-                                  <span className="absolute -bottom-6 -translate-x-1/2 text-[10px] text-muted-foreground font-mono">
-                                    {i * 5}
-                                  </span>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                        {/* Indicator line at draw point */}
-                        <div
-                          className="absolute top-0 h-full w-0.5 bg-[hsl(var(--aurora))] shadow-[0_0_10px_hsl(var(--aurora))] transition-all duration-700"
-                          style={{ left: `${fillPercentage}%` }}
-                        >
-                          <div className="absolute -top-1 -translate-x-1/2 px-1.5 py-0.5 rounded bg-[hsl(var(--aurora))] text-[10px] font-bold text-white whitespace-nowrap">
-                            {activeCalc.units.toFixed(1)}
+                    <Label className="text-sm">
+                      Syringe scale — draw to{' '}
+                      <span className="text-[hsl(var(--ice-blue))] font-bold">
+                        {activeCalc.units.toFixed(1)} units
+                      </span>
+                    </Label>
+
+                    <div className="relative px-2 pt-12 pb-8">
+                      {/* Callout bracket above draw position */}
+                      <div
+                        className="absolute top-0 transition-all duration-700"
+                        style={{ left: `${fillPercentage}%`, transform: 'translateX(-50%)' }}
+                      >
+                        <div className="flex flex-col items-center">
+                          <div className="px-2 py-0.5 rounded-md bg-[hsl(var(--ice-blue))]/15 border border-[hsl(var(--ice-blue))]/60 text-[11px] font-orbitron font-bold text-[hsl(var(--ice-blue))] whitespace-nowrap">
+                            {activeCalc.units.toFixed(1)} U
                           </div>
+                          {/* Bracket */}
+                          <svg width="40" height="10" viewBox="0 0 40 10" className="text-[hsl(var(--ice-blue))]/70">
+                            <path
+                              d="M 2 0 L 2 5 L 18 5 L 20 10 L 22 5 L 38 5 L 38 0"
+                              stroke="currentColor"
+                              strokeWidth="1.2"
+                              fill="none"
+                            />
+                          </svg>
                         </div>
                       </div>
-                      {/* Needle */}
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-0.5 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-transparent" style={{ marginTop: '-12px' }} />
+
+                      {/* Tick marks row */}
+                      <div className="relative h-6">
+                        {Array.from({ length: syringeSpec.units + 1 }).map((_, i) => {
+                          const position = (i / syringeSpec.units) * 100;
+                          const isMajor = i % 10 === 0;
+                          const isMid = i % 5 === 0 && !isMajor;
+                          const filled = i <= activeCalc.units;
+                          return (
+                            <div
+                              key={i}
+                              className="absolute top-0"
+                              style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+                            >
+                              <div
+                                className={cn(
+                                  'w-px transition-colors',
+                                  isMajor ? 'h-6' : isMid ? 'h-4' : 'h-2.5',
+                                  filled
+                                    ? 'bg-[hsl(var(--ice-blue))]'
+                                    : 'bg-foreground/40'
+                                )}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Filled bar from 0 to draw point */}
+                      <div className="relative mt-1 h-5 rounded-sm bg-muted/30 overflow-hidden">
+                        <div
+                          className="absolute left-0 top-0 h-full bg-[hsl(var(--ice-blue))] transition-all duration-700 ease-out"
+                          style={{ width: `${fillPercentage}%` }}
+                        />
+                      </div>
+
+                      {/* Numeric labels */}
+                      <div className="relative h-5 mt-1">
+                        {Array.from({ length: syringeSpec.units / 10 + 1 }).map((_, i) => {
+                          const value = i * 10;
+                          const position = (value / syringeSpec.units) * 100;
+                          if (value === 0) return null;
+                          return (
+                            <span
+                              key={i}
+                              className="absolute top-0 text-[11px] font-mono text-muted-foreground"
+                              style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+                            >
+                              {value}
+                            </span>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
 
