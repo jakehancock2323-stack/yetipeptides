@@ -213,22 +213,22 @@ export default function PeptideCalculator() {
         <Snowfall />
         <Navbar />
 
-        <main className="flex-1 container mx-auto px-4 py-24 relative z-10">
+        <main className="flex-1 container mx-auto px-3 sm:px-4 py-20 sm:py-24 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
-            <AnimateOnScroll animation="fade-up" className="text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[hsl(var(--ice-blue))]/10 border border-[hsl(var(--ice-blue))]/30 mb-4 animate-fade-in">
-                <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))] animate-pulse" />
-                <span className="text-xs uppercase tracking-widest text-[hsl(var(--ice-blue))]">Research Tool</span>
+            <AnimateOnScroll animation="fade-up" className="text-center mb-6 sm:mb-10">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[hsl(var(--ice-blue))]/10 border border-[hsl(var(--ice-blue))]/30 mb-3 sm:mb-4 animate-fade-in">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[hsl(var(--ice-blue))] animate-pulse" />
+                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[hsl(var(--ice-blue))]">Research Tool</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] via-[hsl(var(--glacier))] to-[hsl(var(--aurora))] bg-clip-text text-transparent leading-tight">
                 Peptide Reconstitution Calculator
               </h1>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
                 Calculate concentration, get smart mixing recommendations, and visualize your exact draw on a syringe.
               </p>
               <div className="mt-4 p-3 rounded-lg bg-muted/40 border border-border/40 max-w-2xl mx-auto">
-                <p className="text-sm text-foreground/80">
+                <p className="text-xs sm:text-sm text-foreground/80">
                   ⚠️ For research-use calculations only. Not medical advice.
                 </p>
               </div>
