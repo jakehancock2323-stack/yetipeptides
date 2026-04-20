@@ -24,11 +24,18 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Target "clean" unit values that make at-a-glance dosing easy on a syringe
-const CLEAN_UNIT_TARGETS = [5, 10, 20, 25, 40, 50];
-// Practical BAC water volume bounds (mL)
-const MIN_VOLUME_ML = 0.5;
-const MAX_VOLUME_ML = 5;
+// Standard BAC water volumes researchers commonly use for reconstitution.
+// These are the "real-world" choices — round numbers that are easy to draw
+// accurately into a vial. We score these against the user's dose to find
+// the most practical mixing volumes.
+const STANDARD_BAC_VOLUMES_ML = [
+  0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0,
+];
+// Ideal draw range on the syringe (in units). Draws below ~10 units are
+// hard to measure accurately; draws above ~80% of syringe capacity leave
+// no headroom and are also error-prone.
+const IDEAL_UNITS_MIN = 10;
+const IDEAL_UNITS_MAX = 50;
 type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
@@ -80,51 +87,48 @@ export default function PeptideCalculator() {
     return { mcg: v, mg: v / 1000 };
   }, [doseValue, doseUnit]);
 
-  // Smart recommendations: derive the EXACT BAC water volume that produces
-  // each clean unit target. This is mathematically precise, not a search.
-  //
-  // Concentration C = peptide_mg / volume_mL
-  // Volume per dose (mL) = dose_mg / C = dose_mg * volume_mL / peptide_mg
-  // Units on syringe = volume_per_dose_mL * (syringe_units / syringe_maxMl)
-  //
-  // Solving for volume_mL given a target unit count U:
-  //   volume_mL = (peptide_mg * syringe_maxMl * U) / (dose_mg * syringe_units)
+  // Smart recommendations: evaluate STANDARD BAC water volumes (round numbers
+  // researchers actually use) and score each by how practical the resulting
+  // syringe draw would be. This mirrors how an experienced researcher picks
+  // a reconstitution volume in real life.
   const recommendations = useMemo(() => {
     if (effectivePeptideMg <= 0 || dose.mg <= 0) return [];
 
-    const opts = CLEAN_UNIT_TARGETS.map(targetUnits => {
-      const volumeMl =
-        (effectivePeptideMg * syringeSpec.maxMl * targetUnits) /
-        (dose.mg * syringeSpec.units);
-      const concentration = effectivePeptideMg / volumeMl;
-      const mcgPerUnit = dose.mcg / targetUnits;
-      return { volumeMl, units: targetUnits, mcgPerUnit, concentration };
-    })
-      // Filter to practical BAC water volumes
-      .filter(o => o.volumeMl >= MIN_VOLUME_ML && o.volumeMl <= MAX_VOLUME_ML)
-      // Round volume to a sensible 0.05 mL precision and recompute units exactly
-      .map(o => {
-        const rounded = Math.round(o.volumeMl * 20) / 20; // nearest 0.05 mL
-        const concentration = effectivePeptideMg / rounded;
-        const volumePerDoseMl = dose.mg / concentration;
-        const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
-        return {
-          volumeMl: rounded,
-          units,
-          mcgPerUnit: dose.mcg / units,
-          concentration,
-        };
-      })
-      // De-duplicate volumes
-      .filter((o, i, arr) => arr.findIndex(x => x.volumeMl === o.volumeMl) === i)
-      // Prefer options whose units are closest to a whole number
-      .sort((a, b) => {
-        const da = Math.abs(a.units - Math.round(a.units));
-        const db = Math.abs(b.units - Math.round(b.units));
-        return da - db;
-      });
+    const scored = STANDARD_BAC_VOLUMES_ML.map(volumeMl => {
+      const concentration = effectivePeptideMg / volumeMl; // mg/mL
+      const volumePerDoseMl = dose.mg / concentration;
+      const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
 
-    return opts.slice(0, 3);
+      // Hard requirement: the dose must physically fit in the syringe
+      const fitsSyringe = units > 0 && units <= syringeSpec.units;
+
+      // Score lower = better
+      let score = 0;
+
+      // 1. Strongly prefer draws inside the accurate measurement window
+      if (units < IDEAL_UNITS_MIN) {
+        score += (IDEAL_UNITS_MIN - units) * 4; // hard to measure small draws
+      } else if (units > IDEAL_UNITS_MAX) {
+        score += (units - IDEAL_UNITS_MAX) * 2;
+      }
+
+      // 2. Penalize draws that exceed ~85% of syringe capacity (no headroom)
+      const capacityRatio = units / syringeSpec.units;
+      if (capacityRatio > 0.85) score += (capacityRatio - 0.85) * 100;
+
+      // 3. Reward draws that land on a clean number of units (whole/half)
+      const nearestHalf = Math.round(units * 2) / 2;
+      score += Math.abs(units - nearestHalf) * 8;
+
+      // 4. Slight preference for the most common BAC volumes (1, 2, 3 mL)
+      if ([1.0, 2.0, 3.0].includes(volumeMl)) score -= 0.5;
+
+      return { volumeMl, units, concentration, mcgPerUnit: dose.mcg / units, fitsSyringe, score };
+    })
+      .filter(o => o.fitsSyringe)
+      .sort((a, b) => a.score - b.score);
+
+    return scored.slice(0, 3);
   }, [effectivePeptideMg, dose, syringeSpec]);
 
   // Active calculation (uses custom volume if provided, else first recommendation)
