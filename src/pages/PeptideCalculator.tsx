@@ -83,50 +83,60 @@ export default function PeptideCalculator() {
     return { mcg: v, mg: v / 1000 };
   }, [doseValue, doseUnit]);
 
-  // Smart recommendations: back-solve the BAC water volume needed to make
-  // each TARGET unit draw deliver the user's exact dose. This guarantees
-  // every recommendation lands on a clean, easy-to-read mark.
-  //
-  // Math:  units = (dose_mg / (peptide_mg / volume_ml)) / syringe_maxMl * syringe_units
-  // solve for volume_ml:
-  //   volume_ml = (peptide_mg * targetUnits * syringe_maxMl) / (dose_mg * syringe_units)
-  //   (which simplifies to (peptide_mg * targetUnits) / (dose_mcg * 10) for a 1mL/100u syringe)
+  // Smart recommendations: pick the BEST common BAC volume (smallest volume
+  // that lands the draw in the ideal 5–25 unit window), then show the
+  // adjacent smaller and larger common volumes as alternatives. Mirrors the
+  // pattern used by industry calculators: 3 cards, "Best" centered, one
+  // more concentrated, one more diluted.
   const recommendations = useMemo(() => {
     if (effectivePeptideMg <= 0 || dose.mg <= 0) return [];
 
-    return TARGET_UNITS.map(({ units: targetUnits, label, sublabel }) => {
-      const rawVolumeMl =
-        (effectivePeptideMg * targetUnits * syringeSpec.maxMl) /
-        (dose.mg * syringeSpec.units);
-      // Round to 1 decimal for clean values; prefer whole numbers when very close
-      const rounded1 = Math.round(rawVolumeMl * 10) / 10;
-      const volumeMl =
-        Math.abs(rounded1 - Math.round(rounded1)) < 0.05
-          ? Math.round(rounded1)
-          : rounded1;
-
-      // Recompute exact units with the rounded volume so display is consistent
-      const concentration = effectivePeptideMg / volumeMl;
+    // Compute the syringe-unit draw each common BAC volume would produce
+    const evaluated = COMMON_BAC_VOLUMES_ML.map(volumeMl => {
+      const concentration = effectivePeptideMg / volumeMl; // mg/mL
       const volumePerDoseMl = dose.mg / concentration;
-      const actualUnits =
-        (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
+      const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
+      return { volumeMl, units, concentration, fitsSyringe: units > 0 && units <= syringeSpec.units };
+    }).filter(o => o.fitsSyringe);
 
-      const inRange = volumeMl >= MIN_VOLUME_ML && volumeMl <= MAX_VOLUME_ML;
-      const fitsSyringe = actualUnits > 0 && actualUnits <= syringeSpec.units;
+    if (evaluated.length === 0) return [];
 
-      return {
-        targetUnits,
-        label,
-        sublabel,
-        volumeMl,
-        units: actualUnits,
-        concentration,
-        mcgPerUnit: dose.mcg / actualUnits,
-        unitsPerTenth: (0.1 / syringeSpec.maxMl) * syringeSpec.units, // units per 0.1 mL
-        valid: inRange && fitsSyringe,
-        isBest: targetUnits === 10,
-      };
-    }).filter(r => r.valid);
+    // Pick BEST: smallest volume whose draw lands in the ideal window.
+    // Falls back to the option closest to that window if none qualify.
+    let bestIdx = evaluated.findIndex(
+      o => o.units >= IDEAL_UNITS_MIN && o.units <= IDEAL_UNITS_MAX
+    );
+    if (bestIdx === -1) {
+      // Closest to the ideal window
+      bestIdx = evaluated.reduce((bi, o, i) => {
+        const dist = (u: number) =>
+          u < IDEAL_UNITS_MIN ? IDEAL_UNITS_MIN - u : u > IDEAL_UNITS_MAX ? u - IDEAL_UNITS_MAX : 0;
+        return dist(o.units) < dist(evaluated[bi].units) ? i : bi;
+      }, 0);
+    }
+
+    // Build neighbor set: [smaller, BEST, larger] — fall back gracefully at edges
+    const indices = new Set<number>([bestIdx]);
+    if (bestIdx - 1 >= 0) indices.add(bestIdx - 1);
+    if (bestIdx + 1 < evaluated.length) indices.add(bestIdx + 1);
+    // If at an edge, try to keep 3 cards by extending the other side
+    if (indices.size < 3) {
+      if (bestIdx === 0 && bestIdx + 2 < evaluated.length) indices.add(bestIdx + 2);
+      else if (bestIdx === evaluated.length - 1 && bestIdx - 2 >= 0) indices.add(bestIdx - 2);
+    }
+
+    return Array.from(indices)
+      .sort((a, b) => a - b)
+      .map(i => {
+        const o = evaluated[i];
+        return {
+          volumeMl: o.volumeMl,
+          units: o.units,
+          concentration: o.concentration,
+          mcgPerUnit: dose.mcg / o.units,
+          isBest: i === bestIdx,
+        };
+      });
   }, [effectivePeptideMg, dose, syringeSpec]);
 
   // Active calculation (uses custom volume if provided, else the "Best Precision" 10-unit pick)
