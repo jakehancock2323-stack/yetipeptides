@@ -238,8 +238,7 @@ export default function PeptideCalculator() {
               {/* Step 1: Syringe size */}
               <AnimateOnScroll animation="fade-up" delay={50}>
                 <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
-                  <CardContent className="pt-6">
-                    <StepHeader number={1} title="Select your syringe size" />
+                  <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6">
                     <Select value={syringeSize} onValueChange={(v: SyringeSize) => setSyringeSize(v)}>
                       <SelectTrigger className="bg-input/50 h-12 transition-all hover:border-[hsl(var(--ice-blue))]/60">
                         <SelectValue />
@@ -301,18 +300,17 @@ export default function PeptideCalculator() {
               {/* Step 3: Desired dose */}
               <AnimateOnScroll animation="fade-up" delay={190}>
                 <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
-                  <CardContent className="pt-6">
-                    <StepHeader number={3} title="Enter desired dose" />
+                  <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6">
                     <div className="space-y-3">
                       {/* Unit toggle */}
-                      <div className="inline-flex rounded-lg border border-border/50 bg-input/30 p-1">
+                      <div className="inline-flex w-full sm:w-auto rounded-lg border border-border/50 bg-input/30 p-1">
                         {(['mcg', 'mg'] as DoseUnit[]).map(u => (
                           <button
                             key={u}
                             type="button"
                             onClick={() => setDoseUnit(u)}
                             className={cn(
-                              'px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all duration-200 hover:scale-105 active:scale-95',
+                              'flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all duration-200 hover:scale-105 active:scale-95',
                               doseUnit === u
                                 ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/30 to-[hsl(var(--glacier))]/20 text-[hsl(var(--ice-blue))] shadow-[0_0_10px_hsl(var(--ice-blue)/0.3)]'
                                 : 'text-muted-foreground hover:text-foreground'
@@ -336,6 +334,7 @@ export default function PeptideCalculator() {
                           <Input
                             id="doseValue"
                             type="number"
+                            inputMode="decimal"
                             placeholder=""
                             value={doseValue}
                             onChange={(e) => setDoseValue(e.target.value)}
@@ -367,14 +366,14 @@ export default function PeptideCalculator() {
               {/* Step 4: Mixing volume */}
               <AnimateOnScroll animation="fade-up" delay={260}>
                 <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
-                  <CardContent className="pt-6">
-                    <StepHeader number={4} title="Mixing volume (BAC water)" />
+                  <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6">
                     <div className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="customVol" className="text-sm">Custom mixing volume (mL)</Label>
                         <Input
                           id="customVol"
                           type="number"
+                          inputMode="decimal"
                           placeholder=""
                           value={customVolumeMl}
                           onChange={(e) => setCustomVolumeMl(e.target.value)}
