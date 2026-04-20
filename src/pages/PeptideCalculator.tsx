@@ -395,41 +395,48 @@ export default function PeptideCalculator() {
                           <div className="flex items-center gap-2 mb-2">
                             <Sparkles className="w-4 h-4 text-[hsl(var(--glacier))] animate-pulse" />
                             <span className="text-sm font-semibold text-[hsl(var(--glacier))]">
-                              Smart recommendations for easy dosing
+                              Smart mixing recommendations
                             </span>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {recommendations.map((rec, idx) => {
-                              const isSelected = parseFloat(customVolumeMl) === rec.volumeMl;
-                              const isBest = idx === 0 && !isSelected;
+                              const customVal = parseFloat(customVolumeMl);
+                              const isSelected = !isNaN(customVal) && customVal === rec.volumeMl;
+                              const isAutoBest = rec.isBest && (isNaN(customVal) || customVolumeMl === '');
+                              const highlight = isSelected || isAutoBest;
                               return (
                                 <button
-                                  key={rec.volumeMl}
+                                  key={rec.targetUnits}
                                   type="button"
                                   onClick={() => applyRecommendation(rec.volumeMl)}
                                   style={{ animationDelay: `${idx * 80}ms` }}
                                   className={cn(
                                     'p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
-                                    isSelected
+                                    highlight
                                       ? 'bg-[hsl(var(--ice-blue))]/15 border-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
                                       : 'bg-input/40 border-border/50 hover:border-[hsl(var(--ice-blue))]/50 hover:shadow-[0_0_15px_hsl(var(--ice-blue)/0.2)]'
                                   )}
                                 >
-                                  <div className="flex items-center justify-between mb-1">
-                                    <span className="font-orbitron text-base font-bold text-[hsl(var(--ice-blue))]">
-                                      {rec.volumeMl} mL
+                                  <div className="flex items-center justify-between mb-1.5">
+                                    <span className="text-xs uppercase tracking-wider font-orbitron font-semibold text-[hsl(var(--glacier))]">
+                                      {rec.label}
                                     </span>
-                                    {isBest && (
+                                    {rec.isBest && (
                                       <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[hsl(var(--glacier))]/20 text-[hsl(var(--glacier))] animate-pulse">
-                                        Best
+                                        Auto
                                       </span>
                                     )}
                                   </div>
-                                  <div className="text-xs text-muted-foreground">
-                                    ≈ <span className="text-foreground/90 font-semibold">{rec.units.toFixed(0)} units</span> per dose
+                                  <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
+                                    {rec.volumeMl} mL <span className="text-xs text-muted-foreground font-normal">BAC water</span>
                                   </div>
-                                  <div className="text-xs text-muted-foreground mt-0.5">
-                                    1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
+                                  <div className="text-xs text-foreground/80 mt-1">
+                                    <span className="font-semibold text-[hsl(var(--ice-blue))]">{rec.targetUnits} units</span>
+                                    {' = '}
+                                    <span className="font-semibold">{dose.mcg} mcg</span>
+                                  </div>
+                                  <div className="text-[11px] text-muted-foreground mt-0.5">
+                                    {rec.sublabel} • 1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
                                   </div>
                                 </button>
                               );
