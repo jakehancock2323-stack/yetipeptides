@@ -513,11 +513,11 @@ export default function PeptideCalculator() {
                     <div className="relative px-2 pt-12 pb-8">
                       {/* Callout bracket above draw position */}
                       <div
-                        className="absolute top-0 transition-all duration-700"
-                        style={{ left: `${fillPercentage}%`, transform: 'translateX(-50%)' }}
+                        className="absolute top-0 transition-all duration-700 ease-out animate-fade-in"
+                        style={{ left: `${fillPercentage}%`, transform: 'translateX(-50%)', animationDelay: '400ms' }}
                       >
                         <div className="flex flex-col items-center">
-                          <div className="px-2 py-0.5 rounded-md bg-[hsl(var(--ice-blue))]/15 border border-[hsl(var(--ice-blue))]/60 text-[11px] font-orbitron font-bold text-[hsl(var(--ice-blue))] whitespace-nowrap">
+                          <div className="px-2 py-0.5 rounded-md bg-[hsl(var(--ice-blue))]/15 border border-[hsl(var(--ice-blue))]/60 text-[11px] font-orbitron font-bold text-[hsl(var(--ice-blue))] whitespace-nowrap shadow-[0_0_10px_hsl(var(--ice-blue)/0.4)]">
                             {activeCalc.units.toFixed(1)} U
                           </div>
                           {/* Bracket */}
@@ -542,15 +542,19 @@ export default function PeptideCalculator() {
                           return (
                             <div
                               key={i}
-                              className="absolute top-0"
-                              style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+                              className="absolute top-0 animate-fade-in"
+                              style={{
+                                left: `${position}%`,
+                                transform: 'translateX(-50%)',
+                                animationDelay: `${i * 8}ms`,
+                              }}
                             >
                               <div
                                 className={cn(
-                                  'w-px transition-colors',
+                                  'w-px transition-all duration-300',
                                   isMajor ? 'h-6' : isMid ? 'h-4' : 'h-2.5',
                                   filled
-                                    ? 'bg-[hsl(var(--ice-blue))]'
+                                    ? 'bg-[hsl(var(--ice-blue))] shadow-[0_0_4px_hsl(var(--ice-blue))]'
                                     : 'bg-foreground/40'
                                 )}
                               />
