@@ -24,17 +24,14 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Target syringe unit values we optimize for. We back-solve the BAC water
-// volume that produces these exact unit draws, so every recommendation
-// lands on a clean, easy-to-measure mark on the syringe.
-const TARGET_UNITS: { units: number; label: string; sublabel: string }[] = [
-  { units: 10, label: 'Best Precision', sublabel: 'Recommended' },
-  { units: 5,  label: 'Low Volume Injection', sublabel: 'Smallest draw' },
-  { units: 20, label: 'More Diluted', sublabel: 'Easier measuring' },
-  { units: 25, label: 'Most Diluted', sublabel: 'Largest draw' },
-];
-const MIN_VOLUME_ML = 0.5;
-const MAX_VOLUME_ML = 10;
+// Common BAC water volumes researchers actually use. We pick the BEST from
+// this list (smallest volume that gives a clean ~5–25 unit draw), then show
+// the next-smaller and next-larger neighbors so users can trade off
+// concentration vs. dose precision.
+const COMMON_BAC_VOLUMES_ML = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5];
+// Preferred draw window — narrow, accurate, easy to read on the syringe.
+const IDEAL_UNITS_MIN = 5;
+const IDEAL_UNITS_MAX = 25;
 type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
