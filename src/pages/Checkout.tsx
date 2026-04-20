@@ -73,6 +73,10 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const isUK = region === 'UK Domestic';
+  const deliveryFee = isUK ? 5 : 65;
+  const currencySymbol = isUK ? '£' : '$';
+
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
     setConfirmOpen(false);
@@ -91,7 +95,7 @@ export default function Checkout() {
         lineTotal: item.variant.price * item.quantity,
       })),
       subtotal: calculateSubtotal(),
-      deliveryFee: 65,
+      deliveryFee,
       discount: 0,
       promoCode: null,
       total: calculateTotal(),
