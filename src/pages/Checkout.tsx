@@ -103,6 +103,7 @@ export default function Checkout() {
       })),
       subtotal: calculateSubtotal(),
       deliveryFee,
+      processingFee: btcFee,
       discount: 0,
       promoCode: null,
       total: calculateTotal(),
@@ -139,7 +140,8 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const calculateTotal = () => calculateSubtotal() + deliveryFee;
+  const btcFee = paymentMethod === 'btc' ? (calculateSubtotal() + deliveryFee) * 0.04 : 0;
+  const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee;
 
   return (
     <div className="min-h-screen pb-20">
@@ -301,6 +303,13 @@ export default function Checkout() {
                   <RadioGroupItem value="usdc" id="usdc" />
                   <span className="text-sm font-medium">USDC</span>
                 </label>
+                <label htmlFor="btc" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'btc' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                  <RadioGroupItem value="btc" id="btc" />
+                  <div>
+                    <span className="text-sm font-medium">BTC (Bitcoin)</span>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
+                  </div>
+                </label>
                 <label htmlFor="middleman" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'middleman' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
                   <RadioGroupItem value="middleman" id="middleman" />
                   <div>
@@ -395,6 +404,12 @@ export default function Checkout() {
                     <span>Delivery</span>
                     <span>{currencySymbol}{deliveryFee.toFixed(2)}</span>
                   </div>
+                  {btcFee > 0 && (
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>BTC Processing Fee (4%)</span>
+                      <span>{currencySymbol}{btcFee.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="h-px bg-gradient-to-r from-transparent via-[hsl(var(--ice-blue))]/20 to-transparent my-2" />
                   <div className="flex justify-between items-end">
                     <span className="text-base font-bold">Total</span>
@@ -425,7 +440,7 @@ export default function Checkout() {
               <span className="block">
                 You're about to submit your order for{" "}
                 <span className="font-bold text-foreground">{currencySymbol}{calculateTotal().toFixed(2)}</span>{" "}
-                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod === 'paypal' ? 'PayPal' : paymentMethod}</span>.
+                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod === 'paypal' ? 'PayPal' : paymentMethod === 'btc' ? 'BTC (incl. 4% fee)' : paymentMethod}</span>.
               </span>
               <span className="block text-xs">
                 After confirming, you'll receive an email with payment instructions. This action cannot be undone.

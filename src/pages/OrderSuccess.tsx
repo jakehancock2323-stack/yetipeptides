@@ -69,6 +69,12 @@ export default function OrderSuccess() {
                       <span>Delivery:</span>
                       <span>{sym}{orderData.deliveryFee.toFixed(2)}</span>
                     </div>
+                    {orderData.processingFee > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span>BTC Processing Fee (4%):</span>
+                        <span>{sym}{orderData.processingFee.toFixed(2)}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between font-bold mt-2">
                       <span>Total:</span>
                       <span>{sym}{orderData.total.toFixed(2)}</span>
