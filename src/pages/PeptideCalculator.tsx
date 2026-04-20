@@ -132,12 +132,14 @@ export default function PeptideCalculator() {
     }).filter(r => r.valid);
   }, [effectivePeptideMg, dose, syringeSpec]);
 
-  // Active calculation (uses custom volume if provided, else first recommendation)
+  // Active calculation (uses custom volume if provided, else the "Best Precision" 10-unit pick)
   const activeCalc = useMemo(() => {
     const custom = parseFloat(customVolumeMl);
-    const volumeMl = !isNaN(custom) && custom > 0
-      ? custom
-      : recommendations[0]?.volumeMl ?? 0;
+    const fallback =
+      recommendations.find(r => r.isBest)?.volumeMl ??
+      recommendations[0]?.volumeMl ??
+      0;
+    const volumeMl = !isNaN(custom) && custom > 0 ? custom : fallback;
 
     if (volumeMl <= 0 || effectivePeptideMg <= 0 || dose.mg <= 0) return null;
 
