@@ -298,146 +298,162 @@ export default function PeptideCalculator() {
               </AnimateOnScroll>
 
               {/* Step 3: Desired dose */}
-              <Card className="frosted-glass ice-glow">
-                <CardContent className="pt-6">
-                  <StepHeader number={3} title="Enter desired dose" />
-                  <div className="space-y-3">
-                    {/* Unit toggle */}
-                    <div className="inline-flex rounded-lg border border-border/50 bg-input/30 p-1">
-                      {(['mcg', 'mg'] as DoseUnit[]).map(u => (
-                        <button
-                          key={u}
-                          type="button"
-                          onClick={() => setDoseUnit(u)}
-                          className={cn(
-                            'px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all',
-                            doseUnit === u
-                              ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/30 to-[hsl(var(--glacier))]/20 text-[hsl(var(--ice-blue))] shadow-[0_0_10px_hsl(var(--ice-blue)/0.3)]'
-                              : 'text-muted-foreground hover:text-foreground'
-                          )}
-                        >
-                          {u}
-                        </button>
-                      ))}
+              <AnimateOnScroll animation="fade-up" delay={190}>
+                <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
+                  <CardContent className="pt-6">
+                    <StepHeader number={3} title="Enter desired dose" />
+                    <div className="space-y-3">
+                      {/* Unit toggle */}
+                      <div className="inline-flex rounded-lg border border-border/50 bg-input/30 p-1">
+                        {(['mcg', 'mg'] as DoseUnit[]).map(u => (
+                          <button
+                            key={u}
+                            type="button"
+                            onClick={() => setDoseUnit(u)}
+                            className={cn(
+                              'px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all duration-200 hover:scale-105 active:scale-95',
+                              doseUnit === u
+                                ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/30 to-[hsl(var(--glacier))]/20 text-[hsl(var(--ice-blue))] shadow-[0_0_10px_hsl(var(--ice-blue)/0.3)]'
+                                : 'text-muted-foreground hover:text-foreground'
+                            )}
+                          >
+                            {u}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="doseValue" className="flex items-center gap-1.5 text-sm">
+                            Dose ({doseUnit})
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Info className="w-3.5 h-3.5 text-muted-foreground" />
+                              </TooltipTrigger>
+                              <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
+                            </Tooltip>
+                          </Label>
+                          <Input
+                            id="doseValue"
+                            type="number"
+                            placeholder=""
+                            value={doseValue}
+                            onChange={(e) => setDoseValue(e.target.value)}
+                            min="0"
+                            step="any"
+                            className="bg-input/50 h-12"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-sm">
+                            Equivalent ({doseUnit === 'mcg' ? 'mg' : 'mcg'})
+                          </Label>
+                          <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))] transition-all">
+                            <span key={dose.mg} className="animate-fade-in">
+                              {dose.mg > 0
+                                ? doseUnit === 'mcg'
+                                  ? `${dose.mg.toFixed(4)} mg`
+                                  : `${dose.mcg.toFixed(2)} mcg`
+                                : '—'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
+
+              {/* Step 4: Mixing volume */}
+              <AnimateOnScroll animation="fade-up" delay={260}>
+                <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
+                  <CardContent className="pt-6">
+                    <StepHeader number={4} title="Mixing volume (BAC water)" />
+                    <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="doseValue" className="flex items-center gap-1.5 text-sm">
-                          Dose ({doseUnit})
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Info className="w-3.5 h-3.5 text-muted-foreground" />
-                            </TooltipTrigger>
-                            <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
-                          </Tooltip>
-                        </Label>
+                        <Label htmlFor="customVol" className="text-sm">Custom mixing volume (mL)</Label>
                         <Input
-                          id="doseValue"
+                          id="customVol"
                           type="number"
                           placeholder=""
-                          value={doseValue}
-                          onChange={(e) => setDoseValue(e.target.value)}
+                          value={customVolumeMl}
+                          onChange={(e) => setCustomVolumeMl(e.target.value)}
                           min="0"
                           step="any"
                           className="bg-input/50 h-12"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label className="text-sm">
-                          Equivalent ({doseUnit === 'mcg' ? 'mg' : 'mcg'})
-                        </Label>
-                        <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))]">
-                          {dose.mg > 0
-                            ? doseUnit === 'mcg'
-                              ? `${dose.mg.toFixed(4)} mg`
-                              : `${dose.mcg.toFixed(2)} mcg`
-                            : '—'}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
 
-              {/* Step 4: Mixing volume */}
-              <Card className="frosted-glass ice-glow">
-                <CardContent className="pt-6">
-                  <StepHeader number={4} title="Mixing volume (BAC water)" />
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="customVol" className="text-sm">Custom mixing volume (mL)</Label>
-                      <Input
-                        id="customVol"
-                        type="number"
-                        placeholder=""
-                        value={customVolumeMl}
-                        onChange={(e) => setCustomVolumeMl(e.target.value)}
-                        min="0"
-                        step="any"
-                        className="bg-input/50 h-12"
-                      />
-                    </div>
-
-                    {recommendations.length > 0 && (
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Sparkles className="w-4 h-4 text-[hsl(var(--glacier))]" />
-                          <span className="text-sm font-semibold text-[hsl(var(--glacier))]">
-                            Smart recommendations for easy dosing
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                          {recommendations.map((rec, idx) => {
-                            const isSelected = parseFloat(customVolumeMl) === rec.volumeMl;
-                            const isBest = idx === 0 && !isSelected;
-                            return (
-                              <button
-                                key={rec.volumeMl}
-                                type="button"
-                                onClick={() => applyRecommendation(rec.volumeMl)}
-                                className={cn(
-                                  'p-3 rounded-lg border text-left transition-all',
-                                  isSelected
-                                    ? 'bg-[hsl(var(--ice-blue))]/15 border-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
-                                    : 'bg-input/40 border-border/50 hover:border-[hsl(var(--ice-blue))]/50'
-                                )}
-                              >
-                                <div className="flex items-center justify-between mb-1">
-                                  <span className="font-orbitron text-base font-bold text-[hsl(var(--ice-blue))]">
-                                    {rec.volumeMl} mL
-                                  </span>
-                                  {isBest && (
-                                    <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[hsl(var(--glacier))]/20 text-[hsl(var(--glacier))]">
-                                      Best
-                                    </span>
+                      {recommendations.length > 0 && (
+                        <div className="animate-fade-in">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Sparkles className="w-4 h-4 text-[hsl(var(--glacier))] animate-pulse" />
+                            <span className="text-sm font-semibold text-[hsl(var(--glacier))]">
+                              Smart recommendations for easy dosing
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            {recommendations.map((rec, idx) => {
+                              const isSelected = parseFloat(customVolumeMl) === rec.volumeMl;
+                              const isBest = idx === 0 && !isSelected;
+                              return (
+                                <button
+                                  key={rec.volumeMl}
+                                  type="button"
+                                  onClick={() => applyRecommendation(rec.volumeMl)}
+                                  style={{ animationDelay: `${idx * 80}ms` }}
+                                  className={cn(
+                                    'p-3 rounded-lg border text-left transition-all duration-200 animate-fade-in hover:scale-[1.03] hover:-translate-y-0.5 active:scale-95',
+                                    isSelected
+                                      ? 'bg-[hsl(var(--ice-blue))]/15 border-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
+                                      : 'bg-input/40 border-border/50 hover:border-[hsl(var(--ice-blue))]/50 hover:shadow-[0_0_15px_hsl(var(--ice-blue)/0.2)]'
                                   )}
-                                </div>
-                                <div className="text-xs text-muted-foreground">
-                                  ≈ <span className="text-foreground/90 font-semibold">{rec.units.toFixed(0)} units</span> per dose
-                                </div>
-                                <div className="text-xs text-muted-foreground mt-0.5">
-                                  1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
-                                </div>
-                              </button>
-                            );
-                          })}
+                                >
+                                  <div className="flex items-center justify-between mb-1">
+                                    <span className="font-orbitron text-base font-bold text-[hsl(var(--ice-blue))]">
+                                      {rec.volumeMl} mL
+                                    </span>
+                                    {isBest && (
+                                      <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[hsl(var(--glacier))]/20 text-[hsl(var(--glacier))] animate-pulse">
+                                        Best
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">
+                                    ≈ <span className="text-foreground/90 font-semibold">{rec.units.toFixed(0)} units</span> per dose
+                                  </div>
+                                  <div className="text-xs text-muted-foreground mt-0.5">
+                                    1 unit ≈ {rec.mcgPerUnit.toFixed(1)} mcg
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
 
               {/* Action buttons */}
-              <div className="flex gap-3">
-                <Button onClick={handleCalculate} className="flex-1 h-12 ice-glow font-orbitron text-base">
-                  <Calculator className="w-5 h-5 mr-2" />
-                  Calculate
-                </Button>
-                <Button onClick={handleReset} variant="outline" className="h-12 px-4">
-                  <RotateCcw className="w-4 h-4" />
-                </Button>
-              </div>
+              <AnimateOnScroll animation="fade-up" delay={330}>
+                <div className="flex gap-3">
+                  <Button
+                    onClick={handleCalculate}
+                    className="flex-1 h-12 ice-glow font-orbitron text-base transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(var(--ice-blue)/0.5)] active:scale-95"
+                  >
+                    <Calculator className="w-5 h-5 mr-2" />
+                    Calculate
+                  </Button>
+                  <Button
+                    onClick={handleReset}
+                    variant="outline"
+                    className="h-12 px-4 transition-all duration-200 hover:scale-105 hover:rotate-[-180deg] active:scale-95"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                  </Button>
+                </div>
+              </AnimateOnScroll>
             </div>
 
             {/* Results */}
