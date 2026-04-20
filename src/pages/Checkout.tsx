@@ -139,7 +139,8 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const calculateTotal = () => calculateSubtotal() + deliveryFee;
+  const btcFee = paymentMethod === 'btc' ? (calculateSubtotal() + deliveryFee) * 0.04 : 0;
+  const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee;
 
   return (
     <div className="min-h-screen pb-20">
