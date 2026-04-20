@@ -73,6 +73,10 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const isUK = region === 'UK Domestic';
+  const deliveryFee = isUK ? 5 : 65;
+  const currencySymbol = isUK ? '£' : '$';
+
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
     setConfirmOpen(false);
@@ -91,7 +95,7 @@ export default function Checkout() {
         lineTotal: item.variant.price * item.quantity,
       })),
       subtotal: calculateSubtotal(),
-      deliveryFee: 65,
+      deliveryFee,
       discount: 0,
       promoCode: null,
       total: calculateTotal(),
@@ -128,7 +132,7 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const calculateTotal = () => calculateSubtotal() + 65;
+  const calculateTotal = () => calculateSubtotal() + deliveryFee;
 
   return (
     <div className="min-h-screen pb-20">
@@ -347,8 +351,10 @@ export default function Checkout() {
                         <p className="text-[10px] text-muted-foreground mt-0.5">{item.variant.specification} × {item.quantity}</p>
                       </div>
                       <div className="text-right flex-shrink-0">
-                        <span className="text-sm font-bold">${(item.variant.price * item.quantity).toFixed(2)}</span>
-                        <p className="text-[9px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
+                        <span className="text-sm font-bold">{currencySymbol}{(item.variant.price * item.quantity).toFixed(2)}</span>
+                        {!isUK && (
+                          <p className="text-[9px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -367,21 +373,23 @@ export default function Checkout() {
                 <div className="space-y-2 pt-3 border-t border-border/30">
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>Subtotal</span>
-                    <span>${calculateSubtotal().toFixed(2)}</span>
+                    <span>{currencySymbol}{calculateSubtotal().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>Delivery</span>
-                    <span>$65.00</span>
+                    <span>{currencySymbol}{deliveryFee.toFixed(2)}</span>
                   </div>
                   <div className="h-px bg-gradient-to-r from-transparent via-[hsl(var(--ice-blue))]/20 to-transparent my-2" />
                   <div className="flex justify-between items-end">
                     <span className="text-base font-bold">Total</span>
                     <div className="text-right">
-                      <span className="text-2xl font-bold text-[hsl(var(--ice-blue))]">${calculateTotal().toFixed(2)}</span>
-                      <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(calculateTotal())}</p>
+                      <span className="text-2xl font-bold text-[hsl(var(--ice-blue))]">{currencySymbol}{calculateTotal().toFixed(2)}</span>
+                      {!isUK && (
+                        <p className="text-[10px] text-muted-foreground">{formatGbpEstimate(calculateTotal())}</p>
+                      )}
                     </div>
                   </div>
-                  <p className="text-[8px] text-muted-foreground mt-2">{GBP_DISCLAIMER}</p>
+                  {!isUK && <p className="text-[8px] text-muted-foreground mt-2">{GBP_DISCLAIMER}</p>}
                 </div>
               </div>
             </div>
@@ -400,7 +408,7 @@ export default function Checkout() {
             <AlertDialogDescription className="space-y-3 pt-2">
               <span className="block">
                 You're about to submit your order for{" "}
-                <span className="font-bold text-foreground">${calculateTotal().toFixed(2)}</span>{" "}
+                <span className="font-bold text-foreground">{currencySymbol}{calculateTotal().toFixed(2)}</span>{" "}
                 using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod}</span>.
               </span>
               <span className="block text-xs">

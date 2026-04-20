@@ -36,7 +36,9 @@ export default function OrderSuccess() {
               Your order has been successfully submitted. You will receive an email shortly with payment instructions and order details.
             </p>
             
-            {orderData && (
+            {orderData && (() => {
+              const sym = orderData.shippingRegion === 'UK Domestic' ? '£' : '$';
+              return (
               <div className="bg-background/50 rounded-lg p-6 mb-6 text-left">
                 <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
                 <div className="space-y-3">
@@ -47,7 +49,7 @@ export default function OrderSuccess() {
                         <p className="text-foreground/60">{item.specification}</p>
                         <p className="text-foreground/60">Qty: {item.quantity}</p>
                       </div>
-                      <p className="font-medium">${item.lineTotal.toFixed(2)}</p>
+                      <p className="font-medium">{sym}{item.lineTotal.toFixed(2)}</p>
                     </div>
                   ))}
                   {orderData.includeEbook && (
@@ -61,20 +63,21 @@ export default function OrderSuccess() {
                   <div className="border-t border-border pt-3 mt-3">
                     <div className="flex justify-between text-sm">
                       <span>Subtotal:</span>
-                      <span>${orderData.subtotal.toFixed(2)}</span>
+                      <span>{sym}{orderData.subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Delivery:</span>
-                      <span>${orderData.deliveryFee.toFixed(2)}</span>
+                      <span>{sym}{orderData.deliveryFee.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between font-bold mt-2">
                       <span>Total:</span>
-                      <span>${orderData.total.toFixed(2)}</span>
+                      <span>{sym}{orderData.total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
               </div>
-            )}
+              );
+            })()}
 
             <div className="bg-background/50 rounded-lg p-6 mb-6">
               <h2 className="text-xl font-semibold mb-3">What happens next?</h2>
