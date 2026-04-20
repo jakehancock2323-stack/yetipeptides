@@ -408,7 +408,7 @@ export default function Checkout() {
             <AlertDialogDescription className="space-y-3 pt-2">
               <span className="block">
                 You're about to submit your order for{" "}
-                <span className="font-bold text-foreground">${calculateTotal().toFixed(2)}</span>{" "}
+                <span className="font-bold text-foreground">{currencySymbol}{calculateTotal().toFixed(2)}</span>{" "}
                 using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod}</span>.
               </span>
               <span className="block text-xs">
