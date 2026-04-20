@@ -158,7 +158,12 @@ const handler = async (req: Request): Promise<Response> => {
                   <td style="padding: 8px 0; font-size: 16px;"><strong>Delivery Fee:</strong></td>
                   <td style="padding: 8px 0; text-align: right; font-size: 16px;">$${deliveryFee.toFixed(2)}</td>
                 </tr>
-                ${promoCode ? `
+                ${processingFee && processingFee > 0 ? `
+                <tr>
+                  <td style="padding: 8px 0; font-size: 16px;"><strong>BTC Processing Fee (4%):</strong></td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px;">$${processingFee.toFixed(2)}</td>
+                </tr>
+                ` : ''}
                 <tr style="background: #d4edda;">
                   <td style="padding: 8px 0; font-size: 16px; color: #155724;"><strong>🎉 Promo Code (${promoCode.toUpperCase()}):</strong></td>
                   <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-$${discount.toFixed(2)}</td>
