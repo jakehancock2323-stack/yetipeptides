@@ -459,45 +459,45 @@ export default function PeptideCalculator() {
             {/* Results */}
             {showResults && activeCalc && (
               <Card className="frosted-glass ice-glow mt-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <CardHeader>
-                  <CardTitle className="text-[hsl(var(--glacier))] flex items-center gap-2">
+                <CardHeader className="pb-4 px-4 sm:px-6">
+                  <CardTitle className="text-[hsl(var(--glacier))] flex items-center gap-2 text-lg sm:text-xl">
                     <Sparkles className="w-5 h-5" />
                     Results
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Using {activeCalc.volumeMl} mL BAC water with {effectivePeptideMg} mg peptide
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-5 sm:space-y-6 px-4 sm:px-6">
                   {/* Output grid */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div className="p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '0ms' }}>
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Concentration</div>
-                      <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+                    <div className="p-2.5 sm:p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '0ms' }}>
+                      <div className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mb-1">Concentration</div>
+                      <div className="font-orbitron text-base sm:text-lg font-bold text-[hsl(var(--ice-blue))]">
                         {activeCalc.concentration.toFixed(2)}
                       </div>
-                      <div className="text-xs text-muted-foreground">mg/mL</div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground">mg/mL</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '80ms' }}>
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Dose</div>
-                      <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
+                    <div className="p-2.5 sm:p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '80ms' }}>
+                      <div className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mb-1">Dose</div>
+                      <div className="font-orbitron text-base sm:text-lg font-bold text-[hsl(var(--ice-blue))]">
                         {dose.mcg}
                       </div>
-                      <div className="text-xs text-muted-foreground">mcg</div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground">mcg</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-[hsl(var(--ice-blue))]/15 to-[hsl(var(--glacier))]/10 border border-[hsl(var(--ice-blue))]/40 animate-scale-in transition-transform hover:scale-[1.05] shadow-[0_0_20px_hsl(var(--ice-blue)/0.2)]" style={{ animationDelay: '160ms' }}>
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Draw</div>
-                      <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
+                    <div className="p-2.5 sm:p-3 rounded-lg bg-gradient-to-br from-[hsl(var(--ice-blue))]/15 to-[hsl(var(--glacier))]/10 border border-[hsl(var(--ice-blue))]/40 animate-scale-in transition-transform hover:scale-[1.05] shadow-[0_0_20px_hsl(var(--ice-blue)/0.2)]" style={{ animationDelay: '160ms' }}>
+                      <div className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mb-1">Draw</div>
+                      <div className="font-orbitron text-base sm:text-lg font-bold text-[hsl(var(--ice-blue))]">
                         {activeCalc.units.toFixed(1)}
                       </div>
-                      <div className="text-xs text-muted-foreground">units</div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground">units</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '240ms' }}>
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Doses / vial</div>
-                      <div className="font-orbitron text-lg font-bold text-[hsl(var(--ice-blue))]">
+                    <div className="p-2.5 sm:p-3 rounded-lg bg-input/30 border border-border/40 animate-fade-in transition-transform hover:scale-[1.03]" style={{ animationDelay: '240ms' }}>
+                      <div className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mb-1">Doses / vial</div>
+                      <div className="font-orbitron text-base sm:text-lg font-bold text-[hsl(var(--ice-blue))]">
                         ~{activeCalc.totalDoses}
                       </div>
-                      <div className="text-xs text-muted-foreground">doses</div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground">doses</div>
                     </div>
                   </div>
 
@@ -571,16 +571,21 @@ export default function PeptideCalculator() {
                         />
                       </div>
 
-                      {/* Numeric labels */}
+                      {/* Numeric labels — hide every other on mobile to prevent collision */}
                       <div className="relative h-5 mt-1">
                         {Array.from({ length: syringeSpec.units / 10 + 1 }).map((_, i) => {
                           const value = i * 10;
                           const position = (value / syringeSpec.units) * 100;
                           if (value === 0) return null;
+                          // On 100-unit syringe, hide odd labels on mobile (10, 30, 50, 70, 90)
+                          const hideOnMobile = syringeSpec.units >= 100 && i % 2 === 1;
                           return (
                             <span
                               key={i}
-                              className="absolute top-0 text-[11px] font-mono text-muted-foreground"
+                              className={cn(
+                                'absolute top-0 text-[10px] sm:text-[11px] font-mono text-muted-foreground',
+                                hideOnMobile && 'hidden sm:inline'
+                              )}
                               style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
                             >
                               {value}
