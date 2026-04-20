@@ -24,11 +24,18 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Target "clean" unit values that make at-a-glance dosing easy on a syringe
-const CLEAN_UNIT_TARGETS = [5, 10, 20, 25, 40, 50];
-// Practical BAC water volume bounds (mL)
-const MIN_VOLUME_ML = 0.5;
-const MAX_VOLUME_ML = 5;
+// Standard BAC water volumes researchers commonly use for reconstitution.
+// These are the "real-world" choices — round numbers that are easy to draw
+// accurately into a vial. We score these against the user's dose to find
+// the most practical mixing volumes.
+const STANDARD_BAC_VOLUMES_ML = [
+  0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0,
+];
+// Ideal draw range on the syringe (in units). Draws below ~10 units are
+// hard to measure accurately; draws above ~80% of syringe capacity leave
+// no headroom and are also error-prone.
+const IDEAL_UNITS_MIN = 10;
+const IDEAL_UNITS_MAX = 50;
 type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
