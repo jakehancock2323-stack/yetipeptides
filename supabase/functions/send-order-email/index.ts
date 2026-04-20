@@ -51,7 +51,7 @@ const handler = async (req: Request): Promise<Response> => {
     const orderData: OrderEmailRequest = await req.json();
     console.log("Received order data:", orderData);
 
-    const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, discount, promoCode, total, includeEbook } = orderData;
+    const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook } = orderData;
 
     // Build order items HTML
     const itemsHTML = items.map(item => `
