@@ -257,9 +257,9 @@ export default function PeptideCalculator() {
               {/* Step 2: Peptide amount */}
               <AnimateOnScroll animation="fade-up" delay={120}>
                 <Card className="frosted-glass ice-glow transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--ice-blue)/0.2)]">
-                  <CardContent className="pt-6">
+                  <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6">
                     <StepHeader number={2} title="Select peptide amount (mg)" />
-                    <div className="grid grid-cols-4 gap-2 md:gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
                       {PEPTIDE_AMOUNTS.map((amt, i) => {
                         const isActive = peptideMg === amt && !customPeptideMg;
                         return (
@@ -269,7 +269,7 @@ export default function PeptideCalculator() {
                             onClick={() => { setPeptideMg(amt); setCustomPeptideMg(''); }}
                             style={{ animationDelay: `${i * 40}ms` }}
                             className={cn(
-                              'h-12 rounded-lg border font-orbitron text-sm font-semibold transition-all duration-200 animate-fade-in hover:scale-105 active:scale-95',
+                              'h-11 sm:h-12 rounded-lg border font-orbitron text-sm font-semibold transition-all duration-200 animate-fade-in hover:scale-105 active:scale-95',
                               isActive
                                 ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/20 to-[hsl(var(--glacier))]/20 border-[hsl(var(--ice-blue))] text-[hsl(var(--ice-blue))] shadow-[0_0_15px_hsl(var(--ice-blue)/0.4)]'
                                 : 'bg-input/40 border-border/50 text-foreground/80 hover:border-[hsl(var(--ice-blue))]/50 hover:text-[hsl(var(--ice-blue))]'
@@ -280,11 +280,12 @@ export default function PeptideCalculator() {
                         );
                       })}
                     </div>
-                    <div className="mt-4 flex items-center gap-3">
+                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                       <Label htmlFor="customMg" className="text-sm text-muted-foreground whitespace-nowrap">Or custom (mg):</Label>
                       <Input
                         id="customMg"
                         type="number"
+                        inputMode="decimal"
                         placeholder=""
                         value={customPeptideMg}
                         onChange={(e) => { setCustomPeptideMg(e.target.value); if (e.target.value) setPeptideMg(null); }}
