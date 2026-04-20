@@ -34,6 +34,7 @@ interface OrderEmailRequest {
   items: OrderItem[];
   subtotal: number;
   deliveryFee: number;
+  processingFee?: number;
   discount: number;
   promoCode: string | null;
   total: number;
