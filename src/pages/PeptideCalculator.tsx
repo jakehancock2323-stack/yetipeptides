@@ -274,12 +274,12 @@ export default function PeptideCalculator() {
                     <StepHeader number={2} title="Select peptide amount (mg)" />
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
                       {PEPTIDE_AMOUNTS.map((amt, i) => {
-                        const isActive = peptideMg === amt && !customPeptideMg;
+                        const isActive = peptideMg === amt;
                         return (
                           <button
                             key={amt}
                             type="button"
-                            onClick={() => { setPeptideMg(amt); setCustomPeptideMg(''); }}
+                            onClick={() => setPeptideMg(amt)}
                             style={{ animationDelay: `${i * 40}ms` }}
                             className={cn(
                               'h-11 sm:h-12 rounded-lg border font-orbitron text-sm font-semibold transition-all duration-200 animate-fade-in hover:scale-105 active:scale-95',
@@ -292,20 +292,6 @@ export default function PeptideCalculator() {
                           </button>
                         );
                       })}
-                    </div>
-                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                      <Label htmlFor="customMg" className="text-sm text-muted-foreground whitespace-nowrap">Or custom (mg):</Label>
-                      <Input
-                        id="customMg"
-                        type="number"
-                        inputMode="decimal"
-                        placeholder=""
-                        value={customPeptideMg}
-                        onChange={(e) => { setCustomPeptideMg(e.target.value); if (e.target.value) setPeptideMg(null); }}
-                        min="0"
-                        step="any"
-                        className="bg-input/50"
-                      />
                     </div>
                   </CardContent>
                 </Card>
