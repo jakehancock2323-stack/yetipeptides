@@ -23,8 +23,12 @@ const SYRINGE_OPTIONS: { value: SyringeSize; label: string; maxMl: number; units
 
 const PEPTIDE_AMOUNTS = [1, 2, 5, 10, 15, 20, 50, 100];
 
-// Common BAC water amounts to test for "easy dosing" suggestions
-const CANDIDATE_VOLUMES_ML = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5];
+// Target "clean" unit values that make at-a-glance dosing easy on a syringe
+const CLEAN_UNIT_TARGETS = [5, 10, 20, 25, 40, 50];
+// Practical BAC water volume bounds (mL)
+const MIN_VOLUME_ML = 0.5;
+const MAX_VOLUME_ML = 5;
+type DoseUnit = 'mcg' | 'mg';
 
 interface StepHeaderProps {
   number: number;
@@ -48,9 +52,10 @@ export default function PeptideCalculator() {
   const { toast } = useToast();
 
   const [syringeSize, setSyringeSize] = useState<SyringeSize>('1');
-  const [peptideMg, setPeptideMg] = useState<number | null>(10);
+  const [peptideMg, setPeptideMg] = useState<number | null>(null);
   const [customPeptideMg, setCustomPeptideMg] = useState<string>('');
-  const [doseMcg, setDoseMcg] = useState<string>('250');
+  const [doseValue, setDoseValue] = useState<string>('');
+  const [doseUnit, setDoseUnit] = useState<DoseUnit>('mcg');
   const [customVolumeMl, setCustomVolumeMl] = useState<string>('');
   const [showResults, setShowResults] = useState(false);
 
@@ -66,44 +71,59 @@ export default function PeptideCalculator() {
     [syringeSize]
   );
 
+  // Convert dose to canonical mg + mcg
   const dose = useMemo(() => {
-    const mcg = parseFloat(doseMcg);
-    if (isNaN(mcg) || mcg <= 0) return { mcg: 0, mg: 0 };
-    return { mcg, mg: mcg / 1000 };
-  }, [doseMcg]);
+    const v = parseFloat(doseValue);
+    if (isNaN(v) || v <= 0) return { mcg: 0, mg: 0 };
+    if (doseUnit === 'mg') return { mg: v, mcg: v * 1000 };
+    return { mcg: v, mg: v / 1000 };
+  }, [doseValue, doseUnit]);
 
-  // Calculate "easy dosing" recommendations: pick BAC water volumes
-  // that yield clean unit numbers (e.g. 5, 10, 20, 25, 50 units) per dose.
+  // Smart recommendations: derive the EXACT BAC water volume that produces
+  // each clean unit target. This is mathematically precise, not a search.
+  //
+  // Concentration C = peptide_mg / volume_mL
+  // Volume per dose (mL) = dose_mg / C = dose_mg * volume_mL / peptide_mg
+  // Units on syringe = volume_per_dose_mL * (syringe_units / syringe_maxMl)
+  //
+  // Solving for volume_mL given a target unit count U:
+  //   volume_mL = (peptide_mg * syringe_maxMl * U) / (dose_mg * syringe_units)
   const recommendations = useMemo(() => {
     if (effectivePeptideMg <= 0 || dose.mg <= 0) return [];
 
-    const opts: {
-      volumeMl: number;
-      units: number;
-      mcgPerUnit: number;
-      concentration: number;
-    }[] = [];
+    const opts = CLEAN_UNIT_TARGETS.map(targetUnits => {
+      const volumeMl =
+        (effectivePeptideMg * syringeSpec.maxMl * targetUnits) /
+        (dose.mg * syringeSpec.units);
+      const concentration = effectivePeptideMg / volumeMl;
+      const mcgPerUnit = dose.mcg / targetUnits;
+      return { volumeMl, units: targetUnits, mcgPerUnit, concentration };
+    })
+      // Filter to practical BAC water volumes
+      .filter(o => o.volumeMl >= MIN_VOLUME_ML && o.volumeMl <= MAX_VOLUME_ML)
+      // Round volume to a sensible 0.05 mL precision and recompute units exactly
+      .map(o => {
+        const rounded = Math.round(o.volumeMl * 20) / 20; // nearest 0.05 mL
+        const concentration = effectivePeptideMg / rounded;
+        const volumePerDoseMl = dose.mg / concentration;
+        const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
+        return {
+          volumeMl: rounded,
+          units,
+          mcgPerUnit: dose.mcg / units,
+          concentration,
+        };
+      })
+      // De-duplicate volumes
+      .filter((o, i, arr) => arr.findIndex(x => x.volumeMl === o.volumeMl) === i)
+      // Prefer options whose units are closest to a whole number
+      .sort((a, b) => {
+        const da = Math.abs(a.units - Math.round(a.units));
+        const db = Math.abs(b.units - Math.round(b.units));
+        return da - db;
+      });
 
-    for (const vol of CANDIDATE_VOLUMES_ML) {
-      const concentration = effectivePeptideMg / vol; // mg/mL
-      const volumePerDoseMl = dose.mg / concentration;
-      const units = (volumePerDoseMl / syringeSpec.maxMl) * syringeSpec.units;
-      // Only volumes that fit within syringe
-      if (units > syringeSpec.units) continue;
-      if (units < 1) continue;
-      const mcgPerUnit = (dose.mcg / units);
-      opts.push({ volumeMl: vol, units, mcgPerUnit, concentration });
-    }
-
-    // Score by how close units is to a "clean" number (multiple of 5)
-    const scored = opts.map(o => {
-      const nearestClean = Math.round(o.units / 5) * 5;
-      const diff = Math.abs(o.units - nearestClean);
-      return { ...o, score: diff, clean: nearestClean };
-    });
-
-    scored.sort((a, b) => a.score - b.score);
-    return scored.slice(0, 3);
+    return opts.slice(0, 3);
   }, [effectivePeptideMg, dose, syringeSpec]);
 
   // Active calculation (uses custom volume if provided, else first recommendation)
@@ -135,12 +155,12 @@ export default function PeptideCalculator() {
       toast({ title: 'Select peptide amount', description: 'Choose or enter a peptide amount in mg.', variant: 'destructive' });
       return;
     }
-    if (dose.mcg <= 0) {
-      toast({ title: 'Enter desired dose', description: 'Please enter a desired dose in mcg.', variant: 'destructive' });
+    if (dose.mg <= 0) {
+      toast({ title: 'Enter desired dose', description: `Please enter a desired dose in ${doseUnit}.`, variant: 'destructive' });
       return;
     }
     if (!activeCalc || activeCalc.units > syringeSpec.units) {
-      toast({ title: 'Dose too large', description: 'The calculated draw exceeds the syringe size. Try a larger BAC water volume.', variant: 'destructive' });
+      toast({ title: 'Dose too large', description: 'The calculated draw exceeds the syringe size. Try a larger BAC water volume or a bigger syringe.', variant: 'destructive' });
       return;
     }
     setShowResults(true);
@@ -148,9 +168,10 @@ export default function PeptideCalculator() {
 
   const handleReset = () => {
     setSyringeSize('1');
-    setPeptideMg(10);
+    setPeptideMg(null);
     setCustomPeptideMg('');
-    setDoseMcg('250');
+    setDoseValue('');
+    setDoseUnit('mcg');
     setCustomVolumeMl('');
     setShowResults(false);
   };
@@ -173,6 +194,7 @@ export default function PeptideCalculator() {
     setCustomVolumeMl(String(vol));
     setShowResults(true);
   };
+
 
   const fillPercentage = activeCalc
     ? Math.min((activeCalc.units / syringeSpec.units) * 100, 100)
@@ -258,7 +280,7 @@ export default function PeptideCalculator() {
                     <Input
                       id="customMg"
                       type="number"
-                      placeholder="e.g. 7.5"
+                      placeholder=""
                       value={customPeptideMg}
                       onChange={(e) => { setCustomPeptideMg(e.target.value); if (e.target.value) setPeptideMg(null); }}
                       min="0"
@@ -273,32 +295,58 @@ export default function PeptideCalculator() {
               <Card className="frosted-glass ice-glow">
                 <CardContent className="pt-6">
                   <StepHeader number={3} title="Enter desired dose" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="doseMcg" className="flex items-center gap-1.5 text-sm">
-                        Dose (mcg)
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Info className="w-3.5 h-3.5 text-muted-foreground" />
-                          </TooltipTrigger>
-                          <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
-                        </Tooltip>
-                      </Label>
-                      <Input
-                        id="doseMcg"
-                        type="number"
-                        placeholder="e.g. 250"
-                        value={doseMcg}
-                        onChange={(e) => setDoseMcg(e.target.value)}
-                        min="0"
-                        step="any"
-                        className="bg-input/50 h-12"
-                      />
+                  <div className="space-y-3">
+                    {/* Unit toggle */}
+                    <div className="inline-flex rounded-lg border border-border/50 bg-input/30 p-1">
+                      {(['mcg', 'mg'] as DoseUnit[]).map(u => (
+                        <button
+                          key={u}
+                          type="button"
+                          onClick={() => setDoseUnit(u)}
+                          className={cn(
+                            'px-4 py-1.5 rounded-md text-sm font-orbitron font-semibold transition-all',
+                            doseUnit === u
+                              ? 'bg-gradient-to-br from-[hsl(var(--ice-blue))]/30 to-[hsl(var(--glacier))]/20 text-[hsl(var(--ice-blue))] shadow-[0_0_10px_hsl(var(--ice-blue)/0.3)]'
+                              : 'text-muted-foreground hover:text-foreground'
+                          )}
+                        >
+                          {u}
+                        </button>
+                      ))}
                     </div>
-                    <div className="space-y-2">
-                      <Label className="text-sm">Equivalent (mg)</Label>
-                      <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))]">
-                        {dose.mg > 0 ? `${dose.mg.toFixed(4)} mg` : '—'}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="doseValue" className="flex items-center gap-1.5 text-sm">
+                          Dose ({doseUnit})
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Info className="w-3.5 h-3.5 text-muted-foreground" />
+                            </TooltipTrigger>
+                            <TooltipContent>1 mg = 1000 mcg (micrograms)</TooltipContent>
+                          </Tooltip>
+                        </Label>
+                        <Input
+                          id="doseValue"
+                          type="number"
+                          placeholder=""
+                          value={doseValue}
+                          onChange={(e) => setDoseValue(e.target.value)}
+                          min="0"
+                          step="any"
+                          className="bg-input/50 h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-sm">
+                          Equivalent ({doseUnit === 'mcg' ? 'mg' : 'mcg'})
+                        </Label>
+                        <div className="h-12 px-3 rounded-md bg-input/30 border border-border/50 flex items-center font-orbitron text-[hsl(var(--glacier))]">
+                          {dose.mg > 0
+                            ? doseUnit === 'mcg'
+                              ? `${dose.mg.toFixed(4)} mg`
+                              : `${dose.mcg.toFixed(2)} mcg`
+                            : '—'}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -315,7 +363,7 @@ export default function PeptideCalculator() {
                       <Input
                         id="customVol"
                         type="number"
-                        placeholder="e.g. 2.0"
+                        placeholder=""
                         value={customVolumeMl}
                         onChange={(e) => setCustomVolumeMl(e.target.value)}
                         min="0"
