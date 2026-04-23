@@ -55,11 +55,15 @@ export default function ProductCard({ product }: ProductCardProps) {
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
           {product.category}
         </span>
-        {allVariantsOutOfStock && (
+        {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             Out of Stock
           </span>
-        )}
+        ) : product.stockBadge ? (
+          <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
+            {product.stockBadge}
+          </span>
+        ) : null}
       </div>
 
       {/* Content */}
