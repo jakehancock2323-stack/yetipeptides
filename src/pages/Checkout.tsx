@@ -73,8 +73,11 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const isUK = region === 'UK Domestic';
   const allItemsUKDomestic = items.length > 0 && items.every(item => item.product.region === 'UK Domestic');
+  // Force UK Domestic pricing/currency whenever every item is UK-only,
+  // regardless of the global region toggle.
+  const isUK = allItemsUKDomestic || region === 'UK Domestic';
+  const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : region;
   const paypalAvailable = allItemsUKDomestic;
   const deliveryFee = isUK ? 5 : 65;
   const currencySymbol = isUK ? '£' : '$';
@@ -92,7 +95,7 @@ export default function Checkout() {
     const orderData = {
       customerDetails: formData,
       paymentMethod,
-      shippingRegion: region,
+      shippingRegion: effectiveRegion,
       items: items.map((item) => ({
         productName: item.product.name,
         productCategory: item.product.category,
