@@ -95,7 +95,7 @@ export default function Checkout() {
     const orderData = {
       customerDetails: formData,
       paymentMethod,
-      shippingRegion: region,
+      shippingRegion: effectiveRegion,
       items: items.map((item) => ({
         productName: item.product.name,
         productCategory: item.product.category,
