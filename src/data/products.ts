@@ -634,6 +634,7 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
+    stockBadge: "14 pens left",
     variants: [
       { specification: "Tiffany Blue", price: 15 },
       { specification: "Red", price: 15 },
@@ -646,6 +647,7 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
+    stockBadge: "Limited stock",
     variants: [
       { specification: "1 cartridge", price: 1 }
     ]
@@ -656,6 +658,7 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
+    stockBadge: "Limited stock",
     variants: [
       { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12 }
     ],
