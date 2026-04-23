@@ -657,7 +657,7 @@ export const products: Product[] = [
     currency: "GBP",
     outOfStock: true,
     variants: [
-      { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12, outOfStock: true }
+      { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12 }
     ],
     image: "hospira-bac-water"
   }
