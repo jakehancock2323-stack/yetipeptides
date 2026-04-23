@@ -53,6 +53,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook } = orderData;
 
+    const isUK = shippingRegion === 'UK Domestic';
+    const cur = isUK ? '£' : '$';
+
     // Build order items HTML
     const itemsHTML = items.map(item => `
       <tr style="border-bottom: 1px solid #eee;">
@@ -60,8 +63,8 @@ const handler = async (req: Request): Promise<Response> => {
         <td style="padding: 12px; color: #666;">${item.productCategory}</td>
         <td style="padding: 12px;">${item.specification}</td>
         <td style="padding: 12px; text-align: center;">${item.quantity}</td>
-        <td style="padding: 12px; text-align: right;">$${item.price.toFixed(2)}</td>
-        <td style="padding: 12px; text-align: right; font-weight: 600;">$${item.lineTotal.toFixed(2)}</td>
+        <td style="padding: 12px; text-align: right;">${cur}${item.price.toFixed(2)}</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">${cur}${item.lineTotal.toFixed(2)}</td>
       </tr>
     `).join('');
 
@@ -72,8 +75,8 @@ const handler = async (req: Request): Promise<Response> => {
         <td style="padding: 12px; color: #666;">Digital Guide</td>
         <td style="padding: 12px;">PDF Download</td>
         <td style="padding: 12px; text-align: center;">1</td>
-        <td style="padding: 12px; text-align: right;">$4.99</td>
-        <td style="padding: 12px; text-align: right; font-weight: 600;">$4.99</td>
+        <td style="padding: 12px; text-align: right;">${cur}4.99</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">${cur}4.99</td>
       </tr>
     ` : '';
 
