@@ -52,8 +52,11 @@ export default function USShippingNotice() {
             <span className="block p-3 rounded-xl border border-[hsl(var(--ice-blue))]/20 bg-[hsl(var(--ice-blue))]/[0.04] text-foreground/90">
               <span className="font-semibold text-[hsl(var(--ice-blue))]">All other destinations ship as normal</span> — EU, UK, Canada, Australia, Asia, South America are completely unaffected.
             </span>
+            <span className="block p-3 rounded-xl border border-border/30 bg-secondary/20 text-foreground/90 text-xs">
+              <span className="font-semibold text-foreground">Already ordered?</span> If your order hasn't been processed yet, we can issue a full refund — just contact us. If it's already been processed and shipped out, you'll need to wait until US shipping resumes.
+            </span>
             <span className="block text-xs text-muted-foreground">
-              We'll resume US shipping as soon as the situation clears. Thank you for your patience.
+              Live updates and reopening announcements will be posted in our <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--ice-blue))] font-semibold hover:underline">Discord community</a>. We'll resume US shipping as soon as the situation clears — thank you for your patience.
             </span>
           </DialogDescription>
         </DialogHeader>
