@@ -634,11 +634,11 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "14 pens left",
+    stockBadge: "3 pens left",
     variants: [
-      { specification: "Tiffany Blue", price: 15 },
-      { specification: "Red", price: 15 },
-      { specification: "Deep Purple", price: 15 }
+      { specification: "Tiffany Blue (1 left)", price: 15 },
+      { specification: "Red (Out of Stock)", price: 15, outOfStock: true },
+      { specification: "Deep Purple (2 left)", price: 15 }
     ]
   },
   {
@@ -647,7 +647,7 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "Limited stock",
+    stockBadge: "60 left",
     variants: [
       { specification: "1 cartridge", price: 1 }
     ]
@@ -658,7 +658,7 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "Limited stock",
+    stockBadge: "25 left",
     variants: [
       { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12 }
     ],
