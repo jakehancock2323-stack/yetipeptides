@@ -634,11 +634,11 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "3 pens left",
+    outOfStock: true,
     variants: [
-      { specification: "Tiffany Blue (1 left)", price: 15 },
-      { specification: "Red (Out of Stock)", price: 15, outOfStock: true },
-      { specification: "Deep Purple (2 left)", price: 15 }
+      { specification: "Tiffany Blue", price: 15, outOfStock: true },
+      { specification: "Red", price: 15, outOfStock: true },
+      { specification: "Deep Purple", price: 15, outOfStock: true }
     ]
   },
   {
