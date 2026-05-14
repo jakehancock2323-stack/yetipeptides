@@ -1,0 +1,22 @@
+# Yeti Peptides
+
+> UK-based research peptide supplier offering laboratory-grade compounds with worldwide shipping. Strictly for research use only.
+
+Yeti Peptides supplies premium research-grade peptides — including GLP-1 compounds (Semaglutide, Tirzepatide, Retatrutide, Cagrilintide), healing peptides (BPC-157, TB-500), growth hormone secretagogues, and nootropics — with COA-verified purity, crypto payment options, and a separate UK Domestic catalog for faster in-region delivery.
+
+## Pages
+
+- [Home](/): Product highlights, brand overview, and Discord community.
+- [Products](/products): Full research peptide catalog with International and UK Domestic stock.
+- [Peptide Calculator](/calculator): Concentration and dose-volume calculator with visual syringe.
+- [How to Pay (Crypto)](/how-to-pay-crypto): Step-by-step USDT/USDC and Middleman Escrow payment guide.
+- [Track Order](/track-order): 17TRACK shipment lookup.
+- [About Us](/about): Lab positioning, sourcing, and quality standards.
+- [Contact](/contact): Email, Telegram, and Discord support channels.
+- [Shipping & Returns](/shipping-returns): Delivery terms and refund policy.
+- [Research Disclaimer](/research-disclaimer): Research-use-only legal notice.
+
+## Optional
+
+- [Privacy Policy](/privacy-policy)
+- [Terms & Conditions](/terms-conditions)
