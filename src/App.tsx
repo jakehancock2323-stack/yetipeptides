@@ -12,7 +12,7 @@ import BootScreen from "./components/BootScreen";
 import BackToTop from "./components/BackToTop";
 import PageTransition from "./components/PageTransition";
 import ScrollToTop from "./components/ScrollToTop";
-import USShippingNotice from "./components/USShippingNotice";
+
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
