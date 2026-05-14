@@ -64,8 +64,8 @@ export default function Products() {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Buy Research Peptides Online – Premium Laboratory-Grade Compounds UK & Worldwide"
-        description="Shop premium research-grade peptides for laboratory use. Semaglutide, Retatrutide, Tirzepatide, Cagrilintide, BPC-157, TB-500 & GLP-1 compounds. UK-based supplier with worldwide shipping. COA verified, 99%+ purity. Secure crypto payments."
+        title="Buy Research Peptides Online – UK & Worldwide"
+        description="Shop research-grade peptides: Semaglutide, Tirzepatide, Retatrutide, BPC-157, TB-500 & GLP-1s. UK supplier, worldwide shipping, COA verified."
         keywords="buy peptides online, research peptides, peptide shop UK, GLP-1 peptides, Semaglutide research peptide, Retatrutide for sale, Tirzepatide peptide, Cagrilintide, BPC-157, TB-500, laboratory peptides, research chemicals, peptide supplier worldwide, UK peptide vendor"
         canonical="https://yetipeptides.com/products"
         schema={productsSchema}
