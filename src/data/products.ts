@@ -17,6 +17,7 @@ export interface Product {
   stockBadge?: string;
   image?: string;
   currency?: 'USD' | 'GBP';
+  popular?: boolean;
 }
 
 export const categories = [
