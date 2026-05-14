@@ -17,7 +17,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     searchParams.get('category') || 'All'
   );
-  const { region } = useRegion();
+  const { region, setRegion } = useRegion();
   const activeCategories = region === 'UK Domestic' ? domesticCategories : categories;
 
   useEffect(() => {
