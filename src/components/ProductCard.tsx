@@ -42,8 +42,12 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
   };
 
+  const isUkDomestic = product.region === 'UK Domestic';
+
   return (
-    <div className="group rounded-xl border border-border/20 bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col">
+    <div className={`group rounded-xl border bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col ${
+      isUkDomestic ? 'border-ice-blue/25 hover:border-ice-blue/50' : 'border-border/20'
+    }`}>
       {/* Image */}
       <div className="relative bg-secondary/10 flex items-center justify-center py-6">
         <img 
@@ -52,9 +56,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
-        <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-muted-foreground bg-background/60 backdrop-blur-sm px-2 py-0.5 rounded">
-          {product.category}
-        </span>
+        {isUkDomestic && (
+          <span className="absolute top-3 left-3 text-[9px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/15 backdrop-blur-sm px-2 py-0.5 rounded">
+            UK
+          </span>
+        )}
         {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             Out of Stock
@@ -68,15 +74,20 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1 gap-3">
+        {/* Category label */}
+        <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+          {product.category}
+        </span>
+
         {/* Name + Price */}
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-2 -mt-1">
           <h3 className="text-sm font-semibold leading-tight group-hover:text-ice-blue transition-colors">
             {product.name}
           </h3>
           <div className="text-right whitespace-nowrap">
             <span className="text-xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
             {!isGbp && (
-              <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
+              <p className="text-[10px] text-muted-foreground/70">{formatGbpEstimate(selectedVariant.price)}</p>
             )}
           </div>
         </div>
@@ -84,7 +95,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Ingredients preview */}
         {product.ingredients && (
           <details className="text-xs">
-            <summary className="text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
+            <summary className="text-[11px] text-muted-foreground/80 cursor-pointer hover:text-foreground transition-colors select-none">
               View ingredients
             </summary>
             <ul className="mt-1.5 space-y-0.5 text-muted-foreground pl-3">
