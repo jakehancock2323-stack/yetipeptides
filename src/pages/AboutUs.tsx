@@ -22,8 +22,8 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="About Us - Research Peptide Laboratory Supplier | Yeti Peptides"
-        description="Yeti Peptides is a professional research peptide supplier committed to quality assurance, batch testing, and scientific standards. COA verified compounds with worldwide shipping."
+        title="About Us – Research Peptide Supplier | Yeti Peptides"
+        description="Yeti Peptides — research peptide supplier with COA-verified compounds, batch testing and scientific quality standards. Worldwide shipping."
         keywords="peptide supplier, research laboratory supplier, peptide quality control, COA verified peptides, research peptide vendor, laboratory peptides UK"
         canonical="https://yetipeptides.com/about"
         schema={aboutSchema}
