@@ -17,6 +17,7 @@ export interface Product {
   stockBadge?: string;
   image?: string;
   currency?: 'USD' | 'GBP';
+  popular?: boolean;
 }
 
 export const categories = [
@@ -65,6 +66,7 @@ export const products: Product[] = [
   },
   {
     id: "cagrilintide",
+    popular: true,
     name: "Cagrilintide",
     category: "Weight Loss",
     variants: [
@@ -74,6 +76,7 @@ export const products: Product[] = [
   },
   {
     id: "cagrilintide-semaglutide",
+    popular: true,
     name: "Cagrilintide + Semaglutide",
     category: "Weight Loss",
     variants: [
@@ -82,6 +85,7 @@ export const products: Product[] = [
   },
   {
     id: "retatrutide",
+    popular: true,
     name: "Retatrutide",
     category: "Weight Loss",
     variants: [
@@ -105,6 +109,7 @@ export const products: Product[] = [
   },
   {
     id: "semaglutide",
+    popular: true,
     name: "Semaglutide",
     category: "Weight Loss",
     variants: [
@@ -117,6 +122,7 @@ export const products: Product[] = [
   },
   {
     id: "survodutide",
+    popular: true,
     name: "Survodutide",
     category: "Weight Loss",
     variants: [
@@ -125,6 +131,7 @@ export const products: Product[] = [
   },
   {
     id: "tirzepatide",
+    popular: true,
     name: "Tirzepatide",
     category: "Weight Loss",
     variants: [
@@ -191,6 +198,7 @@ export const products: Product[] = [
   // MUSCLE GROWTH & RECOVERY
   {
     id: "bpc157",
+    popular: true,
     name: "BPC157",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -200,6 +208,7 @@ export const products: Product[] = [
   },
   {
     id: "bpc157-tb500",
+    popular: true,
     name: "BPC157 + TB500",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -219,6 +228,7 @@ export const products: Product[] = [
   },
   {
     id: "cjc1295-nodac-ipamorelin",
+    popular: true,
     name: "CJC-1295 no DAC + Ipamorelin",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -281,6 +291,7 @@ export const products: Product[] = [
   },
   {
     id: "hgh-somatropin",
+    popular: true,
     name: "HGH Somatropin",
     category: "Muscle Growth & Recovery",
     outOfStock: true,
@@ -328,6 +339,7 @@ export const products: Product[] = [
   },
   {
     id: "klow",
+    popular: true,
     name: "Klow",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -336,6 +348,7 @@ export const products: Product[] = [
   },
   {
     id: "mots-c",
+    popular: true,
     name: "MOTS-c",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -372,6 +385,7 @@ export const products: Product[] = [
   },
   {
     id: "tesamorelin",
+    popular: true,
     name: "Tesamorelin",
     category: "Muscle Growth & Recovery",
     variants: [
@@ -483,6 +497,7 @@ export const products: Product[] = [
   },
   {
     id: "ghk-cu",
+    popular: true,
     name: "GHK-Cu",
     category: "General Health",
     variants: [
@@ -508,6 +523,7 @@ export const products: Product[] = [
   },
   {
     id: "nad-plus",
+    popular: true,
     name: "NAD+",
     category: "General Health",
     outOfStock: true,
