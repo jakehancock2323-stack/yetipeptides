@@ -50,7 +50,7 @@ const App = () => {
                 <BrowserRouter>
                   <ScrollToTop />
                   <BackToTop />
-                  <USShippingNotice />
+                  
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/products" element={<Products />} />
