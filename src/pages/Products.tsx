@@ -8,7 +8,7 @@ import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
 import { products, categories, domesticCategories } from '@/data/products';
-import { Search, FlaskConical, MapPin } from 'lucide-react';
+import { Search, FlaskConical, MapPin, Globe } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
 
 export default function Products() {
