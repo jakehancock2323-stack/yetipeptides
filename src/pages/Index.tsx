@@ -55,8 +55,8 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Yeti Peptides – Research-Use Peptides | UK & Worldwide Shipping"
-        description="High-quality research peptides with COA on request. Worldwide shipping, competitive pricing, secure ordering and fast support. For laboratory research use only."
+        title="Yeti Peptides – Research Peptides | UK & Worldwide"
+        description="UK research peptide supplier. COA on request, 99%+ purity, worldwide shipping. Semaglutide, Tirzepatide, Retatrutide, BPC-157 & more."
         keywords="buy peptides online, research peptides UK, peptide supplier worldwide, GLP-1 peptides, Semaglutide research, Retatrutide peptide, Tirzepatide, Cagrilintide, laboratory peptides, research chemicals, UK peptide vendor, worldwide peptide shipping, premium research peptides"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
