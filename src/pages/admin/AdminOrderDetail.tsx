@@ -324,6 +324,61 @@ export default function AdminOrderDetail() {
           </div>
         </div>
       </div>
+
+      <Dialog open={emailDialog.open} onOpenChange={(o) => setEmailDialog((d) => ({ ...d, open: o }))}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{emailDialog.label}</DialogTitle>
+            <DialogDescription>
+              Copy each field below and paste into a new Proton Mail message.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">To</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(order.customer_email, "Email address")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Input readOnly value={order.customer_email} className="bg-secondary/20 border-border/30" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">Subject</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(emailDialog.subject, "Subject")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Input readOnly value={emailDialog.subject} className="bg-secondary/20 border-border/30" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">Body</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(emailDialog.body, "Body")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Textarea readOnly value={emailDialog.body} className="min-h-[260px] bg-secondary/20 border-border/30 font-mono text-xs" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <Button
+                variant="outline"
+                onClick={() => copyToClipboard(`To: ${order.customer_email}\nSubject: ${emailDialog.subject}\n\n${emailDialog.body}`, "Full email")}
+                className="gap-2"
+              >
+                <Copy className="w-3 h-3" /> Copy all
+              </Button>
+              <Button
+                onClick={() => window.open("https://mail.proton.me/u/0/inbox?action=compose", "_blank", "noopener,noreferrer")}
+                className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background"
+              >
+                <Mail className="w-4 h-4" /> Open Proton Mail
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
