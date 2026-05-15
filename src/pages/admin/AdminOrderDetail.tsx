@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
 import { toast } from "sonner";
 import { ArrowLeft, Copy, Mail, Save, Trash2 } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
-import { buildVariables, fillTemplate, buildMailto, type OrderItem } from "@/lib/emailTemplates";
+import { buildVariables, fillTemplate, type OrderItem } from "@/lib/emailTemplates";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 type Template = Database["public"]["Tables"]["email_templates"]["Row"];
@@ -22,6 +23,12 @@ export default function AdminOrderDetail() {
   const [adminNotes, setAdminNotes] = useState("");
   const [tracking, setTracking] = useState("");
   const [savingNotes, setSavingNotes] = useState(false);
+  const [emailDialog, setEmailDialog] = useState<{ open: boolean; label: string; subject: string; body: string }>({
+    open: false,
+    label: "",
+    subject: "",
+    body: "",
+  });
 
   const load = useCallback(async () => {
     if (!id) return;
@@ -83,20 +90,16 @@ export default function AdminOrderDetail() {
     const vars = buildVariables(order);
     const subject = fillTemplate(t.subject, vars);
     const body = fillTemplate(t.body, vars);
-    const clipboardText =
-      `To: ${order.customer_email}\nSubject: ${subject}\n\n${body}`;
+    setEmailDialog({ open: true, label, subject, body });
+  };
+
+  const copyToClipboard = async (text: string, what: string) => {
     try {
-      await navigator.clipboard.writeText(clipboardText);
+      await navigator.clipboard.writeText(text);
+      toast.success(`${what} copied`);
     } catch {
-      // ignore — we still open Proton below
+      toast.error("Copy failed — select and copy manually");
     }
-    // Open Proton Mail web compose in a new tab.
-    window.open(
-      "https://mail.proton.me/u/0/inbox?action=compose",
-      "_blank",
-      "noopener,noreferrer",
-    );
-    toast.success(`${label} copied — paste into the new Proton message`);
   };
 
   const copyAddress = () => {
@@ -275,9 +278,8 @@ export default function AdminOrderDetail() {
           <div className="frosted-glass rounded-xl p-5 sticky top-6">
             <h2 className="font-semibold mb-1">Send email</h2>
             <p className="text-xs text-muted-foreground mb-4">
-              Opens Proton Mail (web) in a new tab and copies the full email
-              (To / Subject / Body) to your clipboard. Click <span className="text-foreground">New message</span>{" "}
-              in Proton, paste, and hit Send. Recipient:{" "}
+              Opens a panel with the ready-to-send email. Copy the recipient,
+              subject, and body, then paste them into Proton Mail. Recipient:{" "}
               <span className="text-foreground">{order.customer_email}</span>.
             </p>
             <div className="space-y-2">
@@ -322,6 +324,61 @@ export default function AdminOrderDetail() {
           </div>
         </div>
       </div>
+
+      <Dialog open={emailDialog.open} onOpenChange={(o) => setEmailDialog((d) => ({ ...d, open: o }))}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{emailDialog.label}</DialogTitle>
+            <DialogDescription>
+              Copy each field below and paste into a new Proton Mail message.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">To</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(order.customer_email, "Email address")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Input readOnly value={order.customer_email} className="bg-secondary/20 border-border/30" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">Subject</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(emailDialog.subject, "Subject")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Input readOnly value={emailDialog.subject} className="bg-secondary/20 border-border/30" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label className="text-xs text-muted-foreground">Body</Label>
+                <Button size="sm" variant="ghost" className="h-7 gap-1" onClick={() => copyToClipboard(emailDialog.body, "Body")}>
+                  <Copy className="w-3 h-3" /> Copy
+                </Button>
+              </div>
+              <Textarea readOnly value={emailDialog.body} className="min-h-[260px] bg-secondary/20 border-border/30 font-mono text-xs" onFocus={(e) => e.currentTarget.select()} />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <Button
+                variant="outline"
+                onClick={() => copyToClipboard(`To: ${order.customer_email}\nSubject: ${emailDialog.subject}\n\n${emailDialog.body}`, "Full email")}
+                className="gap-2"
+              >
+                <Copy className="w-3 h-3" /> Copy all
+              </Button>
+              <Button
+                onClick={() => window.open("https://mail.proton.me/u/0/inbox?action=compose", "_blank", "noopener,noreferrer")}
+                className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background"
+              >
+                <Mail className="w-4 h-4" /> Open Proton Mail
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
