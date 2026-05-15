@@ -58,7 +58,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron font-semibold tracking-wide;
+    @apply font-orbitron font-medium;
+    letter-spacing: -0.015em;
   }
 }
 
