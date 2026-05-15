@@ -10,7 +10,7 @@ import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/compone
 import { toast } from "sonner";
 import { ArrowLeft, Copy, Mail, Save, Trash2 } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
-import { buildVariables, fillTemplate, buildMailto, type OrderItem } from "@/lib/emailTemplates";
+import { buildVariables, fillTemplate, type OrderItem } from "@/lib/emailTemplates";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 type Template = Database["public"]["Tables"]["email_templates"]["Row"];
