@@ -204,12 +204,12 @@
   position: fixed;
   width: 2px;
   height: 2px;
-  background: hsl(var(--ice-blue));
+  background: hsl(var(--frost));
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
   animation: particleDrift linear infinite;
-  box-shadow: 0 0 6px hsl(var(--ice-blue) / 0.5);
+  box-shadow: 0 0 4px hsl(var(--frost) / 0.6);
 }
 
 /* Snowflake kept for compatibility */
