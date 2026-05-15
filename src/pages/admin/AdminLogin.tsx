@@ -8,11 +8,16 @@ import { toast } from "sonner";
 import { useAdminSession } from "@/lib/adminAuth";
 import { Lock } from "lucide-react";
 
+// Fixed admin credentials. Username is mapped to a stable internal email so
+// Supabase auth (which requires an email) keeps working unchanged.
+const ADMIN_USERNAME = "yeti";
+const ADMIN_PASSWORD = "peptides";
+const ADMIN_EMAIL = "yeti@yetipeptides.admin";
+
 export default function AdminLogin() {
   const navigate = useNavigate();
   const { session, isAdmin, loading } = useAdminSession();
-  const [mode, setMode] = useState<"login" | "signup">("login");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -24,20 +29,36 @@ export default function AdminLogin() {
     e.preventDefault();
     setBusy(true);
     try {
-      if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-        toast.success("Account created. Sign in now — your account still needs the admin role granted.");
-        setMode("login");
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        toast.success("Signed in");
+      if (username.trim().toLowerCase() !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+        throw new Error("Invalid username or password");
       }
+
+      // Try sign-in first. If the account doesn't exist yet, create it.
+      let { error } = await supabase.auth.signInWithPassword({
+        email: ADMIN_EMAIL,
+        password: ADMIN_PASSWORD,
+      });
+
+      if (error) {
+        const signUp = await supabase.auth.signUp({
+          email: ADMIN_EMAIL,
+          password: ADMIN_PASSWORD,
+        });
+        if (signUp.error && !/registered|exists/i.test(signUp.error.message)) {
+          throw signUp.error;
+        }
+        const retry = await supabase.auth.signInWithPassword({
+          email: ADMIN_EMAIL,
+          password: ADMIN_PASSWORD,
+        });
+        if (retry.error) throw retry.error;
+      }
+
+      // Grant admin role on first login (no-op if an admin already exists).
+      await supabase.rpc("bootstrap_admin");
+
+      toast.success("Signed in");
+      navigate("/admin", { replace: true });
     } catch (err: any) {
       toast.error(err.message || "Something went wrong");
     } finally {
@@ -53,18 +74,17 @@ export default function AdminLogin() {
             <Lock className="w-5 h-5 text-[hsl(var(--ice-blue))]" />
           </div>
           <h1 className="text-xl font-bold tracking-wide">YETI ADMIN</h1>
-          <p className="text-xs text-muted-foreground mt-1">
-            {mode === "login" ? "Sign in to your admin account" : "Create your admin account"}
-          </p>
+          <p className="text-xs text-muted-foreground mt-1">Sign in to your admin account</p>
         </div>
         <form onSubmit={handle} className="space-y-3">
           <div>
-            <Label htmlFor="email" className="text-xs text-muted-foreground">Email</Label>
+            <Label htmlFor="username" className="text-xs text-muted-foreground">Username</Label>
             <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="username"
+              type="text"
+              autoComplete="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="mt-1 bg-secondary/20 border-border/30"
             />
@@ -74,10 +94,10 @@ export default function AdminLogin() {
             <Input
               id="password"
               type="password"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength={8}
               className="mt-1 bg-secondary/20 border-border/30"
             />
           </div>
@@ -86,16 +106,9 @@ export default function AdminLogin() {
             disabled={busy}
             className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background font-semibold mt-2"
           >
-            {busy ? "…" : mode === "login" ? "Sign In" : "Create Account"}
+            {busy ? "…" : "Sign In"}
           </Button>
         </form>
-        <button
-          type="button"
-          onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="text-[11px] text-muted-foreground hover:text-foreground mt-4 w-full text-center"
-        >
-          {mode === "login" ? "First time? Create an account" : "Have an account? Sign in"}
-        </button>
       </div>
     </div>
   );
