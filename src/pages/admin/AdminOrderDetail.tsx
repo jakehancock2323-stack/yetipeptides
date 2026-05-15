@@ -74,7 +74,7 @@ export default function AdminOrderDetail() {
     toast.success("Saved");
   };
 
-  const sendEmail = (templateKey: string, label: string) => {
+  const sendEmail = async (templateKey: string, label: string) => {
     const t = templates[templateKey];
     if (!t) {
       toast.error(`Template "${templateKey}" not found. Add it in Email Templates.`);
@@ -83,9 +83,20 @@ export default function AdminOrderDetail() {
     const vars = buildVariables(order);
     const subject = fillTemplate(t.subject, vars);
     const body = fillTemplate(t.body, vars);
-    const url = buildMailto(order.customer_email, subject, body);
-    window.location.href = url;
-    toast.success(`Opening ${label} in your email client`);
+    const clipboardText =
+      `To: ${order.customer_email}\nSubject: ${subject}\n\n${body}`;
+    try {
+      await navigator.clipboard.writeText(clipboardText);
+    } catch {
+      // ignore — we still open Proton below
+    }
+    // Open Proton Mail web compose in a new tab.
+    window.open(
+      "https://mail.proton.me/u/0/inbox?action=compose",
+      "_blank",
+      "noopener,noreferrer",
+    );
+    toast.success(`${label} copied — paste into the new Proton message`);
   };
 
   const copyAddress = () => {
@@ -264,8 +275,10 @@ export default function AdminOrderDetail() {
           <div className="frosted-glass rounded-xl p-5 sticky top-6">
             <h2 className="font-semibold mb-1">Send email</h2>
             <p className="text-xs text-muted-foreground mb-4">
-              Opens your default email client (Proton) with a pre-filled message to{" "}
-              <span className="text-foreground">{order.customer_email}</span>. You just hit Send.
+              Opens Proton Mail (web) in a new tab and copies the full email
+              (To / Subject / Body) to your clipboard. Click <span className="text-foreground">New message</span>{" "}
+              in Proton, paste, and hit Send. Recipient:{" "}
+              <span className="text-foreground">{order.customer_email}</span>.
             </p>
             <div className="space-y-2">
               <Button
