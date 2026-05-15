@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 
 export default function Snowfall() {
   const particles = useMemo(() => 
-    Array.from({ length: 12 }, (_, i) => ({
+    Array.from({ length: 40 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
-      duration: 20 + Math.random() * 25,
-      delay: Math.random() * 15,
-      size: 1 + Math.random() * 2,
-      opacity: 0.2 + Math.random() * 0.4,
+      duration: 18 + Math.random() * 28,
+      delay: Math.random() * 20,
+      size: 1 + Math.random() * 2.5,
+      opacity: 0.25 + Math.random() * 0.5,
     })), []
   );
 
