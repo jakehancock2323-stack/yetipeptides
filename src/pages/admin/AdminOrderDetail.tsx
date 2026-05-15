@@ -23,6 +23,12 @@ export default function AdminOrderDetail() {
   const [adminNotes, setAdminNotes] = useState("");
   const [tracking, setTracking] = useState("");
   const [savingNotes, setSavingNotes] = useState(false);
+  const [emailDialog, setEmailDialog] = useState<{ open: boolean; label: string; subject: string; body: string }>({
+    open: false,
+    label: "",
+    subject: "",
+    body: "",
+  });
 
   const load = useCallback(async () => {
     if (!id) return;
