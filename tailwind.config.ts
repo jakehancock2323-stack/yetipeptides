@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        'orbitron': ['Orbitron', 'sans-serif'],
-        'rajdhani': ['Rajdhani', 'sans-serif'],
+        'orbitron': ['Space Grotesk', 'system-ui', 'sans-serif'],
+        'rajdhani': ['Inter', 'system-ui', 'sans-serif'],
+        'serif-accent': ['Libre Baskerville', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
