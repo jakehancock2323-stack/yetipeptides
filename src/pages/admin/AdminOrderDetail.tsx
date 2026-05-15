@@ -90,20 +90,16 @@ export default function AdminOrderDetail() {
     const vars = buildVariables(order);
     const subject = fillTemplate(t.subject, vars);
     const body = fillTemplate(t.body, vars);
-    const clipboardText =
-      `To: ${order.customer_email}\nSubject: ${subject}\n\n${body}`;
+    setEmailDialog({ open: true, label, subject, body });
+  };
+
+  const copyToClipboard = async (text: string, what: string) => {
     try {
-      await navigator.clipboard.writeText(clipboardText);
+      await navigator.clipboard.writeText(text);
+      toast.success(`${what} copied`);
     } catch {
-      // ignore — we still open Proton below
+      toast.error("Copy failed — select and copy manually");
     }
-    // Open Proton Mail web compose in a new tab.
-    window.open(
-      "https://mail.proton.me/u/0/inbox?action=compose",
-      "_blank",
-      "noopener,noreferrer",
-    );
-    toast.success(`${label} copied — paste into the new Proton message`);
   };
 
   const copyAddress = () => {
