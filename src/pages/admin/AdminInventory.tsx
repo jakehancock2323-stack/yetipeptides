@@ -108,8 +108,10 @@ export default function AdminInventory() {
                       <span className={`text-xs ${oos ? "text-red-400" : "text-emerald-400"}`}>
                         {oos ? "Out of stock" : "In stock"}
                       </span>
-                      <Switch checked={!oos} onCheckedChange={(v) => toggle(p.id, v ? "" : v as any, false) /* placeholder */} />
-                      {/* Real switch */}
+                      <Switch
+                        checked={!oos}
+                        onCheckedChange={(checked) => toggle(p.id, v.specification, !checked)}
+                      />
                     </div>
                   </div>
                 );
