@@ -29,6 +29,15 @@ import ResearchDisclaimer from "./pages/ResearchDisclaimer";
 import HowToPayCrypto from "./pages/HowToPayCrypto";
 import TrackOrder from "./pages/TrackOrder";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminOrders from "./pages/admin/AdminOrders";
+import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
+import AdminStats from "./pages/admin/AdminStats";
+import AdminCustomers from "./pages/admin/AdminCustomers";
+import AdminInventory from "./pages/admin/AdminInventory";
+import AdminTemplates from "./pages/admin/AdminTemplates";
+import RequireAdmin from "./components/admin/RequireAdmin";
+import AdminLayout from "./components/admin/AdminLayout";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +76,22 @@ const App = () => {
                     <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                     <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
                     <Route path="/track-order" element={<TrackOrder />} />
+                    <Route path="/admin/login" element={<AdminLogin />} />
+                    <Route
+                      path="/admin"
+                      element={
+                        <RequireAdmin>
+                          <AdminLayout />
+                        </RequireAdmin>
+                      }
+                    >
+                      <Route index element={<AdminOrders />} />
+                      <Route path="orders/:id" element={<AdminOrderDetail />} />
+                      <Route path="stats" element={<AdminStats />} />
+                      <Route path="customers" element={<AdminCustomers />} />
+                      <Route path="inventory" element={<AdminInventory />} />
+                      <Route path="templates" element={<AdminTemplates />} />
+                    </Route>
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </BrowserRouter>

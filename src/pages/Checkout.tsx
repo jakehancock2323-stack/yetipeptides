@@ -114,6 +114,34 @@ export default function Checkout() {
     };
 
     try {
+      // Save to admin orders DB (independent of email; failures don't block checkout)
+      try {
+        await supabase.from("orders").insert({
+          customer_name: formData.fullName,
+          customer_email: formData.email,
+          customer_phone: formData.phone,
+          street: formData.street,
+          city: formData.city,
+          region: formData.region,
+          postcode: formData.postcode,
+          country: formData.country,
+          customer_notes: formData.notes || null,
+          shipping_region: effectiveRegion,
+          payment_method: paymentMethod,
+          items: orderData.items as any,
+          include_ebook: includeEbook,
+          subtotal: orderData.subtotal,
+          delivery_fee: orderData.deliveryFee,
+          processing_fee: orderData.processingFee,
+          discount: 0,
+          total: orderData.total,
+          currency: isUK ? "GBP" : "USD",
+          status: "new",
+        });
+      } catch (dbErr) {
+        console.error("Failed to save order to DB:", dbErr);
+      }
+
       const { error } = await supabase.functions.invoke("send-order-email", {
         body: orderData,
       });
