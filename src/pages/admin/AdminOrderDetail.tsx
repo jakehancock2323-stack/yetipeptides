@@ -275,8 +275,10 @@ export default function AdminOrderDetail() {
           <div className="frosted-glass rounded-xl p-5 sticky top-6">
             <h2 className="font-semibold mb-1">Send email</h2>
             <p className="text-xs text-muted-foreground mb-4">
-              Opens your default email client (Proton) with a pre-filled message to{" "}
-              <span className="text-foreground">{order.customer_email}</span>. You just hit Send.
+              Opens Proton Mail (web) in a new tab and copies the full email
+              (To / Subject / Body) to your clipboard. Click <span className="text-foreground">New message</span>{" "}
+              in Proton, paste, and hit Send. Recipient:{" "}
+              <span className="text-foreground">{order.customer_email}</span>.
             </p>
             <div className="space-y-2">
               <Button
