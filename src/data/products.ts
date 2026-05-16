@@ -33,7 +33,8 @@ export const categories = [
 export const domesticCategories = [
   "All",
   "Peptides",
-  "Peptide Supplies"
+  "Peptide Supplies",
+  "Cosmetics"
 ];
 
 export const products: Product[] = [
