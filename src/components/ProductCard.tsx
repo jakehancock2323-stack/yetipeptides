@@ -26,7 +26,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const selectedVariant = product.variants[selectedVariantIndex];
   const isProductOutOfStock = product.outOfStock;
   const isVariantOutOfStock = selectedVariant.outOfStock;
-  const isCurrentlyOutOfStock = isProductOutOfStock || isVariantOutOfStock;
+  const isComingSoon = product.comingSoon;
+  const isCurrentlyOutOfStock = isProductOutOfStock || isVariantOutOfStock || isComingSoon;
   const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
