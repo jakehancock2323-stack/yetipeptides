@@ -671,7 +671,7 @@ export const products: Product[] = [
   {
     id: "frostskin-serum",
     name: "FrostSkin Serum",
-    category: "Peptides",
+    category: "Cosmetics",
     region: "UK Domestic",
     currency: "GBP",
     variants: [
