@@ -14,6 +14,7 @@ export interface Product {
   variants: ProductVariant[];
   ingredients?: string[];
   outOfStock?: boolean;
+  comingSoon?: boolean;
   stockBadge?: string;
   image?: string;
   currency?: 'USD' | 'GBP';
@@ -676,6 +677,7 @@ export const products: Product[] = [
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "Coming Soon",
+    comingSoon: true,
     variants: [
       { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }
     ],
