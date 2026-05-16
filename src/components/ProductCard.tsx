@@ -30,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : yetiVial;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
