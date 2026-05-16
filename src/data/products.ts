@@ -33,7 +33,8 @@ export const categories = [
 export const domesticCategories = [
   "All",
   "Peptides",
-  "Peptide Supplies"
+  "Peptide Supplies",
+  "Cosmetics"
 ];
 
 export const products: Product[] = [
@@ -671,7 +672,7 @@ export const products: Product[] = [
   {
     id: "frostskin-serum",
     name: "FrostSkin Serum",
-    category: "Peptides",
+    category: "Cosmetics",
     region: "UK Domestic",
     currency: "GBP",
     variants: [
