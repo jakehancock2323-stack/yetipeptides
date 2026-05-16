@@ -675,9 +675,9 @@ export const products: Product[] = [
     category: "Cosmetics",
     region: "UK Domestic",
     currency: "GBP",
-    outOfStock: true,
+    stockBadge: "Coming Soon",
     variants: [
-      { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25, outOfStock: true }
+      { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }
     ],
     ingredients: [
       "Aqua",
