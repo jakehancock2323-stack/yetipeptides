@@ -675,11 +675,20 @@ export const products: Product[] = [
     region: "UK Domestic",
     currency: "GBP",
     variants: [
-      { specification: "GHK-Cu Facial Serum • 30ml dropper", price: 25 }
+      { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }
     ],
     ingredients: [
-      "GHK-Cu (Copper Peptide)",
-      "Cosmetic-grade carrier base"
+      "Aqua",
+      "Sodium Hyaluronate",
+      "Zemea Propanediol",
+      "Copper Tripeptide-1 (GHK-Cu) – 3.33%",
+      "Niacinamide",
+      "N-Acetyl Glucosamine (NAG)",
+      "Panthenol",
+      "Hydrolyzed Silk Protein",
+      "Ectoin",
+      "Transcutol",
+      "Phenoxyethanol"
     ]
   },
   {
