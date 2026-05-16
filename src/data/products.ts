@@ -669,6 +669,20 @@ export const products: Product[] = [
     ]
   },
   {
+    id: "frostskin-serum",
+    name: "FrostSkin Serum",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    variants: [
+      { specification: "GHK-Cu Facial Serum • 30ml dropper", price: 25 }
+    ],
+    ingredients: [
+      "GHK-Cu (Copper Peptide)",
+      "Cosmetic-grade carrier base"
+    ]
+  },
+  {
     id: "hospira-bac-water",
     name: "Hospira Bacteriostatic Water",
     category: "Peptide Supplies",
