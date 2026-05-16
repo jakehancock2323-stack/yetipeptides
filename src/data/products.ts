@@ -14,6 +14,7 @@ export interface Product {
   variants: ProductVariant[];
   ingredients?: string[];
   outOfStock?: boolean;
+  comingSoon?: boolean;
   stockBadge?: string;
   image?: string;
   currency?: 'USD' | 'GBP';
