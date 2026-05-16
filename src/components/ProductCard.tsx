@@ -10,6 +10,7 @@ import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
 import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
+import frostSkinImage from '@/assets/frostskin-serum.png';
 import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
