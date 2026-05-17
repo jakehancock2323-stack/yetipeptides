@@ -28,6 +28,15 @@ export function buildVariables(order: Order): Record<string, string> {
   ]
     .filter(Boolean)
     .join("\n");
+  const pm = (order.payment_method || "").toLowerCase();
+  let walletAddress = "";
+  if (pm.includes("btc") || pm.includes("bitcoin")) {
+    walletAddress = "BTC: bc1qw9wyge8sp336wleanczaa6j70w57nlwvm6efnw";
+  } else if (pm.includes("usdt") || pm.includes("usdc")) {
+    walletAddress = `${pm.includes("usdc") ? "USDC" : "USDT"} (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624`;
+  } else if (pm.includes("middleman") || pm.includes("escrow")) {
+    walletAddress = "Middleman / Escrow — reply to this email and we'll send the next steps.";
+  }
   return {
     customer_name: order.customer_name,
     customer_email: order.customer_email,
@@ -40,6 +49,7 @@ export function buildVariables(order: Order): Record<string, string> {
     total: fmt(order.total),
     address,
     payment_method: order.payment_method.toUpperCase(),
+    wallet_address: walletAddress,
     shipping_region: order.shipping_region,
     tracking_number: order.tracking_number || "(not yet available)",
     status: order.status,
