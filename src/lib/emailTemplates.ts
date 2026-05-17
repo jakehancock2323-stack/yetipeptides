@@ -82,6 +82,7 @@ export const AVAILABLE_VARIABLES = [
   "{total}",
   "{address}",
   "{payment_method}",
+  "{wallet_address}",
   "{shipping_region}",
   "{tracking_number}",
   "{status}",
