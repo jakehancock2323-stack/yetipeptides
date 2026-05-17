@@ -176,6 +176,8 @@ export default function AdminOrderDetail() {
           );
         })}
       </div>
+
+      <div className="grid lg:grid-cols-[1fr_360px] gap-5">
         {/* Left: order content */}
         <div className="space-y-5">
           {/* Customer */}
