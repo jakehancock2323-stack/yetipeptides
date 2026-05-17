@@ -372,7 +372,11 @@ export default function AdminOrderDetail() {
                   <Copy className="w-3 h-3" /> Copy
                 </Button>
               </div>
-              <Input readOnly value={emailDialog.subject} className="bg-secondary/20 border-border/30" onFocus={(e) => e.currentTarget.select()} />
+              <Input
+                value={emailDialog.subject}
+                onChange={(e) => setEmailDialog((d) => ({ ...d, subject: e.target.value }))}
+                className="bg-secondary/20 border-border/30"
+              />
             </div>
             <div>
               <div className="flex items-center justify-between mb-1">
@@ -381,9 +385,13 @@ export default function AdminOrderDetail() {
                   <Copy className="w-3 h-3" /> Copy
                 </Button>
               </div>
-              <Textarea readOnly value={emailDialog.body} className="min-h-[260px] bg-secondary/20 border-border/30 font-mono text-xs" onFocus={(e) => e.currentTarget.select()} />
+              <Textarea
+                value={emailDialog.body}
+                onChange={(e) => setEmailDialog((d) => ({ ...d, body: e.target.value }))}
+                className="min-h-[260px] bg-secondary/20 border-border/30 font-mono text-xs"
+              />
             </div>
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="flex justify-end gap-2 pt-2 flex-wrap">
               <Button
                 variant="outline"
                 onClick={() => copyToClipboard(`To: ${order.customer_email}\nSubject: ${emailDialog.subject}\n\n${emailDialog.body}`, "Full email")}
@@ -392,10 +400,34 @@ export default function AdminOrderDetail() {
                 <Copy className="w-3 h-3" /> Copy all
               </Button>
               <Button
+                variant="outline"
                 onClick={() => window.open("https://mail.proton.me/u/0/inbox?action=compose", "_blank", "noopener,noreferrer")}
-                className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background"
+                className="gap-2"
               >
                 <Mail className="w-4 h-4" /> Open Proton Mail
+              </Button>
+              <Button
+                disabled={sendingEmail}
+                onClick={async () => {
+                  setSendingEmail(true);
+                  const { data, error } = await supabase.functions.invoke("send-customer-email", {
+                    body: {
+                      to: order.customer_email,
+                      subject: emailDialog.subject,
+                      body: emailDialog.body,
+                    },
+                  });
+                  setSendingEmail(false);
+                  if (error || (data as any)?.error) {
+                    toast.error((data as any)?.error || error?.message || "Failed to send");
+                    return;
+                  }
+                  toast.success(`Email sent to ${order.customer_email}`);
+                  setEmailDialog((d) => ({ ...d, open: false }));
+                }}
+                className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background"
+              >
+                <Mail className="w-4 h-4" /> {sendingEmail ? "Sending…" : "Send now"}
               </Button>
             </div>
           </div>
