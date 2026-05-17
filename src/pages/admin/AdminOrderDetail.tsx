@@ -29,6 +29,7 @@ export default function AdminOrderDetail() {
     subject: "",
     body: "",
   });
+  const [sendingEmail, setSendingEmail] = useState(false);
 
   const load = useCallback(async () => {
     if (!id) return;
