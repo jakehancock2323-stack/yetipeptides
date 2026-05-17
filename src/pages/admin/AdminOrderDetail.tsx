@@ -156,7 +156,26 @@ export default function AdminOrderDetail() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_360px] gap-5">
+      {/* Quick status toggles */}
+      <div className="frosted-glass rounded-xl p-3 mb-5 flex flex-wrap items-center gap-2">
+        <span className="text-xs text-muted-foreground px-2">Quick set:</span>
+        {ORDER_STATUSES.map((s) => {
+          const active = order.status === s;
+          return (
+            <button
+              key={s}
+              onClick={() => updateOrder({ status: s })}
+              className={`text-xs px-3 py-1.5 rounded-full border transition ${
+                active
+                  ? "bg-[hsl(var(--ice-blue))]/20 border-[hsl(var(--ice-blue))]/60 text-[hsl(var(--ice-blue))]"
+                  : "bg-secondary/20 border-border/30 hover:border-border/60 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {active ? "✓ " : ""}{ORDER_STATUS_LABELS[s]}
+            </button>
+          );
+        })}
+      </div>
         {/* Left: order content */}
         <div className="space-y-5">
           {/* Customer */}
