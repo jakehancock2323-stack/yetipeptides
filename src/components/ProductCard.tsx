@@ -119,6 +119,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
+        {/* Usage instructions */}
+        {product.usage && (
+          <p className="text-xs text-muted-foreground italic -mt-0.5">
+            {product.usage}
+          </p>
+        )}
+
         {/* Ingredients preview */}
         {product.ingredients && (
           <details className="text-sm">
