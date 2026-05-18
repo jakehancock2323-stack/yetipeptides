@@ -11,6 +11,7 @@ import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
 import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import frostSkinImage from '@/assets/frostskin-serum.png';
+import tretinoinCreamImage from '@/assets/tretinoin-cream.png';
 import { formatGbpEstimate } from '@/lib/currency';
 
 interface ProductCardProps {
@@ -31,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
@@ -64,7 +65,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
         {isUkDomestic && (
