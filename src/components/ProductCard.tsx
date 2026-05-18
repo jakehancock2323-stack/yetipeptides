@@ -33,6 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
   const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
+  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
     setIsAdding(true);
