@@ -62,11 +62,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       )}
 
       {/* Image */}
-      <div className="relative bg-secondary/10 flex items-center justify-center py-6">
+      <div className="relative bg-secondary/10 flex items-center justify-center h-44">
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'w-36 h-36' : 'w-20 h-28'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
         {isUkDomestic && (
