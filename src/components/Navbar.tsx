@@ -67,9 +67,11 @@ export default function Navbar() {
 
             {/* Region Toggle + Cart & Mobile Menu */}
             <div className="flex items-center gap-2">
-              <div className="hidden sm:block">
-                <RegionToggle />
-              </div>
+              {location.pathname === '/products' && (
+                <div className="hidden sm:block">
+                  <RegionToggle />
+                </div>
+              )}
               <Button 
                 variant="ghost" 
                 size="icon"
