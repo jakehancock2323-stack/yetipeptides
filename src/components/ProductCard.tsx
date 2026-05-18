@@ -151,7 +151,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="flex-1 h-9 text-sm"
               variant="outline"
             >
-              {isComingSoon ? 'Coming Soon' : isProductOutOfStock ? 'Out of Stock' : 'Variant Out of Stock'}
+              {isUkDomesticOutOfStock ? 'Coming soon' : isComingSoon ? 'Coming Soon' : isProductOutOfStock ? 'Out of Stock' : 'Variant Out of Stock'}
             </Button>
           ) : (
             <>
