@@ -657,7 +657,8 @@ export const products: Product[] = [
     variants: [
       { specification: "Tiffany Blue", price: 15, outOfStock: true },
       { specification: "Red", price: 15, outOfStock: true },
-      { specification: "Deep Purple", price: 15, outOfStock: true }
+      { specification: "Deep Purple", price: 15, outOfStock: true },
+      { specification: "Green", price: 15, outOfStock: true }
     ]
   },
   {
