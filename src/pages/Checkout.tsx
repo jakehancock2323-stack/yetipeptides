@@ -130,7 +130,7 @@ export default function Checkout() {
           region: formData.region,
           postcode: formData.postcode,
           country: formData.country,
-          customer_notes: formData.notes || null,
+          customer_notes: [isUK ? `Shipping: ${shippingMethodLabel}` : null, formData.notes].filter(Boolean).join(' | ') || null,
           shipping_region: effectiveRegion,
           payment_method: paymentMethod,
           items: orderData.items as any,
