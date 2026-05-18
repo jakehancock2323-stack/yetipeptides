@@ -19,6 +19,7 @@ export interface Product {
   image?: string;
   currency?: 'USD' | 'GBP';
   popular?: boolean;
+  badges?: string[];
 }
 
 export const categories = [
@@ -677,6 +678,7 @@ export const products: Product[] = [
     currency: "GBP",
     stockBadge: "Coming Soon",
     comingSoon: true,
+    badges: ["Cruelty Free Standards", "Small Batch Clinical Purity"],
     variants: [
       { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }
     ],

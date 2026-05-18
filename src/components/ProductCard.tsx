@@ -105,6 +105,20 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
+        {/* Product Badges */}
+        {product.badges && product.badges.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 -mt-1">
+            {product.badges.map((badge, i) => (
+              <span
+                key={i}
+                className="text-[10px] uppercase tracking-wider font-medium text-ice-blue bg-ice-blue/10 border border-ice-blue/20 px-2 py-0.5 rounded-full"
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+        )}
+
         {/* Ingredients preview */}
         {product.ingredients && (
           <details className="text-sm">
