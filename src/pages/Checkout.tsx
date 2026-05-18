@@ -34,6 +34,7 @@ export default function Checkout() {
   const [step, setStep] = useState<1 | 2>(1);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("usdt");
+  const [ukShippingMethod, setUkShippingMethod] = useState<"royal-mail" | "inpost">("royal-mail");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
