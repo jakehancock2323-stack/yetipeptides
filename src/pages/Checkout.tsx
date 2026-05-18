@@ -100,6 +100,7 @@ export default function Checkout() {
       customerDetails: formData,
       paymentMethod,
       shippingRegion: effectiveRegion,
+      shippingMethod: shippingMethodLabel,
       items: items.map((item) => ({
         productName: item.product.name,
         productCategory: item.product.category,
