@@ -20,6 +20,7 @@ export interface Product {
   currency?: 'USD' | 'GBP';
   popular?: boolean;
   badges?: string[];
+  usage?: string;
 }
 
 export const categories = [
