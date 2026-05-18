@@ -33,6 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
   const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
+  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
     setIsAdding(true);
@@ -75,7 +76,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
         {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
-            Out of Stock
+            {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
           </span>
         ) : product.stockBadge ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
@@ -150,7 +151,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="flex-1 h-9 text-sm"
               variant="outline"
             >
-              {isComingSoon ? 'Coming Soon' : isProductOutOfStock ? 'Out of Stock' : 'Variant Out of Stock'}
+              {isUkDomesticOutOfStock ? 'Coming soon' : isComingSoon ? 'Coming Soon' : isProductOutOfStock ? 'Out of Stock' : 'Variant Out of Stock'}
             </Button>
           ) : (
             <>
