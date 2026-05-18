@@ -76,7 +76,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
         {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
-            Out of Stock
+            {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
           </span>
         ) : product.stockBadge ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
