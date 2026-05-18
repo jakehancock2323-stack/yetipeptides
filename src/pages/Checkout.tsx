@@ -472,8 +472,8 @@ export default function Checkout() {
                     <span>{currencySymbol}{calculateSubtotal().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Delivery</span>
-                    <span>{currencySymbol}{deliveryFee.toFixed(2)}</span>
+                    <span>Delivery{isUK ? ` (${shippingMethodLabel})` : ''}</span>
+                    <span>{deliveryFee === 0 ? 'Free' : `${currencySymbol}${deliveryFee.toFixed(2)}`}</span>
                   </div>
                   {btcFee > 0 && (
                     <div className="flex justify-between text-xs text-muted-foreground">
