@@ -63,10 +63,10 @@ export default function AdminStats() {
       <h1 className="text-2xl font-bold mb-6">Stats</h1>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Stat label="Today" value={`$${sumTotal(today).toFixed(2)}`} sub={`${today.length} orders`} />
-        <Stat label="Last 7 days" value={`$${sumTotal(week).toFixed(2)}`} sub={`${week.length} orders`} />
-        <Stat label="Last 30 days" value={`$${sumTotal(month).toFixed(2)}`} sub={`${month.length} orders`} />
-        <Stat label="All-time" value={`$${sumTotal(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
+        <Stat label="Today" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} orders`} />
+        <Stat label="Last 7 days" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} orders`} />
+        <Stat label="Last 30 days" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} orders`} />
+        <Stat label="All-time" value={`$${sumProfit(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
@@ -103,7 +103,7 @@ export default function AdminStats() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-amber-400">UK Domestic</span>
-                  <span>{ukOrders.length} orders · ${sumTotal(ukOrders).toFixed(2)}</span>
+                  <span>{ukOrders.length} orders · ${sumProfit(ukOrders).toFixed(2)}</span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary/30 overflow-hidden">
                   <div
@@ -115,7 +115,7 @@ export default function AdminStats() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-cyan-400">International</span>
-                  <span>{intlOrders.length} orders · ${sumTotal(intlOrders).toFixed(2)}</span>
+                  <span>{intlOrders.length} orders · ${sumProfit(intlOrders).toFixed(2)}</span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary/30 overflow-hidden">
                   <div
