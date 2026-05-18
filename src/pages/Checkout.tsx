@@ -331,10 +331,10 @@ export default function Checkout() {
                         <RadioGroupItem value="inpost" id="inpost" />
                         <div>
                           <span className="text-sm font-medium">InPost Locker</span>
-                          <p className="text-[10px] text-muted-foreground mt-0.5">More anonymous — collect from your nearest locker</p>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">More anonymous — set up your InPost QR code and email it to us. Delivery fee paid separately via InPost.</p>
                         </div>
                       </div>
-                      <span className="text-sm font-semibold text-[hsl(var(--ice-blue))]">Free</span>
+                      <span className="text-sm font-semibold text-[hsl(var(--ice-blue))]">Paid separately</span>
                     </label>
                   </RadioGroup>
                 </div>
