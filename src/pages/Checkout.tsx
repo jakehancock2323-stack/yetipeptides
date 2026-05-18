@@ -80,8 +80,11 @@ export default function Checkout() {
   const isUK = allItemsUKDomestic || region === 'UK Domestic';
   const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : region;
   const paypalAvailable = allItemsUKDomestic;
-  const deliveryFee = isUK ? 5 : 65;
+  const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
   const currencySymbol = isUK ? '£' : '$';
+  const shippingMethodLabel = isUK
+    ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
+    : 'International Shipping';
 
   // Safety: if PayPal becomes unavailable, reset selection
   if (paymentMethod === 'paypal' && !paypalAvailable) {
