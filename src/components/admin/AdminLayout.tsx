@@ -1,13 +1,12 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { adminSignOut } from "@/lib/adminAuth";
-import { LayoutDashboard, Package, BarChart3, Users, Boxes, Mail, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, BarChart3, Users, Mail, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
   { to: "/admin", label: "Orders", icon: Package, end: true },
   { to: "/admin/stats", label: "Stats", icon: BarChart3 },
   { to: "/admin/customers", label: "Customers", icon: Users },
-  { to: "/admin/inventory", label: "Inventory", icon: Boxes },
   { to: "/admin/templates", label: "Email Templates", icon: Mail },
 ];
 
