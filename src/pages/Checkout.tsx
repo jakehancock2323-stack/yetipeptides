@@ -34,6 +34,7 @@ export default function Checkout() {
   const [step, setStep] = useState<1 | 2>(1);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("usdt");
+  const [ukShippingMethod, setUkShippingMethod] = useState<"royal-mail" | "inpost">("royal-mail");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -79,8 +80,11 @@ export default function Checkout() {
   const isUK = allItemsUKDomestic || region === 'UK Domestic';
   const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : region;
   const paypalAvailable = allItemsUKDomestic;
-  const deliveryFee = isUK ? 5 : 65;
+  const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
   const currencySymbol = isUK ? '£' : '$';
+  const shippingMethodLabel = isUK
+    ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
+    : 'International Shipping';
 
   // Safety: if PayPal becomes unavailable, reset selection
   if (paymentMethod === 'paypal' && !paypalAvailable) {
@@ -96,6 +100,7 @@ export default function Checkout() {
       customerDetails: formData,
       paymentMethod,
       shippingRegion: effectiveRegion,
+      shippingMethod: shippingMethodLabel,
       items: items.map((item) => ({
         productName: item.product.name,
         productCategory: item.product.category,
@@ -125,7 +130,7 @@ export default function Checkout() {
           region: formData.region,
           postcode: formData.postcode,
           country: formData.country,
-          customer_notes: formData.notes || null,
+          customer_notes: [isUK ? `Shipping: ${shippingMethodLabel}` : null, formData.notes].filter(Boolean).join(' | ') || null,
           shipping_region: effectiveRegion,
           payment_method: paymentMethod,
           items: orderData.items as any,
@@ -300,6 +305,41 @@ export default function Checkout() {
           <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_380px] gap-6">
             {/* Payment Method */}
             <div className="frosted-glass rounded-2xl p-5 sm:p-7 glow-border">
+              {isUK && (
+                <div className="mb-6">
+                  <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <Package className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
+                    Shipping Method
+                  </h2>
+                  <RadioGroup
+                    value={ukShippingMethod}
+                    onValueChange={(v) => setUkShippingMethod(v as "royal-mail" | "inpost")}
+                    className="space-y-2"
+                  >
+                    <label htmlFor="royal-mail" className={`flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${ukShippingMethod === 'royal-mail' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="royal-mail" id="royal-mail" />
+                        <div>
+                          <span className="text-sm font-medium">Royal Mail 24 Tracked</span>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">Next-day tracked delivery to your address</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-semibold">£5.00</span>
+                    </label>
+                    <label htmlFor="inpost" className={`flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${ukShippingMethod === 'inpost' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                      <div className="flex items-center gap-3">
+                        <RadioGroupItem value="inpost" id="inpost" />
+                        <div>
+                          <span className="text-sm font-medium">InPost Locker</span>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">More anonymous — collect from your nearest locker</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-semibold text-[hsl(var(--ice-blue))]">Free</span>
+                    </label>
+                  </RadioGroup>
+                </div>
+              )}
+
               <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <div className="w-6 h-6 rounded bg-[hsl(var(--ice-blue))]/10 flex items-center justify-center">
                   <span className="text-xs font-bold text-[hsl(var(--ice-blue))]">2</span>
@@ -432,8 +472,8 @@ export default function Checkout() {
                     <span>{currencySymbol}{calculateSubtotal().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Delivery</span>
-                    <span>{currencySymbol}{deliveryFee.toFixed(2)}</span>
+                    <span>Delivery{isUK ? ` (${shippingMethodLabel})` : ''}</span>
+                    <span>{deliveryFee === 0 ? 'Free' : `${currencySymbol}${deliveryFee.toFixed(2)}`}</span>
                   </div>
                   {btcFee > 0 && (
                     <div className="flex justify-between text-xs text-muted-foreground">
