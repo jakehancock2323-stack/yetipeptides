@@ -22,9 +22,13 @@ export default function AdminStats() {
 
   if (loading) return <div className="text-muted-foreground">Loading…</div>;
 
+  const PROFIT_PER_UNIT = 40;
   const now = Date.now();
   const since = (days: number) => now - days * 86400000;
-  const sumTotal = (list: Order[]) => list.reduce((s, o) => s + Number(o.total), 0);
+  const orderUnits = (o: Order) =>
+    (o.items as any[]).reduce((s, it) => s + Number(it.quantity || 0), 0);
+  const sumProfit = (list: Order[]) =>
+    list.reduce((s, o) => s + orderUnits(o) * PROFIT_PER_UNIT, 0);
   const today = orders.filter((o) => new Date(o.created_at).getTime() > since(1));
   const week = orders.filter((o) => new Date(o.created_at).getTime() > since(7));
   const month = orders.filter((o) => new Date(o.created_at).getTime() > since(30));
@@ -35,8 +39,9 @@ export default function AdminStats() {
     (o.items as any[]).forEach((it) => {
       const key = it.productName;
       if (!productCounts[key]) productCounts[key] = { name: key, qty: 0, revenue: 0 };
-      productCounts[key].qty += Number(it.quantity);
-      productCounts[key].revenue += Number(it.lineTotal);
+      const qty = Number(it.quantity);
+      productCounts[key].qty += qty;
+      productCounts[key].revenue += qty * PROFIT_PER_UNIT;
     });
   });
   const topProducts = Object.values(productCounts).sort((a, b) => b.qty - a.qty).slice(0, 10);
