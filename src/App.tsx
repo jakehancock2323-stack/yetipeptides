@@ -34,7 +34,7 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
 import AdminStats from "./pages/admin/AdminStats";
 import AdminCustomers from "./pages/admin/AdminCustomers";
-import AdminInventory from "./pages/admin/AdminInventory";
+
 import AdminTemplates from "./pages/admin/AdminTemplates";
 import RequireAdmin from "./components/admin/RequireAdmin";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -89,7 +89,7 @@ const App = () => {
                       <Route path="orders/:id" element={<AdminOrderDetail />} />
                       <Route path="stats" element={<AdminStats />} />
                       <Route path="customers" element={<AdminCustomers />} />
-                      <Route path="inventory" element={<AdminInventory />} />
+                      
                       <Route path="templates" element={<AdminTemplates />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />

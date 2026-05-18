@@ -22,9 +22,13 @@ export default function AdminStats() {
 
   if (loading) return <div className="text-muted-foreground">Loading…</div>;
 
+  const PROFIT_PER_UNIT = 40;
   const now = Date.now();
   const since = (days: number) => now - days * 86400000;
-  const sumTotal = (list: Order[]) => list.reduce((s, o) => s + Number(o.total), 0);
+  const orderUnits = (o: Order) =>
+    (o.items as any[]).reduce((s, it) => s + Number(it.quantity || 0), 0);
+  const sumProfit = (list: Order[]) =>
+    list.reduce((s, o) => s + orderUnits(o) * PROFIT_PER_UNIT, 0);
   const today = orders.filter((o) => new Date(o.created_at).getTime() > since(1));
   const week = orders.filter((o) => new Date(o.created_at).getTime() > since(7));
   const month = orders.filter((o) => new Date(o.created_at).getTime() > since(30));
@@ -35,8 +39,9 @@ export default function AdminStats() {
     (o.items as any[]).forEach((it) => {
       const key = it.productName;
       if (!productCounts[key]) productCounts[key] = { name: key, qty: 0, revenue: 0 };
-      productCounts[key].qty += Number(it.quantity);
-      productCounts[key].revenue += Number(it.lineTotal);
+      const qty = Number(it.quantity);
+      productCounts[key].qty += qty;
+      productCounts[key].revenue += qty * PROFIT_PER_UNIT;
     });
   });
   const topProducts = Object.values(productCounts).sort((a, b) => b.qty - a.qty).slice(0, 10);
@@ -58,10 +63,10 @@ export default function AdminStats() {
       <h1 className="text-2xl font-bold mb-6">Stats</h1>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Stat label="Today" value={`$${sumTotal(today).toFixed(2)}`} sub={`${today.length} orders`} />
-        <Stat label="Last 7 days" value={`$${sumTotal(week).toFixed(2)}`} sub={`${week.length} orders`} />
-        <Stat label="Last 30 days" value={`$${sumTotal(month).toFixed(2)}`} sub={`${month.length} orders`} />
-        <Stat label="All-time" value={`$${sumTotal(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
+        <Stat label="Today" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} orders`} />
+        <Stat label="Last 7 days" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} orders`} />
+        <Stat label="Last 30 days" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} orders`} />
+        <Stat label="All-time" value={`$${sumProfit(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
@@ -98,7 +103,7 @@ export default function AdminStats() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-amber-400">UK Domestic</span>
-                  <span>{ukOrders.length} orders · ${sumTotal(ukOrders).toFixed(2)}</span>
+                  <span>{ukOrders.length} orders · ${sumProfit(ukOrders).toFixed(2)}</span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary/30 overflow-hidden">
                   <div
@@ -110,7 +115,7 @@ export default function AdminStats() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-cyan-400">International</span>
-                  <span>{intlOrders.length} orders · ${sumTotal(intlOrders).toFixed(2)}</span>
+                  <span>{intlOrders.length} orders · ${sumProfit(intlOrders).toFixed(2)}</span>
                 </div>
                 <div className="h-2 rounded-full bg-secondary/30 overflow-hidden">
                   <div
