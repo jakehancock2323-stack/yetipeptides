@@ -96,9 +96,11 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] bg-background/95 backdrop-blur-2xl">
                   <div className="flex flex-col gap-2 mt-8">
-                    <div className="px-4 pb-3 sm:hidden">
-                      <RegionToggle />
-                    </div>
+                    {location.pathname === '/products' && (
+                      <div className="px-4 pb-3 sm:hidden">
+                        <RegionToggle />
+                      </div>
+                    )}
                     {navLinks.map(link => (
                       <Link 
                         key={link.to}
