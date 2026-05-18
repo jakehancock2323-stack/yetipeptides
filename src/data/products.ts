@@ -717,8 +717,8 @@ export const products: Product[] = [
     outOfStock: true,
     stockBadge: "Coming Soon",
     variants: [
-      { specification: "0.025%", price: 0, outOfStock: true },
-      { specification: "0.5%", price: 0, outOfStock: true }
+      { specification: "0.025%", price: 12, outOfStock: true },
+      { specification: "0.5%", price: 14, outOfStock: true }
     ]
   }
 ];
