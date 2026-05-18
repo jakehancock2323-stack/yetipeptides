@@ -29,6 +29,21 @@ export const categories = [
   "Sexual Health",
   "General Health",
   "Other / Speciality"
+,
+  {
+    id: "tretinoin-cream",
+    name: "Tretinoin Cream",
+    category: "Cosmetics",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon",
+    variants: [
+      { specification: "0.025%", price: 0, outOfStock: true },
+      { specification: "0.5%", price: 0, outOfStock: true }
+    ]
+  }
 ];
 
 export const domesticCategories = [
@@ -36,6 +51,21 @@ export const domesticCategories = [
   "Peptides",
   "Peptide Supplies",
   "Cosmetics"
+,
+  {
+    id: "tretinoin-cream",
+    name: "Tretinoin Cream",
+    category: "Cosmetics",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon",
+    variants: [
+      { specification: "0.025%", price: 0, outOfStock: true },
+      { specification: "0.5%", price: 0, outOfStock: true }
+    ]
+  }
 ];
 
 export const products: Product[] = [
@@ -705,5 +735,20 @@ export const products: Product[] = [
       { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12, outOfStock: true }
     ],
     image: "hospira-bac-water"
+  }
+,
+  {
+    id: "tretinoin-cream",
+    name: "Tretinoin Cream",
+    category: "Cosmetics",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon",
+    variants: [
+      { specification: "0.025%", price: 0, outOfStock: true },
+      { specification: "0.5%", price: 0, outOfStock: true }
+    ]
   }
 ];
