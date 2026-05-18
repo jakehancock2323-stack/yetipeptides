@@ -190,7 +190,7 @@ export default function Products() {
         </p>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto items-start">
           {filteredProducts.map((product, i) => (
             <AnimateOnScroll key={product.id} delay={i * 60} animation="scale-in">
               <ProductCard product={product} />
