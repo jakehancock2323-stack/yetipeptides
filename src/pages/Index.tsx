@@ -12,7 +12,7 @@ import AnimateOnScroll from '@/components/AnimateOnScroll';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import { 
   FileText, Lock, Globe, FlaskConical, Package,
-  Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X
+  Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
 } from 'lucide-react';
 import heroBanner from '@/assets/hero-banner.png';
 import yetiLogo from '@/assets/yeti-logo.png';
