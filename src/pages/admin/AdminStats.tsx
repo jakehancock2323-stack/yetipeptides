@@ -29,13 +29,16 @@ export default function AdminStats() {
     (o.items as any[]).reduce((s, it) => s + Number(it.quantity || 0), 0);
   const sumProfit = (list: Order[]) =>
     list.reduce((s, o) => s + orderUnits(o) * PROFIT_PER_UNIT, 0);
-  const today = orders.filter((o) => new Date(o.created_at).getTime() > since(1));
-  const week = orders.filter((o) => new Date(o.created_at).getTime() > since(7));
-  const month = orders.filter((o) => new Date(o.created_at).getTime() > since(30));
+  // Only count revenue from orders that have been marked as PAID (or further along).
+  const PAID_STATUSES = new Set(["paid", "shipped", "delivered", "completed"]);
+  const paidOrders = orders.filter((o) => PAID_STATUSES.has((o.status || "").toLowerCase()));
+  const today = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(1));
+  const week = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(7));
+  const month = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(30));
 
-  // top products
+  // top products (paid orders only)
   const productCounts: Record<string, { name: string; qty: number; revenue: number }> = {};
-  orders.forEach((o) => {
+  paidOrders.forEach((o) => {
     (o.items as any[]).forEach((it) => {
       const key = it.productName;
       if (!productCounts[key]) productCounts[key] = { name: key, qty: 0, revenue: 0 };
@@ -46,8 +49,8 @@ export default function AdminStats() {
   });
   const topProducts = Object.values(productCounts).sort((a, b) => b.qty - a.qty).slice(0, 10);
 
-  const ukOrders = orders.filter((o) => o.shipping_region === "UK Domestic");
-  const intlOrders = orders.filter((o) => o.shipping_region !== "UK Domestic");
+  const ukOrders = paidOrders.filter((o) => o.shipping_region === "UK Domestic");
+  const intlOrders = paidOrders.filter((o) => o.shipping_region !== "UK Domestic");
   const pendingCount = orders.filter((o) => o.status === "new" || o.status === "awaiting_payment").length;
 
   const Stat = ({ label, value, sub }: { label: string; value: string; sub?: string }) => (
@@ -63,10 +66,10 @@ export default function AdminStats() {
       <h1 className="text-2xl font-bold mb-6">Stats</h1>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Stat label="Today" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} orders`} />
-        <Stat label="Last 7 days" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} orders`} />
-        <Stat label="Last 30 days" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} orders`} />
-        <Stat label="All-time" value={`$${sumProfit(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
+        <Stat label="Today (paid)" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} paid orders`} />
+        <Stat label="Last 7 days (paid)" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} paid orders`} />
+        <Stat label="Last 30 days (paid)" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} paid orders`} />
+        <Stat label="All-time (paid)" value={`$${sumProfit(paidOrders).toFixed(2)}`} sub={`${paidOrders.length} of ${orders.length} orders paid`} />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
