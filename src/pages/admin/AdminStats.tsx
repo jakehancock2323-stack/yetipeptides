@@ -29,9 +29,12 @@ export default function AdminStats() {
     (o.items as any[]).reduce((s, it) => s + Number(it.quantity || 0), 0);
   const sumProfit = (list: Order[]) =>
     list.reduce((s, o) => s + orderUnits(o) * PROFIT_PER_UNIT, 0);
-  const today = orders.filter((o) => new Date(o.created_at).getTime() > since(1));
-  const week = orders.filter((o) => new Date(o.created_at).getTime() > since(7));
-  const month = orders.filter((o) => new Date(o.created_at).getTime() > since(30));
+  // Only count revenue from orders that have been marked as PAID (or further along).
+  const PAID_STATUSES = new Set(["paid", "shipped", "delivered", "completed"]);
+  const paidOrders = orders.filter((o) => PAID_STATUSES.has((o.status || "").toLowerCase()));
+  const today = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(1));
+  const week = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(7));
+  const month = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(30));
 
   // top products
   const productCounts: Record<string, { name: string; qty: number; revenue: number }> = {};
