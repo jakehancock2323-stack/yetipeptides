@@ -36,9 +36,9 @@ export default function AdminStats() {
   const week = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(7));
   const month = paidOrders.filter((o) => new Date(o.created_at).getTime() > since(30));
 
-  // top products
+  // top products (paid orders only)
   const productCounts: Record<string, { name: string; qty: number; revenue: number }> = {};
-  orders.forEach((o) => {
+  paidOrders.forEach((o) => {
     (o.items as any[]).forEach((it) => {
       const key = it.productName;
       if (!productCounts[key]) productCounts[key] = { name: key, qty: 0, revenue: 0 };
@@ -49,8 +49,8 @@ export default function AdminStats() {
   });
   const topProducts = Object.values(productCounts).sort((a, b) => b.qty - a.qty).slice(0, 10);
 
-  const ukOrders = orders.filter((o) => o.shipping_region === "UK Domestic");
-  const intlOrders = orders.filter((o) => o.shipping_region !== "UK Domestic");
+  const ukOrders = paidOrders.filter((o) => o.shipping_region === "UK Domestic");
+  const intlOrders = paidOrders.filter((o) => o.shipping_region !== "UK Domestic");
   const pendingCount = orders.filter((o) => o.status === "new" || o.status === "awaiting_payment").length;
 
   const Stat = ({ label, value, sub }: { label: string; value: string; sub?: string }) => (
