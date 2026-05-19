@@ -421,7 +421,6 @@ export const products: Product[] = [
     id: "melanotan-1",
     name: "Melanotan 1",
     category: "Sexual Health",
-    outOfStock: true,
     variants: [
       { specification: "10mg ×10", price: 99 }
     ]
