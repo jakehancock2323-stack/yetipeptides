@@ -66,10 +66,10 @@ export default function AdminStats() {
       <h1 className="text-2xl font-bold mb-6">Stats</h1>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Stat label="Today" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} orders`} />
-        <Stat label="Last 7 days" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} orders`} />
-        <Stat label="Last 30 days" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} orders`} />
-        <Stat label="All-time" value={`$${sumProfit(orders).toFixed(2)}`} sub={`${orders.length} orders`} />
+        <Stat label="Today (paid)" value={`$${sumProfit(today).toFixed(2)}`} sub={`${today.length} paid orders`} />
+        <Stat label="Last 7 days (paid)" value={`$${sumProfit(week).toFixed(2)}`} sub={`${week.length} paid orders`} />
+        <Stat label="Last 30 days (paid)" value={`$${sumProfit(month).toFixed(2)}`} sub={`${month.length} paid orders`} />
+        <Stat label="All-time (paid)" value={`$${sumProfit(paidOrders).toFixed(2)}`} sub={`${paidOrders.length} of ${orders.length} orders paid`} />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
