@@ -76,6 +76,20 @@ export default function Contact() {
           <div className="frosted-glass rounded-xl p-6 md:p-8">
             <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot — hidden from real users, blocks bots */}
+              <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -83,6 +97,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
                   required
+                  maxLength={200}
                   placeholder="Your name"
                 />
               </div>
@@ -95,6 +110,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
                   required
+                  maxLength={320}
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -106,6 +122,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={(e) => handleChange('message', e.target.value)}
                   required
+                  maxLength={5000}
                   placeholder="How can we help you?"
                   className="min-h-[150px]"
                 />
