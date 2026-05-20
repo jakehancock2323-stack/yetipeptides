@@ -16,6 +16,8 @@ export default function Contact() {
     email: '',
     message: '',
   });
+  // Honeypot — real users never fill this, bots usually will
+  const [website, setWebsite] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,6 +25,11 @@ export default function Contact() {
     
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill in all fields');
+      return;
+    }
+
+    if (formData.name.length > 200 || formData.message.length > 5000) {
+      toast.error('Message is too long');
       return;
     }
 
@@ -34,7 +41,7 @@ export default function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website }),
       });
 
       if (!response.ok) {
@@ -43,8 +50,8 @@ export default function Contact() {
 
       toast.success('Message sent successfully! We will get back to you within 24 hours.');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error("Error sending message:", error);
+      setWebsite('');
+    } catch {
       toast.error("Failed to send message. Please try again or email us directly at yetipeptides@protonmail.com");
     } finally {
       setIsSubmitting(false);
