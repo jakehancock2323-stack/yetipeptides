@@ -173,6 +173,7 @@ export type Database = {
     }
     Functions: {
       bootstrap_admin: { Args: never; Returns: undefined }
+      current_user_is_admin: { Args: never; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
