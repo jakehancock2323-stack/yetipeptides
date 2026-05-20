@@ -35,6 +35,8 @@ export default function Checkout() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("usdt");
   const [ukShippingMethod, setUkShippingMethod] = useState<"royal-mail" | "inpost">("royal-mail");
+  const [promoInput, setPromoInput] = useState("");
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -112,8 +114,8 @@ export default function Checkout() {
       subtotal: calculateSubtotal(),
       deliveryFee,
       processingFee: btcFee,
-      discount: 0,
-      promoCode: null,
+      discount: promoDiscount,
+      promoCode: appliedPromo,
       total: calculateTotal(),
       includeEbook,
     };
@@ -138,7 +140,7 @@ export default function Checkout() {
           subtotal: orderData.subtotal,
           delivery_fee: orderData.deliveryFee,
           processing_fee: orderData.processingFee,
-          discount: 0,
+          discount: promoDiscount,
           total: orderData.total,
           currency: isUK ? "GBP" : "USD",
           status: "new",
@@ -176,8 +178,31 @@ export default function Checkout() {
   };
 
   const calculateSubtotal = () => getTotalPrice();
-  const btcFee = paymentMethod === 'btc' ? (calculateSubtotal() + deliveryFee) * 0.04 : 0;
-  const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee;
+  const iceElixirSubtotal = items
+    .filter(i => i.product.id === 'frostskin-serum')
+    .reduce((sum, i) => sum + i.variant.price * i.quantity, 0);
+  const promoDiscount = appliedPromo === 'HAIRYYETI' ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
+  const btcFee = paymentMethod === 'btc' ? (calculateSubtotal() + deliveryFee - promoDiscount) * 0.04 : 0;
+  const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee - promoDiscount;
+
+  const applyPromo = () => {
+    const code = promoInput.trim().toUpperCase();
+    if (code !== 'HAIRYYETI') {
+      toast.error('Invalid promo code');
+      return;
+    }
+    if (iceElixirSubtotal <= 0) {
+      toast.error('HAIRYYETI only applies to Ice Elixir');
+      return;
+    }
+    setAppliedPromo('HAIRYYETI');
+    toast.success('Promo applied — 7% off Ice Elixir');
+  };
+
+  const removePromo = () => {
+    setAppliedPromo(null);
+    setPromoInput('');
+  };
 
   return (
     <div className="min-h-screen pb-20">
