@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.current_user_is_admin() FROM authenticated;
