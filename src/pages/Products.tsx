@@ -28,7 +28,28 @@ export default function Products() {
   }, [searchParams]);
 
   useEffect(() => {
-    setSelectedCategory('All');
+    const productId = searchParams.get('product');
+    if (!productId) return;
+    const target = products.find(p => p.id === productId);
+    if (target?.region === 'UK Domestic' && region !== 'UK Domestic') {
+      setRegion('UK Domestic');
+    }
+    // Wait for render, then scroll
+    const t = setTimeout(() => {
+      const el = document.getElementById(`product-${productId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('ring-2', 'ring-ice-blue');
+        setTimeout(() => el.classList.remove('ring-2', 'ring-ice-blue'), 2500);
+      }
+    }, 250);
+    return () => clearTimeout(t);
+  }, [searchParams, region, setRegion]);
+
+  useEffect(() => {
+    if (!searchParams.get('product')) {
+      setSelectedCategory('All');
+    }
   }, [region]);
 
   const filteredProducts = products.filter(product => {

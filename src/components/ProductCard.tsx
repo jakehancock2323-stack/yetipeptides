@@ -49,7 +49,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isUkDomestic = product.region === 'UK Domestic';
 
   return (
-    <div className={`group relative rounded-xl border bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col ${
+    <div id={`product-${product.id}`} className={`group relative scroll-mt-24 rounded-xl border bg-card/30 hover:bg-card/60 transition-all duration-300 overflow-hidden flex flex-col ${
       product.popular ? 'border-amber-500/40 hover:border-amber-500/60 shadow-[0_0_24px_-12px] shadow-amber-500/40' :
       isUkDomestic ? 'border-ice-blue/25 hover:border-ice-blue/50' : 'border-border/20'
     }`}>
@@ -98,7 +98,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
           <div className="text-right whitespace-nowrap">
-            <span className="text-2xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
+            <div className="flex items-baseline justify-end gap-1.5">
+              {selectedVariant.originalPrice && selectedVariant.originalPrice > selectedVariant.price && (
+                <span className="text-sm font-medium text-muted-foreground line-through">{currencySymbol}{selectedVariant.originalPrice}</span>
+              )}
+              <span className="text-2xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
+            </div>
             {!isGbp && (
               <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
             )}
