@@ -8,39 +8,58 @@ export function useAdminSession() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
+    let mounted = true;
+    let checkId = 0;
+
+    async function checkRole(s: Session | null) {
+      const currentCheck = ++checkId;
       setSession(s);
-      if (s?.user) {
-        // Defer the role check to avoid deadlock
-        setTimeout(() => checkRole(s.user.id), 0);
-      } else {
+
+      if (!s?.user) {
+        if (!mounted || currentCheck !== checkId) return;
         setIsAdmin(false);
         setLoading(false);
+        return;
       }
+
+      setLoading(true);
+      let { data, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", s.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+
+      if (error) {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        const retry = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", s.user.id)
+          .eq("role", "admin")
+          .maybeSingle();
+        data = retry.data;
+        error = retry.error;
+      }
+
+      if (!mounted || currentCheck !== checkId) return;
+      setIsAdmin(!error && !!data);
+      setLoading(false);
+    }
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
+      setTimeout(() => void checkRole(s), 0);
     });
 
     supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      if (data.session?.user) {
-        checkRole(data.session.user.id);
-      } else {
-        setLoading(false);
-      }
+      void checkRole(data.session);
     });
 
-    return () => sub.subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
   }, []);
-
-  async function checkRole(userId: string) {
-    const { data, error } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", userId)
-      .eq("role", "admin")
-      .maybeSingle();
-    setIsAdmin(!error && !!data);
-    setLoading(false);
-  }
 
   return { session, isAdmin, loading };
 }
