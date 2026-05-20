@@ -12,7 +12,17 @@ interface ContactRequest {
   name: string;
   email: string;
   message: string;
+  // Honeypot — real users never fill this, bots usually do
+  website?: string;
 }
+
+const escapeHtml = (s: string) =>
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
@@ -21,13 +31,28 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const contactData: ContactRequest = await req.json();
-    console.log("Received contact request:", contactData);
 
-    const { name, email, message } = contactData;
+    const { name, email, message, website } = contactData;
+
+    // Honeypot: silently accept then drop bot submissions
+    if (website && website.trim().length > 0) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: "Missing required fields: name, email, and message" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Length limits to prevent abuse / oversized payloads
+    if (name.length > 200 || email.length > 320 || message.length > 5000) {
+      return new Response(
+        JSON.stringify({ error: "Input exceeds maximum allowed length" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -39,6 +64,10 @@ const handler = async (req: Request): Promise<Response> => {
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message);
 
     const emailHTML = `
       <!DOCTYPE html>
@@ -58,21 +87,21 @@ const handler = async (req: Request): Promise<Response> => {
             <table style="width: 100%; margin-bottom: 30px;">
               <tr>
                 <td style="padding: 8px 0;"><strong>Name:</strong></td>
-                <td style="padding: 8px 0;">${name}</td>
+                <td style="padding: 8px 0;">${safeName}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;">${email}</td>
+                <td style="padding: 8px 0;">${safeEmail}</td>
               </tr>
             </table>
 
             <h2 style="color: #1a2332; border-bottom: 2px solid #47d9d9; padding-bottom: 10px;">Message</h2>
             <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #47d9d9; white-space: pre-wrap; line-height: 1.6;">
-              ${message}
+              ${safeMessage}
             </div>
 
             <p style="margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
-              <strong>⚠️ Action Required:</strong> Please respond to <strong>${email}</strong>
+              <strong>⚠️ Action Required:</strong> Please respond to <strong>${safeEmail}</strong>
             </p>
           </div>
           
@@ -93,29 +122,28 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Yeti Peptides <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
-        subject: `💬 Contact Form: ${name}`,
+        subject: `💬 Contact Form: ${safeName}`,
         html: emailHTML,
       }),
     });
 
-    const emailResponseData = await emailResponse.json();
-    console.log("Contact email sent successfully:", emailResponseData);
+    if (!emailResponse.ok) {
+      return new Response(
+        JSON.stringify({ error: "Failed to send email" }),
+        { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
-    return new Response(JSON.stringify({ success: true, emailResponse: emailResponseData }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
+    // Don't echo internal error messages back to clients
+    console.error("send-contact-email failure");
     return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      JSON.stringify({ error: "Internal error" }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };

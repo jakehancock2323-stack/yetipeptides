@@ -41,6 +41,14 @@ interface OrderEmailRequest {
   includeEbook?: boolean;
 }
 
+const escapeHtml = (s: unknown) =>
+  String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -49,7 +57,6 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const orderData: OrderEmailRequest = await req.json();
-    console.log("Received order data:", orderData);
 
     const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook } = orderData;
 
@@ -59,12 +66,12 @@ const handler = async (req: Request): Promise<Response> => {
     // Build order items HTML
     const itemsHTML = items.map(item => `
       <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 12px;">${item.productName}</td>
-        <td style="padding: 12px; color: #666;">${item.productCategory}</td>
-        <td style="padding: 12px;">${item.specification}</td>
-        <td style="padding: 12px; text-align: center;">${item.quantity}</td>
-        <td style="padding: 12px; text-align: right;">${cur}${item.price.toFixed(2)}</td>
-        <td style="padding: 12px; text-align: right; font-weight: 600;">${cur}${item.lineTotal.toFixed(2)}</td>
+        <td style="padding: 12px;">${escapeHtml(item.productName)}</td>
+        <td style="padding: 12px; color: #666;">${escapeHtml(item.productCategory)}</td>
+        <td style="padding: 12px;">${escapeHtml(item.specification)}</td>
+        <td style="padding: 12px; text-align: center;">${Number(item.quantity) || 0}</td>
+        <td style="padding: 12px; text-align: right;">${cur}${Number(item.price).toFixed(2)}</td>
+        <td style="padding: 12px; text-align: right; font-weight: 600;">${cur}${Number(item.lineTotal).toFixed(2)}</td>
       </tr>
     `).join('');
 
@@ -99,36 +106,36 @@ const handler = async (req: Request): Promise<Response> => {
             <table style="width: 100%; margin-bottom: 30px;">
               <tr>
                 <td style="padding: 8px 0;"><strong>Name:</strong></td>
-                <td style="padding: 8px 0;">${customerDetails.fullName}</td>
+                <td style="padding: 8px 0;">${escapeHtml(customerDetails.fullName)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0;"><strong>Email:</strong></td>
-                <td style="padding: 8px 0;">${customerDetails.email}</td>
+                <td style="padding: 8px 0;">${escapeHtml(customerDetails.email)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0;"><strong>Phone:</strong></td>
-                <td style="padding: 8px 0;">${customerDetails.phone}</td>
+                <td style="padding: 8px 0;">${escapeHtml(customerDetails.phone)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; vertical-align: top;"><strong>Address:</strong></td>
                 <td style="padding: 8px 0;">
-                  ${customerDetails.street}<br>
-                  ${customerDetails.city}, ${customerDetails.region} ${customerDetails.postcode}<br>
-                  ${customerDetails.country}
+                  ${escapeHtml(customerDetails.street)}<br>
+                  ${escapeHtml(customerDetails.city)}, ${escapeHtml(customerDetails.region)} ${escapeHtml(customerDetails.postcode)}<br>
+                  ${escapeHtml(customerDetails.country)}
                 </td>
               </tr>
               <tr>
                 <td style="padding: 8px 0;"><strong>Payment Method:</strong></td>
-                <td style="padding: 8px 0;">${paymentMethod.toUpperCase()}</td>
+                <td style="padding: 8px 0;">${escapeHtml(paymentMethod).toUpperCase()}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0;"><strong>Shipping Region:</strong></td>
-                <td style="padding: 8px 0; font-weight: 600; ${shippingRegion === 'UK Domestic' ? 'color: #f59e0b;' : ''}">${shippingRegion || 'International'}</td>
+                <td style="padding: 8px 0; font-weight: 600; ${shippingRegion === 'UK Domestic' ? 'color: #f59e0b;' : ''}">${escapeHtml(shippingRegion || 'International')}</td>
               </tr>
               ${customerDetails.notes ? `
               <tr>
                 <td style="padding: 8px 0; vertical-align: top;"><strong>Order Notes:</strong></td>
-                <td style="padding: 8px 0; background: #fffacd; padding: 12px; border-radius: 4px; font-style: italic;">${customerDetails.notes}</td>
+                <td style="padding: 8px 0; background: #fffacd; padding: 12px; border-radius: 4px; font-style: italic; white-space: pre-wrap;">${escapeHtml(customerDetails.notes)}</td>
               </tr>
               ` : ''}
             </table>
@@ -169,8 +176,8 @@ const handler = async (req: Request): Promise<Response> => {
                 ` : ''}
                 ${promoCode ? `
                 <tr style="background: #d4edda;">
-                  <td style="padding: 8px 0; font-size: 16px; color: #155724;"><strong>🎉 Promo Code (${promoCode.toUpperCase()}):</strong></td>
-                  <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-${cur}${discount.toFixed(2)}</td>
+                  <td style="padding: 8px 0; font-size: 16px; color: #155724;"><strong>🎉 Promo Code (${escapeHtml(promoCode).toUpperCase()}):</strong></td>
+                  <td style="padding: 8px 0; text-align: right; font-size: 16px; color: #155724; font-weight: 600;">-${cur}${Number(discount).toFixed(2)}</td>
                 </tr>
                 ` : ''}
                 <tr style="border-top: 2px solid #47d9d9;">
@@ -181,7 +188,7 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
 
             <p style="margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
-              <strong>⚠️ Action Required:</strong> Review this order and send payment instructions to <strong>${customerDetails.email}</strong>
+              <strong>⚠️ Action Required:</strong> Review this order and send payment instructions to <strong>${escapeHtml(customerDetails.email)}</strong>
             </p>
           </div>
           
