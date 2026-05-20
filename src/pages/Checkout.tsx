@@ -491,6 +491,46 @@ export default function Checkout() {
                   )}
                 </div>
 
+                {/* Promo Code */}
+                {iceElixirSubtotal > 0 && (
+                  <div className="pt-3 border-t border-border/30">
+                    {appliedPromo ? (
+                      <div className="flex items-center justify-between gap-2 p-2 rounded-lg border border-[hsl(var(--ice-blue))]/30 bg-[hsl(var(--ice-blue))]/[0.06]">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <Check className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))] flex-shrink-0" />
+                          <span className="text-xs font-semibold truncate">{appliedPromo}</span>
+                          <span className="text-[10px] text-muted-foreground">— 7% off Ice Elixir</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={removePromo}
+                          className="text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex gap-2">
+                        <Input
+                          value={promoInput}
+                          onChange={(e) => setPromoInput(e.target.value)}
+                          placeholder="Promo code"
+                          className="h-9 bg-secondary/20 border-border/30 text-xs"
+                        />
+                        <Button
+                          type="button"
+                          onClick={applyPromo}
+                          variant="outline"
+                          size="sm"
+                          className="h-9 border-[hsl(var(--ice-blue))]/30 text-xs"
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <div className="space-y-2 pt-3 border-t border-border/30">
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>Subtotal</span>
@@ -500,6 +540,12 @@ export default function Checkout() {
                     <span>Delivery{isUK ? ` (${shippingMethodLabel})` : ''}</span>
                     <span>{isUK && ukShippingMethod === 'inpost' ? 'Paid separately via InPost' : (deliveryFee === 0 ? 'Free' : `${currencySymbol}${deliveryFee.toFixed(2)}`)}</span>
                   </div>
+                  {promoDiscount > 0 && (
+                    <div className="flex justify-between text-xs text-[hsl(var(--ice-blue))]">
+                      <span>Discount ({appliedPromo})</span>
+                      <span>−{currencySymbol}{promoDiscount.toFixed(2)}</span>
+                    </div>
+                  )}
                   {btcFee > 0 && (
                     <div className="flex justify-between text-xs text-muted-foreground">
                       <span>BTC Processing Fee (4%)</span>
