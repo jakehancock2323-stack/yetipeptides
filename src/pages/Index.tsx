@@ -97,7 +97,7 @@ export default function Index() {
       {/* Ice Elixir Announcement Banner */}
       <AnimateOnScroll animation="fade-up">
         <div className="container mx-auto px-4 pt-6">
-          <Link to="/products" className="block group">
+          <Link to="/products?product=frostskin-serum" className="block group">
             <div className="relative rounded-xl overflow-hidden bg-gradient-to-r from-ice-blue/10 via-glacier/5 to-arctic-teal/10 border border-ice-blue/20 glow-border hover:border-ice-blue/40 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-r from-ice-blue/5 to-transparent opacity-50" />
               <div className="absolute top-0 right-0 w-64 h-64 bg-ice-blue/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />

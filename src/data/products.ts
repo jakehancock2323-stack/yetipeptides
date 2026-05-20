@@ -1,6 +1,7 @@
 export interface ProductVariant {
   specification: string;
   price: number;
+  originalPrice?: number;
   outOfStock?: boolean;
 }
 
@@ -680,7 +681,7 @@ export const products: Product[] = [
     badges: ["Cruelty Free Standards", "Small Batch Clinical Purity"],
     usage: "Apply 1-2 full droppers to face & massage in.",
     variants: [
-      { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }
+      { specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25, originalPrice: 28 }
     ],
     ingredients: [
       "Aqua",
