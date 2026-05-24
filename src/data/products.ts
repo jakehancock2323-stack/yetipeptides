@@ -723,5 +723,70 @@ export const products: Product[] = [
       { specification: "0.025%", price: 12, outOfStock: true },
       { specification: "0.5%", price: 14, outOfStock: true }
     ]
+  },
+  {
+    id: "uk-retatrutide-30mg",
+    name: "Retatrutide",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon — Limited Stock",
+    variants: [
+      { specification: "30mg × 1 vial", price: 24, outOfStock: true }
+    ]
+  },
+  {
+    id: "uk-tirzepatide-30mg",
+    name: "Tirzepatide",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon — Limited Stock",
+    variants: [
+      { specification: "30mg × 1 vial", price: 17, outOfStock: true }
+    ]
+  },
+  {
+    id: "uk-mt2-10mg",
+    name: "MT-2",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon — Limited Stock",
+    variants: [
+      { specification: "10mg × 1 vial", price: 14, outOfStock: true }
+    ]
+  },
+  {
+    id: "uk-tesamorelin-10mg",
+    name: "Tesamorelin",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon — Limited Stock",
+    variants: [
+      { specification: "10mg × 1 vial", price: 22, outOfStock: true }
+    ]
+  },
+  {
+    id: "uk-ghkcu-100mg",
+    name: "GHK-Cu",
+    category: "Peptides",
+    region: "UK Domestic",
+    currency: "GBP",
+    comingSoon: true,
+    outOfStock: true,
+    stockBadge: "Coming Soon — Limited Stock",
+    variants: [
+      { specification: "100mg × 1 vial", price: 13, outOfStock: true }
+    ]
   }
 ];
