@@ -406,11 +406,11 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
                   </div>
                 </label>
-                <label htmlFor="middleman" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'middleman' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
-                  <RadioGroupItem value="middleman" id="middleman" />
+                <label htmlFor="bank" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'bank' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                  <RadioGroupItem value="bank" id="bank" />
                   <div>
-                    <span className="text-sm font-medium">Middleman Service</span>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">Secure third-party escrow for added protection</p>
+                    <span className="text-sm font-medium">Bank Transfer</span>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">Bank details will be emailed after order is placed</p>
                   </div>
                 </label>
                 {paypalAvailable && (
@@ -582,7 +582,7 @@ export default function Checkout() {
               <span className="block">
                 You're about to submit your order for{" "}
                 <span className="font-bold text-foreground">{currencySymbol}{calculateTotal().toFixed(2)}</span>{" "}
-                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'middleman' ? 'Middleman Service' : paymentMethod === 'paypal' ? 'PayPal' : paymentMethod === 'btc' ? 'BTC (incl. 4% fee)' : paymentMethod}</span>.
+                using <span className="font-bold text-foreground uppercase">{paymentMethod === 'bank' ? 'Bank Transfer' : paymentMethod === 'paypal' ? 'PayPal' : paymentMethod === 'btc' ? 'BTC (incl. 4% fee)' : paymentMethod}</span>.
               </span>
               <span className="block text-xs">
                 After confirming, you'll receive an email with payment instructions. This action cannot be undone.
