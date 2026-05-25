@@ -95,8 +95,8 @@ const OrderConfirmationEmail = ({
             <Text style={text}>{paymentInstructions}</Text>
           ) : (
             <Text style={textMuted}>
-              After sending payment, reply to this email with the transaction
-              hash / reference so we can confirm and dispatch your order.
+              After sending payment, email your transaction hash (TXID) to
+              yetipeptides@protonmail.com so we can confirm and dispatch your order.
             </Text>
           )}
         </Section>
