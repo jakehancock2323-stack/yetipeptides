@@ -175,17 +175,17 @@ export default function Checkout() {
         let paymentInstructions = '';
         if (pm.includes('btc') || pm.includes('bitcoin')) {
           walletAddress = 'BTC: bc1qw9wyge8sp336wleanczaa6j70w57nlwvm6efnw';
-          paymentInstructions = 'Send the exact total above in BTC to the address. Once sent, email your transaction hash (TXID) to yetipeptides@protonmail.com so we can confirm and dispatch your order.';
+          paymentInstructions = 'Send the exact total above in BTC to the address. Reply to this email with your transaction hash (TXID) once sent.';
         } else if (pm.includes('usdc')) {
           walletAddress = 'USDC (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624';
-          paymentInstructions = 'Send the exact total in USDC on the ERC-20 (Ethereum) network. Once sent, email your transaction hash (TXID) to yetipeptides@protonmail.com so we can confirm and dispatch your order.';
+          paymentInstructions = 'Send the exact total in USDC on the ERC-20 (Ethereum) network. Reply to this email with your transaction hash (TXID) once sent.';
         } else if (pm.includes('usdt')) {
           walletAddress = 'USDT (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624';
-          paymentInstructions = 'Send the exact total in USDT on the ERC-20 (Ethereum) network. Once sent, email your transaction hash (TXID) to yetipeptides@protonmail.com so we can confirm and dispatch your order.';
+          paymentInstructions = 'Send the exact total in USDT on the ERC-20 (Ethereum) network. Reply to this email with your transaction hash (TXID) once sent.';
         } else if (pm.includes('middleman') || pm.includes('escrow')) {
-          paymentInstructions = "You've selected Middleman / Escrow. Please email yetipeptides@protonmail.com and we'll send the next steps for using PayPal or CashApp via our trusted middleman.";
+          paymentInstructions = "You've selected Middleman / Escrow. Reply to this email and we'll send the next steps for using PayPal or CashApp via our trusted middleman.";
         } else if (pm.includes('bank')) {
-          paymentInstructions = "You've selected Bank Transfer. Please email yetipeptides@protonmail.com and we'll send the bank details for your region.";
+          paymentInstructions = "You've selected Bank Transfer. Reply to this email and we'll send the bank details for your region.";
         }
 
         const shippingAddress = [
