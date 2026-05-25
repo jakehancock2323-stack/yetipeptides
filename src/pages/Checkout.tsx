@@ -160,8 +160,8 @@ export default function Checkout() {
         toast.success("Order submitted! Check your email for payment instructions.");
       }
 
-      // Customer-facing branded order confirmation (separate from Proton notification)
-      try {
+      // Customer-facing branded order confirmation (International orders only — UK stays manual)
+      if (!isUK) try {
         const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
         const pm = paymentMethod.toLowerCase();
         const paymentLabels: Record<string, string> = {
