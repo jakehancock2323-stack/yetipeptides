@@ -149,7 +149,7 @@ const OrderConfirmationEmail = ({
         ) : null}
 
         <Text style={footer}>
-          Questions? Email us at yetipeptides@protonmail.com.
+          Questions? Just reply to this email.
           <br />
           — The {SITE_NAME} Team
         </Text>
