@@ -56,6 +56,18 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Require a valid Supabase apikey header to block random scripts from
+    // flooding the admin inbox. The checkout calls this via
+    // supabase.functions.invoke(), which attaches this header automatically.
+    const apiKey = req.headers.get("apikey") ?? req.headers.get("x-api-key");
+    const expectedKey = Deno.env.get("SUPABASE_ANON_KEY") ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY");
+    if (!apiKey || !expectedKey || apiKey !== expectedKey) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
     const orderData: OrderEmailRequest = await req.json();
 
     const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook, orderId } = orderData;
