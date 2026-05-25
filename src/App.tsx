@@ -77,6 +77,7 @@ const App = () => {
                     <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                     <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
                     <Route path="/track-order" element={<TrackOrder />} />
+                    <Route path="/unsubscribe" element={<Unsubscribe />} />
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route
                       path="/admin"
