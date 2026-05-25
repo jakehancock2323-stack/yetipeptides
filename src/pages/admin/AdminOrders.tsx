@@ -191,13 +191,13 @@ export default function AdminOrders() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={8} className="p-8 text-center text-muted-foreground">
                     Loading…
                   </td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={8} className="p-8 text-center text-muted-foreground">
                     No orders.
                   </td>
                 </tr>
@@ -207,6 +207,9 @@ export default function AdminOrders() {
                     key={o.id}
                     className="border-t border-border/20 hover:bg-secondary/10 transition-colors"
                   >
+                    <td className="p-3 font-mono text-xs uppercase text-[hsl(var(--ice-blue))] whitespace-nowrap">
+                      #{o.id.split('-')[0].toUpperCase()}
+                    </td>
                     <td className="p-3 text-xs text-muted-foreground whitespace-nowrap">
                       {new Date(o.created_at).toLocaleString()}
                     </td>
