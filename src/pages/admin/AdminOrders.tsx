@@ -178,6 +178,7 @@ export default function AdminOrders() {
           <table className="w-full text-sm">
             <thead className="bg-secondary/30 text-xs text-muted-foreground uppercase tracking-wider">
               <tr>
+                <th className="text-left p-3">Order #</th>
                 <th className="text-left p-3">Date</th>
                 <th className="text-left p-3">Customer</th>
                 <th className="text-left p-3">Region</th>
@@ -190,13 +191,13 @@ export default function AdminOrders() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={8} className="p-8 text-center text-muted-foreground">
                     Loading…
                   </td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={8} className="p-8 text-center text-muted-foreground">
                     No orders.
                   </td>
                 </tr>
@@ -206,6 +207,9 @@ export default function AdminOrders() {
                     key={o.id}
                     className="border-t border-border/20 hover:bg-secondary/10 transition-colors"
                   >
+                    <td className="p-3 font-mono text-xs uppercase text-[hsl(var(--ice-blue))] whitespace-nowrap">
+                      #{o.id.split('-')[0].toUpperCase()}
+                    </td>
                     <td className="p-3 text-xs text-muted-foreground whitespace-nowrap">
                       {new Date(o.created_at).toLocaleString()}
                     </td>

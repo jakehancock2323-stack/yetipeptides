@@ -120,10 +120,15 @@ export default function Checkout() {
       includeEbook,
     };
 
+    // Single ID shared between DB row + both emails so admin can match by Order #
+    const orderUuid = crypto.randomUUID();
+    const orderId = orderUuid.split('-')[0].toUpperCase();
+
     try {
       // Save to admin orders DB (independent of email; failures don't block checkout)
       try {
         await supabase.from("orders").insert({
+          id: orderUuid,
           customer_name: formData.fullName,
           customer_email: formData.email,
           customer_phone: formData.phone,
@@ -148,9 +153,6 @@ export default function Checkout() {
       } catch (dbErr) {
         console.error("Failed to save order to DB:", dbErr);
       }
-
-      // Shared order ID so admin + customer emails reference the same reference
-      const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
 
       const { error } = await supabase.functions.invoke("send-order-email", {
         body: { ...orderData, orderId },
