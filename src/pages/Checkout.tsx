@@ -149,8 +149,11 @@ export default function Checkout() {
         console.error("Failed to save order to DB:", dbErr);
       }
 
+      // Shared order ID so admin + customer emails reference the same reference
+      const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
+
       const { error } = await supabase.functions.invoke("send-order-email", {
-        body: orderData,
+        body: { ...orderData, orderId },
       });
 
       if (error) {
@@ -162,7 +165,6 @@ export default function Checkout() {
 
       // Customer-facing branded order confirmation (International orders only — UK stays manual)
       if (!isUK) try {
-        const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
         const pm = paymentMethod.toLowerCase();
         const paymentLabels: Record<string, string> = {
           usdt: 'USDT (ERC-20)',
