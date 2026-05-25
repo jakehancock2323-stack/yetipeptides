@@ -160,6 +160,42 @@ export default function Checkout() {
         toast.success("Order submitted! Check your email for payment instructions.");
       }
 
+      // Customer-facing branded order confirmation (separate from Proton notification)
+      try {
+        const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
+        const paymentLabels: Record<string, string> = {
+          usdt: 'USDT (TRC20)',
+          usdc: 'USDC',
+          btc: 'Bitcoin (BTC)',
+          bank: 'Bank Transfer',
+        };
+        await supabase.functions.invoke('send-transactional-email', {
+          body: {
+            templateName: 'order-confirmation',
+            recipientEmail: formData.email,
+            idempotencyKey: `order-confirm-${orderId}`,
+            templateData: {
+              orderId,
+              customerName: formData.fullName?.split(' ')[0] || '',
+              items: orderData.items.map((i: any) => ({
+                name: i.productName,
+                variant: i.specification,
+                quantity: i.quantity,
+                price: i.price,
+              })),
+              subtotal: orderData.subtotal,
+              shipping: orderData.deliveryFee,
+              total: orderData.total,
+              currency: isUK ? 'GBP' : 'USD',
+              paymentMethod: paymentLabels[paymentMethod] || paymentMethod,
+            },
+          },
+        });
+      } catch (custErr) {
+        console.error('Customer confirmation email failed:', custErr);
+      }
+
+
       clearCart();
       navigate("/order-success", { state: { orderData } });
     } catch (error) {
