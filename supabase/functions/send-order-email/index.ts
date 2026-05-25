@@ -209,7 +209,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Yeti Peptides <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
-        subject: `🧪 ${shippingRegion === 'UK Domestic' ? '[UK DOMESTIC] ' : ''}New Order from ${customerDetails.fullName} - ${cur}${total.toFixed(2)}`,
+        subject: `🧪 ${shippingRegion === 'UK Domestic' ? '[UK DOMESTIC] ' : ''}Order #${orderId ?? 'N/A'} — ${customerDetails.fullName} - ${cur}${total.toFixed(2)}`,
         html: emailHTML,
       }),
     });
