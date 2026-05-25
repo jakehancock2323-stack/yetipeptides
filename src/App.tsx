@@ -28,6 +28,7 @@ import ShippingReturns from "./pages/ShippingReturns";
 import ResearchDisclaimer from "./pages/ResearchDisclaimer";
 import HowToPayCrypto from "./pages/HowToPayCrypto";
 import TrackOrder from "./pages/TrackOrder";
+import Unsubscribe from "./pages/Unsubscribe";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminOrders from "./pages/admin/AdminOrders";
@@ -76,6 +77,7 @@ const App = () => {
                     <Route path="/research-disclaimer" element={<ResearchDisclaimer />} />
                     <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
                     <Route path="/track-order" element={<TrackOrder />} />
+                    <Route path="/unsubscribe" element={<Unsubscribe />} />
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route
                       path="/admin"
