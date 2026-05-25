@@ -178,6 +178,7 @@ export default function AdminOrders() {
           <table className="w-full text-sm">
             <thead className="bg-secondary/30 text-xs text-muted-foreground uppercase tracking-wider">
               <tr>
+                <th className="text-left p-3">Order #</th>
                 <th className="text-left p-3">Date</th>
                 <th className="text-left p-3">Customer</th>
                 <th className="text-left p-3">Region</th>
