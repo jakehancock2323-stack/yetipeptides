@@ -8,11 +8,7 @@ import { toast } from "sonner";
 import { useAdminSession } from "@/lib/adminAuth";
 import { Lock } from "lucide-react";
 
-// Fixed admin credentials. Username is mapped to a stable internal email so
-// Supabase auth (which requires an email) keeps working unchanged.
-const ADMIN_USERNAME = "yeti";
-const ADMIN_PASSWORD = "peptides";
-const ADMIN_EMAIL = "yeti@yetipeptides.admin";
+
 
 export default function AdminLogin() {
   const navigate = useNavigate();
