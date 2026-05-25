@@ -29,30 +29,19 @@ export default function AdminLogin() {
     e.preventDefault();
     setBusy(true);
     try {
-      if (username.trim().toLowerCase() !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+      const { data, error } = await supabase.functions.invoke("admin-login", {
+        body: { username, password },
+      });
+      if (error) throw new Error(error.message || "Invalid username or password");
+      if (!data?.access_token || !data?.refresh_token) {
         throw new Error("Invalid username or password");
       }
 
-      // Try sign-in first. If the account doesn't exist yet, create it.
-      let { error } = await supabase.auth.signInWithPassword({
-        email: ADMIN_EMAIL,
-        password: ADMIN_PASSWORD,
+      const { error: setErr } = await supabase.auth.setSession({
+        access_token: data.access_token,
+        refresh_token: data.refresh_token,
       });
-
-      if (error) {
-        const signUp = await supabase.auth.signUp({
-          email: ADMIN_EMAIL,
-          password: ADMIN_PASSWORD,
-        });
-        if (signUp.error && !/registered|exists/i.test(signUp.error.message)) {
-          throw signUp.error;
-        }
-        const retry = await supabase.auth.signInWithPassword({
-          email: ADMIN_EMAIL,
-          password: ADMIN_PASSWORD,
-        });
-        if (retry.error) throw retry.error;
-      }
+      if (setErr) throw setErr;
 
       // Grant admin role on first login (no-op if an admin already exists).
       await supabase.rpc("bootstrap_admin");
@@ -60,7 +49,7 @@ export default function AdminLogin() {
       toast.success("Signed in");
       navigate("/admin", { replace: true });
     } catch (err: any) {
-      toast.error(err.message || "Something went wrong");
+      toast.error(err.message || "Invalid username or password");
     } finally {
       setBusy(false);
     }
