@@ -58,7 +58,7 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const orderData: OrderEmailRequest = await req.json();
 
-    const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook } = orderData;
+    const { customerDetails, paymentMethod, shippingRegion, items, subtotal, deliveryFee, processingFee, discount, promoCode, total, includeEbook, orderId } = orderData;
 
     const isUK = shippingRegion === 'UK Domestic';
     const cur = isUK ? '£' : '$';
