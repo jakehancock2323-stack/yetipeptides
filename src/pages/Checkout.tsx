@@ -163,12 +163,37 @@ export default function Checkout() {
       // Customer-facing branded order confirmation (separate from Proton notification)
       try {
         const orderId = (crypto.randomUUID().split('-')[0] || Date.now().toString(36)).toUpperCase();
+        const pm = paymentMethod.toLowerCase();
         const paymentLabels: Record<string, string> = {
-          usdt: 'USDT (TRC20)',
-          usdc: 'USDC',
+          usdt: 'USDT (ERC-20)',
+          usdc: 'USDC (ERC-20)',
           btc: 'Bitcoin (BTC)',
           bank: 'Bank Transfer',
+          middleman: 'Middleman / Escrow',
         };
+        let walletAddress = '';
+        let paymentInstructions = '';
+        if (pm.includes('btc') || pm.includes('bitcoin')) {
+          walletAddress = 'BTC: bc1qw9wyge8sp336wleanczaa6j70w57nlwvm6efnw';
+          paymentInstructions = 'Send the exact total above in BTC to the address. Reply with your transaction hash once sent.';
+        } else if (pm.includes('usdc')) {
+          walletAddress = 'USDC (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624';
+          paymentInstructions = 'Send the exact total in USDC on the ERC-20 (Ethereum) network. Reply with your transaction hash once sent.';
+        } else if (pm.includes('usdt')) {
+          walletAddress = 'USDT (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624';
+          paymentInstructions = 'Send the exact total in USDT on the ERC-20 (Ethereum) network. Reply with your transaction hash once sent.';
+        } else if (pm.includes('middleman') || pm.includes('escrow')) {
+          paymentInstructions = "You've selected Middleman / Escrow. Reply to this email and we'll send the next steps for using PayPal or CashApp via our trusted middleman.";
+        } else if (pm.includes('bank')) {
+          paymentInstructions = "You've selected Bank Transfer. Reply to this email and we'll send the bank details for your region.";
+        }
+
+        const shippingAddress = [
+          formData.street,
+          `${formData.city || ''}${formData.region ? ', ' + formData.region : ''} ${formData.postcode || ''}`.trim(),
+          formData.country,
+        ].filter(Boolean).join('\n');
+
         await supabase.functions.invoke('send-transactional-email', {
           body: {
             templateName: 'order-confirmation',
@@ -176,6 +201,7 @@ export default function Checkout() {
             idempotencyKey: `order-confirm-${orderId}`,
             templateData: {
               orderId,
+              orderDate: new Date().toLocaleDateString(),
               customerName: formData.fullName?.split(' ')[0] || '',
               items: orderData.items.map((i: any) => ({
                 name: i.productName,
@@ -185,15 +211,21 @@ export default function Checkout() {
               })),
               subtotal: orderData.subtotal,
               shipping: orderData.deliveryFee,
+              processingFee: orderData.processingFee,
+              discount: orderData.discount,
               total: orderData.total,
               currency: isUK ? 'GBP' : 'USD',
               paymentMethod: paymentLabels[paymentMethod] || paymentMethod,
+              walletAddress,
+              paymentInstructions,
+              shippingAddress,
             },
           },
         });
       } catch (custErr) {
         console.error('Customer confirmation email failed:', custErr);
       }
+
 
 
       clearCart();
