@@ -17,6 +17,7 @@ export default function AdminOrders() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [regionFilter, setRegionFilter] = useState<string>("all");
+  const [newOpen, setNewOpen] = useState(false);
 
   const load = async () => {
     setLoading(true);
