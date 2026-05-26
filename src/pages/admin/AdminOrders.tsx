@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
-import NewOrderDialog from "@/components/admin/NewOrderDialog";
+import NewOrderDialog, { type PrefillOrder } from "@/components/admin/NewOrderDialog";
 import { toast } from "sonner";
-import { Download, Search, RefreshCw, Plus } from "lucide-react";
+import { Download, Search, RefreshCw, Plus, Sparkles } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
@@ -18,6 +18,40 @@ export default function AdminOrders() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [regionFilter, setRegionFilter] = useState<string>("all");
   const [newOpen, setNewOpen] = useState(false);
+  const [prefill, setPrefill] = useState<PrefillOrder | null>(null);
+  const [parsing, setParsing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleScreenshot = async (file: File) => {
+    setParsing(true);
+    const t = toast.loading("AI is reading the screenshot…");
+    try {
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result as string;
+          resolve(result.split(",")[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      const { data, error } = await supabase.functions.invoke("parse-order-screenshot", {
+        body: { imageBase64: base64, mimeType: file.type },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      setPrefill(data.order as PrefillOrder);
+      setNewOpen(true);
+      toast.success("Order extracted — please review", { id: t });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Failed to parse screenshot";
+      toast.error(msg, { id: t });
+    } finally {
+      setParsing(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
+
 
   const load = async () => {
     setLoading(true);
@@ -130,8 +164,28 @@ export default function AdminOrders() {
             {filtered.length} of {orders.length} orders
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button size="sm" onClick={() => setNewOpen(true)} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
+        <div className="flex gap-2 flex-wrap">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleScreenshot(f);
+            }}
+          />
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={parsing}
+            className="gap-2 border-[hsl(var(--ice-blue))]/40 text-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/10"
+          >
+            <Sparkles className="w-4 h-4" />
+            {parsing ? "Reading…" : "Import from Screenshot"}
+          </Button>
+          <Button size="sm" onClick={() => { setPrefill(null); setNewOpen(true); }} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
             <Plus className="w-4 h-4" />
             New Order
           </Button>
@@ -146,7 +200,12 @@ export default function AdminOrders() {
         </div>
       </div>
 
-      <NewOrderDialog open={newOpen} onOpenChange={setNewOpen} onCreated={load} />
+      <NewOrderDialog
+        open={newOpen}
+        onOpenChange={(v) => { setNewOpen(v); if (!v) setPrefill(null); }}
+        onCreated={load}
+        prefill={prefill}
+      />
 
       <div className="frosted-glass rounded-xl p-4 mb-4 flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[220px]">
