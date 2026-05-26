@@ -164,8 +164,28 @@ export default function AdminOrders() {
             {filtered.length} of {orders.length} orders
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button size="sm" onClick={() => setNewOpen(true)} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
+        <div className="flex gap-2 flex-wrap">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleScreenshot(f);
+            }}
+          />
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={parsing}
+            className="gap-2 border-[hsl(var(--ice-blue))]/40 text-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/10"
+          >
+            <Sparkles className="w-4 h-4" />
+            {parsing ? "Reading…" : "Import from Screenshot"}
+          </Button>
+          <Button size="sm" onClick={() => { setPrefill(null); setNewOpen(true); }} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
             <Plus className="w-4 h-4" />
             New Order
           </Button>
@@ -180,7 +200,12 @@ export default function AdminOrders() {
         </div>
       </div>
 
-      <NewOrderDialog open={newOpen} onOpenChange={setNewOpen} onCreated={load} />
+      <NewOrderDialog
+        open={newOpen}
+        onOpenChange={(v) => { setNewOpen(v); if (!v) setPrefill(null); }}
+        onCreated={load}
+        prefill={prefill}
+      />
 
       <div className="frosted-glass rounded-xl p-4 mb-4 flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[220px]">
