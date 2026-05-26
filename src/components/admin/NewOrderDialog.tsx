@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,33 @@ import { Button } from "@/components/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-type ItemLine = {
+export type ItemLine = {
+  productName: string;
+  productCategory: string;
+  specification: string;
+  quantity: number;
+  price: number;
+};
+
+export type PrefillOrder = {
+  customer_name?: string;
+  customer_email?: string;
+  customer_phone?: string;
+  street?: string;
+  city?: string;
+  region?: string;
+  postcode?: string;
+  country?: string;
+  customer_notes?: string;
+  shipping_region?: "UK Domestic" | "International";
+  currency?: "USD" | "GBP";
+  payment_method?: string;
+  delivery_fee?: number;
+  processing_fee?: number;
+  discount?: number;
+  items?: Partial<ItemLine>[];
+};
+
   productName: string;
   productCategory: string;
   specification: string;
