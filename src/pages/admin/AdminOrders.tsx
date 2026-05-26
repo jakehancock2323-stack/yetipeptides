@@ -131,6 +131,10 @@ export default function AdminOrders() {
           </p>
         </div>
         <div className="flex gap-2">
+          <Button size="sm" onClick={() => setNewOpen(true)} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
+            <Plus className="w-4 h-4" />
+            New Order
+          </Button>
           <Button variant="outline" size="sm" onClick={load} className="gap-2">
             <RefreshCw className="w-4 h-4" />
             Refresh
@@ -141,6 +145,8 @@ export default function AdminOrders() {
           </Button>
         </div>
       </div>
+
+      <NewOrderDialog open={newOpen} onOpenChange={setNewOpen} onCreated={load} />
 
       <div className="frosted-glass rounded-xl p-4 mb-4 flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[220px]">
