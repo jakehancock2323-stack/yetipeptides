@@ -4,8 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
+import NewOrderDialog from "@/components/admin/NewOrderDialog";
 import { toast } from "sonner";
-import { Download, Search, RefreshCw } from "lucide-react";
+import { Download, Search, RefreshCw, Plus } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
@@ -16,6 +17,7 @@ export default function AdminOrders() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [regionFilter, setRegionFilter] = useState<string>("all");
+  const [newOpen, setNewOpen] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -129,6 +131,10 @@ export default function AdminOrders() {
           </p>
         </div>
         <div className="flex gap-2">
+          <Button size="sm" onClick={() => setNewOpen(true)} className="gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background">
+            <Plus className="w-4 h-4" />
+            New Order
+          </Button>
           <Button variant="outline" size="sm" onClick={load} className="gap-2">
             <RefreshCw className="w-4 h-4" />
             Refresh
@@ -139,6 +145,8 @@ export default function AdminOrders() {
           </Button>
         </div>
       </div>
+
+      <NewOrderDialog open={newOpen} onOpenChange={setNewOpen} onCreated={load} />
 
       <div className="frosted-glass rounded-xl p-4 mb-4 flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[220px]">
