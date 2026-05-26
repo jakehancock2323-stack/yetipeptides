@@ -76,6 +76,37 @@ export default function NewOrderDialog({
   const [discount, setDiscount] = useState(0);
   const [items, setItems] = useState<ItemLine[]>([emptyLine()]);
 
+  useEffect(() => {
+    if (!open || !prefill) return;
+    if (prefill.customer_name) setCustomerName(prefill.customer_name);
+    if (prefill.customer_email) setCustomerEmail(prefill.customer_email);
+    if (prefill.customer_phone) setCustomerPhone(prefill.customer_phone);
+    if (prefill.street) setStreet(prefill.street);
+    if (prefill.city) setCity(prefill.city);
+    if (prefill.region) setRegionField(prefill.region);
+    if (prefill.postcode) setPostcode(prefill.postcode);
+    if (prefill.country) setCountry(prefill.country);
+    if (prefill.customer_notes) setCustomerNotes(prefill.customer_notes);
+    if (prefill.shipping_region) setRegion(prefill.shipping_region);
+    if (prefill.currency) setCurrency(prefill.currency);
+    if (prefill.payment_method) setPaymentMethod(prefill.payment_method);
+    if (typeof prefill.delivery_fee === "number") setDeliveryFee(prefill.delivery_fee);
+    if (typeof prefill.processing_fee === "number") setProcessingFee(prefill.processing_fee);
+    if (typeof prefill.discount === "number") setDiscount(prefill.discount);
+    if (prefill.items && prefill.items.length) {
+      setItems(
+        prefill.items.map((it) => ({
+          productName: it.productName ?? "",
+          productCategory: it.productCategory ?? "",
+          specification: it.specification ?? "",
+          quantity: Number(it.quantity ?? 1),
+          price: Number(it.price ?? 0),
+        })),
+      );
+    }
+  }, [open, prefill]);
+
+
   const subtotal = items.reduce((s, it) => s + Number(it.price) * Number(it.quantity), 0);
   const total = Math.max(0, subtotal + Number(deliveryFee) + Number(processingFee) - Number(discount));
 
