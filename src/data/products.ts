@@ -716,12 +716,11 @@ export const products: Product[] = [
     category: "Cosmetics",
     region: "UK Domestic",
     currency: "GBP",
-    comingSoon: true,
-    outOfStock: true,
-    stockBadge: "Coming Soon",
+    outOfStock: false,
+    stockBadge: "In Stock",
     variants: [
-      { specification: "0.025%", price: 10, outOfStock: true },
-      { specification: "0.5%", price: 12, outOfStock: true }
+      { specification: "0.025%", price: 10, outOfStock: false },
+      { specification: "0.5%", price: 12, outOfStock: false }
     ]
   },
   {
