@@ -47,12 +47,15 @@ const emptyLine = (): ItemLine => ({
 
 export default function NewOrderDialog({
   open,
+  open,
   onOpenChange,
   onCreated,
+  prefill,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   onCreated: () => void;
+  prefill?: PrefillOrder | null;
 }) {
   const [saving, setSaving] = useState(false);
   const [region, setRegion] = useState<"UK Domestic" | "International">("International");
