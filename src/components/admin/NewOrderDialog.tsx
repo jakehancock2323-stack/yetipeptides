@@ -47,7 +47,6 @@ const emptyLine = (): ItemLine => ({
 
 export default function NewOrderDialog({
   open,
-  open,
   onOpenChange,
   onCreated,
   prefill,
