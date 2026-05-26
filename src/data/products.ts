@@ -551,6 +551,15 @@ export const products: Product[] = [
       { specification: "10mg ×10", price: 217 }
     ]
   },
+  {
+    id: "glutathione-600mg",
+    name: "Glutathione 600mg",
+    category: "General Health",
+    variants: [
+      { specification: "600mg ×10 vials", price: 89 }
+    ]
+  },
+
 
   // OTHER / SPECIALITY
   {
