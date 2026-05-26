@@ -70,8 +70,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           loading="lazy"
         />
         {isUkDomestic && (
-          <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/15 backdrop-blur-sm px-2 py-0.5 rounded">
-            UK
+          <span className="absolute top-3 left-3 text-lg bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none" title="UK Domestic">
+            🇬🇧
           </span>
         )}
         {allVariantsOutOfStock ? (
