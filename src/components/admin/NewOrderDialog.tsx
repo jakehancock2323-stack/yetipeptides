@@ -35,12 +35,7 @@ export type PrefillOrder = {
   items?: Partial<ItemLine>[];
 };
 
-  productName: string;
-  productCategory: string;
-  specification: string;
-  quantity: number;
-  price: number;
-};
+
 
 const emptyLine = (): ItemLine => ({
   productName: "",
