@@ -202,10 +202,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                 onClick={handleAddToCart}
                 disabled={isAdding}
                 size="sm"
-                className="flex-1 bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold h-9 text-sm gap-1.5"
+                className={`flex-1 font-semibold h-9 text-sm gap-1.5 ${
+                  isPreOrder
+                    ? 'bg-amber-500 hover:bg-amber-500/90 text-background'
+                    : 'bg-ice-blue hover:bg-ice-blue/90 text-background'
+                }`}
               >
-                <ShoppingCart className="w-4 h-4" />
-                {isAdding ? "Added!" : "Add to Cart"}
+                {isPreOrder ? <Clock className="w-4 h-4" /> : <ShoppingCart className="w-4 h-4" />}
+                {isAdding ? (isPreOrder ? 'Pre-Ordered!' : 'Added!') : isPreOrder ? 'Pre-Order Now' : 'Add to Cart'}
               </Button>
             </>
           )}
