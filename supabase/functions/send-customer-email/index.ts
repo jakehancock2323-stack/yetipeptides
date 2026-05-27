@@ -10,7 +10,7 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 // While you're using the Resend sandbox, you can only email the address that
 // owns the Resend account. To email real customers, verify yetipeptides.com
 // in Resend and keep this set to an address on that domain.
-const FROM_ADDRESS = "Yeti Peptides <orders@yetipeptides.com>";
+const FROM_ADDRESS = "Yeti Peptides <yetipeptides@protonmail.com>";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
