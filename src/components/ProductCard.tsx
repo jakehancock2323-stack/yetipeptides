@@ -25,15 +25,16 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
   const selectedVariant = product.variants[selectedVariantIndex];
-  const isProductOutOfStock = product.outOfStock;
-  const isVariantOutOfStock = selectedVariant.outOfStock;
+  const isPreOrder = !!product.preOrder;
+  const isProductOutOfStock = product.outOfStock && !isPreOrder;
+  const isVariantOutOfStock = selectedVariant.outOfStock && !isPreOrder;
   const isComingSoon = product.comingSoon;
   const isCurrentlyOutOfStock = isProductOutOfStock || isVariantOutOfStock || isComingSoon;
-  const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
+  const allVariantsOutOfStock = !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
   const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
-  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && (product.outOfStock || product.variants.every(v => v.outOfStock));
+  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
     setIsAdding(true);
