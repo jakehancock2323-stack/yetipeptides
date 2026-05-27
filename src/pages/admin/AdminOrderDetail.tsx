@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
 import { toast } from "sonner";
-import { ArrowLeft, Copy, Mail, Save, Trash2 } from "lucide-react";
+import { ArrowLeft, Copy, Mail, Save, Trash2, Package } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { buildVariables, fillTemplate, type OrderItem } from "@/lib/emailTemplates";
+import { downloadRoyalMailCsv } from "@/lib/royalMail";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 type Template = Database["public"]["Tables"]["email_templates"]["Row"];
@@ -182,11 +183,27 @@ export default function AdminOrderDetail() {
         <div className="space-y-5">
           {/* Customer */}
           <div className="frosted-glass rounded-xl p-5">
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
               <h2 className="font-semibold">Customer</h2>
-              <Button size="sm" variant="ghost" onClick={copyAddress} className="gap-1 h-8">
-                <Copy className="w-3 h-3" /> Copy address
-              </Button>
+              <div className="flex items-center gap-2">
+                {order.shipping_region === "UK Domestic" && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      downloadRoyalMailCsv(order, "Tracked 24");
+                      toast.success("Royal Mail CSV downloaded — upload it in Click & Drop");
+                    }}
+                    className="gap-1 h-8"
+                    title="Download a Click & Drop CSV for Royal Mail Tracked 24"
+                  >
+                    <Package className="w-3 h-3" /> Royal Mail label
+                  </Button>
+                )}
+                <Button size="sm" variant="ghost" onClick={copyAddress} className="gap-1 h-8">
+                  <Copy className="w-3 h-3" /> Copy address
+                </Button>
+              </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-3 text-sm">
               <div>
