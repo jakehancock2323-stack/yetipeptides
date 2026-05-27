@@ -40,7 +40,11 @@ export default function ProductCard({ product }: ProductCardProps) {
     setIsAdding(true);
     try {
       addToCart(product, selectedVariant, quantity);
-      toast.success(`Added ${quantity}x ${product.name} to cart`);
+      toast.success(
+        isPreOrder
+          ? `Pre-ordered ${quantity}x ${product.name}`
+          : `Added ${quantity}x ${product.name} to cart`
+      );
       setQuantity(1);
     } finally {
       setTimeout(() => setIsAdding(false), 300);
