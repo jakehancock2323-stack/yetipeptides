@@ -10,8 +10,11 @@ type OrderItem = {
   price?: number;
 };
 
-// Royal Mail Click & Drop CSV — standard import column set.
-// Upload at https://business.parcel.royalmail.com/ → Orders → Import.
+// Royal Mail Click & Drop — "Default" CSV import template column set.
+// These header names match the template Royal Mail provides for download
+// at https://business.parcel.royalmail.com/ → Settings → Import/Export → Order import.
+// Using these exact headers means Click & Drop auto-maps every column with the
+// built-in "Default" mapping; no custom import profile setup required.
 const HEADERS = [
   "Order reference",
   "Recipient name",
@@ -21,19 +24,20 @@ const HEADERS = [
   "Recipient town",
   "Recipient county",
   "Recipient postcode",
-  "Recipient country",
+  "Recipient country code",
   "Recipient email",
-  "Recipient mobile",
+  "Recipient phone",
   "Order date",
+  "Order value",
+  "Currency code",
   "Weight (kg)",
-  "Format",
   "Length (cm)",
   "Width (cm)",
-  "Depth (cm)",
+  "Height (cm)",
   "Service",
-  "Order subtotal",
-  "Order total",
-  "Currency",
+  "Format",
+  "Packaging",
+  "Channel",
   "Special instructions",
 ];
 
@@ -48,16 +52,23 @@ export function buildRoyalMailCsv(
   order: Order,
   opts: { service?: string; format?: string; weightKg?: number } = {},
 ): string {
+  // Service must match a name Click & Drop recognises. "Tracked 24" is the
+  // standard display name; Click & Drop accepts it directly with the
+  // default import profile.
   const service = opts.service ?? "Tracked 24";
-  const format = opts.format ?? "Parcel";
+  const format = opts.format ?? "Parcel"; // Parcel | Large Letter | Letter
   const items = (order.items as unknown as OrderItem[]) || [];
   const totalQty = items.reduce((s, it) => s + Number(it.quantity ?? 1), 0);
-  // Rough default: 0.1 kg per item, min 0.1, capped 2 kg for the small-parcel band.
+  // Rough default: 0.1 kg per item, min 0.1, capped 2 kg for small-parcel band.
   const weightKg =
     opts.weightKg ?? Math.min(2, Math.max(0.1, Number((totalQty * 0.1).toFixed(2))));
 
   const orderRef = order.id.slice(0, 8).toUpperCase();
-  const orderDate = new Date(order.created_at).toISOString().slice(0, 10);
+  // Click & Drop expects DD/MM/YYYY in the default template.
+  const d = new Date(order.created_at);
+  const orderDate = `${String(d.getDate()).padStart(2, "0")}/${String(
+    d.getMonth() + 1,
+  ).padStart(2, "0")}/${d.getFullYear()}`;
 
   const row = [
     orderRef,
@@ -67,24 +78,27 @@ export function buildRoyalMailCsv(
     "",
     order.city ?? "",
     order.region ?? "",
-    order.postcode ?? "",
-    "GB",
+    (order.postcode ?? "").toUpperCase(),
+    "GB", // ISO country code — required, not the country name
     order.customer_email,
     order.customer_phone ?? "",
     orderDate,
+    Number(order.total ?? 0).toFixed(2),
+    order.currency ?? "GBP",
     weightKg,
-    format,
     "",
     "",
     "",
     service,
-    Number(order.subtotal ?? 0).toFixed(2),
-    Number(order.total ?? 0).toFixed(2),
-    order.currency ?? "GBP",
+    format,
+    "",
+    "Yeti Peptides",
     order.customer_notes ?? "",
   ];
 
-  return [HEADERS.join(","), row.map(csvEscape).join(",")].join("\r\n") + "\r\n";
+  // UTF-8 BOM helps Excel and Click & Drop detect encoding correctly.
+  const bom = "\ufeff";
+  return bom + [HEADERS.join(","), row.map(csvEscape).join(",")].join("\r\n") + "\r\n";
 }
 
 export function downloadRoyalMailCsv(order: Order, service = "Tracked 24") {
