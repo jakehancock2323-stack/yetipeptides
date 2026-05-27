@@ -83,6 +83,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
           </span>
+        ) : isPreOrder ? (
+          <span className="absolute top-3 right-3 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
+            <Clock className="w-3 h-3" />
+            Pre-Order
+          </span>
         ) : product.stockBadge ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {product.stockBadge}
