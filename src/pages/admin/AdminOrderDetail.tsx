@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
 import { toast } from "sonner";
-import { ArrowLeft, Copy, Mail, Save, Trash2 } from "lucide-react";
+import { ArrowLeft, Copy, Mail, Save, Trash2, Package } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { buildVariables, fillTemplate, type OrderItem } from "@/lib/emailTemplates";
+import { downloadRoyalMailCsv } from "@/lib/royalMail";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 type Template = Database["public"]["Tables"]["email_templates"]["Row"];
