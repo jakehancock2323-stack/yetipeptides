@@ -108,7 +108,7 @@ export default function Checkout() {
       shippingRegion: effectiveRegion,
       shippingMethod: shippingMethodLabel,
       items: items.map((item) => ({
-        productName: item.product.name,
+        productName: item.product.preOrder ? `${item.product.name} (PRE-ORDER)` : item.product.name,
         productCategory: item.product.category,
         specification: item.variant.specification,
         quantity: item.quantity,
