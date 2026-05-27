@@ -16,6 +16,7 @@ export interface Product {
   ingredients?: string[];
   outOfStock?: boolean;
   comingSoon?: boolean;
+  preOrder?: boolean;
   stockBadge?: string;
   image?: string;
   currency?: 'USD' | 'GBP';
@@ -661,12 +662,13 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    outOfStock: true,
+    preOrder: true,
+    stockBadge: "Pre-Order",
     variants: [
-      { specification: "Tiffany Blue", price: 15, outOfStock: true },
-      { specification: "Red", price: 15, outOfStock: true },
-      { specification: "Deep Purple", price: 15, outOfStock: true },
-      { specification: "Green", price: 15, outOfStock: true }
+      { specification: "Tiffany Blue", price: 15 },
+      { specification: "Red", price: 15 },
+      { specification: "Deep Purple", price: 15 },
+      { specification: "Green", price: 15 }
     ]
   },
   {

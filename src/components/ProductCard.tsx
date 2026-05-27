@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from './ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
-import { ShoppingCart, Flame } from 'lucide-react';
+import { ShoppingCart, Flame, Clock } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
@@ -25,21 +25,26 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
   const selectedVariant = product.variants[selectedVariantIndex];
-  const isProductOutOfStock = product.outOfStock;
-  const isVariantOutOfStock = selectedVariant.outOfStock;
+  const isPreOrder = !!product.preOrder;
+  const isProductOutOfStock = product.outOfStock && !isPreOrder;
+  const isVariantOutOfStock = selectedVariant.outOfStock && !isPreOrder;
   const isComingSoon = product.comingSoon;
   const isCurrentlyOutOfStock = isProductOutOfStock || isVariantOutOfStock || isComingSoon;
-  const allVariantsOutOfStock = product.outOfStock || product.variants.every(v => v.outOfStock);
+  const allVariantsOutOfStock = !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
   const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
-  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && (product.outOfStock || product.variants.every(v => v.outOfStock));
+  const isUkDomesticOutOfStock = product.region === 'UK Domestic' && !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
     setIsAdding(true);
     try {
       addToCart(product, selectedVariant, quantity);
-      toast.success(`Added ${quantity}x ${product.name} to cart`);
+      toast.success(
+        isPreOrder
+          ? `Pre-ordered ${quantity}x ${product.name}`
+          : `Added ${quantity}x ${product.name} to cart`
+      );
       setQuantity(1);
     } finally {
       setTimeout(() => setIsAdding(false), 300);
@@ -77,6 +82,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
+          </span>
+        ) : isPreOrder ? (
+          <span className="absolute top-3 right-3 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
+            <Clock className="w-3 h-3" />
+            Pre-Order
           </span>
         ) : product.stockBadge ? (
           <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
@@ -192,10 +202,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                 onClick={handleAddToCart}
                 disabled={isAdding}
                 size="sm"
-                className="flex-1 bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold h-9 text-sm gap-1.5"
+                className={`flex-1 font-semibold h-9 text-sm gap-1.5 ${
+                  isPreOrder
+                    ? 'bg-amber-500 hover:bg-amber-500/90 text-background'
+                    : 'bg-ice-blue hover:bg-ice-blue/90 text-background'
+                }`}
               >
-                <ShoppingCart className="w-4 h-4" />
-                {isAdding ? "Added!" : "Add to Cart"}
+                {isPreOrder ? <Clock className="w-4 h-4" /> : <ShoppingCart className="w-4 h-4" />}
+                {isAdding ? (isPreOrder ? 'Pre-Ordered!' : 'Added!') : isPreOrder ? 'Pre-Order Now' : 'Add to Cart'}
               </Button>
             </>
           )}
