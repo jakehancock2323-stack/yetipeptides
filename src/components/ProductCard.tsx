@@ -39,13 +39,15 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async () => {
     setIsAdding(true);
     try {
-      addToCart(product, selectedVariant, quantity);
-      toast.success(
-        isPreOrder
-          ? `Pre-ordered ${quantity}x ${product.name}`
-          : `Added ${quantity}x ${product.name} to cart`
-      );
-      setQuantity(1);
+      const ok = addToCart(product, selectedVariant, quantity);
+      if (ok) {
+        toast.success(
+          isPreOrder
+            ? `Pre-ordered ${quantity}x ${product.name}`
+            : `Added ${quantity}x ${product.name} to cart`
+        );
+        setQuantity(1);
+      }
     } finally {
       setTimeout(() => setIsAdding(false), 300);
     }
