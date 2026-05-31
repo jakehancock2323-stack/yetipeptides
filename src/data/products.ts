@@ -757,6 +757,7 @@ export const products: Product[] = [
     outOfStock: true,
     stockBadge: "Coming Soon — Limited Stock",
     variants: [
+      { specification: "10mg × 1 vial", price: 14, outOfStock: true },
       { specification: "30mg × 1 vial", price: 17, outOfStock: true }
     ]
   },
