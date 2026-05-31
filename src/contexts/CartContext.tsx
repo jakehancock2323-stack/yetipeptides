@@ -45,6 +45,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [includeEbook]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
+    const incomingRegion = getRegion(product);
+    if (items.length > 0) {
+      const existingRegion = getRegion(items[0].product);
+      if (existingRegion !== incomingRegion) {
+        toast.error(
+          `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`
+        );
+        return;
+      }
+    }
     setItems(prev => {
       const existing = prev.find(
         item => item.product.id === product.id && 
