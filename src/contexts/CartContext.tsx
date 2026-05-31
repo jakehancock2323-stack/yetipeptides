@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant } from '@/data/products';
+import { toast } from 'sonner';
+
+const getRegion = (p: Product): 'UK Domestic' | 'International' =>
+  p.region === 'UK Domestic' ? 'UK Domestic' : 'International';
 
 export interface CartItem {
   product: Product;
@@ -9,7 +13,7 @@ export interface CartItem {
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (product: Product, variant: ProductVariant, quantity: number) => void;
+  addToCart: (product: Product, variant: ProductVariant, quantity: number) => boolean;
   removeFromCart: (productId: string, variantSpec: string) => void;
   updateQuantity: (productId: string, variantSpec: string, quantity: number) => void;
   clearCart: () => void;
@@ -41,6 +45,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [includeEbook]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
+    const incomingRegion = getRegion(product);
+    if (items.length > 0) {
+      const existingRegion = getRegion(items[0].product);
+      if (existingRegion !== incomingRegion) {
+        toast.error(
+          `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`
+        );
+        return false;
+      }
+    }
     setItems(prev => {
       const existing = prev.find(
         item => item.product.id === product.id && 
@@ -58,6 +72,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       return [...prev, { product, variant, quantity }];
     });
+    return true;
   };
 
   const removeFromCart = (productId: string, variantSpec: string) => {
