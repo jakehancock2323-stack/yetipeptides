@@ -52,7 +52,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         toast.error(
           `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`
         );
-        return;
+        return false;
       }
     }
     setItems(prev => {
@@ -72,6 +72,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       return [...prev, { product, variant, quantity }];
     });
+    return true;
   };
 
   const removeFromCart = (productId: string, variantSpec: string) => {
