@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant } from '@/data/products';
+import { toast } from 'sonner';
+
+const getRegion = (p: Product): 'UK Domestic' | 'International' =>
+  p.region === 'UK Domestic' ? 'UK Domestic' : 'International';
 
 export interface CartItem {
   product: Product;
