@@ -84,19 +84,14 @@ export default function Checkout() {
   // regardless of the global region toggle.
   const isUK = allItemsUKDomestic;
   const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : 'International';
-  const paypalAvailable = allItemsUKDomestic;
-  const bankTransferAvailable = isUK;
   const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
   const currencySymbol = isUK ? '£' : '$';
   const shippingMethodLabel = isUK
     ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
     : 'International Shipping';
 
-  // Safety: if PayPal or Bank Transfer become unavailable, reset selection
-  if (paymentMethod === 'paypal' && !paypalAvailable) {
-    setPaymentMethod('usdt');
-  }
-  if (paymentMethod === 'bank' && !bankTransferAvailable) {
+  // Safety: if PayPal or Bank Transfer is still selected (removed options), reset
+  if (paymentMethod === 'paypal' || paymentMethod === 'bank') {
     setPaymentMethod('usdt');
   }
 
@@ -491,24 +486,6 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
                   </div>
                 </label>
-                {bankTransferAvailable && (
-                  <label htmlFor="bank" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'bank' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
-                    <RadioGroupItem value="bank" id="bank" />
-                    <div>
-                      <span className="text-sm font-medium">Bank Transfer</span>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Bank details will be emailed after order is placed</p>
-                    </div>
-                  </label>
-                )}
-                {paypalAvailable && (
-                  <label htmlFor="paypal" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'paypal' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
-                    <RadioGroupItem value="paypal" id="paypal" />
-                    <div>
-                      <span className="text-sm font-medium">PayPal</span>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">Available for UK Domestic orders only</p>
-                    </div>
-                  </label>
-                )}
               </RadioGroup>
 
               {/* Final Confirmation Notice */}
