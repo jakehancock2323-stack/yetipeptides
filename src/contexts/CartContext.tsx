@@ -2,14 +2,24 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant } from '@/data/products';
 import { toast } from 'sonner';
 
-const getRegion = (p: Product): 'UK Domestic' | 'International' =>
-  p.region === 'UK Domestic' ? 'UK Domestic' : 'International';
+export type CartRegion = 'UK Domestic' | 'International';
+
+export const getProductRegion = (product: Product): CartRegion =>
+  product.region === 'UK Domestic' ? 'UK Domestic' : 'International';
 
 export interface CartItem {
   product: Product;
   variant: ProductVariant;
   quantity: number;
 }
+
+export const hasMixedCartRegions = (cartItems: CartItem[]) => {
+  const regions = new Set(cartItems.map((item) => getProductRegion(item.product)));
+  return regions.size > 1;
+};
+
+const getRegionConflictMessage = (existingRegion: CartRegion, incomingRegion: CartRegion) =>
+  `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`;
 
 interface CartContextType {
   items: CartItem[];
@@ -45,17 +55,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [includeEbook]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
-    const incomingRegion = getRegion(product);
-    if (items.length > 0) {
-      const existingRegion = getRegion(items[0].product);
-      if (existingRegion !== incomingRegion) {
-        toast.error(
-          `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`
-        );
-        return false;
-      }
+    const incomingRegion = getProductRegion(product);
+    const conflictingItem = items.find((item) => getProductRegion(item.product) !== incomingRegion);
+    if (conflictingItem) {
+      toast.error(getRegionConflictMessage(getProductRegion(conflictingItem.product), incomingRegion));
+      return false;
     }
+
     setItems(prev => {
+      const latestConflict = prev.find((item) => getProductRegion(item.product) !== incomingRegion);
+      if (latestConflict) {
+        toast.error(getRegionConflictMessage(getProductRegion(latestConflict.product), incomingRegion));
+        return prev;
+      }
+
       const existing = prev.find(
         item => item.product.id === product.id && 
         item.variant.specification === variant.specification
