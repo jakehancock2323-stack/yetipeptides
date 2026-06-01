@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { Product, ProductVariant } from '@/data/products';
 import { toast } from 'sonner';
 import { CartRegion, getProductRegion } from '@/lib/cartRegion';
@@ -31,6 +31,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
+  const itemsRef = useRef<CartItem[]>(items);
 
   const [includeEbook, setIncludeEbook] = useState<boolean>(() => {
     const saved = localStorage.getItem('includeEbook');
@@ -38,6 +39,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    itemsRef.current = items;
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
@@ -47,35 +49,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
     const incomingRegion = getProductRegion(product);
-    const conflictingItem = items.find((item) => getProductRegion(item.product) !== incomingRegion);
+    const currentItems = itemsRef.current;
+    const conflictingItem = currentItems.find((item) => getProductRegion(item.product) !== incomingRegion);
     if (conflictingItem) {
       toast.error(getRegionConflictMessage(getProductRegion(conflictingItem.product), incomingRegion));
       return false;
     }
 
-    setItems(prev => {
-      const latestConflict = prev.find((item) => getProductRegion(item.product) !== incomingRegion);
-      if (latestConflict) {
-        toast.error(getRegionConflictMessage(getProductRegion(latestConflict.product), incomingRegion));
-        return prev;
-      }
-
-      const existing = prev.find(
-        item => item.product.id === product.id && 
+    const existing = currentItems.find(
+      item => item.product.id === product.id && 
         item.variant.specification === variant.specification
-      );
+    );
 
-      if (existing) {
-        return prev.map(item =>
-          item.product.id === product.id && 
+    const nextItems = existing
+      ? currentItems.map(item =>
+          item.product.id === product.id &&
           item.variant.specification === variant.specification
             ? { ...item, quantity: item.quantity + quantity }
             : item
-        );
-      }
+        )
+      : [...currentItems, { product, variant, quantity }];
 
-      return [...prev, { product, variant, quantity }];
-    });
+    itemsRef.current = nextItems;
+    setItems(nextItems);
     return true;
   };
 
