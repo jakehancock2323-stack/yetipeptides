@@ -1,22 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant } from '@/data/products';
 import { toast } from 'sonner';
-
-export type CartRegion = 'UK Domestic' | 'International';
-
-export const getProductRegion = (product: Product): CartRegion =>
-  product.region === 'UK Domestic' ? 'UK Domestic' : 'International';
+import { CartRegion, getProductRegion } from '@/lib/cartRegion';
 
 export interface CartItem {
   product: Product;
   variant: ProductVariant;
   quantity: number;
 }
-
-export const hasMixedCartRegions = (cartItems: CartItem[]) => {
-  const regions = new Set(cartItems.map((item) => getProductRegion(item.product)));
-  return regions.size > 1;
-};
 
 const getRegionConflictMessage = (existingRegion: CartRegion, incomingRegion: CartRegion) =>
   `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`;
