@@ -76,11 +76,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const removeFromCart = (productId: string, variantSpec: string) => {
-    setItems(prev => 
-      prev.filter(item => 
+    setItems(prev => {
+      const nextItems = prev.filter(item => 
         !(item.product.id === productId && item.variant.specification === variantSpec)
-      )
-    );
+      );
+      itemsRef.current = nextItems;
+      return nextItems;
+    });
   };
 
   const updateQuantity = (productId: string, variantSpec: string, quantity: number) => {
@@ -89,16 +91,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    setItems(prev =>
-      prev.map(item =>
+    setItems(prev => {
+      const nextItems = prev.map(item =>
         item.product.id === productId && item.variant.specification === variantSpec
           ? { ...item, quantity }
           : item
-      )
-    );
+      );
+      itemsRef.current = nextItems;
+      return nextItems;
+    });
   };
 
-  const clearCart = () => setItems([]);
+  const clearCart = () => {
+    itemsRef.current = [];
+    setItems([]);
+  };
 
   const getTotalPrice = () => {
     const itemsTotal = items.reduce((total, item) => total + (item.variant.price * item.quantity), 0);
