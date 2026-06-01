@@ -78,7 +78,6 @@ export default function Checkout() {
 
   const mixedRegionCart = hasMixedCartRegions(items);
   const allItemsUKDomestic = items.length > 0 && items.every(item => getProductRegion(item.product) === 'UK Domestic');
-  const hasInternationalItems = items.some(item => getProductRegion(item.product) === 'International');
   // Force UK Domestic pricing/currency whenever every item is UK-only,
   // regardless of the global region toggle.
   const isUK = allItemsUKDomestic;
@@ -557,6 +556,12 @@ export default function Checkout() {
                 </h2>
 
                 <div className="space-y-3 mb-5 max-h-[350px] overflow-y-auto pr-1">
+                  {mixedRegionCart && (
+                    <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs font-semibold text-destructive">
+                      Domestic and international items can't be ordered together. Remove one region before checkout.
+                    </div>
+                  )}
+
                   {items.map((item) => (
                     <div key={`${item.product.id}-${item.variant.specification}`} className="flex justify-between items-start gap-2 pb-3 border-b border-border/20">
                       <div className="min-w-0">
