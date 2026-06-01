@@ -739,7 +739,7 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "In Stock",
+    stockBadge: "Limited Stock",
     variants: [
       { specification: "10mg × 1 vial", price: 18 },
       { specification: "30mg × 1 vial", price: 24 }
