@@ -739,10 +739,10 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "10mg In Stock — 30mg Out of Stock",
+    stockBadge: "In Stock",
     variants: [
       { specification: "10mg × 1 vial", price: 18 },
-      { specification: "30mg × 1 vial", price: 24, outOfStock: true }
+      { specification: "30mg × 1 vial", price: 24 }
     ]
   },
   {
@@ -751,10 +751,10 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "10mg In Stock — 30mg Out of Stock",
+    stockBadge: "In Stock",
     variants: [
       { specification: "10mg × 1 vial", price: 14 },
-      { specification: "30mg × 1 vial", price: 17, outOfStock: true }
+      { specification: "30mg × 1 vial", price: 17 }
     ]
   },
   {
@@ -763,11 +763,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    comingSoon: true,
-    outOfStock: true,
-    stockBadge: "Coming Soon — Limited Stock",
+    stockBadge: "In Stock",
     variants: [
-      { specification: "10mg × 1 vial", price: 14, outOfStock: true }
+      { specification: "10mg × 1 vial", price: 14 }
     ]
   },
   {
@@ -776,11 +774,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    comingSoon: true,
-    outOfStock: true,
-    stockBadge: "Coming Soon — Limited Stock",
+    stockBadge: "In Stock",
     variants: [
-      { specification: "10mg × 1 vial", price: 22, outOfStock: true }
+      { specification: "10mg × 1 vial", price: 22 }
     ]
   },
   {
@@ -789,11 +785,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    comingSoon: true,
-    outOfStock: true,
-    stockBadge: "Coming Soon — Limited Stock",
+    stockBadge: "In Stock",
     variants: [
-      { specification: "100mg × 1 vial", price: 13, outOfStock: true }
+      { specification: "100mg × 1 vial", price: 13 }
     ]
   }
 ];
