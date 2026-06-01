@@ -19,7 +19,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useCart } from "@/contexts/CartContext";
+import { getProductRegion, hasMixedCartRegions, useCart } from "@/contexts/CartContext";
 import { useRegion } from "@/contexts/RegionContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -76,11 +76,13 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const allItemsUKDomestic = items.length > 0 && items.every(item => item.product.region === 'UK Domestic');
+  const mixedRegionCart = hasMixedCartRegions(items);
+  const allItemsUKDomestic = items.length > 0 && items.every(item => getProductRegion(item.product) === 'UK Domestic');
+  const hasInternationalItems = items.some(item => getProductRegion(item.product) === 'International');
   // Force UK Domestic pricing/currency whenever every item is UK-only,
   // regardless of the global region toggle.
-  const isUK = allItemsUKDomestic || region === 'UK Domestic';
-  const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : region;
+  const isUK = allItemsUKDomestic;
+  const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : 'International';
   const paypalAvailable = allItemsUKDomestic;
   const bankTransferAvailable = isUK;
   const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
@@ -99,6 +101,12 @@ export default function Checkout() {
 
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
+    if (mixedRegionCart) {
+      toast.error("Domestic and international items can't be ordered together. Please remove one region before checkout.");
+      setConfirmOpen(false);
+      return;
+    }
+
     setConfirmOpen(false);
     setIsSubmitting(true);
 
@@ -523,8 +531,14 @@ export default function Checkout() {
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => setConfirmOpen(true)}
-                  disabled={isSubmitting}
+                  onClick={() => {
+                    if (mixedRegionCart) {
+                      toast.error("Domestic and international items can't be ordered together. Please remove one region before checkout.");
+                      return;
+                    }
+                    setConfirmOpen(true);
+                  }}
+                  disabled={isSubmitting || mixedRegionCart}
                   className="flex-1 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background font-semibold gap-2 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--ice-blue)/0.3)]"
                   size="lg"
                 >
