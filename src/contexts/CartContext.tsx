@@ -1,15 +1,16 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { Product, ProductVariant } from '@/data/products';
 import { toast } from 'sonner';
-
-const getRegion = (p: Product): 'UK Domestic' | 'International' =>
-  p.region === 'UK Domestic' ? 'UK Domestic' : 'International';
+import { CartRegion, getProductRegion } from '@/lib/cartRegion';
 
 export interface CartItem {
   product: Product;
   variant: ProductVariant;
   quantity: number;
 }
+
+const getRegionConflictMessage = (existingRegion: CartRegion, incomingRegion: CartRegion) =>
+  `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`;
 
 interface CartContextType {
   items: CartItem[];
@@ -30,6 +31,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
+  const itemsRef = useRef<CartItem[]>(items);
 
   const [includeEbook, setIncludeEbook] = useState<boolean>(() => {
     const saved = localStorage.getItem('includeEbook');
@@ -37,6 +39,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    itemsRef.current = items;
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
@@ -45,42 +48,41 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [includeEbook]);
 
   const addToCart = (product: Product, variant: ProductVariant, quantity: number) => {
-    const incomingRegion = getRegion(product);
-    if (items.length > 0) {
-      const existingRegion = getRegion(items[0].product);
-      if (existingRegion !== incomingRegion) {
-        toast.error(
-          `Your cart contains ${existingRegion} items. Clear it before adding ${incomingRegion} items.`
-        );
-        return false;
-      }
+    const incomingRegion = getProductRegion(product);
+    const currentItems = itemsRef.current;
+    const conflictingItem = currentItems.find((item) => getProductRegion(item.product) !== incomingRegion);
+    if (conflictingItem) {
+      toast.error(getRegionConflictMessage(getProductRegion(conflictingItem.product), incomingRegion));
+      return false;
     }
-    setItems(prev => {
-      const existing = prev.find(
-        item => item.product.id === product.id && 
-        item.variant.specification === variant.specification
-      );
 
-      if (existing) {
-        return prev.map(item =>
-          item.product.id === product.id && 
+    const existing = currentItems.find(
+      item => item.product.id === product.id && 
+        item.variant.specification === variant.specification
+    );
+
+    const nextItems = existing
+      ? currentItems.map(item =>
+          item.product.id === product.id &&
           item.variant.specification === variant.specification
             ? { ...item, quantity: item.quantity + quantity }
             : item
-        );
-      }
+        )
+      : [...currentItems, { product, variant, quantity }];
 
-      return [...prev, { product, variant, quantity }];
-    });
+    itemsRef.current = nextItems;
+    setItems(nextItems);
     return true;
   };
 
   const removeFromCart = (productId: string, variantSpec: string) => {
-    setItems(prev => 
-      prev.filter(item => 
+    setItems(prev => {
+      const nextItems = prev.filter(item => 
         !(item.product.id === productId && item.variant.specification === variantSpec)
-      )
-    );
+      );
+      itemsRef.current = nextItems;
+      return nextItems;
+    });
   };
 
   const updateQuantity = (productId: string, variantSpec: string, quantity: number) => {
@@ -89,16 +91,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    setItems(prev =>
-      prev.map(item =>
+    setItems(prev => {
+      const nextItems = prev.map(item =>
         item.product.id === productId && item.variant.specification === variantSpec
           ? { ...item, quantity }
           : item
-      )
-    );
+      );
+      itemsRef.current = nextItems;
+      return nextItems;
+    });
   };
 
-  const clearCart = () => setItems([]);
+  const clearCart = () => {
+    itemsRef.current = [];
+    setItems([]);
+  };
 
   const getTotalPrice = () => {
     const itemsTotal = items.reduce((total, item) => total + (item.variant.price * item.quantity), 0);

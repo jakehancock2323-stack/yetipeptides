@@ -25,6 +25,8 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Lock, ShieldCheck, CreditCard, Package, ArrowRight, ArrowLeft, BookOpen, Check, AlertTriangle } from "lucide-react";
 import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
+import { getProductRegion, hasMixedProductRegions } from '@/lib/cartRegion';
+import type { Json } from '@/integrations/supabase/types';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -76,11 +78,12 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const allItemsUKDomestic = items.length > 0 && items.every(item => item.product.region === 'UK Domestic');
+  const mixedRegionCart = hasMixedProductRegions(items);
+  const allItemsUKDomestic = items.length > 0 && items.every(item => getProductRegion(item.product) === 'UK Domestic');
   // Force UK Domestic pricing/currency whenever every item is UK-only,
   // regardless of the global region toggle.
-  const isUK = allItemsUKDomestic || region === 'UK Domestic';
-  const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : region;
+  const isUK = allItemsUKDomestic;
+  const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : 'International';
   const paypalAvailable = allItemsUKDomestic;
   const bankTransferAvailable = isUK;
   const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
@@ -99,6 +102,12 @@ export default function Checkout() {
 
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
+    if (mixedRegionCart) {
+      toast.error("Domestic and international items can't be ordered together. Please remove one region before checkout.");
+      setConfirmOpen(false);
+      return;
+    }
+
     setConfirmOpen(false);
     setIsSubmitting(true);
 
@@ -144,7 +153,7 @@ export default function Checkout() {
           customer_notes: [isUK ? `Shipping: ${shippingMethodLabel}` : null, formData.notes].filter(Boolean).join(' | ') || null,
           shipping_region: effectiveRegion,
           payment_method: paymentMethod,
-          items: orderData.items as any,
+          items: orderData.items as unknown as Json,
           include_ebook: includeEbook,
           subtotal: orderData.subtotal,
           delivery_fee: orderData.deliveryFee,
@@ -211,7 +220,7 @@ export default function Checkout() {
               orderId,
               orderDate: new Date().toLocaleDateString(),
               customerName: formData.fullName?.split(' ')[0] || '',
-              items: orderData.items.map((i: any) => ({
+              items: orderData.items.map((i) => ({
                 name: i.productName,
                 variant: i.specification,
                 quantity: i.quantity,
@@ -523,8 +532,14 @@ export default function Checkout() {
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => setConfirmOpen(true)}
-                  disabled={isSubmitting}
+                  onClick={() => {
+                    if (mixedRegionCart) {
+                      toast.error("Domestic and international items can't be ordered together. Please remove one region before checkout.");
+                      return;
+                    }
+                    setConfirmOpen(true);
+                  }}
+                  disabled={isSubmitting || mixedRegionCart}
                   className="flex-1 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background font-semibold gap-2 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--ice-blue)/0.3)]"
                   size="lg"
                 >
@@ -543,6 +558,12 @@ export default function Checkout() {
                 </h2>
 
                 <div className="space-y-3 mb-5 max-h-[350px] overflow-y-auto pr-1">
+                  {mixedRegionCart && (
+                    <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs font-semibold text-destructive">
+                      Domestic and international items can't be ordered together. Remove one region before checkout.
+                    </div>
+                  )}
+
                   {items.map((item) => (
                     <div key={`${item.product.id}-${item.variant.specification}`} className="flex justify-between items-start gap-2 pb-3 border-b border-border/20">
                       <div className="min-w-0">
