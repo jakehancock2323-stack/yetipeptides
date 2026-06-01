@@ -26,6 +26,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Lock, ShieldCheck, CreditCard, Package, ArrowRight, ArrowLeft, BookOpen, Check, AlertTriangle } from "lucide-react";
 import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
 import { getProductRegion, hasMixedProductRegions } from '@/lib/cartRegion';
+import type { Json } from '@/integrations/supabase/types';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -152,7 +153,7 @@ export default function Checkout() {
           customer_notes: [isUK ? `Shipping: ${shippingMethodLabel}` : null, formData.notes].filter(Boolean).join(' | ') || null,
           shipping_region: effectiveRegion,
           payment_method: paymentMethod,
-          items: orderData.items as any,
+          items: orderData.items as unknown as Json,
           include_ebook: includeEbook,
           subtotal: orderData.subtotal,
           delivery_fee: orderData.deliveryFee,
@@ -219,7 +220,7 @@ export default function Checkout() {
               orderId,
               orderDate: new Date().toLocaleDateString(),
               customerName: formData.fullName?.split(' ')[0] || '',
-              items: orderData.items.map((i: any) => ({
+              items: orderData.items.map((i) => ({
                 name: i.productName,
                 variant: i.specification,
                 quantity: i.quantity,
