@@ -19,12 +19,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { getProductRegion, hasMixedCartRegions, useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/CartContext";
 import { useRegion } from "@/contexts/RegionContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Lock, ShieldCheck, CreditCard, Package, ArrowRight, ArrowLeft, BookOpen, Check, AlertTriangle } from "lucide-react";
 import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
+import { getProductRegion, hasMixedProductRegions } from '@/lib/cartRegion';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ export default function Checkout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const mixedRegionCart = hasMixedCartRegions(items);
+  const mixedRegionCart = hasMixedProductRegions(items);
   const allItemsUKDomestic = items.length > 0 && items.every(item => getProductRegion(item.product) === 'UK Domestic');
   // Force UK Domestic pricing/currency whenever every item is UK-only,
   // regardless of the global region toggle.
