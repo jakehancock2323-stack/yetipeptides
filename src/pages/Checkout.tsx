@@ -84,19 +84,14 @@ export default function Checkout() {
   // regardless of the global region toggle.
   const isUK = allItemsUKDomestic;
   const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : 'International';
-  const paypalAvailable = allItemsUKDomestic;
-  const bankTransferAvailable = isUK;
   const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
   const currencySymbol = isUK ? '£' : '$';
   const shippingMethodLabel = isUK
     ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
     : 'International Shipping';
 
-  // Safety: if PayPal or Bank Transfer become unavailable, reset selection
-  if (paymentMethod === 'paypal' && !paypalAvailable) {
-    setPaymentMethod('usdt');
-  }
-  if (paymentMethod === 'bank' && !bankTransferAvailable) {
+  // Safety: if PayPal or Bank Transfer is still selected (removed options), reset
+  if (paymentMethod === 'paypal' || paymentMethod === 'bank') {
     setPaymentMethod('usdt');
   }
 
