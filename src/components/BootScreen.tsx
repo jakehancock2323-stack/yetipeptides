@@ -73,20 +73,106 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
       style={{ transitionProperty: 'opacity, transform' }}
     >
       {/* Background grid */}
-      <div className="absolute inset-0 grid-overlay opacity-30" />
+      <div className="absolute inset-0 grid-overlay opacity-40" />
 
-      {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[hsl(var(--ice-blue))] opacity-[0.03] blur-[120px]" />
+      {/* Animated aurora gradient blobs */}
+      <div
+        className="absolute top-[15%] left-[10%] w-[520px] h-[520px] rounded-full opacity-[0.18] blur-[120px]"
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--ice-blue)) 0%, transparent 70%)',
+          animation: 'blobDrift1 14s ease-in-out infinite',
+        }}
+      />
+      <div
+        className="absolute bottom-[10%] right-[8%] w-[600px] h-[600px] rounded-full opacity-[0.14] blur-[140px]"
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--glacier)) 0%, transparent 70%)',
+          animation: 'blobDrift2 18s ease-in-out infinite',
+        }}
+      />
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[hsl(var(--ice-blue))] opacity-[0.05] blur-[140px]"
+        style={{ animation: 'pulseGlow 4s ease-in-out infinite' }}
+      />
+
+      {/* Rotating concentric rings */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div
+          className="absolute w-[320px] h-[320px] rounded-full border border-[hsl(var(--ice-blue)/0.12)]"
+          style={{ animation: 'spinSlow 30s linear infinite' }}
+        />
+        <div
+          className="absolute w-[480px] h-[480px] rounded-full border border-dashed border-[hsl(var(--ice-blue)/0.1)]"
+          style={{ animation: 'spinSlow 50s linear infinite reverse' }}
+        />
+        <div
+          className="absolute w-[680px] h-[680px] rounded-full border border-[hsl(var(--ice-blue)/0.06)]"
+          style={{ animation: 'spinSlow 80s linear infinite' }}
+        />
+      </div>
+
+      {/* Floating data particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {Array.from({ length: 22 }).map((_, i) => {
+          const left = (i * 53) % 100;
+          const delay = (i * 0.7) % 8;
+          const duration = 8 + (i % 5) * 2;
+          const size = 1 + (i % 3);
+          return (
+            <div
+              key={i}
+              className="absolute rounded-full bg-[hsl(var(--ice-blue))]"
+              style={{
+                left: `${left}%`,
+                bottom: '-10px',
+                width: `${size}px`,
+                height: `${size}px`,
+                opacity: 0.4,
+                boxShadow: '0 0 8px hsl(var(--ice-blue))',
+                animation: `floatUp ${duration}s linear ${delay}s infinite`,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* Binary rain columns */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.18]">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 font-mono text-[10px] text-[hsl(var(--ice-blue))] whitespace-pre leading-tight"
+            style={{
+              left: `${(i * 13 + 4) % 100}%`,
+              animation: `rainFall ${10 + (i % 4) * 3}s linear ${i * 0.8}s infinite`,
+            }}
+          >
+            {Array.from({ length: 30 }).map((_, j) => (
+              <div key={j}>{Math.random() > 0.5 ? '1' : '0'}</div>
+            ))}
+          </div>
+        ))}
+      </div>
 
       {/* Scanline effect */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="w-full h-[2px] bg-[hsl(var(--ice-blue)/0.08)]"
+          className="w-full h-[2px] bg-[hsl(var(--ice-blue)/0.12)]"
           style={{
+            boxShadow: '0 0 12px hsl(var(--ice-blue) / 0.4)',
             animation: 'scanMove 3s linear infinite',
           }}
         />
       </div>
+
+      {/* Corner brackets */}
+      <div className="absolute top-6 left-6 w-12 h-12 border-l-2 border-t-2 border-[hsl(var(--ice-blue)/0.4)]" />
+      <div className="absolute top-6 right-6 w-12 h-12 border-r-2 border-t-2 border-[hsl(var(--ice-blue)/0.4)]" />
+      <div className="absolute bottom-6 left-6 w-12 h-12 border-l-2 border-b-2 border-[hsl(var(--ice-blue)/0.4)]" />
+      <div className="absolute bottom-6 right-6 w-12 h-12 border-r-2 border-b-2 border-[hsl(var(--ice-blue)/0.4)]" />
+
+      {/* Vignette */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, hsl(var(--background)) 100%)' }} />
 
       {/* Logo */}
       <div className="relative mb-8">
