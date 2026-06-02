@@ -165,9 +165,9 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Orders</h1>
+          <h1 className="text-2xl font-bold">{title ?? "Orders"}</h1>
           <p className="text-sm text-muted-foreground">
-            {filtered.length} of {orders.length} orders
+            {subtitle ? `${subtitle} · ` : ""}{filtered.length} of {orders.length} orders
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">
