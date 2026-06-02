@@ -3,6 +3,7 @@ const styles: Record<string, string> = {
   awaiting_payment: "bg-amber-500/15 text-amber-400 border-amber-500/30",
   paid: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   shipped: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+  delivered: "bg-green-500/15 text-green-400 border-green-500/30",
   cancelled: "bg-red-500/15 text-red-400 border-red-500/30",
 };
 
@@ -11,10 +12,11 @@ const labels: Record<string, string> = {
   awaiting_payment: "Awaiting Payment",
   paid: "Paid",
   shipped: "Shipped",
+  delivered: "Delivered",
   cancelled: "Cancelled",
 };
 
-export const ORDER_STATUSES = ["new", "awaiting_payment", "paid", "shipped", "cancelled"];
+export const ORDER_STATUSES = ["new", "awaiting_payment", "paid", "shipped", "delivered", "cancelled"];
 export const ORDER_STATUS_LABELS = labels;
 
 export default function OrderStatusBadge({ status }: { status: string }) {
