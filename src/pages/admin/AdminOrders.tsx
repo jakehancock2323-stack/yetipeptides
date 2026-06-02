@@ -61,11 +61,13 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
 
   const load = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    let q = supabase
       .from("orders")
       .select("*")
       .order("created_at", { ascending: false })
       .limit(500);
+    if (lockedRegion) q = q.eq("shipping_region", lockedRegion);
+    const { data, error } = await q;
     if (error) toast.error(error.message);
     setOrders((data ?? []) as Order[]);
     setLoading(false);
