@@ -173,8 +173,8 @@ export default function Checkout() {
         toast.success("Order submitted! Check your email for payment instructions.");
       }
 
-      // Customer-facing branded order confirmation (International orders only — UK stays manual)
-      if (!isUK) try {
+      // Customer-facing branded order confirmation (sent for all regions — UK domestic is crypto-only now)
+      try {
         const pm = paymentMethod.toLowerCase();
         const paymentLabels: Record<string, string> = {
           usdt: 'USDT (ERC-20)',
