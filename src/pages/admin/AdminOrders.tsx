@@ -73,6 +73,16 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
     setLoading(false);
   };
 
+  const markDelivered = async (id: string) => {
+    const { error } = await supabase.from("orders").update({ status: "delivered" }).eq("id", id);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status: "delivered" } : o)));
+    toast.success("Marked as delivered");
+  };
+
   useEffect(() => {
     load();
     const channel = supabase
