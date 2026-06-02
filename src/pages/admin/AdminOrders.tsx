@@ -325,12 +325,24 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
                       <OrderStatusBadge status={o.status} />
                     </td>
                     <td className="p-3 text-right">
-                      <Link
-                        to={`/admin/orders/${o.id}`}
-                        className="text-[hsl(var(--ice-blue))] hover:underline text-xs font-medium"
-                      >
-                        View →
-                      </Link>
+                      <div className="flex items-center justify-end gap-2">
+                        {o.status !== "delivered" && o.status !== "cancelled" && (
+                          <Button
+                            size="sm"
+                            onClick={() => markDelivered(o.id)}
+                            className="h-7 px-2 gap-1 bg-green-600 hover:bg-green-500 text-white text-xs"
+                          >
+                            <Check className="w-3 h-3" />
+                            Delivered
+                          </Button>
+                        )}
+                        <Link
+                          to={`/admin/orders/${o.id}`}
+                          className="text-[hsl(var(--ice-blue))] hover:underline text-xs font-medium"
+                        >
+                          View →
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))
