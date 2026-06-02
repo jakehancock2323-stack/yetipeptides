@@ -117,6 +117,8 @@ export default function AdminOrderDetail() {
     toast.success("Address copied");
   };
 
+  const backTo = sessionStorage.getItem("admin-orders-last-path") || "/admin";
+
   const deleteOrder = async () => {
     if (!confirm("Delete this order permanently? This can't be undone.")) return;
     const { error } = await supabase.from("orders").delete().eq("id", order.id);
@@ -125,12 +127,12 @@ export default function AdminOrderDetail() {
       return;
     }
     toast.success("Order deleted");
-    navigate("/admin");
+    navigate(backTo);
   };
 
   return (
     <div className="max-w-5xl">
-      <Link to="/admin" className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground mb-4">
+      <Link to={backTo} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground mb-4">
         <ArrowLeft className="w-3 h-3" /> Back to orders
       </Link>
 
