@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
 import NewOrderDialog, { type PrefillOrder } from "@/components/admin/NewOrderDialog";
 import { toast } from "sonner";
-import { Download, Search, RefreshCw, Plus, Sparkles } from "lucide-react";
+import { Download, Search, RefreshCw, Plus, Sparkles, Check } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
