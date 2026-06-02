@@ -46,6 +46,7 @@ const queryClient = new QueryClient();
 const App = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [isBooted, setIsBooted] = useState(false);
+  const isAdminRoute = typeof window !== "undefined" && window.location.pathname.startsWith("/admin");
 
   return (
     <HelmetProvider>
@@ -55,9 +56,9 @@ const App = () => {
             <CartProvider>
               <Toaster />
               <Sonner />
-              <AgeVerification onVerified={() => setIsVerified(true)} />
-              {isVerified && !isBooted && <BootScreen onComplete={() => setIsBooted(true)} />}
-              {isVerified && isBooted && (
+              {!isAdminRoute && <AgeVerification onVerified={() => setIsVerified(true)} />}
+              {!isAdminRoute && isVerified && !isBooted && <BootScreen onComplete={() => setIsBooted(true)} />}
+              {(isAdminRoute || (isVerified && isBooted)) && (
                 <BrowserRouter>
                   <ScrollToTop />
                   <BackToTop />
