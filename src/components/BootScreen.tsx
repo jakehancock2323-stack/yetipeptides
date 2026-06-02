@@ -262,6 +262,32 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
           from { opacity: 0; transform: translateX(-8px); }
           to { opacity: 1; transform: translateX(0); }
         }
+        @keyframes blobDrift1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(60px, 40px) scale(1.15); }
+        }
+        @keyframes blobDrift2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-80px, -50px) scale(1.1); }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 0.09; transform: translate(-50%, -50%) scale(1.08); }
+        }
+        @keyframes spinSlow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes floatUp {
+          0% { transform: translateY(0); opacity: 0; }
+          10% { opacity: 0.6; }
+          90% { opacity: 0.4; }
+          100% { transform: translateY(-110vh); opacity: 0; }
+        }
+        @keyframes rainFall {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100vh); }
+        }
       `}</style>
     </div>
   );
