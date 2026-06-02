@@ -1,53 +1,19 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import { Sparkles, Icosahedron } from '@react-three/drei';
 import * as THREE from 'three';
 
 /**
- * Animated double-helix DNA / peptide strand.
- * Rotates slowly and gently tracks the mouse for a subtle parallax.
+ * Detailed peptide-sphere: a glowing wireframe icosahedron, an inner solid
+ * core, a soft halo, and drifting sparkle particles. Reacts subtly to mouse.
  */
-function Helix() {
+function PeptideSphere() {
   const groupRef = useRef<THREE.Group>(null);
+  const wireRef = useRef<THREE.Mesh>(null);
+  const coreRef = useRef<THREE.Mesh>(null);
   const mouse = useRef({ x: 0, y: 0 });
 
-  // Pre-compute helix node positions
-  const { nodes, rungs } = useMemo(() => {
-    const turns = 6;
-    const segments = 90;
-    const radius = 1.15;
-    const height = 9;
-    const nodes: { pos: [number, number, number]; strand: 0 | 1 }[] = [];
-    const rungs: { a: [number, number, number]; b: [number, number, number] }[] = [];
-
-    for (let i = 0; i <= segments; i++) {
-      const t = i / segments;
-      const y = (t - 0.5) * height;
-      const angle = t * Math.PI * 2 * turns;
-      const a: [number, number, number] = [Math.cos(angle) * radius, y, Math.sin(angle) * radius];
-      const b: [number, number, number] = [
-        Math.cos(angle + Math.PI) * radius,
-        y,
-        Math.sin(angle + Math.PI) * radius,
-      ];
-      nodes.push({ pos: a, strand: 0 });
-      nodes.push({ pos: b, strand: 1 });
-      if (i % 3 === 0) rungs.push({ a, b });
-    }
-    return { nodes, rungs };
-  }, []);
-
-  useFrame((state, delta) => {
-    if (!groupRef.current) return;
-    groupRef.current.rotation.y += delta * 0.18;
-    // Subtle parallax
-    const targetX = mouse.current.y * 0.15;
-    const targetZ = mouse.current.x * 0.25;
-    groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * 0.05;
-    groupRef.current.rotation.z += (targetZ - groupRef.current.rotation.z) * 0.05;
-  });
-
-  // Track mouse via window listener (cleaned up automatically by Canvas unmount)
-  useMemo(() => {
+  useEffect(() => {
     if (typeof window === 'undefined') return;
     const handler = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -57,38 +23,101 @@ function Helix() {
     return () => window.removeEventListener('mousemove', handler);
   }, []);
 
-  const iceBlue = new THREE.Color('#7dd3fc');
-  const aurora = new THREE.Color('#67e8f9');
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+    groupRef.current.rotation.y += delta * 0.15;
+    const tX = -mouse.current.y * 0.35;
+    const tY = mouse.current.x * 0.35;
+    groupRef.current.rotation.x += (tX - groupRef.current.rotation.x) * 0.04;
+    groupRef.current.position.x += (mouse.current.x * 0.3 - groupRef.current.position.x) * 0.03;
+    groupRef.current.position.y += (-mouse.current.y * 0.2 - groupRef.current.position.y) * 0.03;
+
+    if (wireRef.current) wireRef.current.rotation.x -= delta * 0.08;
+    if (coreRef.current) {
+      const s = 1 + Math.sin(state.clock.elapsedTime * 1.2) * 0.04;
+      coreRef.current.scale.setScalar(s);
+    }
+  });
+
+  // Generate vertex node positions from an icosahedron geometry
+  const vertexPositions = useMemo(() => {
+    const geo = new THREE.IcosahedronGeometry(2.2, 3);
+    const pos = geo.attributes.position;
+    const seen = new Set<string>();
+    const out: [number, number, number][] = [];
+    for (let i = 0; i < pos.count; i++) {
+      const x = +pos.getX(i).toFixed(3);
+      const y = +pos.getY(i).toFixed(3);
+      const z = +pos.getZ(i).toFixed(3);
+      const k = `${x},${y},${z}`;
+      if (!seen.has(k)) {
+        seen.add(k);
+        out.push([x, y, z]);
+      }
+    }
+    geo.dispose();
+    return out;
+  }, []);
 
   return (
     <group ref={groupRef}>
-      {/* Strand nodes */}
-      {nodes.map((n, i) => (
-        <mesh key={`n-${i}`} position={n.pos}>
-          <sphereGeometry args={[0.07, 12, 12]} />
-          <meshBasicMaterial color={n.strand === 0 ? iceBlue : aurora} transparent opacity={0.85} />
+      {/* Soft glowing halo */}
+      <mesh>
+        <sphereGeometry args={[2.9, 32, 32]} />
+        <meshBasicMaterial color="#7dd3fc" transparent opacity={0.04} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[2.55, 32, 32]} />
+        <meshBasicMaterial color="#67e8f9" transparent opacity={0.06} />
+      </mesh>
+
+      {/* Inner solid core */}
+      <mesh ref={coreRef}>
+        <icosahedronGeometry args={[1.35, 4]} />
+        <meshPhysicalMaterial
+          color="#0ea5e9"
+          emissive="#0891b2"
+          emissiveIntensity={0.55}
+          roughness={0.15}
+          metalness={0.4}
+          transparent
+          opacity={0.55}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
+        />
+      </mesh>
+
+      {/* Wireframe outer shell */}
+      <mesh ref={wireRef}>
+        <icosahedronGeometry args={[2.2, 3]} />
+        <meshBasicMaterial color="#7dd3fc" wireframe transparent opacity={0.55} />
+      </mesh>
+
+      {/* Vertex nodes — peptide bonds */}
+      {vertexPositions.map((p, i) => (
+        <mesh key={i} position={p}>
+          <sphereGeometry args={[0.045, 10, 10]} />
+          <meshBasicMaterial color="#e0f2fe" />
         </mesh>
       ))}
-      {/* Rungs */}
-      {rungs.map((r, i) => {
-        const mid = new THREE.Vector3(
-          (r.a[0] + r.b[0]) / 2,
-          (r.a[1] + r.b[1]) / 2,
-          (r.a[2] + r.b[2]) / 2,
-        );
-        const dir = new THREE.Vector3(r.b[0] - r.a[0], r.b[1] - r.a[1], r.b[2] - r.a[2]);
-        const len = dir.length();
-        const quat = new THREE.Quaternion().setFromUnitVectors(
-          new THREE.Vector3(0, 1, 0),
-          dir.clone().normalize(),
-        );
-        return (
-          <mesh key={`r-${i}`} position={mid.toArray()} quaternion={quat}>
-            <cylinderGeometry args={[0.015, 0.015, len, 6]} />
-            <meshBasicMaterial color="#bae6fd" transparent opacity={0.35} />
-          </mesh>
-        );
-      })}
+
+      {/* Sparkle field */}
+      <Sparkles
+        count={140}
+        scale={[8, 6, 8]}
+        size={2.2}
+        speed={0.35}
+        opacity={0.7}
+        color="#bae6fd"
+      />
+      <Sparkles
+        count={60}
+        scale={[5, 4, 5]}
+        size={3.5}
+        speed={0.2}
+        opacity={0.5}
+        color="#ffffff"
+      />
     </group>
   );
 }
@@ -96,12 +125,15 @@ function Helix() {
 export default function DnaHelix() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 7], fov: 50 }}
-      dpr={[1, 1.5]}
+      camera={{ position: [0, 0, 6.5], fov: 50 }}
+      dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true }}
       style={{ background: 'transparent' }}
     >
-      <Helix />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[5, 5, 5]} intensity={1.2} color="#7dd3fc" />
+      <pointLight position={[-5, -3, -5]} intensity={0.8} color="#67e8f9" />
+      <PeptideSphere />
     </Canvas>
   );
 }
