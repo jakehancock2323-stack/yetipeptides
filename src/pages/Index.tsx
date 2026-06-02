@@ -114,7 +114,7 @@ export default function Index() {
                     </div>
                     <p className="text-sm md:text-base font-medium mt-1">
                       <span className="text-foreground">Ice Elixir</span>
-                      <span className="text-muted-foreground"> — GHK-Cu 3.33% Facial Serum now available. Only 30 units in stock.</span>
+                      <span className="text-muted-foreground"> — GHK-Cu 3.33% Facial Serum now available. Only 13 units in stock.</span>
                     </p>
                   </div>
                 </div>
