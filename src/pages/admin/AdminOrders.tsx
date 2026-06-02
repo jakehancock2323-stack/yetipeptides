@@ -11,12 +11,18 @@ import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 
-export default function AdminOrders() {
+interface AdminOrdersProps {
+  lockedRegion?: "UK Domestic" | "International";
+  title?: string;
+  subtitle?: string;
+}
+
+export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrdersProps = {}) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [regionFilter, setRegionFilter] = useState<string>("all");
+  const [regionFilter, setRegionFilter] = useState<string>(lockedRegion ?? "all");
   const [newOpen, setNewOpen] = useState(false);
   const [prefill, setPrefill] = useState<PrefillOrder | null>(null);
   const [parsing, setParsing] = useState(false);
@@ -55,11 +61,13 @@ export default function AdminOrders() {
 
   const load = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    let q = supabase
       .from("orders")
       .select("*")
       .order("created_at", { ascending: false })
       .limit(500);
+    if (lockedRegion) q = q.eq("shipping_region", lockedRegion);
+    const { data, error } = await q;
     if (error) toast.error(error.message);
     setOrders((data ?? []) as Order[]);
     setLoading(false);
@@ -74,6 +82,7 @@ export default function AdminOrders() {
         { event: "INSERT", schema: "public", table: "orders" },
         (payload) => {
           const newOrder = payload.new as Order;
+          if (lockedRegion && newOrder.shipping_region !== lockedRegion) return;
           setOrders((prev) => [newOrder, ...prev]);
           toast.success(`🔔 New order from ${newOrder.customer_name}`, {
             duration: 8000,
@@ -159,9 +168,9 @@ export default function AdminOrders() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Orders</h1>
+          <h1 className="text-2xl font-bold">{title ?? "Orders"}</h1>
           <p className="text-sm text-muted-foreground">
-            {filtered.length} of {orders.length} orders
+            {subtitle ? `${subtitle} · ` : ""}{filtered.length} of {orders.length} orders
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -229,15 +238,17 @@ export default function AdminOrders() {
             </option>
           ))}
         </select>
-        <select
-          value={regionFilter}
-          onChange={(e) => setRegionFilter(e.target.value)}
-          className="h-10 rounded-md bg-secondary/20 border border-border/30 px-3 text-sm"
-        >
-          <option value="all">All regions</option>
-          <option value="UK Domestic">UK Domestic</option>
-          <option value="International">International</option>
-        </select>
+        {!lockedRegion && (
+          <select
+            value={regionFilter}
+            onChange={(e) => setRegionFilter(e.target.value)}
+            className="h-10 rounded-md bg-secondary/20 border border-border/30 px-3 text-sm"
+          >
+            <option value="all">All regions</option>
+            <option value="UK Domestic">UK Domestic</option>
+            <option value="International">International</option>
+          </select>
+        )}
       </div>
 
       <div className="frosted-glass rounded-xl overflow-hidden">

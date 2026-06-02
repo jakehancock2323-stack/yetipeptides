@@ -35,6 +35,7 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
 import AdminStats from "./pages/admin/AdminStats";
 import AdminCustomers from "./pages/admin/AdminCustomers";
+import AdminDomestic from "./pages/admin/AdminDomestic";
 
 import AdminTemplates from "./pages/admin/AdminTemplates";
 import RequireAdmin from "./components/admin/RequireAdmin";
@@ -88,6 +89,7 @@ const App = () => {
                       }
                     >
                       <Route index element={<AdminOrders />} />
+                      <Route path="domestic" element={<AdminDomestic />} />
                       <Route path="orders/:id" element={<AdminOrderDetail />} />
                       <Route path="stats" element={<AdminStats />} />
                       <Route path="customers" element={<AdminCustomers />} />
