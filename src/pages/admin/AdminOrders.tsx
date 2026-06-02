@@ -11,12 +11,18 @@ import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 
-export default function AdminOrders() {
+interface AdminOrdersProps {
+  lockedRegion?: "UK Domestic" | "International";
+  title?: string;
+  subtitle?: string;
+}
+
+export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrdersProps = {}) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [regionFilter, setRegionFilter] = useState<string>("all");
+  const [regionFilter, setRegionFilter] = useState<string>(lockedRegion ?? "all");
   const [newOpen, setNewOpen] = useState(false);
   const [prefill, setPrefill] = useState<PrefillOrder | null>(null);
   const [parsing, setParsing] = useState(false);
