@@ -80,6 +80,7 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
         { event: "INSERT", schema: "public", table: "orders" },
         (payload) => {
           const newOrder = payload.new as Order;
+          if (lockedRegion && newOrder.shipping_region !== lockedRegion) return;
           setOrders((prev) => [newOrder, ...prev]);
           toast.success(`🔔 New order from ${newOrder.customer_name}`, {
             duration: 8000,
