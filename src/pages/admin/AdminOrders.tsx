@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import OrderStatusBadge, { ORDER_STATUSES, ORDER_STATUS_LABELS } from "@/components/admin/OrderStatusBadge";
 import NewOrderDialog, { type PrefillOrder } from "@/components/admin/NewOrderDialog";
 import { toast } from "sonner";
-import { Download, Search, RefreshCw, Plus, Sparkles } from "lucide-react";
+import { Download, Search, RefreshCw, Plus, Sparkles, Check } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 
 type Order = Database["public"]["Tables"]["orders"]["Row"];
@@ -71,6 +71,16 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
     if (error) toast.error(error.message);
     setOrders((data ?? []) as Order[]);
     setLoading(false);
+  };
+
+  const markDelivered = async (id: string) => {
+    const { error } = await supabase.from("orders").update({ status: "delivered" }).eq("id", id);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status: "delivered" } : o)));
+    toast.success("Marked as delivered");
   };
 
   useEffect(() => {
@@ -315,12 +325,24 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
                       <OrderStatusBadge status={o.status} />
                     </td>
                     <td className="p-3 text-right">
-                      <Link
-                        to={`/admin/orders/${o.id}`}
-                        className="text-[hsl(var(--ice-blue))] hover:underline text-xs font-medium"
-                      >
-                        View →
-                      </Link>
+                      <div className="flex items-center justify-end gap-2">
+                        {o.status !== "delivered" && o.status !== "cancelled" && (
+                          <Button
+                            size="sm"
+                            onClick={() => markDelivered(o.id)}
+                            className="h-7 px-2 gap-1 bg-green-600 hover:bg-green-500 text-white text-xs"
+                          >
+                            <Check className="w-3 h-3" />
+                            Delivered
+                          </Button>
+                        )}
+                        <Link
+                          to={`/admin/orders/${o.id}`}
+                          className="text-[hsl(var(--ice-blue))] hover:underline text-xs font-medium"
+                        >
+                          View →
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))
