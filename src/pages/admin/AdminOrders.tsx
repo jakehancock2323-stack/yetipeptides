@@ -235,15 +235,17 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
             </option>
           ))}
         </select>
-        <select
-          value={regionFilter}
-          onChange={(e) => setRegionFilter(e.target.value)}
-          className="h-10 rounded-md bg-secondary/20 border border-border/30 px-3 text-sm"
-        >
-          <option value="all">All regions</option>
-          <option value="UK Domestic">UK Domestic</option>
-          <option value="International">International</option>
-        </select>
+        {!lockedRegion && (
+          <select
+            value={regionFilter}
+            onChange={(e) => setRegionFilter(e.target.value)}
+            className="h-10 rounded-md bg-secondary/20 border border-border/30 px-3 text-sm"
+          >
+            <option value="all">All regions</option>
+            <option value="UK Domestic">UK Domestic</option>
+            <option value="International">International</option>
+          </select>
+        )}
       </div>
 
       <div className="frosted-glass rounded-xl overflow-hidden">
