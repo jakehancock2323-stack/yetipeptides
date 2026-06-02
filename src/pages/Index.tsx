@@ -14,7 +14,7 @@ import {
   FileText, Lock, Globe, FlaskConical, Package,
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
 } from 'lucide-react';
-import heroBanner from '@/assets/hero-banner.png';
+import DnaHelix from '@/components/DnaHelix';
 import yetiLogo from '@/assets/yeti-logo.png';
 import { products } from '@/data/products';
 
