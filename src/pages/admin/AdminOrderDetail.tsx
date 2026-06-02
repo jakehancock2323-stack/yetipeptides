@@ -141,8 +141,16 @@ export default function AdminOrderDetail() {
             {new Date(order.created_at).toLocaleString()}
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <OrderStatusBadge status={order.status} />
+          <Button
+            size="sm"
+            onClick={() => updateOrder({ status: "delivered" })}
+            disabled={order.status === "delivered"}
+            className="gap-1 bg-green-600 hover:bg-green-500 text-white"
+          >
+            ✓ {order.status === "delivered" ? "Delivered" : "Mark delivered"}
+          </Button>
           <select
             value={order.status}
             onChange={(e) => updateOrder({ status: e.target.value })}
