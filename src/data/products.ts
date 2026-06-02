@@ -687,7 +687,7 @@ export const products: Product[] = [
     category: "Cosmetics",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "LIMITED STOCK — Only 23 available",
+    stockBadge: "LIMITED STOCK — Only 13 available",
     badges: ["Cruelty Free Standards", "Small Batch Clinical Purity"],
     usage: "Apply 1-2 full droppers to face & massage in.",
     variants: [
