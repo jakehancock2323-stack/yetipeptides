@@ -130,13 +130,9 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src={heroBanner} 
-            alt="Yeti Peptides research laboratory - premium research-grade peptides with worldwide shipping" 
-            className="w-full h-full object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
-          <div className="absolute inset-0 grid-overlay" />
+          <DnaHelix />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background pointer-events-none" />
+          <div className="absolute inset-0 grid-overlay pointer-events-none" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center pt-20">
