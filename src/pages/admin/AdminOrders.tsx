@@ -72,6 +72,14 @@ export default function AdminOrders({ lockedRegion, title, subtitle }: AdminOrde
     );
   }, [filterKey, search, statusFilter, regionFilter]);
 
+  // remember which list page (all vs domestic) the user was on
+  useEffect(() => {
+    sessionStorage.setItem(
+      "admin-orders-last-path",
+      lockedRegion === "UK Domestic" ? "/admin/domestic" : "/admin",
+    );
+  }, [lockedRegion]);
+
   const handleScreenshot = async (file: File) => {
     setParsing(true);
     const t = toast.loading("AI is reading the screenshot…");
