@@ -106,14 +106,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "lemon-bottle",
-    name: "Lemon Bottle",
-    category: "Weight Loss",
-    variants: [
-      { specification: "10mg ×10 vials", price: 109 }
-    ]
-  },
-  {
     id: "semaglutide",
     popular: true,
     name: "Semaglutide",
@@ -278,14 +270,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "glow",
-    name: "Glow",
-    category: "Muscle Growth & Recovery",
-    variants: [
-      { specification: "70mg ×10", price: 243 }
-    ]
-  },
-  {
     id: "hexarelin",
     name: "Hexarelin",
     category: "Muscle Growth & Recovery",
@@ -306,14 +290,6 @@ export const products: Product[] = [
       { specification: "12iu ×10", price: 110 },
       { specification: "15iu ×10", price: 123 },
       { specification: "24iu ×10", price: 166 }
-    ]
-  },
-  {
-    id: "hgh-frag",
-    name: "HGH Frag 176-191",
-    category: "Muscle Growth & Recovery",
-    variants: [
-      { specification: "5mg ×10", price: 140 }
     ]
   },
   {
@@ -344,15 +320,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "klow",
-    popular: true,
-    name: "Klow",
-    category: "Muscle Growth & Recovery",
-    variants: [
-      { specification: "80mg ×10", price: 267 }
-    ]
-  },
-  {
     id: "mots-c",
     popular: true,
     name: "MOTS-c",
@@ -369,14 +336,6 @@ export const products: Product[] = [
     variants: [
       { specification: "5mg ×10", price: 118 },
       { specification: "10mg ×10", price: 184 }
-    ]
-  },
-  {
-    id: "slu-pp-332",
-    name: "SLU-PP-332",
-    category: "Muscle Growth & Recovery",
-    variants: [
-      { specification: "5mg ×10", price: 135 }
     ]
   },
   {
@@ -474,14 +433,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "29000-ara",
-    name: "29000 ARA",
-    category: "General Health",
-    variants: [
-      { specification: "10mg ×10", price: 116 }
-    ]
-  },
-  {
     id: "acetic-acid",
     name: "Acetic Acid 0.6%",
     category: "General Health",
@@ -515,14 +466,6 @@ export const products: Product[] = [
     category: "General Health",
     variants: [
       { specification: "5mg ×10", price: 220 }
-    ]
-  },
-  {
-    id: "lip-c-b12",
-    name: "Lip-C + B12",
-    category: "General Health",
-    variants: [
-      { specification: "10ml ×10", price: 111 }
     ]
   },
   {
@@ -581,14 +524,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "cerebrolysin",
-    name: "Cerebrolysin",
-    category: "Other / Speciality",
-    variants: [
-      { specification: "60mg ×6", price: 83 }
-    ]
-  },
-  {
     id: "gonadorelin",
     name: "Gonadorelin",
     category: "Other / Speciality",
@@ -643,15 +578,6 @@ export const products: Product[] = [
     category: "Other / Speciality",
     variants: [
       { specification: "10mg ×10", price: 110 }
-    ]
-  },
-  {
-    id: "ss-31",
-    name: "SS-31",
-    category: "Other / Speciality",
-    variants: [
-      { specification: "10mg ×10", price: 142 },
-      { specification: "50mg ×10", price: 451 }
     ]
   },
 
