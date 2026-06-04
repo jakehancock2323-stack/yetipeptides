@@ -665,10 +665,10 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "6 vials left",
+    stockBadge: "10mg: 5 left · 30mg: 6 left",
     variants: [
-      { specification: "10mg × 1 vial", price: 18 },
-      { specification: "30mg × 1 vial", price: 24 }
+      { specification: "10mg × 1 vial — 5 left", price: 18 },
+      { specification: "30mg × 1 vial — 6 left", price: 24 }
     ]
   },
   {
@@ -677,10 +677,10 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "2 vials left",
+    stockBadge: "10mg: 5 left · 30mg: 2 left",
     variants: [
-      { specification: "10mg × 1 vial", price: 14 },
-      { specification: "30mg × 1 vial", price: 17 }
+      { specification: "10mg × 1 vial — 5 left", price: 14 },
+      { specification: "30mg × 1 vial — 2 left", price: 17 }
     ]
   },
   {
