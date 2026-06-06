@@ -13,7 +13,9 @@ type Template = Database["public"]["Tables"]["email_templates"]["Row"];
 
 const TEMPLATE_LABELS: Record<string, string> = {
   order_confirmation: "Order Confirmation",
-  payment_confirmation: "Payment Confirmation",
+  payment_confirmation: "Payment Confirmation (legacy)",
+  payment_confirmation_uk: "Payment Confirmation — UK Domestic",
+  payment_confirmation_intl: "Payment Confirmation — International",
   shipping_update: "Shipping Update",
 };
 
