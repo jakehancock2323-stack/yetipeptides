@@ -333,10 +333,21 @@ export default function AdminOrderDetail() {
             </p>
             <div className="space-y-2">
               <Button
-                onClick={() => sendEmail("order_confirmation", "Order Confirmation")}
+                onClick={() => {
+                  const key = order.shipping_region === "UK Domestic"
+                    ? "order_confirmation_uk"
+                    : "order_confirmation_intl";
+                  const label = order.shipping_region === "UK Domestic"
+                    ? "Order Confirmation (UK)"
+                    : "Order Confirmation (International)";
+                  sendEmail(key, label);
+                }}
                 className="w-full justify-start gap-2 bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background"
               >
-                <Mail className="w-4 h-4" /> Order Confirmation
+                <Mail className="w-4 h-4" />
+                {order.shipping_region === "UK Domestic"
+                  ? "Order Confirmation (UK)"
+                  : "Order Confirmation (International)"}
               </Button>
               <Button
                 onClick={() => {
