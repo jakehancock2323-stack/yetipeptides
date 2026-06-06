@@ -12,7 +12,9 @@ import type { Database } from "@/integrations/supabase/types";
 type Template = Database["public"]["Tables"]["email_templates"]["Row"];
 
 const TEMPLATE_LABELS: Record<string, string> = {
-  order_confirmation: "Order Confirmation",
+  order_confirmation: "Order Confirmation (legacy)",
+  order_confirmation_uk: "Order Confirmation — UK Domestic",
+  order_confirmation_intl: "Order Confirmation — International",
   payment_confirmation: "Payment Confirmation (legacy)",
   payment_confirmation_uk: "Payment Confirmation — UK Domestic",
   payment_confirmation_intl: "Payment Confirmation — International",
