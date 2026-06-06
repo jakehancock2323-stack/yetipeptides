@@ -339,11 +339,22 @@ export default function AdminOrderDetail() {
                 <Mail className="w-4 h-4" /> Order Confirmation
               </Button>
               <Button
-                onClick={() => sendEmail("payment_confirmation", "Payment Confirmation")}
+                onClick={() => {
+                  const key = order.shipping_region === "UK Domestic"
+                    ? "payment_confirmation_uk"
+                    : "payment_confirmation_intl";
+                  const label = order.shipping_region === "UK Domestic"
+                    ? "Payment Confirmation (UK)"
+                    : "Payment Confirmation (International)";
+                  sendEmail(key, label);
+                }}
                 variant="outline"
                 className="w-full justify-start gap-2"
               >
-                <Mail className="w-4 h-4" /> Payment Confirmation
+                <Mail className="w-4 h-4" />
+                {order.shipping_region === "UK Domestic"
+                  ? "Payment Confirmation (UK)"
+                  : "Payment Confirmation (International)"}
               </Button>
               <Button
                 onClick={() => sendEmail("shipping_update", "Shipping Update")}
