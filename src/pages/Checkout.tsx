@@ -84,7 +84,7 @@ export default function Checkout() {
   // regardless of the global region toggle.
   const isUK = allItemsUKDomestic;
   const effectiveRegion = allItemsUKDomestic ? 'UK Domestic' : 'International';
-  const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 5 : 0) : 65;
+  const deliveryFee = isUK ? (ukShippingMethod === 'royal-mail' ? 6 : 0) : 65;
   const currencySymbol = isUK ? '£' : '$';
   const shippingMethodLabel = isUK
     ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
