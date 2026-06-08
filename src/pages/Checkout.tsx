@@ -429,7 +429,7 @@ export default function Checkout() {
                           <p className="text-[10px] text-muted-foreground mt-0.5">Next-day tracked delivery to your address</p>
                         </div>
                       </div>
-                      <span className="text-sm font-semibold">£5.00</span>
+                      <span className="text-sm font-semibold">£6.00</span>
                     </label>
                     <label htmlFor="inpost" className={`flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${ukShippingMethod === 'inpost' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
                       <div className="flex items-center gap-3">
