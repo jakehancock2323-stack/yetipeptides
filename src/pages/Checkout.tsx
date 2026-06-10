@@ -73,6 +73,10 @@ export default function Checkout() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
+    if (ukOrdersOnHold) {
+      toast.error("UK domestic orders are temporarily on hold. We'll be back on the 29th.");
+      return;
+    }
     if (!validateDetails()) return;
     setStep(2);
     window.scrollTo({ top: 0, behavior: "smooth" });
