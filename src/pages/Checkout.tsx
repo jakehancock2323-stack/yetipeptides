@@ -90,6 +90,10 @@ export default function Checkout() {
     ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
     : 'International Shipping';
 
+  // Temporary hold on UK Domestic orders. Resumes 29th of this month.
+  const UK_DOMESTIC_HOLD = true;
+  const ukOrdersOnHold = UK_DOMESTIC_HOLD && isUK;
+
   // Safety: if PayPal or Bank Transfer is still selected (removed options), reset
   if (paymentMethod === 'paypal' || paymentMethod === 'bank') {
     setPaymentMethod('usdt');
