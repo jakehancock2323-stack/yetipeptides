@@ -444,7 +444,7 @@ export default function Checkout() {
           </div>
         )}
 
-        {step === 2 && (
+        {!ukOrdersOnHold && step === 2 && (
           <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_380px] gap-6">
             {/* Payment Method */}
             <div className="frosted-glass rounded-2xl p-5 sm:p-7 glow-border">
