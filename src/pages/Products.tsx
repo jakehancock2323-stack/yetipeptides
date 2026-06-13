@@ -158,6 +158,20 @@ export default function Products() {
           </AnimateOnScroll>
         )}
 
+        {region === 'International' && (
+          <AnimateOnScroll animation="fade-in" delay={75}>
+            <div className="mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm px-4 py-3.5 flex items-start gap-3">
+              <Globe className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+              <div className="text-sm">
+                <p className="font-semibold text-amber-300 mb-0.5">International Orders Temporarily Closed</p>
+                <p className="text-amber-100/80 text-xs leading-relaxed">
+                  New international orders are paused from <span className="font-semibold">10th</span> through <span className="font-semibold">29th</span> of this month. Service resumes on the 29th — orders already placed are unaffected and continue to ship as normal.
+                </p>
+              </div>
+            </div>
+          </AnimateOnScroll>
+        )}
+
         {/* Active region indicator strip */}
         <AnimateOnScroll animation="fade-in" delay={100}>
           <div className={`mb-6 flex items-center justify-between gap-3 px-4 py-2.5 rounded-lg border ${
