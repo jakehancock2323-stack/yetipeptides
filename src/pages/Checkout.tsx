@@ -77,6 +77,10 @@ export default function Checkout() {
       toast.error("UK domestic orders are temporarily on hold. We'll be back on the 29th.");
       return;
     }
+    if (intlOrdersOnHold) {
+      toast.error("International orders are temporarily on hold. We'll be back on the 29th.");
+      return;
+    }
     if (!validateDetails()) return;
     setStep(2);
     window.scrollTo({ top: 0, behavior: "smooth" });
