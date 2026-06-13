@@ -117,6 +117,11 @@ export default function Checkout() {
       setConfirmOpen(false);
       return;
     }
+    if (intlOrdersOnHold) {
+      toast.error("International orders are temporarily on hold. We'll be back on the 29th.");
+      setConfirmOpen(false);
+      return;
+    }
     if (mixedRegionCart) {
       toast.error("Domestic and international items can't be ordered together. Please remove one region before checkout.");
       setConfirmOpen(false);
