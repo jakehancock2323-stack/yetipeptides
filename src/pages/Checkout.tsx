@@ -77,6 +77,10 @@ export default function Checkout() {
       toast.error("UK domestic orders are temporarily on hold. We'll be back on the 29th.");
       return;
     }
+    if (intlOrdersOnHold) {
+      toast.error("International orders are temporarily on hold. We'll be back on the 29th.");
+      return;
+    }
     if (!validateDetails()) return;
     setStep(2);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -94,9 +98,12 @@ export default function Checkout() {
     ? (ukShippingMethod === 'royal-mail' ? 'Royal Mail 24 Tracked' : 'InPost Locker (Anonymous)')
     : 'International Shipping';
 
-  // Temporary hold on UK Domestic orders. Resumes 29th of this month.
+  // Temporary holds. Both resume on the 29th of this month.
   const UK_DOMESTIC_HOLD = true;
+  const INTERNATIONAL_HOLD = true;
   const ukOrdersOnHold = UK_DOMESTIC_HOLD && isUK;
+  const intlOrdersOnHold = INTERNATIONAL_HOLD && !isUK;
+  const ordersOnHold = ukOrdersOnHold || intlOrdersOnHold;
 
   // Safety: if PayPal or Bank Transfer is still selected (removed options), reset
   if (paymentMethod === 'paypal' || paymentMethod === 'bank') {
@@ -107,6 +114,11 @@ export default function Checkout() {
     if (isSubmitting) return;
     if (ukOrdersOnHold) {
       toast.error("UK domestic orders are temporarily on hold. We'll be back on the 29th.");
+      setConfirmOpen(false);
+      return;
+    }
+    if (intlOrdersOnHold) {
+      toast.error("International orders are temporarily on hold. We'll be back on the 29th.");
       setConfirmOpen(false);
       return;
     }
@@ -341,20 +353,20 @@ export default function Checkout() {
           </div>
         </div>
 
-        {ukOrdersOnHold && (
+        {ordersOnHold && (
           <div className="max-w-2xl mx-auto mb-6">
             <div className="frosted-glass rounded-2xl p-6 sm:p-8 glow-border border border-[hsl(var(--ice-blue))]/30 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/10 mb-4">
                 <AlertTriangle className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
               </div>
               <h2 className="text-xl font-bold mb-2 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-                UK Domestic Orders Temporarily On Hold
+                {ukOrdersOnHold ? 'UK Domestic Orders Temporarily On Hold' : 'International Orders Temporarily On Hold'}
               </h2>
               <p className="text-sm text-foreground/80 mb-4">
-                We're not accepting UK domestic orders at the moment. Domestic orders will resume on the <span className="font-semibold text-foreground">29th of this month</span>.
+                We're not accepting {ukOrdersOnHold ? 'UK domestic' : 'international'} orders at the moment. New orders will resume on the <span className="font-semibold text-foreground">29th of this month</span>.
               </p>
               <p className="text-xs text-muted-foreground mb-5">
-                International orders are unaffected and continue to ship as normal.
+                Orders already placed are unaffected and continue to be processed as normal.
               </p>
               <Button
                 onClick={() => navigate('/products')}
@@ -366,7 +378,7 @@ export default function Checkout() {
           </div>
         )}
 
-        {!ukOrdersOnHold && step === 1 && (
+        {!ordersOnHold && step === 1 && (
           <div className="max-w-2xl mx-auto">
             <div className="frosted-glass rounded-2xl p-5 sm:p-7 glow-border">
               <h2 className="text-lg font-bold mb-5 flex items-center gap-2">
@@ -444,7 +456,7 @@ export default function Checkout() {
           </div>
         )}
 
-        {!ukOrdersOnHold && step === 2 && (
+        {!ordersOnHold && step === 2 && (
           <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_380px] gap-6">
             {/* Payment Method */}
             <div className="frosted-glass rounded-2xl p-5 sm:p-7 glow-border">
