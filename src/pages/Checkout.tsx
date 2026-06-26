@@ -99,7 +99,7 @@ export default function Checkout() {
     : 'International Shipping';
 
   // Temporary holds. Both resume on the 29th of this month.
-  const UK_DOMESTIC_HOLD = true;
+  const UK_DOMESTIC_HOLD = false;
   const INTERNATIONAL_HOLD = true;
   const ukOrdersOnHold = UK_DOMESTIC_HOLD && isUK;
   const intlOrdersOnHold = INTERNATIONAL_HOLD && !isUK;
