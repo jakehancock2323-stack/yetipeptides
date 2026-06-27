@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
-import ProductCard from '@/components/ProductCard';
+// ProductCard removed — featured section deleted
 import Reviews from '@/components/Reviews';
 import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
@@ -15,13 +15,11 @@ import {
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
 } from 'lucide-react';
 import DnaHelix from '@/components/DnaHelix';
-import yetiLogo from '@/assets/yeti-logo.png';
-import { products } from '@/data/products';
+
 
 export default function Index() {
   const [showDiscordBanner, setShowDiscordBanner] = useState(true);
-  const featuredProductIds = ['lc526', 'retatrutide', 'tirzepatide', 'cagrilintide', 'ghk-cu', 'hgh-somatropin'];
-  const featuredProducts = products.filter(p => featuredProductIds.includes(p.id));
+
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -227,33 +225,6 @@ export default function Index() {
       </AnimateOnScroll>
 
 
-      {/* Featured Products */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <AnimateOnScroll>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">Featured Compounds</h2>
-                <p className="text-muted-foreground max-w-lg">
-                  Premium GLP-1 peptides and research compounds — COA verified, 99%+ purity
-                </p>
-              </div>
-              <Link to="/products">
-                <Button variant="outline" className="gap-2 border-border hover:bg-secondary/50">
-                  View All <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-          </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map((product, i) => (
-              <AnimateOnScroll key={product.id} delay={i * 100}>
-                <ProductCard product={product} />
-              </AnimateOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Why Trust Us */}
       <section className="py-20 px-4">

@@ -16,12 +16,21 @@ export default function ResearchDisclaimer() {
       <Snowfall />
       <Navbar />
       
-      <div className="container mx-auto px-4 pt-32 max-w-4xl">
-        <div className="frosted-glass rounded-xl p-6 sm:p-8 md:p-12">
-          <div className="flex items-center gap-3 mb-6">
-            <AlertTriangle className="w-8 h-8 text-destructive" />
-            <h1 className="text-3xl md:text-4xl font-bold">Research Use Disclaimer</h1>
+      <div className="container mx-auto px-4 pt-24 md:pt-28 max-w-4xl">
+        <div className="mb-8 md:mb-10 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-6">
+          <div className="md:col-span-8 flex items-center gap-3">
+            <AlertTriangle className="w-7 h-7 text-destructive flex-shrink-0" />
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-destructive mb-1">Important Notice</div>
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight">Research Use Disclaimer</h1>
+            </div>
           </div>
+          <div className="md:col-span-4 md:text-right">
+            <p className="text-sm text-muted-foreground">Not for human consumption</p>
+          </div>
+        </div>
+        <div className="frosted-glass rounded-xl p-6 sm:p-8 md:p-12">
+
           
           <div className="space-y-6 text-muted-foreground">
             <div className="p-6 rounded-lg border-2 border-destructive bg-destructive/10">

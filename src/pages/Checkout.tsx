@@ -320,19 +320,21 @@ export default function Checkout() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-2">
-            <Lock className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[hsl(var(--ice-blue))] font-semibold">
-              Secure Checkout
-            </span>
+      <div className="container mx-auto px-4 pt-24 md:pt-28">
+        {/* Magazine header */}
+        <div className="max-w-5xl mx-auto mb-6 md:mb-8 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-5">
+          <div className="md:col-span-8 flex items-center gap-3">
+            <Lock className="w-5 h-5 text-ice-blue flex-shrink-0" />
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-1">Secure Checkout</div>
+              <h1 className="text-2xl md:text-4xl font-bold leading-tight">Complete Your Order</h1>
+            </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-            Complete Your Order
-          </h1>
+          <div className="md:col-span-4 md:text-right">
+            <p className="text-xs text-muted-foreground">Step {step} of 2 · Encrypted transmission</p>
+          </div>
         </div>
+
 
         {/* Step Indicator */}
         <div className="max-w-md mx-auto mb-8">

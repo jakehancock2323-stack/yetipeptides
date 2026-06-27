@@ -57,17 +57,18 @@ export default function Cart() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[hsl(var(--ice-blue))] font-semibold">
-            Order Review
-          </span>
-          <h1 className="text-3xl md:text-4xl font-bold mt-2 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-            Shopping Cart
-          </h1>
-          <p className="text-sm text-muted-foreground mt-2">{items.length} item{items.length !== 1 ? 's' : ''} in your cart</p>
+      <div className="container mx-auto px-4 pt-24 md:pt-28">
+        {/* Magazine header */}
+        <div className="max-w-5xl mx-auto mb-8 md:mb-10 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-6">
+          <div className="md:col-span-8">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Order Review</div>
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight">Shopping Cart</h1>
+          </div>
+          <div className="md:col-span-4 md:text-right">
+            <p className="text-sm text-muted-foreground">{items.length} item{items.length !== 1 ? 's' : ''} ready for checkout</p>
+          </div>
         </div>
+
 
         <div className="max-w-4xl mx-auto grid lg:grid-cols-[1fr_340px] gap-6">
           {/* Items Column */}

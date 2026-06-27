@@ -16,10 +16,17 @@ export default function ShippingReturns() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-          Shipping & Returns
-        </h1>
+      <div className="container mx-auto px-4 pt-24 md:pt-28">
+        <div className="max-w-4xl mx-auto mb-8 md:mb-10 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-6">
+          <div className="md:col-span-8">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Logistics Policy</div>
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight">Shipping & Returns</h1>
+          </div>
+          <div className="md:col-span-4 md:text-right">
+            <p className="text-sm text-muted-foreground">Tracked · Discreet · Worldwide</p>
+          </div>
+        </div>
+
 
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="frosted-glass rounded-xl p-6 md:p-8 space-y-8">
