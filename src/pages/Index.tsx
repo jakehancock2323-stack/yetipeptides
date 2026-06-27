@@ -127,61 +127,79 @@ export default function Index() {
         </div>
       </AnimateOnScroll>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <DnaHelix />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background pointer-events-none" />
-          <div className="absolute inset-0 grid-overlay pointer-events-none" />
+      {/* Hero Section — asymmetric split */}
+      <section className="relative overflow-hidden">
+        {/* Ambient background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-32 -left-32 w-[42rem] h-[42rem] rounded-full bg-ice-blue/10 blur-[120px]" />
+          <div className="absolute top-40 -right-32 w-[36rem] h-[36rem] rounded-full bg-aurora/15 blur-[120px]" />
+          <div className="absolute inset-0 grid-overlay opacity-60" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center pt-20">
-          <div className="fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ice-blue/20 bg-ice-blue/5 mb-8">
-              <Zap className="w-3.5 h-3.5 text-ice-blue" />
-              <span className="text-xs uppercase tracking-[0.15em] text-ice-blue font-medium">Research-Grade Peptides</span>
+        <div className="relative z-10 container mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Copy column */}
+            <div className="lg:col-span-7 fade-in-up">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
+                <Zap className="w-3.5 h-3.5 text-ice-blue" />
+                <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.05]">
+                <span className="block text-foreground">Precision</span>
+                <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
+                  Compounds for
+                </span>
+                <span className="block text-foreground">Serious Research.</span>
+              </h1>
+
+              <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
+                COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <Link to="/products">
+                  <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
+                    Browse Catalogue <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/products?region=uk">
+                  <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
+                    UK Domestic
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 fade-in-up animate-delay-100 leading-tight">
-            <span className="text-foreground">Precision Compounds</span>
-            <br />
-            <span className="bg-gradient-to-r from-ice-blue via-glacier to-aurora bg-clip-text text-transparent">
-              For Serious Research
-            </span>
-          </h1>
-          
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto fade-in-up animate-delay-200 leading-relaxed">
-            COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
-          </p>
-          
-          <div className="flex flex-wrap gap-4 justify-center fade-in-up animate-delay-300">
-            <Link to="/products">
-              <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-8 gap-2">
-                Browse Catalogue
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
+
+            {/* Visual column */}
+            <div className="lg:col-span-5 fade-in-up animate-delay-200 relative">
+              <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-border/40 bg-card/30 backdrop-blur-sm">
+                <DnaHelix />
+                <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-aurora/10 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 frosted-glass rounded-xl px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Live Catalogue</p>
+                    <p className="text-sm font-semibold">50+ Compounds</p>
+                  </div>
+                  <div className="h-2 w-2 rounded-full bg-ice-blue animate-pulse" />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Stats strip */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-0 max-w-3xl mx-auto fade-in-up animate-delay-400">
-            <div className="stat-block border-r border-border/30">
-              <div className="stat-value"><AnimatedCounter end={99} suffix="%+" /></div>
-              <div className="stat-label">Purity</div>
-            </div>
-            <div className="stat-block border-r border-border/30 md:border-r">
-              <div className="stat-value"><AnimatedCounter end={150} suffix="+" /></div>
-              <div className="stat-label">Reviews</div>
-            </div>
-            <div className="stat-block border-r border-border/30">
-              <div className="stat-value"><AnimatedCounter end={50} suffix="+" /></div>
-              <div className="stat-label">Compounds</div>
-            </div>
-            <div className="stat-block">
-              <div className="stat-value">24/7</div>
-              <div className="stat-label">Support</div>
-            </div>
+          <div className="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 rounded-2xl overflow-hidden border border-border/40 fade-in-up animate-delay-400">
+            {[
+              { v: <AnimatedCounter end={99} suffix="%+" />, l: 'Purity' },
+              { v: <AnimatedCounter end={150} suffix="+" />, l: 'Reviews' },
+              { v: <AnimatedCounter end={50} suffix="+" />, l: 'Compounds' },
+              { v: '24/7', l: 'Support' },
+            ].map((s, i) => (
+              <div key={i} className="bg-card/60 backdrop-blur-sm py-5 px-3 text-center">
+                <div className="text-2xl md:text-3xl font-urbanist font-bold text-ice-blue">{s.v}</div>
+                <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1.5">{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -190,7 +208,7 @@ export default function Index() {
       <AnimateOnScroll animation="fade-in">
         <section className="py-5 border-y border-border/20 bg-secondary/20">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 md:gap-12">
               {[
                 { icon: FlaskConical, label: 'Quality Verified' },
                 { icon: Lock, label: 'Secure Checkout' },
@@ -200,13 +218,14 @@ export default function Index() {
               ].map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-2">
                   <Icon className="w-4 h-4 text-ice-blue" />
-                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
+                  <span className="text-[10px] md:text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
       </AnimateOnScroll>
+
 
       {/* Featured Products */}
       <section className="py-20 px-4">
