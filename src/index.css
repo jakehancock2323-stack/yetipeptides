@@ -2,59 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Yeti Peptides — Aurora Magazine Editorial
-   Palette: #1a1a2e bg · #16213e card · #4ade80 primary · #a78bfa accent
+/* Yeti Peptides — Indigo Aurora
+   Palette: deep navy bg · indigo card · sky-blue primary · violet accent
    Typography: Urbanist (display) + Epilogue (body)
 */
 
 @layer base {
   :root {
     /* Core surface */
-    --background: 240 28% 14%;          /* #1a1a2e */
-    --foreground: 210 40% 96%;          /* slate-100 */
+    --background: 230 40% 7%;           /* deep navy #0a0d1f */
+    --foreground: 220 30% 96%;
 
-    --card: 220 49% 16%;                /* #16213e */
-    --card-foreground: 210 40% 96%;
+    --card: 230 38% 12%;                /* indigo card */
+    --card-foreground: 220 30% 96%;
 
-    --popover: 220 49% 14%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 230 40% 10%;
+    --popover-foreground: 220 30% 96%;
 
-    /* Aurora green */
-    --primary: 141 71% 58%;             /* #4ade80 */
-    --primary-foreground: 240 28% 14%;
+    /* Sky blue primary */
+    --primary: 214 95% 68%;             /* #60a5fa-ish */
+    --primary-foreground: 230 40% 7%;
 
-    --secondary: 220 40% 20%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 232 35% 18%;
+    --secondary-foreground: 220 30% 96%;
 
-    --muted: 220 30% 18%;
-    --muted-foreground: 215 20% 70%;    /* slate-400 */
+    --muted: 232 28% 16%;
+    --muted-foreground: 220 16% 72%;
 
-    /* Aurora violet */
-    --accent: 252 92% 76%;              /* #a78bfa */
-    --accent-foreground: 240 28% 14%;
+    /* Violet accent */
+    --accent: 258 90% 76%;              /* #a78bfa */
+    --accent-foreground: 230 40% 7%;
 
     --destructive: 0 72% 60%;
-    --destructive-foreground: 210 40% 96%;
+    --destructive-foreground: 220 30% 96%;
 
-    --border: 220 30% 22%;
-    --input: 220 40% 18%;
-    --ring: 141 71% 58%;
+    --border: 232 30% 22%;
+    --input: 232 35% 16%;
+    --ring: 214 95% 68%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    /* Legacy aliases — remapped to aurora palette so existing
-       components/classes (ice-blue/frost/aurora/glacier) keep working. */
-    --ice-blue: 141 71% 58%;            /* primary green */
-    --frost: 210 40% 96%;               /* near-white */
-    --deep-freeze: 240 30% 8%;          /* deeper bg */
-    --arctic-teal: 141 71% 58%;
-    --glacier: 252 92% 76%;             /* aurora violet */
-    --aurora: 252 92% 76%;              /* aurora violet */
+    /* Legacy aliases — remapped to blue/violet palette */
+    --ice-blue: 214 95% 68%;            /* sky blue */
+    --frost: 220 30% 96%;
+    --deep-freeze: 232 50% 5%;
+    --arctic-teal: 220 90% 72%;         /* lighter blue */
+    --glacier: 258 90% 76%;             /* violet */
+    --aurora: 268 85% 70%;              /* deeper violet */
 
-    --glow-primary: 141 71% 58%;
-    --glow-accent: 252 92% 76%;
+    --glow-primary: 214 95% 68%;
+    --glow-accent: 258 90% 76%;
   }
 }
+
 
 @layer base {
   * {
