@@ -14,7 +14,7 @@ import {
   FileText, Lock, Globe, FlaskConical, Package,
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
 } from 'lucide-react';
-import DnaHelix from '@/components/DnaHelix';
+import AuroraWaves from '@/components/AuroraWaves';
 
 
 export default function Index() {
@@ -172,7 +172,7 @@ export default function Index() {
             {/* Visual column */}
             <div className="lg:col-span-5 fade-in-up animate-delay-200 relative">
               <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-border/40 bg-card/30 backdrop-blur-sm">
-                <DnaHelix />
+                <AuroraWaves />
                 <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-aurora/10 pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 frosted-glass rounded-xl px-4 py-3 flex items-center justify-between">
                   <div>
