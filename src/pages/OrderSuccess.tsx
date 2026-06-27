@@ -21,20 +21,23 @@ export default function OrderSuccess() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="frosted-glass rounded-lg p-8 md:p-12">
-            <div className="mb-6 flex justify-center">
-              <CheckCircle className="w-20 h-20 text-[hsl(var(--ice-blue))]" />
+      <div className="container mx-auto px-4 pt-24 md:pt-28">
+        <div className="max-w-3xl mx-auto">
+          <div className="frosted-glass rounded-2xl p-8 md:p-12 border border-ice-blue/20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6 pb-6 border-b border-border/30">
+              <div className="w-14 h-14 rounded-2xl bg-ice-blue/15 flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-8 h-8 text-ice-blue" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-1">Order Confirmed</div>
+                <h1 className="text-2xl md:text-3xl font-bold leading-tight">Thank You for Your Order</h1>
+              </div>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-              Thank You for Your Order!
-            </h1>
-            
-            <p className="text-lg text-foreground/80 mb-6">
+
+            <p className="text-base text-muted-foreground mb-6">
               Your order has been successfully submitted. You will receive an email shortly with payment instructions and order details.
             </p>
+
             
             {orderData && (() => {
               const sym = orderData.shippingRegion === 'UK Domestic' ? '£' : '$';

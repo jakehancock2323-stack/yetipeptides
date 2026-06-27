@@ -46,22 +46,19 @@ export default function TrackOrder() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
+      <div className="container mx-auto px-4 pt-24 md:pt-28">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] flex items-center justify-center">
-                <Package className="w-8 h-8 text-background" />
-              </div>
+          <div className="mb-8 md:mb-10 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-6">
+            <div className="md:col-span-8">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Shipment Status</div>
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight">Track Your Order</h1>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-              Track Your Order
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Enter your tracking number below to check the status of your shipment. 
-              Supports all major carriers worldwide including USPS, Royal Mail, DHL, FedEx, and more.
-            </p>
+            <div className="md:col-span-4 md:text-right flex md:justify-end items-center gap-2 text-muted-foreground">
+              <Package className="w-4 h-4 text-ice-blue" />
+              <span className="text-xs">USPS · Royal Mail · DHL · FedEx</span>
+            </div>
           </div>
+
 
           <div className="frosted-glass rounded-xl p-6 md:p-8">
             <div className="flex flex-col sm:flex-row gap-3">

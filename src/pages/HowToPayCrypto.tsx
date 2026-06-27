@@ -121,33 +121,28 @@ export default function HowToPayCrypto() {
       />
       <Navbar />
       
-      <main className="pt-24 pb-16">
-        {/* Hero Section */}
-        <section className="px-4 pb-12">
-          <div className="container mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ice-blue/10 border border-ice-blue/20 mb-6">
-              <Snowflake className="w-4 h-4 text-ice-blue" />
-              <span className="text-sm text-ice-blue">Crypto Payment Guide</span>
+      <main className="pt-24 md:pt-28 pb-16">
+        {/* Magazine header */}
+        <section className="px-4 pb-10">
+          <div className="container mx-auto max-w-5xl">
+            <div className="grid md:grid-cols-12 gap-6 items-end border-b border-border/30 pb-6">
+              <div className="md:col-span-8">
+                <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Payment Guide</div>
+                <h1 className="text-3xl md:text-5xl font-bold leading-tight">How to Pay with Crypto</h1>
+                <p className="text-sm md:text-base text-muted-foreground mt-3 max-w-xl">
+                  A simple step-by-step guide for secure and smooth checkout. Perfect for beginners.
+                </p>
+              </div>
+              <div className="md:col-span-4 md:text-right">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ice-blue/10 border border-ice-blue/30">
+                  <Snowflake className="w-3.5 h-3.5 text-ice-blue" />
+                  <span className="text-xs text-ice-blue font-medium">BTC · USDT · USDC</span>
+                </div>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              How to Pay with Crypto
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A simple step-by-step guide for secure and smooth checkout. Perfect for beginners.
-            </p>
           </div>
         </section>
 
-        {/* Frosty Divider */}
-        <div className="flex justify-center gap-2 py-6">
-          {[...Array(5)].map((_, i) => (
-            <Snowflake 
-              key={i} 
-              className="w-4 h-4 text-ice-blue/40" 
-              style={{ opacity: 1 - Math.abs(i - 2) * 0.25 }}
-            />
-          ))}
-        </div>
 
         {/* Section 1: Choose Your Crypto */}
         <section className="px-4 py-12">
