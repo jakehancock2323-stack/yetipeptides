@@ -15,7 +15,7 @@ import {
   Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
 } from 'lucide-react';
 import DnaHelix from '@/components/DnaHelix';
-import yetiLogo from '@/assets/yeti-logo.png';
+
 
 export default function Index() {
   const [showDiscordBanner, setShowDiscordBanner] = useState(true);
