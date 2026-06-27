@@ -94,169 +94,165 @@ export default function Products() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-28 pb-20">
-        {/* Compact Header */}
+      <div className="container mx-auto px-4 pt-24 md:pt-28 pb-20">
+        {/* Magazine header */}
         <AnimateOnScroll>
-          <div className="mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Research Peptides</h1>
-            <p className="text-sm text-muted-foreground">
-              Laboratory-grade compounds · 99%+ purity
-            </p>
-          </div>
-        </AnimateOnScroll>
-
-        {/* Prominent Region Switcher */}
-        <AnimateOnScroll delay={50}>
-          <div className="mb-6 rounded-xl border border-border/30 bg-card/40 backdrop-blur-sm p-1.5 flex flex-col sm:flex-row gap-1.5">
-            <button
-              onClick={() => setRegion('International')}
-              className={`flex-1 flex items-center justify-center gap-2.5 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                region === 'International'
-                  ? 'bg-ice-blue text-background shadow-md shadow-ice-blue/20'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
-              }`}
-            >
-              <Globe className="w-4 h-4" />
-              <div className="flex flex-col items-start leading-tight">
-                <span>International Catalog</span>
-                <span className={`text-[10px] font-normal ${region === 'International' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
-                  Ships worldwide · USD pricing
-                </span>
-              </div>
-            </button>
-            <button
-              onClick={() => setRegion('UK Domestic')}
-              className={`flex-1 flex items-center justify-center gap-2.5 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                region === 'UK Domestic'
-                  ? 'bg-ice-blue text-background shadow-md shadow-ice-blue/20'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
-              }`}
-            >
-              <MapPin className="w-4 h-4" />
-              <div className="flex flex-col items-start leading-tight">
-                <span>UK Domestic Only</span>
-                <span className={`text-[10px] font-normal ${region === 'UK Domestic' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
-                  Ships within UK · GBP pricing
-                </span>
-              </div>
-            </button>
-          </div>
-        </AnimateOnScroll>
-
-        {region === 'International' && (
-          <AnimateOnScroll animation="fade-in" delay={75}>
-            <div className="mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm px-4 py-3.5 flex items-start gap-3">
-              <Globe className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-              <div className="text-sm">
-                <p className="font-semibold text-amber-300 mb-0.5">International Orders Temporarily Closed</p>
-                <p className="text-amber-100/80 text-xs leading-relaxed">
-                  New international orders are paused from <span className="font-semibold">10th</span> through <span className="font-semibold">29th</span> of this month. Service resumes on the 29th — orders already placed are unaffected and continue to ship as normal.
-                </p>
-              </div>
-            </div>
-          </AnimateOnScroll>
-        )}
-
-        {/* Active region indicator strip */}
-        <AnimateOnScroll animation="fade-in" delay={100}>
-          <div className={`mb-6 flex items-center justify-between gap-3 px-4 py-2.5 rounded-lg border ${
-            region === 'UK Domestic'
-              ? 'bg-ice-blue/10 border-ice-blue/30'
-              : 'bg-secondary/20 border-border/30'
-          }`}>
-            <div className="flex items-center gap-2 text-xs">
-              {region === 'UK Domestic' ? (
-                <MapPin className="w-3.5 h-3.5 text-ice-blue" />
-              ) : (
-                <Globe className="w-3.5 h-3.5 text-ice-blue" />
-              )}
-              <span className="font-medium">
-                Viewing: <span className="text-ice-blue">{region === 'UK Domestic' ? 'UK Domestic Stock' : 'International Catalog'}</span>
-              </span>
-            </div>
-            <a
-              href="https://discord.gg/seDb5c9XkM"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[11px] font-medium text-[#5865F2] hover:text-[#5865F2]/80 transition-colors"
-            >
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-              </svg>
-              Join Discord
-            </a>
-          </div>
-        </AnimateOnScroll>
-
-        {/* Search + Filters Row */}
-        <AnimateOnScroll delay={150}>
-          <div className="flex flex-col gap-3 mb-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search compounds..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 bg-secondary/20 border-border/30 h-10 text-sm"
-              />
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {activeCategories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                    selectedCategory === category 
-                      ? 'bg-ice-blue text-background' 
-                      : 'bg-secondary/30 text-muted-foreground hover:text-foreground hover:bg-secondary/50'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </AnimateOnScroll>
-
-        {/* Results count */}
-        <p className="text-xs text-muted-foreground mb-5">
-          {filteredProducts.length} compound{filteredProducts.length !== 1 ? 's' : ''}
-        </p>
-
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto items-start">
-          {filteredProducts.map((product, i) => (
-            <AnimateOnScroll key={product.id} delay={i * 60} animation="scale-in">
-              <ProductCard product={product} />
-            </AnimateOnScroll>
-          ))}
-        </div>
-
-        {filteredProducts.length === 0 && region === 'UK Domestic' ? (
-          <AnimateOnScroll animation="fade-in">
-            <div className="text-center py-24">
-              <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                UK Domestic stock is not yet available. Check back soon for updates.
+          <div className="mb-8 md:mb-10 grid md:grid-cols-12 gap-6 items-end border-b border-border/30 pb-6">
+            <div className="md:col-span-7">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">Catalogue · 2026</div>
+              <h1 className="text-3xl md:text-5xl font-bold leading-tight">Research Peptides</h1>
+              <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-xl">
+                Laboratory-grade compounds · 99%+ purity · COA verified
               </p>
             </div>
-          </AnimateOnScroll>
-        ) : filteredProducts.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">No compounds found matching your search.</p>
-          </div>
-        ) : null}
-
-        {/* Disclaimer */}
-        <AnimateOnScroll animation="fade-in" delay={200}>
-          <div className="mt-16 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-            <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
-            <span>All products are intended for laboratory research use only. Not for human consumption.</span>
+            <div className="md:col-span-5 grid grid-cols-2 gap-3 text-center">
+              <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm py-3">
+                <div className="text-xl font-bold text-ice-blue">{products.filter(p => p.region !== 'UK Domestic').length}</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Worldwide</div>
+              </div>
+              <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm py-3">
+                <div className="text-xl font-bold text-aurora">{products.filter(p => p.region === 'UK Domestic').length}</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">UK Domestic</div>
+              </div>
+            </div>
           </div>
         </AnimateOnScroll>
+
+        {/* Sidebar + Grid */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
+          {/* Sidebar (sticky on desktop) */}
+          <aside className="lg:col-span-3 lg:sticky lg:top-24 lg:self-start space-y-4">
+            {/* Region switch */}
+            <AnimateOnScroll delay={50}>
+              <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm p-1.5 flex lg:flex-col gap-1.5">
+                <button
+                  onClick={() => setRegion('International')}
+                  className={`flex-1 flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-left ${
+                    region === 'International'
+                      ? 'bg-ice-blue text-background shadow-md shadow-ice-blue/20'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
+                  }`}
+                >
+                  <Globe className="w-4 h-4 flex-shrink-0" />
+                  <div className="flex flex-col leading-tight">
+                    <span>International</span>
+                    <span className={`text-[10px] font-normal ${region === 'International' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
+                      USD · worldwide
+                    </span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setRegion('UK Domestic')}
+                  className={`flex-1 flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-left ${
+                    region === 'UK Domestic'
+                      ? 'bg-aurora text-background shadow-md shadow-aurora/20'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
+                  }`}
+                >
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
+                  <div className="flex flex-col leading-tight">
+                    <span>UK Domestic</span>
+                    <span className={`text-[10px] font-normal ${region === 'UK Domestic' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
+                      GBP · UK only
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </AnimateOnScroll>
+
+            {/* Search */}
+            <AnimateOnScroll delay={100}>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search compounds..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-10 bg-secondary/20 border-border/40 h-10 text-sm"
+                />
+              </div>
+            </AnimateOnScroll>
+
+            {/* Categories */}
+            <AnimateOnScroll delay={150}>
+              <div className="rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm p-3">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2.5 px-1">Categories</div>
+                <div className="flex flex-wrap lg:flex-col gap-1.5">
+                  {activeCategories.map(category => (
+                    <button
+                      key={category}
+                      onClick={() => handleCategoryChange(category)}
+                      className={`px-3 py-1.5 rounded-lg text-xs lg:text-sm font-medium transition-all duration-200 lg:text-left ${
+                        selectedCategory === category
+                          ? 'bg-ice-blue/15 text-ice-blue border border-ice-blue/30'
+                          : 'bg-secondary/20 text-muted-foreground hover:text-foreground hover:bg-secondary/40 border border-transparent'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </AnimateOnScroll>
+
+            <p className="text-xs text-muted-foreground px-1">
+              {filteredProducts.length} compound{filteredProducts.length !== 1 ? 's' : ''} shown
+            </p>
+          </aside>
+
+          {/* Main column */}
+          <div className="lg:col-span-9 space-y-4">
+            {region === 'International' && (
+              <AnimateOnScroll animation="fade-in">
+                <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm px-4 py-3.5 flex items-start gap-3">
+                  <Globe className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm">
+                    <p className="font-semibold text-amber-300 mb-0.5">International Orders Temporarily Closed</p>
+                    <p className="text-amber-100/80 text-xs leading-relaxed">
+                      New international orders are paused from <span className="font-semibold">10th</span> through <span className="font-semibold">29th</span> of this month. Service resumes on the 29th — orders already placed are unaffected and continue to ship as normal.
+                    </p>
+                  </div>
+                </div>
+              </AnimateOnScroll>
+            )}
+
+            {/* Product Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-start">
+              {filteredProducts.map((product, i) => (
+                <AnimateOnScroll key={product.id} delay={i * 40} animation="scale-in">
+                  <ProductCard product={product} />
+                </AnimateOnScroll>
+              ))}
+            </div>
+
+            {filteredProducts.length === 0 && region === 'UK Domestic' ? (
+              <AnimateOnScroll animation="fade-in">
+                <div className="text-center py-24">
+                  <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
+                  <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
+                  <p className="text-muted-foreground max-w-md mx-auto">
+                    UK Domestic stock is not yet available. Check back soon for updates.
+                  </p>
+                </div>
+              </AnimateOnScroll>
+            ) : filteredProducts.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-muted-foreground">No compounds found matching your search.</p>
+              </div>
+            ) : null}
+
+            {/* Disclaimer */}
+            <AnimateOnScroll animation="fade-in" delay={200}>
+              <div className="mt-10 flex items-center justify-center gap-2 text-xs text-muted-foreground border-t border-border/30 pt-6">
+                <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
+                <span>All products are intended for laboratory research use only. Not for human consumption.</span>
+              </div>
+            </AnimateOnScroll>
+          </div>
+        </div>
       </div>
+
 
       <Footer />
     </div>
