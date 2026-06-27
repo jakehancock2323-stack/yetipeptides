@@ -2,49 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Yeti Peptides - Dark Biotech Theme */
+/* Yeti Peptides — Aurora Magazine Editorial
+   Palette: #1a1a2e bg · #16213e card · #4ade80 primary · #a78bfa accent
+   Typography: Urbanist (display) + Epilogue (body)
+*/
 
 @layer base {
   :root {
-    --background: 215 45% 5%;
-    --foreground: 200 25% 96%;
+    /* Core surface */
+    --background: 240 28% 14%;          /* #1a1a2e */
+    --foreground: 210 40% 96%;          /* slate-100 */
 
-    --card: 215 35% 8%;
-    --card-foreground: 200 25% 96%;
+    --card: 220 49% 16%;                /* #16213e */
+    --card-foreground: 210 40% 96%;
 
-    --popover: 215 35% 9%;
-    --popover-foreground: 200 25% 96%;
+    --popover: 220 49% 14%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 200 70% 75%;
-    --primary-foreground: 215 45% 5%;
+    /* Aurora green */
+    --primary: 141 71% 58%;             /* #4ade80 */
+    --primary-foreground: 240 28% 14%;
 
-    --secondary: 215 28% 13%;
-    --secondary-foreground: 200 25% 96%;
+    --secondary: 220 40% 20%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 215 22% 11%;
-    --muted-foreground: 205 12% 62%;
+    --muted: 220 30% 18%;
+    --muted-foreground: 215 20% 70%;    /* slate-400 */
 
-    --accent: 210 50% 70%;
-    --accent-foreground: 215 45% 5%;
+    /* Aurora violet */
+    --accent: 252 92% 76%;              /* #a78bfa */
+    --accent-foreground: 240 28% 14%;
 
-    --destructive: 0 65% 55%;
-    --destructive-foreground: 200 25% 96%;
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 210 40% 96%;
 
-    --border: 210 30% 18%;
-    --input: 215 28% 13%;
-    --ring: 200 70% 75%;
+    --border: 220 30% 22%;
+    --input: 220 40% 18%;
+    --ring: 141 71% 58%;
 
-    --radius: 0.375rem;
+    --radius: 0.25rem;
 
-    --ice-blue: 200 70% 75%;
-    --frost: 200 30% 92%;
-    --deep-freeze: 218 50% 6%;
-    --arctic-teal: 195 45% 60%;
-    --glacier: 205 60% 80%;
-    --aurora: 220 40% 70%;
+    /* Legacy aliases — remapped to aurora palette so existing
+       components/classes (ice-blue/frost/aurora/glacier) keep working. */
+    --ice-blue: 141 71% 58%;            /* primary green */
+    --frost: 210 40% 96%;               /* near-white */
+    --deep-freeze: 240 30% 8%;          /* deeper bg */
+    --arctic-teal: 141 71% 58%;
+    --glacier: 252 92% 76%;             /* aurora violet */
+    --aurora: 252 92% 76%;              /* aurora violet */
 
-    --glow-primary: 200 70% 75%;
-    --glow-accent: 210 50% 70%;
+    --glow-primary: 141 71% 58%;
+    --glow-accent: 252 92% 76%;
   }
 }
 
@@ -54,12 +62,14 @@
   }
 
   body {
-    @apply bg-background text-foreground font-rajdhani;
+    @apply bg-background text-foreground font-epilogue;
+    font-weight: 400;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron font-medium;
-    letter-spacing: -0.015em;
+    @apply font-urbanist;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 

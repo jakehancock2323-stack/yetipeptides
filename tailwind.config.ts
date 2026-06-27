@@ -14,9 +14,13 @@ export default {
     },
     extend: {
       fontFamily: {
-        'orbitron': ['Space Grotesk', 'system-ui', 'sans-serif'],
-        'rajdhani': ['Inter', 'system-ui', 'sans-serif'],
-        'serif-accent': ['Libre Baskerville', 'Georgia', 'serif'],
+        // Aliased to the new Aurora Magazine pair (Urbanist + Epilogue)
+        // legacy class names retained so existing components flip automatically.
+        'orbitron': ['Urbanist', 'system-ui', 'sans-serif'],
+        'rajdhani': ['Epilogue', 'system-ui', 'sans-serif'],
+        'urbanist': ['Urbanist', 'system-ui', 'sans-serif'],
+        'epilogue': ['Epilogue', 'system-ui', 'sans-serif'],
+        'serif-accent': ['Urbanist', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
