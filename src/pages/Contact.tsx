@@ -73,146 +73,92 @@ export default function Contact() {
       <Snowfall />
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-32">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-          Contact Yeti Peptides - Research Peptide Supplier
-        </h1>
-
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          {/* Contact Form */}
-          <div className="frosted-glass rounded-xl p-6 md:p-8">
-            <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Honeypot — hidden from real users, blocks bots */}
-              <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
-                <label htmlFor="website">Website</label>
-                <input
-                  id="website"
-                  name="website"
-                  type="text"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  required
-                  maxLength={200}
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  required
-                  maxLength={320}
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) => handleChange('message', e.target.value)}
-                  required
-                  maxLength={5000}
-                  placeholder="How can we help you?"
-                  className="min-h-[150px]"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background"
-                size="lg"
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
+      <div className="container mx-auto px-4 pt-24 md:pt-28 pb-16">
+        <div className="max-w-6xl mx-auto">
+          {/* Magazine header */}
+          <div className="mb-10 md:mb-12 grid md:grid-cols-12 gap-6 items-end border-b border-border/30 pb-6">
+            <div className="md:col-span-8">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">Get in Touch</div>
+              <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+                Questions, COA requests, or research enquiries?
+              </h1>
+            </div>
+            <div className="md:col-span-4 md:text-right">
+              <p className="text-sm text-muted-foreground">We typically respond within 24 hours during business days.</p>
+            </div>
           </div>
 
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <div className="frosted-glass rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-10">
+            {/* Contact Information — sidebar */}
+            <div className="lg:col-span-5 lg:order-1 order-2 space-y-4">
+              {[
+                { icon: Mail, label: 'Email', value: 'yetipeptides@protonmail.com', href: 'mailto:yetipeptides@protonmail.com' },
+                { icon: Send, label: 'Telegram', value: '@yetipeptides', href: 'https://t.me/yetipeptides', external: true },
+                { icon: MessageCircle, label: 'Discord', value: 'Join Server', href: 'https://discord.gg/seDb5c9XkM', external: true },
+              ].map(({ icon: Icon, label, value, href, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  className="block frosted-glass rounded-xl p-5 hover:bg-card/70 hover:border-ice-blue/30 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-ice-blue/15 flex items-center justify-center flex-shrink-0 group-hover:bg-ice-blue/25 transition-colors">
+                      <Icon className="w-5 h-5 text-ice-blue" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+                      <div className="text-sm font-medium truncate">{value}</div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
-                    <a 
-                      href="mailto:yetipeptides@protonmail.com"
-                      className="text-sm text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
-                    >
-                      yetipeptides@protonmail.com
-                    </a>
-                  </div>
-                </div>
+                </a>
+              ))}
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
-                    <Send className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Telegram</h3>
-                    <a 
-                      href="https://t.me/yetipeptides" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
-                    >
-                      @yetipeptides
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[hsl(var(--ice-blue))]/20 flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Discord</h3>
-                    <a 
-                      href="https://discord.gg/seDb5c9XkM"
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-[hsl(var(--ice-blue))] transition-colors"
-                    >
-                      Join Server
-                    </a>
-                  </div>
-                </div>
+              <div className="rounded-xl border border-aurora/30 bg-aurora/5 p-5">
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  <strong className="text-aurora">Tip:</strong> For order-specific questions, please include your order ID in the message so we can locate it quickly.
+                </p>
               </div>
             </div>
 
-            <div className="frosted-glass rounded-xl p-6">
-              <div className="p-4 bg-[hsl(var(--ice-blue))]/10 rounded-lg border border-[hsl(var(--ice-blue))]/20">
-                <p className="text-sm text-center">
-                  <strong>Response Time:</strong> We typically respond within 24 hours during business days.
-                </p>
+            {/* Contact Form — main */}
+            <div className="lg:col-span-7 lg:order-2 order-1">
+              <div className="frosted-glass rounded-2xl p-6 md:p-8">
+                <h2 className="text-xl md:text-2xl font-bold mb-6">Send a Message</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+                    <label htmlFor="website">Website</label>
+                    <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="name">Name</Label>
+                      <Input id="name" value={formData.name} onChange={(e) => handleChange('name', e.target.value)} required maxLength={200} placeholder="Your name" />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input id="email" type="email" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} required maxLength={320} placeholder="your.email@example.com" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" value={formData.message} onChange={(e) => handleChange('message', e.target.value)} required maxLength={5000} placeholder="How can we help you?" className="min-h-[180px]" />
+                  </div>
+
+                  <Button type="submit" disabled={isSubmitting} className="w-full bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold" size="lg">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+
 
       <Footer />
     </div>
