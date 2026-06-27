@@ -125,65 +125,46 @@ export default function Index() {
         </div>
       </AnimateOnScroll>
 
-      {/* Hero Section — asymmetric split */}
+      {/* Hero Section — ambient aurora background, no box */}
       <section className="relative overflow-hidden">
-        {/* Ambient background */}
+        {/* Ambient aurora that bleeds into the page */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-32 -left-32 w-[42rem] h-[42rem] rounded-full bg-ice-blue/10 blur-[120px]" />
-          <div className="absolute top-40 -right-32 w-[36rem] h-[36rem] rounded-full bg-aurora/15 blur-[120px]" />
-          <div className="absolute inset-0 grid-overlay opacity-60" />
+          <AuroraWaves />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-            {/* Copy column */}
-            <div className="lg:col-span-7 fade-in-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
-                <Zap className="w-3.5 h-3.5 text-ice-blue" />
-                <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.05]">
-                <span className="block text-foreground">Precision</span>
-                <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
-                  Compounds for
-                </span>
-                <span className="block text-foreground">Serious Research.</span>
-              </h1>
-
-              <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
-                COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <Link to="/products">
-                  <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
-                    Browse Catalogue <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </Link>
-                <Link to="/products?region=uk">
-                  <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
-                    UK Domestic
-                  </Button>
-                </Link>
-              </div>
+        <div className="relative z-10 container mx-auto px-4 pt-16 pb-20 md:pt-28 md:pb-32">
+          <div className="max-w-3xl fade-in-up">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
+              <Zap className="w-3.5 h-3.5 text-ice-blue" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
             </div>
 
-            {/* Visual column */}
-            <div className="lg:col-span-5 fade-in-up animate-delay-200 relative">
-              <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-border/40 bg-card/30 backdrop-blur-sm">
-                <AuroraWaves />
-                <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-aurora/10 pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 frosted-glass rounded-xl px-4 py-3 flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Live Catalogue</p>
-                    <p className="text-sm font-semibold">50+ Compounds</p>
-                  </div>
-                  <div className="h-2 w-2 rounded-full bg-ice-blue animate-pulse" />
-                </div>
-              </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.02]">
+              <span className="block text-foreground">Precision</span>
+              <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
+                Compounds for
+              </span>
+              <span className="block text-foreground">Serious Research.</span>
+            </h1>
+
+            <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <Link to="/products">
+                <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
+                  Browse Catalogue <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+              <Link to="/products?region=uk">
+                <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
+                  UK Domestic
+                </Button>
+              </Link>
             </div>
           </div>
+
 
           {/* Stats strip */}
           <div className="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 rounded-2xl overflow-hidden border border-border/40 fade-in-up animate-delay-400">
