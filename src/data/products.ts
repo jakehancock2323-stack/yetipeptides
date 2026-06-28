@@ -691,7 +691,7 @@ export const products: Product[] = [
     currency: "GBP",
     stockBadge: "6 vials left",
     variants: [
-      { specification: "10mg × 1 vial", price: 14 }
+      { specification: "10mg × 1 vial", price: 18 }
     ]
   },
   {
