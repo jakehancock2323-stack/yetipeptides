@@ -42,8 +42,7 @@ export default function Index() {
   };
 
   const trustFeatures = [
-    { icon: Microscope, title: 'Strict QC Standards', desc: 'Every batch undergoes rigorous quality control testing to ensure 99%+ purity and consistency.' },
-    { icon: BadgeCheck, title: 'Batch Verification', desc: 'Full traceability with batch numbers and lot-specific documentation for all products.' },
+    { icon: Microscope, title: 'Strict QC Standards', desc: 'Rigorous quality control testing to ensure 99%+ purity and consistency across all compounds.' },
     { icon: FileText, title: 'COA Available', desc: 'Certificates of Analysis with HPLC and MS data available on request for all compounds.' },
     { icon: Package, title: 'Professional Packaging', desc: 'Temperature-controlled, discreet packaging to maintain product integrity during transit.' },
     { icon: Award, title: 'Established Supplier', desc: 'Trusted by researchers worldwide with a proven track record of reliable service.' },
