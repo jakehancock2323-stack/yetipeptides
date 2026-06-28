@@ -95,11 +95,17 @@ export default {
             height: "0",
           },
         },
+        "spin-slow": { to: { transform: "rotate(360deg)" } },
+        "spin-reverse": { to: { transform: "rotate(-360deg)" } },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "spin-slow": "spin-slow 30s linear infinite",
+        "spin-reverse": "spin-reverse 22s linear infinite",
+        "spin-medium": "spin-slow 18s linear infinite",
       },
+
     },
   },
   plugins: [require("tailwindcss-animate")],
