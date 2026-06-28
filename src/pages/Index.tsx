@@ -133,37 +133,99 @@ export default function Index() {
         </div>
 
         <div className="relative z-10 container mx-auto px-4 pt-16 pb-20 md:pt-28 md:pb-32">
-          <div className="max-w-3xl fade-in-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
-              <Zap className="w-3.5 h-3.5 text-ice-blue" />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-7 fade-in-up">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
+                <Zap className="w-3.5 h-3.5 text-ice-blue" />
+                <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.02]">
+                <span className="block text-foreground">Precision</span>
+                <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
+                  Compounds for
+                </span>
+                <span className="block text-foreground">Serious Research.</span>
+              </h1>
+
+              <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
+                COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <Link to="/products">
+                  <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
+                    Browse Catalogue <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/products?region=uk">
+                  <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
+                    UK Domestic
+                  </Button>
+                </Link>
+              </div>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.02]">
-              <span className="block text-foreground">Precision</span>
-              <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
-                Compounds for
-              </span>
-              <span className="block text-foreground">Serious Research.</span>
-            </h1>
+            {/* Right: floating spec card cluster */}
+            <div className="lg:col-span-5 relative hidden lg:block fade-in-up animate-delay-200">
+              <div className="relative h-[460px]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-gradient-to-br from-ice-blue/30 to-aurora/30 blur-3xl" />
 
-            <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
-              COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
-            </p>
+                <div className="absolute top-4 right-2 w-72 frosted-glass rounded-2xl p-5 glow-border backdrop-blur-xl">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-ice-blue">Live Batch</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-aurora animate-pulse" />
+                      <span className="text-[10px] uppercase tracking-wider text-aurora">Verified</span>
+                    </span>
+                  </div>
+                  <div className="text-2xl font-urbanist font-bold mb-1">Retatrutide</div>
+                  <div className="text-xs text-muted-foreground mb-4">Lot YP-2615 · HPLC + MS</div>
+                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/30">
+                    <div>
+                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Purity</div>
+                      <div className="text-sm font-semibold text-ice-blue">99.4%</div>
+                    </div>
+                    <div>
+                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Mass</div>
+                      <div className="text-sm font-semibold">4731.4</div>
+                    </div>
+                    <div>
+                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Form</div>
+                      <div className="text-sm font-semibold">Lyo</div>
+                    </div>
+                  </div>
+                </div>
 
-            <div className="flex flex-wrap gap-3">
-              <Link to="/products">
-                <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
-                  Browse Catalogue <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-              <Link to="/products?region=uk">
-                <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
-                  UK Domestic
-                </Button>
-              </Link>
+                <div className="absolute top-44 -left-2 w-52 frosted-glass rounded-xl p-4 glow-border backdrop-blur-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-aurora/15 flex items-center justify-center flex-shrink-0">
+                      <BadgeCheck className="w-5 h-5 text-aurora" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground">COA on file</div>
+                      <div className="text-sm font-semibold">3rd-party tested</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-6 right-10 w-56 frosted-glass rounded-xl p-4 glow-border backdrop-blur-xl">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Shipping</span>
+                    <Globe className="w-3.5 h-3.5 text-ice-blue" />
+                  </div>
+                  <div className="text-sm font-semibold">UK Royal Mail 24</div>
+                  <div className="text-xs text-muted-foreground">+ Worldwide tracked</div>
+                </div>
+
+                <div className="absolute bottom-32 left-6 w-40 frosted-glass rounded-xl p-3 glow-border backdrop-blur-xl">
+                  <div className="text-3xl font-urbanist font-bold text-ice-blue leading-none">99%+</div>
+                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">Avg purity</div>
+                </div>
+              </div>
             </div>
           </div>
+
 
 
           {/* Stats strip */}
