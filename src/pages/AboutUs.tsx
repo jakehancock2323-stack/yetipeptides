@@ -70,10 +70,10 @@ export default function AboutUs() {
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { icon: Microscope, title: 'Analytical Testing', desc: 'All compounds undergo HPLC and Mass Spectrometry analysis to verify identity, purity, and composition. Testing is performed on each production batch.' },
+                { icon: Microscope, title: 'Analytical Testing', desc: 'All compounds undergo HPLC and Mass Spectrometry analysis to verify identity, purity, and composition.' },
                 { icon: BadgeCheck, title: 'Purity Standards', desc: 'We maintain strict purity thresholds of 99%+ for all peptide products. Compounds failing to meet specifications are not released.' },
-                { icon: ClipboardCheck, title: 'Batch Documentation', desc: 'Complete batch records are maintained for full traceability. Each product is assigned a unique lot number linked to testing documentation.' },
-                { icon: FileText, title: 'COA Verification', desc: 'Certificates of Analysis are available on request for all products, providing complete analytical data for research verification.' },
+                { icon: ClipboardCheck, title: 'Research Grade', desc: 'Products are prepared and handled to research-grade standards, intended exclusively for laboratory use.' },
+                { icon: FileText, title: 'COA Available', desc: 'Certificates of Analysis are available on request, providing analytical data for research verification.' },
               ].map(({ icon: Icon, title, desc }, i) => (
                 <AnimateOnScroll key={title} delay={i * 80}>
                   <div className="frosted-glass rounded-xl p-6 hover:bg-card/70 transition-all duration-300 h-full glow-border">

@@ -42,8 +42,7 @@ export default function Index() {
   };
 
   const trustFeatures = [
-    { icon: Microscope, title: 'Strict QC Standards', desc: 'Every batch undergoes rigorous quality control testing to ensure 99%+ purity and consistency.' },
-    { icon: BadgeCheck, title: 'Batch Verification', desc: 'Full traceability with batch numbers and lot-specific documentation for all products.' },
+    { icon: Microscope, title: 'Strict QC Standards', desc: 'Rigorous quality control testing to ensure 99%+ purity and consistency across all compounds.' },
     { icon: FileText, title: 'COA Available', desc: 'Certificates of Analysis with HPLC and MS data available on request for all compounds.' },
     { icon: Package, title: 'Professional Packaging', desc: 'Temperature-controlled, discreet packaging to maintain product integrity during transit.' },
     { icon: Award, title: 'Established Supplier', desc: 'Trusted by researchers worldwide with a proven track record of reliable service.' },
@@ -205,8 +204,8 @@ export default function Index() {
 
                 {/* Corner labels */}
                 <div className="absolute top-6 left-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <div className="text-ice-blue">⌁ Batch verified</div>
-                  <div className="mt-1 text-foreground/60">HPLC · MS</div>
+                  <div className="text-ice-blue">⌁ HPLC tested</div>
+                  <div className="mt-1 text-foreground/60">99%+ Purity</div>
                 </div>
                 <div className="absolute bottom-6 right-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground text-right">
                   <div className="text-aurora">⌁ Worldwide</div>
