@@ -204,8 +204,8 @@ export default function Index() {
 
                 {/* Corner labels */}
                 <div className="absolute top-6 left-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <div className="text-ice-blue">⌁ Batch verified</div>
-                  <div className="mt-1 text-foreground/60">HPLC · MS</div>
+                  <div className="text-ice-blue">⌁ HPLC tested</div>
+                  <div className="mt-1 text-foreground/60">99%+ Purity</div>
                 </div>
                 <div className="absolute bottom-6 right-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground text-right">
                   <div className="text-aurora">⌁ Worldwide</div>
