@@ -668,7 +668,7 @@ export const products: Product[] = [
     outOfStock: true,
     stockBadge: "30mg: Out of stock",
     variants: [
-      { specification: "30mg × 1 vial — Out of stock", price: 24, outOfStock: true }
+      { specification: "30mg × 1 vial — Out of stock", price: 28, outOfStock: true }
     ]
   },
   {
@@ -680,7 +680,7 @@ export const products: Product[] = [
     outOfStock: true,
     stockBadge: "30mg: Out of stock",
     variants: [
-      { specification: "30mg × 1 vial — Out of stock", price: 17, outOfStock: true }
+      { specification: "30mg × 1 vial — Out of stock", price: 23, outOfStock: true }
     ]
   },
   {
@@ -691,7 +691,7 @@ export const products: Product[] = [
     currency: "GBP",
     stockBadge: "6 vials left",
     variants: [
-      { specification: "10mg × 1 vial", price: 14 }
+      { specification: "10mg × 1 vial", price: 18 }
     ]
   },
   {
@@ -703,7 +703,7 @@ export const products: Product[] = [
     outOfStock: true,
     stockBadge: "Out of stock",
     variants: [
-      { specification: "10mg × 1 vial", price: 22, outOfStock: true }
+      { specification: "10mg × 1 vial", price: 26, outOfStock: true }
     ]
   },
   {
@@ -714,7 +714,7 @@ export const products: Product[] = [
     currency: "GBP",
     stockBadge: "11 vials left",
     variants: [
-      { specification: "100mg × 1 vial", price: 13 }
+      { specification: "100mg × 1 vial", price: 18 }
     ]
   }
 
