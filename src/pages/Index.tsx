@@ -166,65 +166,57 @@ export default function Index() {
               </div>
             </div>
 
-            {/* Right: floating spec card cluster */}
+            {/* Right: orbiting molecule visual */}
             <div className="lg:col-span-5 relative hidden lg:block fade-in-up animate-delay-200">
-              <div className="relative h-[460px]">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-gradient-to-br from-ice-blue/30 to-aurora/30 blur-3xl" />
+              <div className="relative h-[480px] flex items-center justify-center">
+                {/* Soft glow */}
+                <div className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-ice-blue/25 via-aurora/20 to-transparent blur-3xl" />
 
-                <div className="absolute top-4 right-2 w-72 frosted-glass rounded-2xl p-5 glow-border backdrop-blur-xl">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-ice-blue">Live Batch</span>
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-aurora animate-pulse" />
-                      <span className="text-[10px] uppercase tracking-wider text-aurora">Verified</span>
-                    </span>
-                  </div>
-                  <div className="text-2xl font-urbanist font-bold mb-1">Retatrutide</div>
-                  <div className="text-xs text-muted-foreground mb-4">Lot YP-2615 · HPLC + MS</div>
-                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/30">
-                    <div>
-                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Purity</div>
-                      <div className="text-sm font-semibold text-ice-blue">99.4%</div>
+                {/* Orbits */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative w-[420px] h-[420px]">
+                    {/* Ring 1 */}
+                    <div className="absolute inset-0 rounded-full border border-ice-blue/20 animate-spin-slow">
+                      <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-ice-blue shadow-[0_0_16px_hsl(var(--ice-blue))]" />
+                      <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 rounded-full bg-ice-blue/70" />
                     </div>
-                    <div>
-                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Mass</div>
-                      <div className="text-sm font-semibold">4731.4</div>
+                    {/* Ring 2 */}
+                    <div className="absolute inset-8 rounded-full border border-aurora/25 animate-spin-reverse">
+                      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-aurora shadow-[0_0_14px_hsl(var(--aurora))]" />
+                      <span className="absolute top-1/4 -left-1 w-2 h-2 rounded-full bg-aurora/70" />
                     </div>
-                    <div>
-                      <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Form</div>
-                      <div className="text-sm font-semibold">Lyo</div>
+                    {/* Ring 3 — tilted */}
+                    <div
+                      className="absolute inset-16 rounded-full border border-arctic-teal/30 animate-spin-medium"
+                      style={{ transform: 'rotateX(65deg)' }}
+                    >
+                      <span className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-arctic-teal" />
                     </div>
-                  </div>
-                </div>
 
-                <div className="absolute top-44 -left-2 w-52 frosted-glass rounded-xl p-4 glow-border backdrop-blur-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-aurora/15 flex items-center justify-center flex-shrink-0">
-                      <BadgeCheck className="w-5 h-5 text-aurora" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground">COA on file</div>
-                      <div className="text-sm font-semibold">3rd-party tested</div>
+                    {/* Core */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-ice-blue/30 to-aurora/30 backdrop-blur-xl border border-ice-blue/40 flex items-center justify-center shadow-[0_0_60px_hsl(var(--ice-blue)/0.4)]">
+                      <div className="text-center">
+                        <div className="text-[9px] uppercase tracking-[0.25em] text-ice-blue/80 mb-1">Purity</div>
+                        <div className="text-3xl font-urbanist font-bold bg-gradient-to-br from-ice-blue to-aurora bg-clip-text text-transparent">99%+</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="absolute bottom-6 right-10 w-56 frosted-glass rounded-xl p-4 glow-border backdrop-blur-xl">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Shipping</span>
-                    <Globe className="w-3.5 h-3.5 text-ice-blue" />
-                  </div>
-                  <div className="text-sm font-semibold">UK Royal Mail 24</div>
-                  <div className="text-xs text-muted-foreground">+ Worldwide tracked</div>
+                {/* Corner labels */}
+                <div className="absolute top-6 left-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  <div className="text-ice-blue">⌁ Batch verified</div>
+                  <div className="mt-1 text-foreground/60">HPLC · MS</div>
                 </div>
-
-                <div className="absolute bottom-32 left-6 w-40 frosted-glass rounded-xl p-3 glow-border backdrop-blur-xl">
-                  <div className="text-3xl font-urbanist font-bold text-ice-blue leading-none">99%+</div>
-                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">Avg purity</div>
+                <div className="absolute bottom-6 right-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground text-right">
+                  <div className="text-aurora">⌁ Worldwide</div>
+                  <div className="mt-1 text-foreground/60">UK · EU · US</div>
                 </div>
               </div>
             </div>
           </div>
+
+
 
 
 
