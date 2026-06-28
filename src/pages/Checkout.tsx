@@ -362,10 +362,12 @@ export default function Checkout() {
                 <AlertTriangle className="w-6 h-6 text-[hsl(var(--ice-blue))]" />
               </div>
               <h2 className="text-xl font-bold mb-2 bg-gradient-to-r from-[hsl(var(--ice-blue))] to-[hsl(var(--frost))] bg-clip-text text-transparent">
-                {ukOrdersOnHold ? 'UK Domestic Orders Temporarily On Hold' : 'International Orders Temporarily On Hold'}
+                {ukOrdersOnHold ? 'UK Domestic Orders Temporarily On Hold' : 'International Orders Closed for the Foreseeable Future'}
               </h2>
               <p className="text-sm text-foreground/80 mb-4">
-                We're not accepting {ukOrdersOnHold ? 'UK domestic' : 'international'} orders at the moment. New orders will resume on the <span className="font-semibold text-foreground">29th of this month</span>.
+                {ukOrdersOnHold
+                  ? <>We're not accepting UK domestic orders at the moment. New orders will resume on the <span className="font-semibold text-foreground">29th of this month</span>.</>
+                  : <>We're not accepting new international orders at this time. This may change in the future, but for now international checkout is closed.</>}
               </p>
               <p className="text-xs text-muted-foreground mb-5">
                 Orders already placed are unaffected and continue to be processed as normal.
