@@ -6,7 +6,7 @@ import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag, ArrowRight, Package, BookOpen } from 'lucide-react';
 import Snowfall from './Snowfall';
 import QuantityInput from './QuantityInput';
-import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
+
 
 interface CartDrawerProps {
   open: boolean;
@@ -96,9 +96,8 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                     />
                     <div className="text-right">
                       <p className="text-sm font-bold text-[hsl(var(--ice-blue))]">
-                        ${(item.variant.price * item.quantity).toFixed(2)}
+                        £{(item.variant.price * item.quantity).toFixed(2)}
                       </p>
-                      <p className="text-[9px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +126,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                   E-book – GLP1 Series
                 </label>
                 <p className="text-[10px] text-muted-foreground mt-0.5">Digital research guide</p>
-                <p className="text-xs font-bold text-[hsl(var(--ice-blue))] mt-1">+$4.99</p>
+                <p className="text-xs font-bold text-[hsl(var(--ice-blue))] mt-1">+£4.99</p>
               </div>
             </div>
           </div>
@@ -136,12 +135,9 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
           <div className="rounded-xl p-4 ice-glow frosted-glass">
             <div className="flex justify-between items-end">
               <span className="text-sm font-bold">Total</span>
-              <div className="text-right">
-                <span className="text-xl font-bold text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
-                <p className="text-[9px] text-muted-foreground">{formatGbpEstimate(getTotalPrice())}</p>
-              </div>
+              <span className="text-xl font-bold text-[hsl(var(--ice-blue))]">£{getTotalPrice().toFixed(2)}</span>
             </div>
-            <p className="text-[8px] text-muted-foreground mt-1">{GBP_DISCLAIMER}</p>
+            <p className="text-[10px] text-muted-foreground mt-1">+ Royal Mail 24 (£6) or InPost (paid separately) at checkout</p>
           </div>
 
           <Link to="/checkout" onClick={() => onOpenChange(false)}>
