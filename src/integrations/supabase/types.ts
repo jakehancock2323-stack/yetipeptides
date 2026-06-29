@@ -152,6 +152,7 @@ export type Database = {
           total: number
           tracking_number: string | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           admin_notes?: string | null
@@ -179,6 +180,7 @@ export type Database = {
           total?: number
           tracking_number?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           admin_notes?: string | null
@@ -206,6 +208,7 @@ export type Database = {
           total?: number
           tracking_number?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
