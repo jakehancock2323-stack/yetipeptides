@@ -166,4 +166,20 @@ export const products: Product[] = [
     stockBadge: '11 vials left',
     variants: [{ specification: '100mg × 1 vial', price: 18 }],
   },
+  {
+    id: 'uk-klow',
+    name: 'KLOW',
+    category: 'Peptides',
+    region: 'UK Domestic',
+    currency: 'GBP',
+    stockBadge: 'In Stock',
+    variants: [{ specification: 'Blend × 1 vial', price: 28 }],
+    ingredients: [
+      'TB-500 – 10mg',
+      'BPC-157 – 10mg',
+      'KPV – 10mg',
+      'GHK-Cu – 50mg',
+    ],
+  },
 ];
+
