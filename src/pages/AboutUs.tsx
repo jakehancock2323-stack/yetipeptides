@@ -23,7 +23,7 @@ export default function AboutUs() {
     <div className="min-h-screen pb-20">
       <SEO
         title="About Yeti Peptides – UK Research Peptide Supplier"
-        description="A small UK-based research peptide outfit. 99%+ purity, plain packaging, Royal Mail 24 or anonymous InPost lockers."
+        description="A small UK-based research peptide outfit. 99%+ purity, plain packaging, Royal Mail 24 tracked or anonymous InPost lockers."
         canonical="https://yetipeptides.com/about"
         schema={aboutSchema}
       />
