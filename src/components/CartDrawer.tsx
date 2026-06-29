@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
-import { Trash2, ShoppingBag, ArrowRight, Package, BookOpen } from 'lucide-react';
+import { Trash2, ShoppingBag, ArrowRight, BookOpen, Truck, Lock, Sparkles } from 'lucide-react';
 import Snowfall from './Snowfall';
 import QuantityInput from './QuantityInput';
 
@@ -15,150 +15,146 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
-
-  if (items.length === 0) {
-    return (
-      <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto border-l border-border/30">
-          <Snowfall />
-          <SheetHeader>
-            <SheetTitle className="text-left">Shopping Cart</SheetTitle>
-          </SheetHeader>
-          <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center mb-4">
-              <ShoppingBag className="w-8 h-8 text-muted-foreground" />
-            </div>
-            <p className="text-sm font-semibold mb-1">Your cart is empty</p>
-            <p className="text-xs text-muted-foreground mb-6">Add some products to get started!</p>
-            <Button 
-              onClick={() => onOpenChange(false)}
-              className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background text-xs"
-              size="sm"
-            >
-              Continue Shopping
-            </Button>
-          </div>
-        </SheetContent>
-      </Sheet>
-    );
-  }
+  const subtotal = getTotalPrice();
+  const itemCount = items.reduce((s, i) => s + i.quantity, 0);
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto flex flex-col border-l border-border/30 p-0">
+      <SheetContent
+        side="right"
+        className="w-full sm:max-w-md p-0 flex flex-col border-l border-[hsl(var(--ice-blue))]/15 bg-background/95 backdrop-blur-2xl"
+      >
         <Snowfall />
-        
-        {/* Header */}
-        <div className="px-5 pt-5 pb-4 border-b border-border/30">
+
+        {/* Gradient header */}
+        <div className="relative px-5 pt-6 pb-5 border-b border-border/20 bg-gradient-to-br from-[hsl(var(--ice-blue))]/[0.08] via-transparent to-transparent">
           <SheetHeader>
-            <SheetTitle className="text-left flex items-center gap-2 text-base">
-              <Package className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
-              Cart
-              <span className="text-xs font-normal text-muted-foreground">({items.length})</span>
+            <SheetTitle className="text-left flex items-center gap-2.5 text-base">
+              <div className="w-8 h-8 rounded-lg bg-[hsl(var(--ice-blue))]/15 flex items-center justify-center">
+                <ShoppingBag className="w-4 h-4 text-[hsl(var(--ice-blue))]" />
+              </div>
+              <div className="leading-tight">
+                <div className="text-[10px] uppercase tracking-[0.25em] text-aurora">Your Basket</div>
+                <div className="text-base font-bold">{itemCount} item{itemCount !== 1 ? 's' : ''}</div>
+              </div>
             </SheetTitle>
           </SheetHeader>
         </div>
 
-        {/* Items */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-          {items.map((item) => (
-            <div
-              key={`${item.product.id}-${item.variant.specification}`}
-              className="frosted-glass rounded-xl p-3.5"
+        {items.length === 0 ? (
+          <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
+            <div className="w-20 h-20 rounded-full bg-secondary/30 flex items-center justify-center mb-5 ring-1 ring-border/30">
+              <ShoppingBag className="w-9 h-9 text-muted-foreground" />
+            </div>
+            <h3 className="text-base font-bold mb-1">Your basket is empty</h3>
+            <p className="text-xs text-muted-foreground mb-6 max-w-[240px]">Browse our research-grade peptides and start your order.</p>
+            <Button
+              onClick={() => onOpenChange(false)}
+              className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background gap-2"
             >
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Package className="w-4 h-4 text-[hsl(var(--ice-blue))] opacity-60" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-semibold text-xs leading-tight">{item.product.name}</h3>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">{item.variant.specification}</p>
+              Continue Shopping <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
+          </div>
+        ) : (
+          <>
+            {/* Items list */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2.5">
+              {items.map((item) => (
+                <div
+                  key={`${item.product.id}-${item.variant.specification}`}
+                  className="group relative rounded-xl border border-border/30 bg-secondary/10 hover:border-[hsl(var(--ice-blue))]/30 transition-colors p-3.5"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2.5">
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-sm leading-tight truncate">{item.product.name}</h3>
+                      <p className="text-[10.5px] text-muted-foreground mt-0.5">{item.variant.specification}</p>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
+                    <button
                       onClick={() => removeFromCart(item.product.id, item.variant.specification)}
-                      className="hover:bg-destructive/10 hover:text-destructive h-6 w-6 flex-shrink-0"
+                      className="opacity-60 hover:opacity-100 hover:text-destructive transition-colors flex-shrink-0"
+                      aria-label="Remove item"
                     >
-                      <Trash2 className="w-3 h-3" />
-                    </Button>
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
 
-                  <div className="flex items-center justify-between mt-2.5">
+                  <div className="flex items-center justify-between">
                     <QuantityInput
                       value={item.quantity}
                       onChange={(qty) =>
                         updateQuantity(item.product.id, item.variant.specification, qty)
                       }
-                      className="w-14 h-7 text-xs text-center"
+                      className="w-16 h-8 text-xs text-center"
                     />
                     <div className="text-right">
-                      <p className="text-sm font-bold text-[hsl(var(--ice-blue))]">
+                      <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Subtotal</p>
+                      <p className="text-base font-bold text-[hsl(var(--ice-blue))] leading-none mt-0.5">
                         £{(item.variant.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              ))}
 
-        {/* Footer */}
-        <div className="border-t border-border/30 px-4 pt-4 pb-5 space-y-3 bg-card/40">
-          {/* E-book Add-on */}
-          <div className="frosted-glass rounded-xl p-3.5">
-            <div className="flex items-start gap-2.5">
-              <Checkbox
-                id="ebook-addon"
-                checked={includeEbook}
-                onCheckedChange={(checked) => setIncludeEbook(checked as boolean)}
-                className="mt-0.5"
-              />
-              <div className="flex-1">
-                <label
-                  htmlFor="ebook-addon"
-                  className="text-xs font-semibold cursor-pointer leading-tight flex items-center gap-1.5"
+              {/* E-book Add-on */}
+              <button
+                type="button"
+                onClick={() => setIncludeEbook(!includeEbook)}
+                className={`w-full text-left rounded-xl border p-3.5 transition-all ${
+                  includeEbook
+                    ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.06]'
+                    : 'border-dashed border-border/40 hover:border-border/70 bg-secondary/5'
+                }`}
+              >
+                <div className="flex items-start gap-2.5">
+                  <Checkbox checked={includeEbook} className="mt-0.5 pointer-events-none" />
+                  <div className="flex-1">
+                    <div className="text-xs font-semibold leading-tight flex items-center gap-1.5">
+                      <BookOpen className="w-3 h-3 text-[hsl(var(--ice-blue))]" />
+                      Add Yeti's GLP-1 E-book
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">Digital research guide</p>
+                  </div>
+                  <span className="text-xs font-bold text-[hsl(var(--ice-blue))]">+£4.99</span>
+                </div>
+              </button>
+            </div>
+
+            {/* Sticky footer */}
+            <div className="border-t border-border/30 bg-card/60 backdrop-blur-xl px-4 pt-4 pb-5 space-y-3">
+              <div className="flex items-center justify-between gap-3 px-1 text-[10.5px] text-muted-foreground">
+                <span className="flex items-center gap-1.5"><Truck className="w-3 h-3 text-[hsl(var(--ice-blue))]" />Royal Mail 24 from £6</span>
+                <span className="flex items-center gap-1.5"><Lock className="w-3 h-3 text-[hsl(var(--ice-blue))]" />Crypto secure</span>
+              </div>
+
+              <div className="rounded-xl p-4 bg-gradient-to-br from-[hsl(var(--ice-blue))]/[0.08] to-transparent border border-[hsl(var(--ice-blue))]/20">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">Subtotal</span>
+                  <span className="text-2xl font-bold text-[hsl(var(--ice-blue))]">£{subtotal.toFixed(2)}</span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1.5 flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" /> Shipping calculated at checkout
+                </p>
+              </div>
+
+              <Link to="/checkout" onClick={() => onOpenChange(false)}>
+                <Button
+                  className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/85 text-background font-semibold gap-2 h-12 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--ice-blue)/0.35)]"
                 >
-                  <BookOpen className="w-3 h-3 text-[hsl(var(--ice-blue))]" />
-                  E-book – GLP1 Series
-                </label>
-                <p className="text-[10px] text-muted-foreground mt-0.5">Digital research guide</p>
-                <p className="text-xs font-bold text-[hsl(var(--ice-blue))] mt-1">+£4.99</p>
-              </div>
-            </div>
-          </div>
+                  Secure Checkout
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
 
-          {/* Total */}
-          <div className="rounded-xl p-4 ice-glow frosted-glass">
-            <div className="flex justify-between items-end">
-              <span className="text-sm font-bold">Total</span>
-              <span className="text-xl font-bold text-[hsl(var(--ice-blue))]">£{getTotalPrice().toFixed(2)}</span>
+              <button
+                onClick={() => onOpenChange(false)}
+                className="block w-full text-center text-[11px] text-muted-foreground hover:text-foreground transition-colors py-1"
+              >
+                Continue Shopping
+              </button>
             </div>
-            <p className="text-[10px] text-muted-foreground mt-1">+ Royal Mail 24 (£6) or InPost (paid separately) at checkout</p>
-          </div>
-
-          <Link to="/checkout" onClick={() => onOpenChange(false)}>
-            <Button 
-              className="w-full bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/80 text-background font-semibold gap-2 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--ice-blue)/0.3)]" 
-              size="lg"
-            >
-              Checkout
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          
-          <Button 
-            variant="ghost" 
-            className="w-full text-xs text-muted-foreground hover:text-foreground"
-            size="sm"
-            onClick={() => onOpenChange(false)}
-          >
-            Continue Shopping
-          </Button>
-        </div>
+          </>
+        )}
       </SheetContent>
     </Sheet>
   );
