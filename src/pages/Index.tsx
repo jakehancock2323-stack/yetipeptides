@@ -31,8 +31,9 @@ export default function Index() {
   };
 
   const trustFeatures = [
-    { icon: Microscope, title: 'Strict QC Standards', desc: '99%+ purity verified — HPLC and Mass Spec data available on request.' },
-    { icon: Truck, title: 'Royal Mail 24', desc: 'Next-day tracked delivery on every UK order at a flat £6.' },
+    { icon: Microscope, title: 'Strict QC Standards', desc: '99%+ purity — every batch quality-controlled before it leaves the bench.' },
+    { icon: Truck, title: 'Royal Mail 24', desc: 'Tracked despatch on every UK order at a flat £6 — typically arrives within 2 days.' },
+
     { icon: Package, title: 'InPost Locker', desc: 'Want it anonymous? Send us your InPost QR code — we post, you collect.' },
     { icon: Award, title: 'UK Based & Discreet', desc: 'Plain packaging, no external markings, no signed-for awkwardness.' },
     { icon: HeadphonesIcon, title: 'Fast Support', desc: 'ProtonMail, Discord and Telegram — usually replies same day.' },
