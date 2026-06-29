@@ -14,12 +14,13 @@ const faqs = [
   },
   {
     question: "What are shipping costs and delivery times?",
-    answer: "A flat delivery charge of $65 USD is applied to all orders worldwide. Shipping typically takes 7-14 business days for domestic orders and 14-21 business days for international orders. All orders include tracking information."
+    answer: "UK domestic only. Royal Mail 24 Tracked is a flat £6 — posted same day if you order before 14:00, and typically arrives within 2 days. Anonymous InPost locker drop-off is also available; you pay the InPost fee directly."
   },
   {
     question: "What purity are your peptides?",
-    answer: "All our peptides are manufactured to a minimum purity of 99%+ as verified by HPLC analysis. Certificate of Analysis (COA) documentation is available upon request for any product."
+    answer: "All our peptides are manufactured to a minimum purity of 99%+. Certificate of Analysis (COA) documentation is available upon request for any product."
   },
+
   {
     question: "How should I store the peptides?",
     answer: "Lyophilised (freeze-dried) peptides should be stored at -20°C and protected from light. After reconstitution, store at 2-8°C and use within 14 days. Avoid repeated freeze-thaw cycles."
