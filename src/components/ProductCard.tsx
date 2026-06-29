@@ -154,7 +154,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {selectedVariant.originalPrice && selectedVariant.originalPrice > selectedVariant.price && (
                 <span className="text-sm font-medium text-muted-foreground line-through">{currencySymbol}{selectedVariant.originalPrice}</span>
               )}
-              <span className="text-2xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
+              <span className="text-xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
             </div>
             {!isGbp && (
               <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
