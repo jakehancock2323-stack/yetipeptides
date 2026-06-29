@@ -12,7 +12,22 @@ import penCartridgeImage from '@/assets/pen-cartridge.png';
 import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import frostSkinImage from '@/assets/ice-elixir.png';
 import tretinoinCreamImage from '@/assets/tretinoin-cream.png';
+import vialReta from '@/assets/vials/vial-reta.png';
+import vialTirz from '@/assets/vials/vial-tirz.png';
+import vialTesa from '@/assets/vials/vial-tesa.png';
+import vialGhk from '@/assets/vials/vial-ghk.png';
+import vialMt2 from '@/assets/vials/vial-mt2.png';
+import vialKlow from '@/assets/vials/vial-klow.png';
 import { formatGbpEstimate } from '@/lib/currency';
+
+const VIAL_IMAGE_MAP: Record<string, string> = {
+  'uk-retatrutide-30mg': vialReta,
+  'uk-tirzepatide-30mg': vialTirz,
+  'uk-tesamorelin-10mg': vialTesa,
+  'uk-ghkcu-100mg': vialGhk,
+  'uk-mt2-10mg': vialMt2,
+  'uk-klow': vialKlow,
+};
 
 interface ProductCardProps {
   product: Product;
@@ -53,7 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const allVariantsOutOfStock = !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : (VIAL_IMAGE_MAP[product.id] ?? yetiVial);
   const isUkDomesticOutOfStock = product.region === 'UK Domestic' && !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
@@ -97,31 +112,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           loading="lazy"
         />
 
-        {/* Nickname overlay — ghost behind + tracked label */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span
-            aria-hidden
-            className="absolute font-orbitron font-black tracking-tighter text-ice-blue/[0.07] text-7xl whitespace-nowrap"
-          >
-            {getNickname(product)}
-          </span>
-          <span
-            className={`relative font-orbitron font-bold tracking-[0.25em] text-[1.6rem] sm:text-[1.75rem] whitespace-nowrap transition-opacity duration-500 ${
-              allVariantsOutOfStock
-                ? 'text-foreground/30'
-                : 'text-foreground/85 drop-shadow-[0_0_18px_rgba(125,211,252,0.45)]'
-            }`}
-          >
-            {getNickname(product)}
-          </span>
-        </div>
-
         {/* Corner accents */}
         <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-ice-blue/40 pointer-events-none" />
         <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-ice-blue/40 pointer-events-none" />
 
         {isUkDomestic && (
-          <span className="absolute top-3 left-1/2 -translate-x-1/2 text-base bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none z-20" title="UK Domestic">
+          <span className="absolute top-3 left-3 text-lg bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none z-20" title="UK Domestic">
             🇬🇧
           </span>
         )}
