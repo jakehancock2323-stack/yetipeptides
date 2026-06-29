@@ -18,6 +18,26 @@ interface ProductCardProps {
   product: Product;
 }
 
+const NICKNAME_MAP: Record<string, string> = {
+  'uk-retatrutide-30mg': 'RETA',
+  'uk-tirzepatide-30mg': 'TIRZ',
+  'uk-tesamorelin-10mg': 'TESA',
+  'uk-ghkcu-100mg': 'GHK',
+  'uk-mt2-10mg': 'MT-2',
+  'uk-klow': 'KLOW',
+  'frostskin-serum': 'ICE',
+  'tretinoin-cream': 'TRET',
+  'v1-pen': 'V1',
+  '3ml-pen-cartridge': '3ML',
+  'hospira-bac-water': 'BAC',
+};
+
+function getNickname(product: Product): string {
+  if (NICKNAME_MAP[product.id]) return NICKNAME_MAP[product.id];
+  const first = product.name.split(/[\s-]+/)[0] ?? product.name;
+  return first.slice(0, 4).toUpperCase();
+}
+
 export default function ProductCard({ product }: ProductCardProps) {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
