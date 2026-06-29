@@ -168,7 +168,7 @@ export default function Index() {
                       </div>
                       <span className="text-lg font-bold text-ice-blue">£6</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Posted same day if you order before 14:00 · Next-day tracked to your door.</p>
+                    <p className="text-xs text-muted-foreground">Posted same day if you order before 14:00 · Tracked, typically arrives within 2 days.</p>
                   </div>
 
                   {/* InPost card */}
