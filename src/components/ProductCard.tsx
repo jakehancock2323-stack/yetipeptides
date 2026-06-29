@@ -89,29 +89,53 @@ export default function ProductCard({ product }: ProductCardProps) {
       )}
 
       {/* Image */}
-      <div className="relative bg-secondary/10 flex items-center justify-center h-44">
+      <div className="relative bg-secondary/10 flex items-center justify-center h-44 overflow-hidden border-b border-ice-blue/10">
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`relative z-10 ${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
+
+        {/* Nickname overlay — ghost behind + tracked label */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+          <span
+            aria-hidden
+            className="absolute font-display font-black tracking-tighter text-ice-blue/[0.07] text-7xl whitespace-nowrap"
+          >
+            {getNickname(product)}
+          </span>
+          <span
+            className={`relative font-display font-bold tracking-[0.25em] text-[1.6rem] sm:text-[1.75rem] whitespace-nowrap transition-opacity duration-500 ${
+              allVariantsOutOfStock
+                ? 'text-foreground/30'
+                : 'text-foreground/85 drop-shadow-[0_0_18px_rgba(125,211,252,0.45)]'
+            }`}
+          >
+            {getNickname(product)}
+          </span>
+        </div>
+
+        {/* Corner accents */}
+        <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-ice-blue/40 pointer-events-none" />
+        <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-ice-blue/40 pointer-events-none" />
+
         {isUkDomestic && (
-          <span className="absolute top-3 left-3 text-lg bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none" title="UK Domestic">
+          <span className="absolute top-3 left-1/2 -translate-x-1/2 text-base bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none z-20" title="UK Domestic">
             🇬🇧
           </span>
         )}
         {allVariantsOutOfStock ? (
-          <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
+          <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
           </span>
         ) : isPreOrder ? (
-          <span className="absolute top-3 right-3 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
+          <span className="absolute top-3 right-3 z-20 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
             <Clock className="w-3 h-3" />
             Pre-Order
           </span>
         ) : product.stockBadge ? (
-          <span className="absolute top-3 right-3 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
+          <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {product.stockBadge}
           </span>
         ) : null}
