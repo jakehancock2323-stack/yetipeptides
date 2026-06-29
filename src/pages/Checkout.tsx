@@ -251,7 +251,7 @@ export default function Checkout() {
     <div className="min-h-screen pb-20">
       <SEO
         title="Secure Checkout – Yeti Peptides | UK Domestic"
-        description="Complete your UK domestic peptide order. Royal Mail 24 next-day or anonymous InPost lockers. Crypto-only checkout (USDT, USDC, BTC)."
+        description="Complete your UK domestic peptide order. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto-only checkout (USDT, USDC, BTC)."
         canonical="https://yetipeptides.com/checkout"
       />
       <Snowfall />
