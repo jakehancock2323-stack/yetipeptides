@@ -40,9 +40,10 @@ export default function ShippingReturns() {
                 </div>
                 <p className="text-3xl font-bold text-ice-blue mb-2">£6.00</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Next-day tracked delivery to your registered address. Plain unmarked packaging.
+                  Tracked delivery to your registered address — typically arrives within 2 days. Plain unmarked packaging.
                   Tracking number lands in your inbox the moment we drop it at the post office.
                 </p>
+
               </div>
             </AnimateOnScroll>
             <AnimateOnScroll delay={100}>
