@@ -243,7 +243,7 @@ export default function Index() {
             <div className="grid md:grid-cols-12 gap-6 items-end mb-12 border-b border-border/30 pb-5">
               <div className="md:col-span-8">
                 <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">How it works</div>
-                <h2 className="text-3xl md:text-4xl font-bold">From basket to letterbox in 24 hours.</h2>
+                <h2 className="text-3xl md:text-4xl font-bold">From basket to letterbox in a couple of days.</h2>
               </div>
               <div className="md:col-span-4 md:text-right text-sm text-muted-foreground">
                 Three steps. No card readers, no signatures, no awkwardness.
