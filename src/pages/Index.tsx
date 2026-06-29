@@ -23,7 +23,7 @@ export default function Index() {
     'name': 'Yeti Peptides',
     'url': 'https://yetipeptides.com',
     'logo': 'https://yetipeptides.com/yeti-logo.png',
-    'description': 'UK domestic research peptide supplier. Royal Mail 24 next-day or anonymous InPost lockers. Crypto checkout only.',
+    'description': 'UK domestic research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
     'areaServed': 'United Kingdom',
     'sameAs': ['https://discord.gg/seDb5c9XkM', 'https://t.me/yetipeptides'],
