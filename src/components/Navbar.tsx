@@ -1,14 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu } from 'lucide-react';
+import { ShoppingCart, Menu, User, LogIn } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/hooks/useAuth';
 import { useState, useEffect } from 'react';
 import CartDrawer from './CartDrawer';
 import yetiLogo from '@/assets/yeti-logo.png';
 
 export default function Navbar() {
   const { getItemCount } = useCart();
+  const { user } = useAuth();
   const itemCount = getItemCount();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
@@ -65,6 +67,17 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-2">
+              <Link to={user ? "/account" : "/auth"} className="hidden sm:inline-flex">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-secondary/50"
+                  aria-label={user ? "My Account" : "Sign In"}
+                  title={user ? "My Account" : "Sign In"}
+                >
+                  {user ? <User className="w-5 h-5" /> : <LogIn className="w-5 h-5" />}
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 size="icon"
@@ -102,6 +115,14 @@ export default function Navbar() {
                         {link.label}
                       </Link>
                     ))}
+                    <Link
+                      to={user ? "/account" : "/auth"}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-lg font-medium px-4 py-3 rounded-lg hover:text-ice-blue hover:bg-secondary/30 transition-all flex items-center gap-2"
+                    >
+                      {user ? <User className="w-4 h-4" /> : <LogIn className="w-4 h-4" />}
+                      {user ? "My Account" : "Sign In / Sign Up"}
+                    </Link>
                     <button
                       onClick={() => {
                         setMobileMenuOpen(false);
