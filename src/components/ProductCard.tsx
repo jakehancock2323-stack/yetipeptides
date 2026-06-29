@@ -104,11 +104,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       )}
 
       {/* Image */}
-      <div className="relative bg-secondary/10 flex items-center justify-center h-44 overflow-hidden border-b border-ice-blue/10">
+      <div className="relative bg-secondary/10 flex items-center justify-center h-32 overflow-hidden border-b border-ice-blue/10">
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`relative z-10 ${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`relative z-10 ${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[6.5rem] max-h-[6.5rem]' : 'max-w-[3.75rem] max-h-[5.25rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
 
@@ -138,7 +138,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1 gap-3">
+      <div className="p-3 flex flex-col flex-1 gap-2">
         {/* Category label */}
         <span className="text-[11px] uppercase tracking-wider font-medium text-muted-foreground">
           {product.category}
@@ -154,7 +154,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {selectedVariant.originalPrice && selectedVariant.originalPrice > selectedVariant.price && (
                 <span className="text-sm font-medium text-muted-foreground line-through">{currencySymbol}{selectedVariant.originalPrice}</span>
               )}
-              <span className="text-2xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
+              <span className="text-xl font-bold text-ice-blue">{currencySymbol}{selectedVariant.price}</span>
             </div>
             {!isGbp && (
               <p className="text-xs text-muted-foreground">{formatGbpEstimate(selectedVariant.price)}</p>
