@@ -44,7 +44,8 @@ export default function Index() {
     <div className="min-h-screen">
       <SEO
         title="Yeti Peptides – UK Domestic Research Peptides | Royal Mail 24 & InPost"
-        description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 next-day or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
+        description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
+
         keywords="UK research peptides, royal mail peptides, inpost peptide delivery, domestic peptide UK, GHK-Cu UK, MT-2 UK, tretinoin UK, GLP-1 UK"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
