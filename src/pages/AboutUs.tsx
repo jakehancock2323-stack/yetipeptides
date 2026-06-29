@@ -14,7 +14,7 @@ export default function AboutUs() {
     '@type': 'Organization',
     'name': 'Yeti Peptides',
     'url': 'https://yetipeptides.com',
-    'description': 'UK-based research peptide supplier. Royal Mail 24 next-day or anonymous InPost lockers. Crypto checkout only.',
+    'description': 'UK-based research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
     'areaServed': 'United Kingdom',
   };
