@@ -40,7 +40,8 @@ export default function AboutUs() {
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
               No empire, no hype. One UK-based outfit running a tight despatch of research-grade
-              peptides — posted via Royal Mail 24 next-day or anonymous InPost lockers, paid in crypto.
+              peptides — posted via Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
+
             </p>
           </AnimateOnScroll>
           <AnimateOnScroll animation="fade-left" delay={150} className="lg:col-span-4">
