@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Snowfall from "@/components/Snowfall";
 import Footer from "@/components/Footer";
@@ -20,13 +20,15 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Lock, ShieldCheck, CreditCard, Package, ArrowRight, ArrowLeft, BookOpen, Check, AlertTriangle, Truck } from "lucide-react";
+import { Lock, ShieldCheck, CreditCard, Package, ArrowRight, ArrowLeft, BookOpen, Check, AlertTriangle, Truck, User as UserIcon } from "lucide-react";
 import type { Json } from "@/integrations/supabase/types";
 
 export default function Checkout() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { items, getTotalPrice, clearCart, includeEbook } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -46,6 +48,13 @@ export default function Checkout() {
     country: "United Kingdom",
     notes: "",
   });
+
+  useEffect(() => {
+    if (user?.email && !formData.email) {
+      setFormData((prev) => ({ ...prev, email: user.email ?? "" }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   if (items.length === 0) {
     navigate("/cart");
@@ -119,6 +128,7 @@ export default function Checkout() {
       try {
         await supabase.from("orders").insert({
           id: orderUuid,
+          user_id: user?.id ?? null,
           customer_name: formData.fullName,
           customer_email: formData.email,
           customer_phone: formData.phone,

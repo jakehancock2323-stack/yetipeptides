@@ -172,7 +172,8 @@ export const products: Product[] = [
     category: 'Peptides',
     region: 'UK Domestic',
     currency: 'GBP',
-    stockBadge: 'In Stock',
+    stockBadge: 'Out of Stock',
+    outOfStock: true,
     variants: [{ specification: 'Blend × 1 vial', price: 28 }],
     ingredients: [
       'TB-500 – 10mg',
