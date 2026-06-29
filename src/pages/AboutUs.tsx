@@ -14,7 +14,7 @@ export default function AboutUs() {
     '@type': 'Organization',
     'name': 'Yeti Peptides',
     'url': 'https://yetipeptides.com',
-    'description': 'UK-based research peptide supplier. Royal Mail 24 next-day or anonymous InPost lockers. Crypto checkout only.',
+    'description': 'UK-based research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
     'areaServed': 'United Kingdom',
   };
@@ -23,7 +23,7 @@ export default function AboutUs() {
     <div className="min-h-screen pb-20">
       <SEO
         title="About Yeti Peptides – UK Research Peptide Supplier"
-        description="A small UK-based research peptide outfit. 99%+ purity, plain packaging, Royal Mail 24 or anonymous InPost lockers."
+        description="A small UK-based research peptide outfit. 99%+ purity, plain packaging, Royal Mail 24 tracked or anonymous InPost lockers."
         canonical="https://yetipeptides.com/about"
         schema={aboutSchema}
       />
@@ -40,7 +40,8 @@ export default function AboutUs() {
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
               No empire, no hype. One UK-based outfit running a tight despatch of research-grade
-              peptides — posted via Royal Mail 24 next-day or anonymous InPost lockers, paid in crypto.
+              peptides — posted via Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
+
             </p>
           </AnimateOnScroll>
           <AnimateOnScroll animation="fade-left" delay={150} className="lg:col-span-4">
@@ -71,7 +72,7 @@ export default function AboutUs() {
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { icon: Microscope, title: 'Analytical Testing', desc: 'HPLC and Mass Spectrometry verification of identity and purity. Data available on request.' },
+                { icon: Microscope, title: 'Analytical Testing', desc: 'Identity and purity verified before release. Nothing below spec leaves the bench.' },
                 { icon: BadgeCheck, title: 'Purity Standards', desc: 'A strict 99%+ purity threshold across all peptides. Anything below spec doesn\'t leave the bench.' },
                 { icon: ClipboardCheck, title: 'Research Grade', desc: 'Prepared and handled to research-grade standards — strictly for laboratory use.' },
                 { icon: FileText, title: 'COA on Request', desc: 'Certificates of Analysis available on request, for verification before or after delivery.' },
@@ -103,7 +104,7 @@ export default function AboutUs() {
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                { icon: Truck, title: 'Royal Mail 24', desc: 'Next-day tracked, flat £6. Drop at the local sorting office before 14:00 — usually with you tomorrow.' },
+                { icon: Truck, title: 'Royal Mail 24', desc: 'Tracked, flat £6. Drop at the local sorting office before 14:00 — typically arrives within 2 days.' },
                 { icon: Package, title: 'InPost Lockers', desc: 'For people who want anonymity — send us a locker QR, we post, you collect. You pay InPost\'s fee directly.' },
                 { icon: MapPin, title: 'Plain Packaging', desc: 'No external markings. No "Yeti Peptides" on the label. Nothing that suggests what\'s inside.' },
               ].map(({ icon: Icon, title, desc }, i) => (

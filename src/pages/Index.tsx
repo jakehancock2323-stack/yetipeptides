@@ -23,7 +23,7 @@ export default function Index() {
     'name': 'Yeti Peptides',
     'url': 'https://yetipeptides.com',
     'logo': 'https://yetipeptides.com/yeti-logo.png',
-    'description': 'UK domestic research peptide supplier. Royal Mail 24 next-day or anonymous InPost lockers. Crypto checkout only.',
+    'description': 'UK domestic research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
     'areaServed': 'United Kingdom',
     'sameAs': ['https://discord.gg/seDb5c9XkM', 'https://t.me/yetipeptides'],
@@ -31,8 +31,9 @@ export default function Index() {
   };
 
   const trustFeatures = [
-    { icon: Microscope, title: 'Strict QC Standards', desc: '99%+ purity verified — HPLC and Mass Spec data available on request.' },
-    { icon: Truck, title: 'Royal Mail 24', desc: 'Next-day tracked delivery on every UK order at a flat £6.' },
+    { icon: Microscope, title: 'Strict QC Standards', desc: '99%+ purity — every batch quality-controlled before it leaves the bench.' },
+    { icon: Truck, title: 'Royal Mail 24', desc: 'Tracked despatch on every UK order at a flat £6 — typically arrives within 2 days.' },
+
     { icon: Package, title: 'InPost Locker', desc: 'Want it anonymous? Send us your InPost QR code — we post, you collect.' },
     { icon: Award, title: 'UK Based & Discreet', desc: 'Plain packaging, no external markings, no signed-for awkwardness.' },
     { icon: HeadphonesIcon, title: 'Fast Support', desc: 'ProtonMail, Discord and Telegram — usually replies same day.' },
@@ -43,7 +44,8 @@ export default function Index() {
     <div className="min-h-screen">
       <SEO
         title="Yeti Peptides – UK Domestic Research Peptides | Royal Mail 24 & InPost"
-        description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 next-day or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
+        description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
+
         keywords="UK research peptides, royal mail peptides, inpost peptide delivery, domestic peptide UK, GHK-Cu UK, MT-2 UK, tretinoin UK, GLP-1 UK"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
@@ -114,13 +116,14 @@ export default function Index() {
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight">
                 <span className="block text-foreground">Posted today.</span>
                 <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
-                  Delivered tomorrow.
+                  At your door soon.
                 </span>
               </h1>
 
               <p className="text-base md:text-lg text-muted-foreground mt-7 max-w-xl leading-relaxed">
                 A small UK research-peptide outfit. 99%+ purity, plain packaging, no card readers — just
-                Royal Mail 24 next-day or anonymous InPost lockers, paid in crypto.
+                Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
+
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
@@ -165,7 +168,7 @@ export default function Index() {
                       </div>
                       <span className="text-lg font-bold text-ice-blue">£6</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Posted same day if you order before 14:00 · Next-day tracked to your door.</p>
+                    <p className="text-xs text-muted-foreground">Posted same day if you order before 14:00 · Tracked, typically arrives within 2 days.</p>
                   </div>
 
                   {/* InPost card */}
@@ -240,7 +243,7 @@ export default function Index() {
             <div className="grid md:grid-cols-12 gap-6 items-end mb-12 border-b border-border/30 pb-5">
               <div className="md:col-span-8">
                 <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">How it works</div>
-                <h2 className="text-3xl md:text-4xl font-bold">From basket to letterbox in 24 hours.</h2>
+                <h2 className="text-3xl md:text-4xl font-bold">From basket to letterbox in a couple of days.</h2>
               </div>
               <div className="md:col-span-4 md:text-right text-sm text-muted-foreground">
                 Three steps. No card readers, no signatures, no awkwardness.

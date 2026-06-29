@@ -251,7 +251,7 @@ export default function Checkout() {
     <div className="min-h-screen pb-20">
       <SEO
         title="Secure Checkout – Yeti Peptides | UK Domestic"
-        description="Complete your UK domestic peptide order. Royal Mail 24 next-day or anonymous InPost lockers. Crypto-only checkout (USDT, USDC, BTC)."
+        description="Complete your UK domestic peptide order. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto-only checkout (USDT, USDC, BTC)."
         canonical="https://yetipeptides.com/checkout"
       />
       <Snowfall />
@@ -370,7 +370,7 @@ export default function Checkout() {
                       <RadioGroupItem value="royal-mail" id="royal-mail" />
                       <div>
                         <span className="text-sm font-medium">Royal Mail 24 Tracked</span>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Next-day tracked delivery to your address</p>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">Tracked delivery to your address · typically 2 days</p>
                       </div>
                     </div>
                     <span className="text-sm font-semibold">£6.00</span>

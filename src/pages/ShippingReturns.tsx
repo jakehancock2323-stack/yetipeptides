@@ -10,7 +10,7 @@ export default function ShippingReturns() {
     <div className="min-h-screen pb-20">
       <SEO
         title="Shipping & Returns – UK Domestic Delivery | Yeti Peptides"
-        description="Royal Mail 24 next-day tracked or anonymous InPost lockers. UK domestic peptide delivery. Returns & damaged goods policy."
+        description="Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. UK domestic peptide delivery. Returns & damaged goods policy."
         canonical="https://yetipeptides.com/shipping-returns"
       />
       <Snowfall />
@@ -40,9 +40,10 @@ export default function ShippingReturns() {
                 </div>
                 <p className="text-3xl font-bold text-ice-blue mb-2">£6.00</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Next-day tracked delivery to your registered address. Plain unmarked packaging.
+                  Tracked delivery to your registered address — typically arrives within 2 days. Plain unmarked packaging.
                   Tracking number lands in your inbox the moment we drop it at the post office.
                 </p>
+
               </div>
             </AnimateOnScroll>
             <AnimateOnScroll delay={100}>
@@ -77,12 +78,13 @@ export default function ShippingReturns() {
                 </div>
                 <div className="rounded-xl border border-border/30 bg-card/30 p-4">
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Royal Mail 24</div>
-                  <div className="text-foreground font-semibold">1 working day</div>
+                  <div className="text-foreground font-semibold">~2 working days</div>
                   <p className="text-xs text-muted-foreground mt-1">Tracked, signed-for not required.</p>
+
                 </div>
                 <div className="rounded-xl border border-border/30 bg-card/30 p-4">
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">InPost</div>
-                  <div className="text-foreground font-semibold">1-2 working days</div>
+                  <div className="text-foreground font-semibold">2-3 working days</div>
                   <p className="text-xs text-muted-foreground mt-1">Dropped at our local locker, then routed to yours.</p>
                 </div>
               </div>

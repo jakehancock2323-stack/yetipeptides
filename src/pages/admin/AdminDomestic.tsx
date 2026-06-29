@@ -5,7 +5,7 @@ export default function AdminDomestic() {
     <AdminOrders
       lockedRegion="UK Domestic"
       title="UK Domestic Orders"
-      subtitle="Royal Mail 24 — next-day shipping"
+      subtitle="Royal Mail 24 — tracked, typically 2 days"
     />
   );
 }

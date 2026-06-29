@@ -71,7 +71,7 @@ export default function Products() {
     <div className="min-h-screen">
       <SEO
         title="UK Research Peptides – Royal Mail 24 & InPost | Yeti Peptides"
-        description="UK domestic research peptides. Shipped same-day via Royal Mail 24 next-day tracked or anonymous InPost lockers. GBP pricing, crypto checkout."
+        description="UK domestic research peptides. Shipped same-day via Royal Mail 24 Tracked (typically 2 days) or anonymous InPost lockers. GBP pricing, crypto checkout."
         keywords="UK peptides, research peptides UK, royal mail peptides, inpost peptides, GHK-Cu UK, MT-2 UK, tretinoin UK, domestic peptide supplier"
         canonical="https://yetipeptides.com/products"
         schema={productsSchema}
@@ -87,7 +87,7 @@ export default function Products() {
               <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">UK Catalogue · 2026 · 🇬🇧</div>
               <h1 className="text-3xl md:text-5xl font-bold leading-tight">The Despatch List</h1>
               <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-xl">
-                Every line below ships from the UK · Royal Mail 24 next-day or anonymous InPost lockers.
+                Every line below ships from the UK · Royal Mail 24 Tracked (typically 2 days) or anonymous InPost lockers.
               </p>
             </div>
             <div className="md:col-span-5 grid grid-cols-3 gap-3 text-center">
@@ -151,7 +151,7 @@ export default function Products() {
                   <Truck className="w-4 h-4 text-ice-blue mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-xs font-semibold">Royal Mail 24</p>
-                    <p className="text-[11px] text-muted-foreground">Next-day tracked · £6 flat</p>
+                    <p className="text-[11px] text-muted-foreground">Tracked · ~2 days · £6 flat</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
