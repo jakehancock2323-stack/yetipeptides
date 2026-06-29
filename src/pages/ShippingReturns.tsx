@@ -2,15 +2,15 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { Package, Truck, Globe, AlertCircle } from 'lucide-react';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
+import { Truck, Package, AlertCircle, MapPin, Clock, FlaskConical } from 'lucide-react';
 
 export default function ShippingReturns() {
   return (
     <div className="min-h-screen pb-20">
-      <SEO 
-        title="Shipping & Returns - Worldwide Research Peptide Delivery"
-        description="Worldwide shipping for research peptides. UK & international delivery with tracking. Discreet packaging, temperature-controlled shipping. Read our returns policy."
-        keywords="worldwide peptide shipping, research peptide delivery, UK peptide shipping, international peptide shipping, peptide returns policy"
+      <SEO
+        title="Shipping & Returns – UK Domestic Delivery | Yeti Peptides"
+        description="Royal Mail 24 next-day tracked or anonymous InPost lockers. UK domestic peptide delivery. Returns & damaged goods policy."
         canonical="https://yetipeptides.com/shipping-returns"
       />
       <Snowfall />
@@ -19,125 +19,131 @@ export default function ShippingReturns() {
       <div className="container mx-auto px-4 pt-24 md:pt-28">
         <div className="max-w-4xl mx-auto mb-8 md:mb-10 grid md:grid-cols-12 gap-4 items-end border-b border-border/30 pb-6">
           <div className="md:col-span-8">
-            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Logistics Policy</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">UK Logistics</div>
             <h1 className="text-3xl md:text-4xl font-bold leading-tight">Shipping & Returns</h1>
           </div>
           <div className="md:col-span-4 md:text-right">
-            <p className="text-sm text-muted-foreground">Tracked · Discreet · Worldwide</p>
+            <p className="text-sm text-muted-foreground">Tracked · Discreet · Posted from the UK 🇬🇧</p>
           </div>
         </div>
 
-
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="frosted-glass rounded-xl p-6 md:p-8 space-y-8">
-            <section>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[hsl(var(--ice-blue))] to-[hsl(var(--glacier))] flex items-center justify-center">
-                  <Globe className="w-6 h-6 text-background" />
+          {/* Method cards */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <AnimateOnScroll>
+              <div className="frosted-glass rounded-2xl p-6 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-ice-blue/15 flex items-center justify-center">
+                    <Truck className="w-5 h-5 text-ice-blue" />
+                  </div>
+                  <h2 className="text-xl font-semibold">Royal Mail 24 Tracked</h2>
                 </div>
-                <h2 className="text-2xl font-semibold">Worldwide Shipping</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed mb-3">
-                Yeti Peptides ships to researchers worldwide. We offer tracked, discreet shipping to ensure your order arrives safely and confidentially.
-              </p>
-              <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-                <li>All orders are shipped with tracking numbers</li>
-                <li>Discreet packaging with no external product identification</li>
-                <li>Temperature-controlled packaging for product integrity</li>
-                <li>Insurance available on request</li>
-              </ul>
-            </section>
-
-            <section>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[hsl(var(--glacier))] to-[hsl(var(--aurora))] flex items-center justify-center">
-                  <Truck className="w-6 h-6 text-background" />
-                </div>
-                <h2 className="text-2xl font-semibold">Processing & Delivery Times</h2>
-              </div>
-              <div className="space-y-3 text-muted-foreground">
-                <p><strong className="text-foreground">Processing Time:</strong> 2-3 business days after payment confirmation</p>
-                <p><strong className="text-foreground">Domestic Delivery:</strong> 5-10 business days (country dependent)</p>
-                <p><strong className="text-foreground">International Delivery:</strong> 10-21 business days (country dependent)</p>
-                <p className="text-sm">
-                  Note: Delivery times are estimates and may vary due to customs processing, local holidays, or carrier delays.
+                <p className="text-3xl font-bold text-ice-blue mb-2">£6.00</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Next-day tracked delivery to your registered address. Plain unmarked packaging.
+                  Tracking number lands in your inbox the moment we drop it at the post office.
                 </p>
               </div>
-            </section>
-
-            <section>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[hsl(var(--aurora))] to-[hsl(var(--arctic-teal))] flex items-center justify-center">
-                  <Package className="w-6 h-6 text-background" />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={100}>
+              <div className="frosted-glass rounded-2xl p-6 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-aurora/15 flex items-center justify-center">
+                    <Package className="w-5 h-5 text-aurora" />
+                  </div>
+                  <h2 className="text-xl font-semibold">InPost Locker</h2>
                 </div>
-                <h2 className="text-2xl font-semibold">Shipping Costs</h2>
+                <p className="text-3xl font-bold text-aurora mb-2">Anonymous</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Set up an InPost locker drop in the app, send us the QR / pickup code in checkout
+                  notes, we post it. You pay InPost's fee directly — nothing on our books links to you.
+                </p>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-3">
-                Shipping costs are calculated based on destination and weight. Standard tracked shipping is $65 USD for most destinations.
-              </p>
-              <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-                <li>Express shipping available on request for urgent orders</li>
-                <li>Shipping costs displayed at checkout</li>
-                <li>Free shipping on orders over $500 USD (select countries)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Customs & Import Duties</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                International customers are responsible for any customs duties, taxes, or fees imposed by their country. Yeti Peptides is not responsible for customs delays or charges. Please check your local regulations regarding research peptide imports.
-              </p>
-            </section>
-
-            <section className="border-t border-border pt-6">
-              <h2 className="text-2xl font-semibold mb-4">Returns & Refunds Policy</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Due to the specialized nature of research peptides and regulatory requirements, we have a limited returns policy:
-              </p>
-              
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold mb-2 text-foreground">Damaged Products</h3>
-                  <p className="text-muted-foreground text-sm">
-                    If you receive a damaged product, please contact us within 48 hours of delivery with photographic evidence. We will arrange a replacement or refund.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold mb-2 text-foreground">Incorrect Products</h3>
-                  <p className="text-muted-foreground text-sm">
-                    If you receive an incorrect product, contact us within 48 hours with order details. We will send the correct product at no additional cost.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold mb-2 text-foreground">Lost Shipments</h3>
-                  <p className="text-muted-foreground text-sm">
-                    If tracking shows your shipment as lost, we will investigate with the carrier and provide a replacement or refund once confirmed.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold mb-2 text-foreground">Non-Returnable Items</h3>
-                  <p className="text-muted-foreground text-sm">
-                    For safety and regulatory reasons, we cannot accept returns of products that have been delivered in good condition. Please ensure you review product specifications carefully before ordering.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            <section className="border-t border-border pt-6">
-              <div className="flex items-start gap-3 p-4 bg-[hsl(var(--ice-blue))]/10 rounded-lg border border-[hsl(var(--ice-blue))]/20">
-                <AlertCircle className="w-6 h-6 text-[hsl(var(--ice-blue))] flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold mb-2">Need Assistance?</h3>
-                  <p className="text-sm text-muted-foreground">
-                    For any shipping or returns inquiries, please contact us at yetipeptides@protonmail.com or through our Discord server. We typically respond within 24 hours.
-                  </p>
-                </div>
-              </div>
-            </section>
+            </AnimateOnScroll>
           </div>
+
+          {/* Timings */}
+          <AnimateOnScroll>
+            <div className="frosted-glass rounded-2xl p-6 md:p-8 space-y-6">
+              <div className="flex items-center gap-3">
+                <Clock className="w-6 h-6 text-ice-blue" />
+                <h2 className="text-2xl font-semibold">Processing & Cutoffs</h2>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="rounded-xl border border-border/30 bg-card/30 p-4">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Cutoff</div>
+                  <div className="text-foreground font-semibold">14:00 GMT</div>
+                  <p className="text-xs text-muted-foreground mt-1">Orders & cleared crypto in by 2pm ship same day.</p>
+                </div>
+                <div className="rounded-xl border border-border/30 bg-card/30 p-4">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Royal Mail 24</div>
+                  <div className="text-foreground font-semibold">1 working day</div>
+                  <p className="text-xs text-muted-foreground mt-1">Tracked, signed-for not required.</p>
+                </div>
+                <div className="rounded-xl border border-border/30 bg-card/30 p-4">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">InPost</div>
+                  <div className="text-foreground font-semibold">1-2 working days</div>
+                  <p className="text-xs text-muted-foreground mt-1">Dropped at our local locker, then routed to yours.</p>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Weekends & bank holidays don't count as working days. Royal Mail and InPost may add a day during peak periods.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          {/* Returns */}
+          <AnimateOnScroll>
+            <div className="frosted-glass rounded-2xl p-6 md:p-8 space-y-5">
+              <div className="flex items-center gap-3">
+                <FlaskConical className="w-6 h-6 text-aurora" />
+                <h2 className="text-2xl font-semibold">Returns & Damaged Goods</h2>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Because of the research-only nature of what we ship, returns are limited to issues that are our fault:
+              </p>
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { title: 'Damaged in transit', desc: 'Photo evidence within 48 hours of delivery — we\'ll replace or refund.' },
+                  { title: 'Wrong item sent', desc: 'Tell us within 48 hours, we\'ll dispatch the correct item at no extra cost.' },
+                  { title: 'Lost in post', desc: 'If tracking confirms loss, we\'ll claim with Royal Mail and replace or refund.' },
+                ].map((s) => (
+                  <div key={s.title} className="rounded-xl border border-border/30 bg-card/30 p-4">
+                    <h3 className="font-semibold text-foreground text-sm mb-1.5">{s.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                We can't accept change-of-mind returns on opened or sealed products.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll>
+            <div className="rounded-xl border border-ice-blue/20 bg-ice-blue/[0.04] p-5 flex items-start gap-3">
+              <MapPin className="w-5 h-5 text-ice-blue mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-1 text-sm">UK Domestic Only</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  We currently ship within the United Kingdom only. International orders are not being accepted.
+                  For shipping questions email <a href="mailto:yetipeptides@protonmail.com" className="text-ice-blue underline-offset-2 hover:underline">yetipeptides@protonmail.com</a>.
+                </p>
+              </div>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll>
+            <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-5 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-1 text-sm">Need help fast?</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Email or message us on Discord/Telegram — we usually respond within 24 hours.
+                </p>
+              </div>
+            </div>
+          </AnimateOnScroll>
         </div>
       </div>
 
