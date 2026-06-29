@@ -1,25 +1,27 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+// Region system kept as a no-op shim — the site now ships UK Domestic only.
+// The provider exists so any lingering useRegion() callers continue to compile.
+import { createContext, useContext, ReactNode } from 'react';
 
-export type Region = 'International' | 'UK Domestic';
+export type Region = 'UK Domestic';
 
 interface RegionContextType {
   region: Region;
   setRegion: (region: Region) => void;
 }
 
-const RegionContext = createContext<RegionContextType | undefined>(undefined);
+const RegionContext = createContext<RegionContextType>({
+  region: 'UK Domestic',
+  setRegion: () => {},
+});
 
 export function RegionProvider({ children }: { children: ReactNode }) {
-  const [region, setRegion] = useState<Region>('International');
   return (
-    <RegionContext.Provider value={{ region, setRegion }}>
+    <RegionContext.Provider value={{ region: 'UK Domestic', setRegion: () => {} }}>
       {children}
     </RegionContext.Provider>
   );
 }
 
 export function useRegion() {
-  const context = useContext(RegionContext);
-  if (!context) throw new Error('useRegion must be used within RegionProvider');
-  return context;
+  return useContext(RegionContext);
 }

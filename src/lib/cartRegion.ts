@@ -1,11 +1,8 @@
 import { Product } from '@/data/products';
 
-export type CartRegion = 'UK Domestic' | 'International';
+// UK-only site — kept as a stable export so older callers don't break.
+export type CartRegion = 'UK Domestic';
 
-export const getProductRegion = (product: Product): CartRegion =>
-  product.region === 'UK Domestic' ? 'UK Domestic' : 'International';
+export const getProductRegion = (_product: Product): CartRegion => 'UK Domestic';
 
-export const hasMixedProductRegions = (items: Array<{ product: Product }>) => {
-  const regions = new Set(items.map((item) => getProductRegion(item.product)));
-  return regions.size > 1;
-};
+export const hasMixedProductRegions = (_items: Array<{ product: Product }>) => false;
