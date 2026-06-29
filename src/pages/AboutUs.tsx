@@ -72,7 +72,7 @@ export default function AboutUs() {
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { icon: Microscope, title: 'Analytical Testing', desc: 'HPLC and Mass Spectrometry verification of identity and purity. Data available on request.' },
+                { icon: Microscope, title: 'Analytical Testing', desc: 'Identity and purity verified before release. Nothing below spec leaves the bench.' },
                 { icon: BadgeCheck, title: 'Purity Standards', desc: 'A strict 99%+ purity threshold across all peptides. Anything below spec doesn\'t leave the bench.' },
                 { icon: ClipboardCheck, title: 'Research Grade', desc: 'Prepared and handled to research-grade standards — strictly for laboratory use.' },
                 { icon: FileText, title: 'COA on Request', desc: 'Certificates of Analysis available on request, for verification before or after delivery.' },
