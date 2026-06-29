@@ -12,7 +12,22 @@ import penCartridgeImage from '@/assets/pen-cartridge.png';
 import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import frostSkinImage from '@/assets/ice-elixir.png';
 import tretinoinCreamImage from '@/assets/tretinoin-cream.png';
+import vialReta from '@/assets/vials/vial-reta.png';
+import vialTirz from '@/assets/vials/vial-tirz.png';
+import vialTesa from '@/assets/vials/vial-tesa.png';
+import vialGhk from '@/assets/vials/vial-ghk.png';
+import vialMt2 from '@/assets/vials/vial-mt2.png';
+import vialKlow from '@/assets/vials/vial-klow.png';
 import { formatGbpEstimate } from '@/lib/currency';
+
+const VIAL_IMAGE_MAP: Record<string, string> = {
+  'uk-retatrutide-30mg': vialReta,
+  'uk-tirzepatide-30mg': vialTirz,
+  'uk-tesamorelin-10mg': vialTesa,
+  'uk-ghkcu-100mg': vialGhk,
+  'uk-mt2-10mg': vialMt2,
+  'uk-klow': vialKlow,
+};
 
 interface ProductCardProps {
   product: Product;
