@@ -87,7 +87,7 @@ export default function Products() {
               <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">UK Catalogue · 2026 · 🇬🇧</div>
               <h1 className="text-3xl md:text-5xl font-bold leading-tight">The Despatch List</h1>
               <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-xl">
-                Every line below ships from the UK · Royal Mail 24 next-day or anonymous InPost lockers.
+                Every line below ships from the UK · Royal Mail 24 Tracked (typically 2 days) or anonymous InPost lockers.
               </p>
             </div>
             <div className="md:col-span-5 grid grid-cols-3 gap-3 text-center">
