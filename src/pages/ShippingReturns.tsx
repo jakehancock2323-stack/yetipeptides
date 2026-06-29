@@ -84,7 +84,7 @@ export default function ShippingReturns() {
                 </div>
                 <div className="rounded-xl border border-border/30 bg-card/30 p-4">
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">InPost</div>
-                  <div className="text-foreground font-semibold">1-2 working days</div>
+                  <div className="text-foreground font-semibold">2-3 working days</div>
                   <p className="text-xs text-muted-foreground mt-1">Dropped at our local locker, then routed to yours.</p>
                 </div>
               </div>
