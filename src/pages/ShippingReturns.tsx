@@ -78,8 +78,9 @@ export default function ShippingReturns() {
                 </div>
                 <div className="rounded-xl border border-border/30 bg-card/30 p-4">
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Royal Mail 24</div>
-                  <div className="text-foreground font-semibold">1 working day</div>
+                  <div className="text-foreground font-semibold">~2 working days</div>
                   <p className="text-xs text-muted-foreground mt-1">Tracked, signed-for not required.</p>
+
                 </div>
                 <div className="rounded-xl border border-border/30 bg-card/30 p-4">
                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">InPost</div>
