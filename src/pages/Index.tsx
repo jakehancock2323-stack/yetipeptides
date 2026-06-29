@@ -116,13 +116,14 @@ export default function Index() {
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight">
                 <span className="block text-foreground">Posted today.</span>
                 <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
-                  Delivered tomorrow.
+                  At your door soon.
                 </span>
               </h1>
 
               <p className="text-base md:text-lg text-muted-foreground mt-7 max-w-xl leading-relaxed">
                 A small UK research-peptide outfit. 99%+ purity, plain packaging, no card readers — just
-                Royal Mail 24 next-day or anonymous InPost lockers, paid in crypto.
+                Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
+
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
