@@ -370,7 +370,7 @@ export default function Checkout() {
                       <RadioGroupItem value="royal-mail" id="royal-mail" />
                       <div>
                         <span className="text-sm font-medium">Royal Mail 24 Tracked</span>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Next-day tracked delivery to your address</p>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">Tracked delivery to your address · typically 2 days</p>
                       </div>
                     </div>
                     <span className="text-sm font-semibold">£6.00</span>
