@@ -101,12 +101,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
           <span
             aria-hidden
-            className="absolute font-display font-black tracking-tighter text-ice-blue/[0.07] text-7xl whitespace-nowrap"
+            className="absolute font-orbitron font-black tracking-tighter text-ice-blue/[0.07] text-7xl whitespace-nowrap"
           >
             {getNickname(product)}
           </span>
           <span
-            className={`relative font-display font-bold tracking-[0.25em] text-[1.6rem] sm:text-[1.75rem] whitespace-nowrap transition-opacity duration-500 ${
+            className={`relative font-orbitron font-bold tracking-[0.25em] text-[1.6rem] sm:text-[1.75rem] whitespace-nowrap transition-opacity duration-500 ${
               allVariantsOutOfStock
                 ? 'text-foreground/30'
                 : 'text-foreground/85 drop-shadow-[0_0_18px_rgba(125,211,252,0.45)]'
