@@ -5,7 +5,6 @@ import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { useState, useEffect } from 'react';
 import CartDrawer from './CartDrawer';
-import RegionToggle from './RegionToggle';
 import yetiLogo from '@/assets/yeti-logo.png';
 
 export default function Navbar() {
@@ -24,7 +23,7 @@ export default function Navbar() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/products', label: 'Products' },
+    { to: '/products', label: 'Catalogue' },
     { to: '/calculator', label: 'Calculator' },
     { to: '/how-to-pay-crypto', label: 'How to Pay' },
     { to: '/track-order', label: 'Track Order' },
@@ -36,27 +35,27 @@ export default function Navbar() {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/90 backdrop-blur-2xl border-b border-border/30 shadow-[0_4px_20px_hsl(var(--ice-blue)/0.05)]' : 'bg-background/60 backdrop-blur-xl border-b border-transparent'}`}>
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <Link to="/" className="flex items-center gap-3 group">
-              <img 
-                src={yetiLogo} 
-                alt="Yeti Peptides logo - research peptide supplier" 
+              <img
+                src={yetiLogo}
+                alt="Yeti Peptides logo - UK research peptide supplier"
                 className="w-10 h-10 object-contain drop-shadow-[0_0_15px_rgba(71,217,217,0.3)] group-hover:drop-shadow-[0_0_25px_rgba(71,217,217,0.5)] transition-all duration-300"
               />
-              <span className="text-lg md:text-xl font-bold text-ice-blue tracking-wider">
-                YETI PEPTIDES
-              </span>
+              <div className="leading-none">
+                <span className="block text-lg md:text-xl font-bold text-ice-blue tracking-wider">YETI PEPTIDES</span>
+                <span className="hidden sm:block text-[9px] uppercase tracking-[0.3em] text-muted-foreground mt-1">UK Domestic · 🇬🇧</span>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map(link => (
-                <Link 
+                <Link
                   key={link.to}
-                  to={link.to} 
+                  to={link.to}
                   className={`text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 ${
-                    location.pathname === link.to 
-                      ? 'text-ice-blue bg-ice-blue/10' 
+                    location.pathname === link.to
+                      ? 'text-ice-blue bg-ice-blue/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
                   }`}
                 >
@@ -65,15 +64,9 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Region Toggle + Cart & Mobile Menu */}
             <div className="flex items-center gap-2">
-              {location.pathname === '/products' && (
-                <div className="hidden sm:block">
-                  <RegionToggle />
-                </div>
-              )}
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="icon"
                 className="relative hover:bg-secondary/50"
                 onClick={() => setCartDrawerOpen(true)}
@@ -87,7 +80,6 @@ export default function Navbar() {
                 )}
               </Button>
 
-              {/* Mobile Menu */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden hover:bg-secondary/50" aria-label="Menu">
@@ -96,15 +88,10 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] bg-background/95 backdrop-blur-2xl">
                   <div className="flex flex-col gap-2 mt-8">
-                    {location.pathname === '/products' && (
-                      <div className="px-4 pb-3 sm:hidden">
-                        <RegionToggle />
-                      </div>
-                    )}
                     {navLinks.map(link => (
-                      <Link 
+                      <Link
                         key={link.to}
-                        to={link.to} 
+                        to={link.to}
                         className={`text-lg font-medium px-4 py-3 rounded-lg transition-all ${
                           location.pathname === link.to
                             ? 'text-ice-blue bg-ice-blue/10'

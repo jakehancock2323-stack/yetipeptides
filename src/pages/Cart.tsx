@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useCart } from '@/contexts/CartContext';
 import { Trash2, ShoppingBag, ArrowRight, Package, BookOpen } from 'lucide-react';
 import QuantityInput from '@/components/QuantityInput';
-import { formatGbpEstimate, GBP_DISCLAIMER } from '@/lib/currency';
+
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, includeEbook, setIncludeEbook } = useCart();
@@ -111,8 +111,7 @@ export default function Cart() {
                         className="w-16 sm:w-20 text-center h-8 text-sm"
                       />
                       <div className="text-right">
-                        <p className="text-lg font-bold text-[hsl(var(--ice-blue))]">${(item.variant.price * item.quantity).toFixed(2)}</p>
-                        <p className="text-[11px] text-muted-foreground">{formatGbpEstimate(item.variant.price * item.quantity)}</p>
+                        <p className="text-lg font-bold text-[hsl(var(--ice-blue))]">£{(item.variant.price * item.quantity).toFixed(2)}</p>
                       </div>
                     </div>
                   </div>
@@ -143,7 +142,7 @@ export default function Cart() {
                   <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
                     Digital guide: GLP-1 family, mechanisms & research use.
                   </p>
-                  <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+$4.99</p>
+                  <p className="text-sm font-bold text-[hsl(var(--ice-blue))] mt-2">+£4.99</p>
                 </div>
               </div>
             </div>
@@ -153,17 +152,14 @@ export default function Cart() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>Subtotal</span>
-                  <span>${getTotalPrice().toFixed(2)}</span>
+                  <span>£{getTotalPrice().toFixed(2)}</span>
                 </div>
                 <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
                 <div className="flex justify-between items-end">
                   <span className="text-lg font-bold">Total</span>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[hsl(var(--ice-blue))]">${getTotalPrice().toFixed(2)}</span>
-                    <p className="text-[11px] text-muted-foreground">{formatGbpEstimate(getTotalPrice())}</p>
-                  </div>
+                  <span className="text-2xl font-bold text-[hsl(var(--ice-blue))]">£{getTotalPrice().toFixed(2)}</span>
                 </div>
-                <p className="text-[9px] text-muted-foreground">{GBP_DISCLAIMER}</p>
+                <p className="text-[10px] text-muted-foreground">+ Royal Mail 24 (£6) or InPost (paid separately) at checkout.</p>
               </div>
 
               <Link to="/checkout" className="block mt-5">

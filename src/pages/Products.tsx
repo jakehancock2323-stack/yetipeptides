@@ -7,9 +7,8 @@ import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
-import { products, categories, domesticCategories } from '@/data/products';
-import { Search, FlaskConical, MapPin, Globe } from 'lucide-react';
-import { useRegion } from '@/contexts/RegionContext';
+import { products, categories } from '@/data/products';
+import { Search, FlaskConical, Package, Truck } from 'lucide-react';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,24 +16,15 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     searchParams.get('category') || 'All'
   );
-  const { region, setRegion } = useRegion();
-  const activeCategories = region === 'UK Domestic' ? domesticCategories : categories;
 
   useEffect(() => {
     const category = searchParams.get('category');
-    if (category) {
-      setSelectedCategory(category);
-    }
+    if (category) setSelectedCategory(category);
   }, [searchParams]);
 
   useEffect(() => {
     const productId = searchParams.get('product');
     if (!productId) return;
-    const target = products.find(p => p.id === productId);
-    if (target?.region === 'UK Domestic' && region !== 'UK Domestic') {
-      setRegion('UK Domestic');
-    }
-    // Wait for render, then scroll
     const t = setTimeout(() => {
       const el = document.getElementById(`product-${productId}`);
       if (el) {
@@ -44,19 +34,12 @@ export default function Products() {
       }
     }, 250);
     return () => clearTimeout(t);
-  }, [searchParams, region, setRegion]);
-
-  useEffect(() => {
-    if (!searchParams.get('product')) {
-      setSelectedCategory('All');
-    }
-  }, [region]);
+  }, [searchParams]);
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesRegion = region === 'UK Domestic' ? product.region === 'UK Domestic' : product.region !== 'UK Domestic';
-    return matchesSearch && matchesCategory && matchesRegion;
+    return matchesSearch && matchesCategory;
   });
 
   const handleCategoryChange = (category: string) => {
@@ -65,29 +48,31 @@ export default function Products() {
   };
 
   const productsSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": products.map((product, index) => ({
-      "@type": "Product",
-      "position": index + 1,
-      "name": product.name,
-      "description": `Research-grade ${product.name} peptide for laboratory use`,
-      "category": product.category,
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "lowPrice": Math.min(...product.variants.map(v => v.price)),
-        "highPrice": Math.max(...product.variants.map(v => v.price))
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'itemListElement': products.map((product, index) => ({
+      '@type': 'Product',
+      'position': index + 1,
+      'name': product.name,
+      'description': `UK domestic research-grade ${product.name}`,
+      'category': product.category,
+      'offers': {
+        '@type': 'AggregateOffer',
+        'priceCurrency': 'GBP',
+        'lowPrice': Math.min(...product.variants.map(v => v.price)),
+        'highPrice': Math.max(...product.variants.map(v => v.price)),
+      },
+    })),
   };
+
+  const inStockCount = products.filter(p => !p.outOfStock && p.variants.some(v => !v.outOfStock)).length;
 
   return (
     <div className="min-h-screen">
-      <SEO 
-        title="Buy Research Peptides Online – UK & Worldwide"
-        description="Shop research-grade peptides: Semaglutide, Tirzepatide, Retatrutide, BPC-157, TB-500 & GLP-1s. UK supplier, worldwide shipping, COA verified."
-        keywords="buy peptides online, research peptides, peptide shop UK, GLP-1 peptides, Semaglutide research peptide, Retatrutide for sale, Tirzepatide peptide, Cagrilintide, BPC-157, TB-500, laboratory peptides, research chemicals, peptide supplier worldwide, UK peptide vendor"
+      <SEO
+        title="UK Research Peptides – Royal Mail 24 & InPost | Yeti Peptides"
+        description="UK domestic research peptides. Shipped same-day via Royal Mail 24 next-day tracked or anonymous InPost lockers. GBP pricing, crypto checkout."
+        keywords="UK peptides, research peptides UK, royal mail peptides, inpost peptides, GHK-Cu UK, MT-2 UK, tretinoin UK, domestic peptide supplier"
         canonical="https://yetipeptides.com/products"
         schema={productsSchema}
       />
@@ -95,73 +80,37 @@ export default function Products() {
       <Navbar />
 
       <div className="container mx-auto px-4 pt-24 md:pt-28 pb-20">
-        {/* Magazine header */}
+        {/* Editorial header */}
         <AnimateOnScroll>
           <div className="mb-8 md:mb-10 grid md:grid-cols-12 gap-6 items-end border-b border-border/30 pb-6">
             <div className="md:col-span-7">
-              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">Catalogue · 2026</div>
-              <h1 className="text-3xl md:text-5xl font-bold leading-tight">Research Peptides</h1>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-3">UK Catalogue · 2026 · 🇬🇧</div>
+              <h1 className="text-3xl md:text-5xl font-bold leading-tight">The Despatch List</h1>
               <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-xl">
-                Laboratory-grade compounds · 99%+ purity · COA verified
+                Every line below ships from the UK · Royal Mail 24 next-day or anonymous InPost lockers.
               </p>
             </div>
-            <div className="md:col-span-5 grid grid-cols-2 gap-3 text-center">
+            <div className="md:col-span-5 grid grid-cols-3 gap-3 text-center">
               <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm py-3">
-                <div className="text-xl font-bold text-ice-blue">{products.filter(p => p.region !== 'UK Domestic').length}</div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Worldwide</div>
+                <div className="text-xl font-bold text-ice-blue">{inStockCount}</div>
+                <div className="text-[9px] uppercase tracking-widest text-muted-foreground mt-1">In Stock</div>
               </div>
               <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm py-3">
-                <div className="text-xl font-bold text-aurora">{products.filter(p => p.region === 'UK Domestic').length}</div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">UK Domestic</div>
+                <div className="text-xl font-bold text-aurora">£6</div>
+                <div className="text-[9px] uppercase tracking-widest text-muted-foreground mt-1">Royal Mail 24</div>
+              </div>
+              <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm py-3">
+                <div className="text-xl font-bold text-foreground">InPost</div>
+                <div className="text-[9px] uppercase tracking-widest text-muted-foreground mt-1">Anonymous</div>
               </div>
             </div>
           </div>
         </AnimateOnScroll>
 
-        {/* Sidebar + Grid */}
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Sidebar (sticky on desktop) */}
+          {/* Sticky sidebar */}
           <aside className="lg:col-span-3 lg:sticky lg:top-24 lg:self-start space-y-4">
-            {/* Region switch */}
             <AnimateOnScroll delay={50}>
-              <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-sm p-1.5 flex lg:flex-col gap-1.5">
-                <button
-                  onClick={() => setRegion('International')}
-                  className={`flex-1 flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-left ${
-                    region === 'International'
-                      ? 'bg-ice-blue text-background shadow-md shadow-ice-blue/20'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
-                  }`}
-                >
-                  <Globe className="w-4 h-4 flex-shrink-0" />
-                  <div className="flex flex-col leading-tight">
-                    <span>International</span>
-                    <span className={`text-[10px] font-normal ${region === 'International' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
-                      USD · worldwide
-                    </span>
-                  </div>
-                </button>
-                <button
-                  onClick={() => setRegion('UK Domestic')}
-                  className={`flex-1 flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-left ${
-                    region === 'UK Domestic'
-                      ? 'bg-aurora text-background shadow-md shadow-aurora/20'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/40'
-                  }`}
-                >
-                  <MapPin className="w-4 h-4 flex-shrink-0" />
-                  <div className="flex flex-col leading-tight">
-                    <span>UK Domestic</span>
-                    <span className={`text-[10px] font-normal ${region === 'UK Domestic' ? 'text-background/70' : 'text-muted-foreground/70'}`}>
-                      GBP · UK only
-                    </span>
-                  </div>
-                </button>
-              </div>
-            </AnimateOnScroll>
-
-            {/* Search */}
-            <AnimateOnScroll delay={100}>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
                 <Input
@@ -174,12 +123,11 @@ export default function Products() {
               </div>
             </AnimateOnScroll>
 
-            {/* Categories */}
-            <AnimateOnScroll delay={150}>
+            <AnimateOnScroll delay={100}>
               <div className="rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm p-3">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2.5 px-1">Categories</div>
                 <div className="flex flex-wrap lg:flex-col gap-1.5">
-                  {activeCategories.map(category => (
+                  {categories.map(category => (
                     <button
                       key={category}
                       onClick={() => handleCategoryChange(category)}
@@ -196,28 +144,33 @@ export default function Products() {
               </div>
             </AnimateOnScroll>
 
+            <AnimateOnScroll delay={150}>
+              <div className="rounded-xl border border-aurora/25 bg-aurora/[0.04] p-4 space-y-3">
+                <div className="text-[10px] uppercase tracking-[0.25em] text-aurora">Despatch</div>
+                <div className="flex items-start gap-2.5">
+                  <Truck className="w-4 h-4 text-ice-blue mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-xs font-semibold">Royal Mail 24</p>
+                    <p className="text-[11px] text-muted-foreground">Next-day tracked · £6 flat</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <Package className="w-4 h-4 text-aurora mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-xs font-semibold">InPost Locker</p>
+                    <p className="text-[11px] text-muted-foreground">Anonymous · paid separately</p>
+                  </div>
+                </div>
+              </div>
+            </AnimateOnScroll>
+
             <p className="text-xs text-muted-foreground px-1">
               {filteredProducts.length} compound{filteredProducts.length !== 1 ? 's' : ''} shown
             </p>
           </aside>
 
-          {/* Main column */}
+          {/* Grid */}
           <div className="lg:col-span-9 space-y-4">
-            {region === 'International' && (
-              <AnimateOnScroll animation="fade-in">
-                <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 backdrop-blur-sm px-4 py-3.5 flex items-start gap-3">
-                  <Globe className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm">
-                    <p className="font-semibold text-amber-300 mb-0.5">International Orders Closed for the Foreseeable Future</p>
-                    <p className="text-amber-100/80 text-xs leading-relaxed">
-                      We're not accepting new international orders at this time. This may change in the future — <span className="font-semibold">existing orders are unaffected</span> and continue to ship as normal.
-                    </p>
-                  </div>
-                </div>
-              </AnimateOnScroll>
-            )}
-
-            {/* Product Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-start">
               {filteredProducts.map((product, i) => (
                 <AnimateOnScroll key={product.id} delay={i * 40} animation="scale-in">
@@ -226,23 +179,12 @@ export default function Products() {
               ))}
             </div>
 
-            {filteredProducts.length === 0 && region === 'UK Domestic' ? (
-              <AnimateOnScroll animation="fade-in">
-                <div className="text-center py-24">
-                  <MapPin className="w-10 h-10 text-ice-blue mx-auto mb-4" />
-                  <h2 className="text-2xl font-bold mb-2">Coming Soon</h2>
-                  <p className="text-muted-foreground max-w-md mx-auto">
-                    UK Domestic stock is not yet available. Check back soon for updates.
-                  </p>
-                </div>
-              </AnimateOnScroll>
-            ) : filteredProducts.length === 0 ? (
+            {filteredProducts.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-muted-foreground">No compounds found matching your search.</p>
               </div>
-            ) : null}
+            )}
 
-            {/* Disclaimer */}
             <AnimateOnScroll animation="fade-in" delay={200}>
               <div className="mt-10 flex items-center justify-center gap-2 text-xs text-muted-foreground border-t border-border/30 pt-6">
                 <FlaskConical className="w-3.5 h-3.5 text-ice-blue" />
@@ -252,7 +194,6 @@ export default function Products() {
           </div>
         </div>
       </div>
-
 
       <Footer />
     </div>

@@ -5,56 +5,46 @@ import Navbar from '@/components/Navbar';
 import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
-// ProductCard removed — featured section deleted
 import Reviews from '@/components/Reviews';
 import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import AnimatedCounter from '@/components/AnimatedCounter';
-import { 
-  FileText, Lock, Globe, FlaskConical, Package,
-  Microscope, Award, HeadphonesIcon, BadgeCheck, ArrowRight, Zap, X, Sparkles
+import {
+  FileText, Lock, FlaskConical, Package,
+  Microscope, Award, HeadphonesIcon, ArrowRight, X, Sparkles, Truck, MapPin, Clock, Bitcoin
 } from 'lucide-react';
-import AuroraWaves from '@/components/AuroraWaves';
-
 
 export default function Index() {
   const [showDiscordBanner, setShowDiscordBanner] = useState(true);
 
-
   const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Yeti Peptides",
-    "url": "https://yetipeptides.com",
-    "logo": "https://yetipeptides.com/yeti-logo.png",
-    "description": "Premium research-grade peptides supplier. UK & worldwide shipping. Specializing in Semaglutide, Retatrutide, Cagrilintide, and GLP-1 research compounds.",
-    "email": "yetipeptides@protonmail.com",
-    "areaServed": "Worldwide",
-    "sameAs": [
-      "https://discord.gg/seDb5c9XkM",
-      "https://t.me/yetipeptides"
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "150"
-    }
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': 'Yeti Peptides',
+    'url': 'https://yetipeptides.com',
+    'logo': 'https://yetipeptides.com/yeti-logo.png',
+    'description': 'UK domestic research peptide supplier. Royal Mail 24 next-day or anonymous InPost lockers. Crypto checkout only.',
+    'email': 'yetipeptides@protonmail.com',
+    'areaServed': 'United Kingdom',
+    'sameAs': ['https://discord.gg/seDb5c9XkM', 'https://t.me/yetipeptides'],
+    'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.9', 'reviewCount': '150' },
   };
 
   const trustFeatures = [
-    { icon: Microscope, title: 'Strict QC Standards', desc: 'Rigorous quality control testing to ensure 99%+ purity and consistency across all compounds.' },
-    { icon: FileText, title: 'COA Available', desc: 'Certificates of Analysis with HPLC and MS data available on request for all compounds.' },
-    { icon: Package, title: 'Professional Packaging', desc: 'Temperature-controlled, discreet packaging to maintain product integrity during transit.' },
-    { icon: Award, title: 'Established Supplier', desc: 'Trusted by researchers worldwide with a proven track record of reliable service.' },
-    { icon: HeadphonesIcon, title: 'Fast & Helpful Support', desc: 'Responsive customer service via email, Discord, and Telegram for all enquiries.' },
+    { icon: Microscope, title: 'Strict QC Standards', desc: '99%+ purity verified — HPLC and Mass Spec data available on request.' },
+    { icon: Truck, title: 'Royal Mail 24', desc: 'Next-day tracked delivery on every UK order at a flat £6.' },
+    { icon: Package, title: 'InPost Locker', desc: 'Want it anonymous? Send us your InPost QR code — we post, you collect.' },
+    { icon: Award, title: 'UK Based & Discreet', desc: 'Plain packaging, no external markings, no signed-for awkwardness.' },
+    { icon: HeadphonesIcon, title: 'Fast Support', desc: 'ProtonMail, Discord and Telegram — usually replies same day.' },
+    { icon: Bitcoin, title: 'Crypto Checkout', desc: 'USDT, USDC and BTC only. Private, no card, no chargebacks.' },
   ];
 
   return (
     <div className="min-h-screen">
-      <SEO 
-        title="Yeti Peptides – Research Peptides | UK & Worldwide"
-        description="UK research peptide supplier. COA on request, 99%+ purity, worldwide shipping. Semaglutide, Tirzepatide, Retatrutide, BPC-157 & more."
-        keywords="buy peptides online, research peptides UK, peptide supplier worldwide, GLP-1 peptides, Semaglutide research, Retatrutide peptide, Tirzepatide, Cagrilintide, laboratory peptides, research chemicals, UK peptide vendor, worldwide peptide shipping, premium research peptides"
+      <SEO
+        title="Yeti Peptides – UK Domestic Research Peptides | Royal Mail 24 & InPost"
+        description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 next-day or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
+        keywords="UK research peptides, royal mail peptides, inpost peptide delivery, domestic peptide UK, GHK-Cu UK, MT-2 UK, tretinoin UK, GLP-1 UK"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
       />
@@ -65,25 +55,13 @@ export default function Index() {
       {showDiscordBanner && (
         <div className="pt-[60px]">
           <div className="relative bg-[#5865F2] py-2.5 px-4">
-            <a 
-              href="https://discord.gg/seDb5c9XkM" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block"
-            >
+            <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="block">
               <div className="container mx-auto flex items-center justify-center gap-3 text-white pr-8">
-                <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
                 <span className="text-sm font-medium">Join our Discord community — connect with researchers & get support</span>
                 <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 hidden sm:block" />
               </div>
             </a>
-            <button
-              onClick={() => setShowDiscordBanner(false)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-1"
-              aria-label="Dismiss banner"
-            >
+            <button onClick={() => setShowDiscordBanner(false)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-1" aria-label="Dismiss banner">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -91,12 +69,11 @@ export default function Index() {
       )}
       {!showDiscordBanner && <div className="pt-[60px]" />}
 
-      {/* Ice Elixir Announcement Banner */}
+      {/* Ice Elixir banner */}
       <AnimateOnScroll animation="fade-up">
         <div className="container mx-auto px-4 pt-6">
           <Link to="/products?product=frostskin-serum" className="block group">
             <div className="relative rounded-xl overflow-hidden bg-gradient-to-r from-ice-blue/10 via-glacier/5 to-arctic-teal/10 border border-ice-blue/20 glow-border hover:border-ice-blue/40 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-r from-ice-blue/5 to-transparent opacity-50" />
               <div className="absolute top-0 right-0 w-64 h-64 bg-ice-blue/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
               <div className="relative z-10 px-6 py-4 md:px-8 md:py-5 flex flex-col md:flex-row items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -105,13 +82,12 @@ export default function Index() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-ice-blue bg-ice-blue/10 px-2 py-0.5 rounded">New Product</span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-arctic-teal bg-arctic-teal/10 px-2 py-0.5 rounded">UK Only</span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-destructive bg-destructive/10 px-2 py-0.5 rounded">Limited Stock</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-ice-blue bg-ice-blue/10 px-2 py-0.5 rounded">New</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-destructive bg-destructive/10 px-2 py-0.5 rounded">Limited</span>
                     </div>
                     <p className="text-sm md:text-base font-medium mt-1">
                       <span className="text-foreground">Ice Elixir</span>
-                      <span className="text-muted-foreground"> — GHK-Cu 3.33% Facial Serum now available. Only 13 units in stock.</span>
+                      <span className="text-muted-foreground"> — GHK-Cu 3.33% Facial Serum. Only 13 units in stock.</span>
                     </p>
                   </div>
                 </div>
@@ -124,108 +100,107 @@ export default function Index() {
         </div>
       </AnimateOnScroll>
 
-      {/* Hero Section — ambient aurora background, no box */}
-      <section className="relative overflow-hidden">
-        {/* Ambient aurora that bleeds into the page */}
-        <div className="absolute inset-0 pointer-events-none">
-          <AuroraWaves />
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 pt-16 pb-20 md:pt-28 md:pb-32">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      {/* HERO — editorial UK postal masthead */}
+      <section className="relative overflow-hidden border-b border-border/20">
+        <div className="container mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <div className="lg:col-span-7 fade-in-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ice-blue/25 bg-ice-blue/5 mb-6">
-                <Zap className="w-3.5 h-3.5 text-ice-blue" />
-                <span className="text-[11px] uppercase tracking-[0.2em] text-ice-blue font-medium">Research-Grade Peptides</span>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-[11px] uppercase tracking-[0.35em] text-aurora">Posted from the UK</span>
+                <span className="h-px flex-1 bg-gradient-to-r from-aurora/60 via-border/50 to-transparent max-w-[180px]" />
+                <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">Vol. 03 · 2026</span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.02]">
-                <span className="block text-foreground">Precision</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight">
+                <span className="block text-foreground">Posted today.</span>
                 <span className="block bg-gradient-to-r from-ice-blue via-arctic-teal to-aurora bg-clip-text text-transparent">
-                  Compounds for
+                  Delivered tomorrow.
                 </span>
-                <span className="block text-foreground">Serious Research.</span>
               </h1>
 
-              <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl leading-relaxed">
-                COA verified, 99%+ purity. Trusted by laboratories and researchers worldwide. UK-based with worldwide shipping.
+              <p className="text-base md:text-lg text-muted-foreground mt-7 max-w-xl leading-relaxed">
+                A small UK research-peptide outfit. 99%+ purity, plain packaging, no card readers — just
+                Royal Mail 24 next-day or anonymous InPost lockers, paid in crypto.
               </p>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 mt-8">
                 <Link to="/products">
                   <Button size="lg" className="bg-ice-blue hover:bg-ice-blue/90 text-background font-semibold px-7 gap-2">
-                    Browse Catalogue <ArrowRight className="w-4 h-4" />
+                    Open the Catalogue <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
-                <Link to="/products?region=uk">
+                <Link to="/how-to-pay-crypto">
                   <Button size="lg" variant="outline" className="border-aurora/40 text-aurora hover:bg-aurora/10 hover:text-aurora font-semibold px-7">
-                    UK Domestic
+                    How to pay in crypto
                   </Button>
                 </Link>
+              </div>
+
+              {/* Despatch ticker */}
+              <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Despatch open</span>
+                <span className="flex items-center gap-1.5"><Clock className="w-3 h-3 text-ice-blue" /> Cutoff 14:00 GMT</span>
+                <span className="flex items-center gap-1.5"><MapPin className="w-3 h-3 text-aurora" /> Posted from West Yorkshire</span>
               </div>
             </div>
 
-            {/* Right: orbiting molecule visual */}
-            <div className="lg:col-span-5 relative hidden lg:block fade-in-up animate-delay-200">
-              <div className="relative h-[480px] flex items-center justify-center">
-                {/* Soft glow */}
-                <div className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-ice-blue/25 via-aurora/20 to-transparent blur-3xl" />
+            {/* Right — shipping menu card */}
+            <div className="lg:col-span-5 fade-in-up animate-delay-200">
+              <div className="relative rounded-2xl border border-border/40 bg-card/40 backdrop-blur-xl p-6 overflow-hidden">
+                <div className="absolute -top-24 -right-24 w-64 h-64 bg-ice-blue/15 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-aurora/15 rounded-full blur-3xl" />
 
-                {/* Orbits */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-[420px] h-[420px]">
-                    {/* Ring 1 */}
-                    <div className="absolute inset-0 rounded-full border border-ice-blue/20 animate-spin-slow">
-                      <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-ice-blue shadow-[0_0_16px_hsl(var(--ice-blue))]" />
-                      <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 rounded-full bg-ice-blue/70" />
-                    </div>
-                    {/* Ring 2 */}
-                    <div className="absolute inset-8 rounded-full border border-aurora/25 animate-spin-reverse">
-                      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-aurora shadow-[0_0_14px_hsl(var(--aurora))]" />
-                      <span className="absolute top-1/4 -left-1 w-2 h-2 rounded-full bg-aurora/70" />
-                    </div>
-                    {/* Ring 3 — tilted */}
-                    <div
-                      className="absolute inset-16 rounded-full border border-arctic-teal/30 animate-spin-medium"
-                      style={{ transform: 'rotateX(65deg)' }}
-                    >
-                      <span className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-arctic-teal" />
-                    </div>
-
-                    {/* Core */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-ice-blue/30 to-aurora/30 backdrop-blur-xl border border-ice-blue/40 flex items-center justify-center shadow-[0_0_60px_hsl(var(--ice-blue)/0.4)]">
-                      <div className="text-center">
-                        <div className="text-[9px] uppercase tracking-[0.25em] text-ice-blue/80 mb-1">Purity</div>
-                        <div className="text-3xl font-urbanist font-bold bg-gradient-to-br from-ice-blue to-aurora bg-clip-text text-transparent">99%+</div>
-                      </div>
-                    </div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Despatch options</span>
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-aurora">UK only · 🇬🇧</span>
                   </div>
-                </div>
 
-                {/* Corner labels */}
-                <div className="absolute top-6 left-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <div className="text-ice-blue">⌁ HPLC tested</div>
-                  <div className="mt-1 text-foreground/60">99%+ Purity</div>
-                </div>
-                <div className="absolute bottom-6 right-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground text-right">
-                  <div className="text-aurora">⌁ Worldwide</div>
-                  <div className="mt-1 text-foreground/60">UK · EU · US</div>
+                  {/* Royal Mail card */}
+                  <div className="rounded-xl border border-ice-blue/30 bg-ice-blue/[0.05] p-4 mb-3">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <Truck className="w-4 h-4 text-ice-blue" />
+                        <span className="text-sm font-semibold">Royal Mail 24 Tracked</span>
+                      </div>
+                      <span className="text-lg font-bold text-ice-blue">£6</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Posted same day if you order before 14:00 · Next-day tracked to your door.</p>
+                  </div>
+
+                  {/* InPost card */}
+                  <div className="rounded-xl border border-aurora/30 bg-aurora/[0.05] p-4 mb-5">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <Package className="w-4 h-4 text-aurora" />
+                        <span className="text-sm font-semibold">InPost Locker</span>
+                      </div>
+                      <span className="text-[11px] uppercase tracking-wider text-aurora">Anonymous</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Generate an InPost QR code, send it across, we drop it off. You pay InPost's fee directly.</p>
+                  </div>
+
+                  {/* Payment row */}
+                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-border/30">
+                    {['USDT', 'USDC', 'BTC'].map((c) => (
+                      <div key={c} className="rounded-lg bg-secondary/30 py-2 text-center text-[11px] font-bold tracking-wider text-foreground/80">
+                        {c}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-3 text-center">Crypto checkout only</p>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
 
           {/* Stats strip */}
           <div className="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 rounded-2xl overflow-hidden border border-border/40 fade-in-up animate-delay-400">
             {[
               { v: <AnimatedCounter end={99} suffix="%+" />, l: 'Purity' },
               { v: <AnimatedCounter end={150} suffix="+" />, l: 'Reviews' },
-              { v: <AnimatedCounter end={50} suffix="+" />, l: 'Compounds' },
-              { v: '24/7', l: 'Support' },
+              { v: '24h', l: 'Royal Mail' },
+              { v: 'UK 🇬🇧', l: 'Despatch' },
             ].map((s, i) => (
               <div key={i} className="bg-card/60 backdrop-blur-sm py-5 px-3 text-center">
                 <div className="text-2xl md:text-3xl font-urbanist font-bold text-ice-blue">{s.v}</div>
@@ -236,17 +211,17 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Trust Badge Strip */}
+      {/* Trust strip */}
       <AnimateOnScroll animation="fade-in">
         <section className="py-5 border-y border-border/20 bg-secondary/20">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 md:gap-12">
               {[
-                { icon: FlaskConical, label: 'Quality Verified' },
-                { icon: Lock, label: 'Secure Checkout' },
-                { icon: Globe, label: 'Worldwide Shipping' },
                 { icon: FlaskConical, label: 'Research Use Only' },
-                { icon: Package, label: 'Discreet Packaging' },
+                { icon: Lock, label: 'Crypto Checkout' },
+                { icon: Truck, label: 'Royal Mail 24' },
+                { icon: Package, label: 'InPost Lockers' },
+                { icon: MapPin, label: 'Posted from the UK' },
               ].map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-2">
                   <Icon className="w-4 h-4 text-ice-blue" />
@@ -258,17 +233,47 @@ export default function Index() {
         </section>
       </AnimateOnScroll>
 
-
-
-      {/* Why Trust Us */}
+      {/* How it works — 3 numbered steps */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <AnimateOnScroll>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Trust Yeti Peptides?</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Committed to quality, transparency, and professional service for the research community
-              </p>
+            <div className="grid md:grid-cols-12 gap-6 items-end mb-12 border-b border-border/30 pb-5">
+              <div className="md:col-span-8">
+                <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">How it works</div>
+                <h2 className="text-3xl md:text-4xl font-bold">From basket to letterbox in 24 hours.</h2>
+              </div>
+              <div className="md:col-span-4 md:text-right text-sm text-muted-foreground">
+                Three steps. No card readers, no signatures, no awkwardness.
+              </div>
+            </div>
+          </AnimateOnScroll>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              { n: '01', title: 'Order before 14:00', desc: 'Drop what you need into the basket. Royal Mail 24 (£6) or send us an InPost QR code for anonymous drop-off.' },
+              { n: '02', title: 'Pay in crypto', desc: 'USDT, USDC or BTC. We send wallet details on your order confirmation. Reply with the TXID and you\'re done.' },
+              { n: '03', title: 'Posted the same day', desc: 'Plain packaging, no markings. Tracking number lands in your inbox the moment we\'ve dropped it at the post office.' },
+            ].map((s, i) => (
+              <AnimateOnScroll key={s.n} delay={i * 100} animation="fade-up">
+                <div className="relative frosted-glass rounded-xl p-6 glow-border h-full">
+                  <div className="text-5xl font-bold text-ice-blue/20 mb-3">{s.n}</div>
+                  <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why trust us — bento grid */}
+      <section className="py-20 px-4 border-t border-border/20">
+        <div className="container mx-auto max-w-6xl">
+          <AnimateOnScroll>
+            <div className="text-center mb-12">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-2">Why Yeti</div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">A small UK shop, taken seriously.</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">No empire, no hype — one bench, one despatch, run properly.</p>
             </div>
           </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -289,37 +294,20 @@ export default function Index() {
 
       <Reviews />
 
-      {/* Discord Community CTA */}
+      {/* Discord CTA */}
       <AnimateOnScroll animation="scale-in">
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <a
-              href="https://discord.gg/seDb5c9XkM"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block group"
-            >
+            <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="block group">
               <div className="relative rounded-2xl overflow-hidden bg-[#5865F2] p-8 md:p-12 text-center hover:shadow-[0_0_40px_rgba(88,101,242,0.3)] transition-all duration-500">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#5865F2] via-[#4752C4] to-[#3C45A5]" />
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-white/20 -translate-x-1/2 -translate-y-1/2" />
-                  <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-white/10 translate-x-1/3 translate-y-1/3" />
-                </div>
                 <div className="relative z-10">
-                  <div className="flex justify-center mb-5">
-                    <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-9 h-9 text-white" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Join Our Discord Community</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Join Our Discord</h2>
                   <p className="text-white/80 text-base md:text-lg mb-6 max-w-xl mx-auto">
-                    Connect with fellow researchers, get real-time support, exclusive updates, and be part of the Yeti community.
+                    Live order updates, restock pings and a place to chat with other researchers.
                   </p>
                   <div className="inline-flex items-center gap-2 bg-white text-[#5865F2] font-semibold px-6 py-3 rounded-lg group-hover:bg-white/90 transition-colors">
-                    Join Discord
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    Join Discord <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>

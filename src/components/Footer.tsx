@@ -1,62 +1,56 @@
 import { Link } from 'react-router-dom';
-import { Mail, MessageCircle, Send, FlaskConical } from 'lucide-react';
+import { Mail, MessageCircle, Send, FlaskConical, MapPin, Truck, Package } from 'lucide-react';
 import yetiLogo from '@/assets/yeti-logo.png';
 
 export default function Footer() {
   return (
     <footer className="border-t border-border/30 bg-background">
-      {/* Main Footer */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          {/* Brand Column */}
+          {/* Brand */}
           <div className="md:col-span-4">
             <div className="flex items-center gap-3 mb-4">
               <img src={yetiLogo} alt="Yeti Peptides" className="w-8 h-8 object-contain" />
-              <span className="text-lg font-bold text-ice-blue tracking-wider">YETI PEPTIDES</span>
+              <div className="leading-none">
+                <span className="block text-lg font-bold text-ice-blue tracking-wider">YETI PEPTIDES</span>
+                <span className="block text-[9px] uppercase tracking-[0.3em] text-muted-foreground mt-1">UK Domestic · 🇬🇧</span>
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-              Professional research peptide supplier. Premium quality compounds for laboratory use only. Trusted by researchers worldwide.
+            <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+              A small UK research-peptide outfit. 99%+ purity, plain packaging, posted via
+              Royal Mail 24 or anonymous InPost lockers.
             </p>
+            <div className="space-y-2 mb-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 text-ice-blue" /><span>Posted from West Yorkshire</span></div>
+              <div className="flex items-center gap-2"><Truck className="w-3.5 h-3.5 text-ice-blue" /><span>Royal Mail 24 — £6 flat</span></div>
+              <div className="flex items-center gap-2"><Package className="w-3.5 h-3.5 text-aurora" /><span>InPost Lockers — anonymous</span></div>
+            </div>
             <div className="flex gap-3">
-              <a 
-                href="https://discord.gg/seDb5c9XkM"
-                className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all"
-                target="_blank" rel="noopener noreferrer" aria-label="Discord"
-              >
+              <a href="https://discord.gg/seDb5c9XkM" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" target="_blank" rel="noopener noreferrer" aria-label="Discord">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a 
-                href="https://t.me/yetipeptides"
-                className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all"
-                target="_blank" rel="noopener noreferrer" aria-label="Telegram"
-              >
+              <a href="https://t.me/yetipeptides" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                 <Send className="w-4 h-4" />
               </a>
-              <a 
-                href="mailto:yetipeptides@protonmail.com"
-                className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all"
-                aria-label="Email"
-              >
+              <a href="mailto:yetipeptides@protonmail.com" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" aria-label="Email">
                 <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Links */}
+          {/* Navigate */}
           <div className="md:col-span-2">
             <h3 className="font-bold text-sm uppercase tracking-wider mb-4 text-foreground">Navigate</h3>
             <ul className="space-y-2.5 text-sm">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/products', label: 'Products' },
+                { to: '/products', label: 'Catalogue' },
                 { to: '/track-order', label: 'Track Order' },
                 { to: '/about', label: 'About Us' },
                 { to: '/contact', label: 'Contact' },
               ].map(link => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-muted-foreground hover:text-ice-blue transition-colors">
-                    {link.label}
-                  </Link>
+                  <Link to={link.to} className="text-muted-foreground hover:text-ice-blue transition-colors">{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -74,9 +68,7 @@ export default function Footer() {
                 { to: '/how-to-pay-crypto', label: 'How to Pay with Crypto' },
               ].map(link => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-muted-foreground hover:text-ice-blue transition-colors">
-                    {link.label}
-                  </Link>
+                  <Link to={link.to} className="text-muted-foreground hover:text-ice-blue transition-colors">{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -88,20 +80,17 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <a href="mailto:yetipeptides@protonmail.com" className="text-muted-foreground hover:text-ice-blue transition-colors flex items-center gap-2">
-                  <Mail className="w-4 h-4 flex-shrink-0" />
-                  <span>yetipeptides@protonmail.com</span>
+                  <Mail className="w-4 h-4 flex-shrink-0" /><span>yetipeptides@protonmail.com</span>
                 </a>
               </li>
               <li>
                 <a href="https://discord.gg/seDb5c9XkM" className="text-muted-foreground hover:text-ice-blue transition-colors flex items-center gap-2" target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="w-4 h-4 flex-shrink-0" />
-                  <span>Discord Community</span>
+                  <MessageCircle className="w-4 h-4 flex-shrink-0" /><span>Discord Community</span>
                 </a>
               </li>
               <li>
                 <a href="https://t.me/yetipeptides" className="text-muted-foreground hover:text-ice-blue transition-colors flex items-center gap-2" target="_blank" rel="noopener noreferrer">
-                  <Send className="w-4 h-4 flex-shrink-0" />
-                  <span>Telegram</span>
+                  <Send className="w-4 h-4 flex-shrink-0" /><span>Telegram</span>
                 </a>
               </li>
             </ul>
@@ -109,7 +98,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Disclaimer + Copyright */}
       <div className="border-t border-border/20">
         <div className="container mx-auto px-4 py-6">
           <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4 mb-4">
@@ -118,11 +106,11 @@ export default function Footer() {
               <p className="text-sm font-semibold text-destructive">FOR RESEARCH USE ONLY – NOT FOR HUMAN CONSUMPTION</p>
             </div>
             <p className="text-xs text-center text-muted-foreground">
-              All products sold by Yeti Peptides are strictly for laboratory research purposes. Not intended for human or animal consumption, diagnostic, or therapeutic use.
+              All products are strictly for laboratory research purposes. Not intended for human or animal consumption, diagnostic, or therapeutic use.
             </p>
           </div>
           <p className="text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Yeti Peptides. All rights reserved.
+            © {new Date().getFullYear()} Yeti Peptides. UK domestic only. All rights reserved.
           </p>
         </div>
       </div>
