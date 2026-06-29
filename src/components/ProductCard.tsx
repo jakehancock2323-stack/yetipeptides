@@ -97,28 +97,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           loading="lazy"
         />
 
-        {/* Nickname overlay — ghost behind + tracked label */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <span
-            aria-hidden
-            className="absolute font-orbitron font-black tracking-tighter text-ice-blue/[0.07] text-7xl whitespace-nowrap"
-          >
-            {getNickname(product)}
-          </span>
-          <span
-            className={`relative font-orbitron font-bold tracking-[0.25em] text-[1.6rem] sm:text-[1.75rem] whitespace-nowrap transition-opacity duration-500 ${
-              allVariantsOutOfStock
-                ? 'text-foreground/30'
-                : 'text-foreground/85 drop-shadow-[0_0_18px_rgba(125,211,252,0.45)]'
-            }`}
-          >
-            {getNickname(product)}
-          </span>
-        </div>
-
-        {/* Corner accents */}
-        <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-ice-blue/40 pointer-events-none" />
-        <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-ice-blue/40 pointer-events-none" />
 
         {isUkDomestic && (
           <span className="absolute top-3 left-1/2 -translate-x-1/2 text-base bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none z-20" title="UK Domestic">
