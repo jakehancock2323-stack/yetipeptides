@@ -104,7 +104,7 @@ export default function AboutUs() {
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                { icon: Truck, title: 'Royal Mail 24', desc: 'Next-day tracked, flat £6. Drop at the local sorting office before 14:00 — usually with you tomorrow.' },
+                { icon: Truck, title: 'Royal Mail 24', desc: 'Tracked, flat £6. Drop at the local sorting office before 14:00 — typically arrives within 2 days.' },
                 { icon: Package, title: 'InPost Lockers', desc: 'For people who want anonymity — send us a locker QR, we post, you collect. You pay InPost\'s fee directly.' },
                 { icon: MapPin, title: 'Plain Packaging', desc: 'No external markings. No "Yeti Peptides" on the label. Nothing that suggests what\'s inside.' },
               ].map(({ icon: Icon, title, desc }, i) => (
