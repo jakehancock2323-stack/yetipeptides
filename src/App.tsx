@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from "./contexts/CartContext";
 import { RegionProvider } from "./contexts/RegionContext";
+import { AuthProvider } from "./hooks/useAuth";
 import AgeVerification from "./components/AgeVerification";
 import BootScreen from "./components/BootScreen";
 import BackToTop from "./components/BackToTop";
@@ -30,6 +31,8 @@ import HowToPayCrypto from "./pages/HowToPayCrypto";
 import TrackOrder from "./pages/TrackOrder";
 import Unsubscribe from "./pages/Unsubscribe";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import Account from "./pages/Account";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
@@ -53,6 +56,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <RegionProvider>
+            <AuthProvider>
             <CartProvider>
               <Toaster />
               <Sonner />
@@ -80,6 +84,8 @@ const App = () => {
                     <Route path="/how-to-pay-crypto" element={<HowToPayCrypto />} />
                     <Route path="/track-order" element={<TrackOrder />} />
                     <Route path="/unsubscribe" element={<Unsubscribe />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/account" element={<Account />} />
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route
                       path="/admin"
@@ -102,6 +108,7 @@ const App = () => {
                 </BrowserRouter>
               )}
             </CartProvider>
+            </AuthProvider>
           </RegionProvider>
         </TooltipProvider>
       </QueryClientProvider>
