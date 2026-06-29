@@ -151,7 +151,7 @@ export default function Products() {
                   <Truck className="w-4 h-4 text-ice-blue mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-xs font-semibold">Royal Mail 24</p>
-                    <p className="text-[11px] text-muted-foreground">Next-day tracked · £6 flat</p>
+                    <p className="text-[11px] text-muted-foreground">Tracked · ~2 days · £6 flat</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
