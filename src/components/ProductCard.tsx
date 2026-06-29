@@ -138,7 +138,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1 gap-3">
+      <div className="p-3 flex flex-col flex-1 gap-2">
         {/* Category label */}
         <span className="text-[11px] uppercase tracking-wider font-medium text-muted-foreground">
           {product.category}
