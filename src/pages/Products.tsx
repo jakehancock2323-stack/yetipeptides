@@ -5,6 +5,7 @@ import Snowfall from '@/components/Snowfall';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import SEO from '@/components/SEO';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
 import { products, categories } from '@/data/products';
@@ -218,6 +219,8 @@ export default function Products() {
                 <p className="text-muted-foreground">No compounds found matching your search.</p>
               </div>
             )}
+
+            <RecentlyViewed />
 
             <AnimateOnScroll animation="fade-in" delay={200}>
               <div className="mt-10 flex items-center justify-center gap-2 text-xs text-muted-foreground border-t border-border/30 pt-6">
