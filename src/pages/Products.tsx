@@ -154,8 +154,10 @@ export default function Products() {
                 <Flame className="w-3.5 h-3.5" />
                 {bestSellersOnly ? 'Showing Best Sellers' : 'Best Sellers Only'}
               </button>
+            </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
+
               <div className="rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm p-3">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2.5 px-1">Categories</div>
                 <div className="flex flex-wrap lg:flex-col gap-1.5">
