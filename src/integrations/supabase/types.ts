@@ -212,6 +212,42 @@ export type Database = {
         }
         Relationships: []
       }
+      product_reviews: {
+        Row: {
+          body: string
+          created_at: string
+          customer_name: string
+          id: string
+          product_id: string
+          published: boolean
+          rating: number
+          title: string | null
+          verified_purchase: boolean
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          customer_name: string
+          id?: string
+          product_id: string
+          published?: boolean
+          rating: number
+          title?: string | null
+          verified_purchase?: boolean
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          customer_name?: string
+          id?: string
+          product_id?: string
+          published?: boolean
+          rating?: number
+          title?: string | null
+          verified_purchase?: boolean
+        }
+        Relationships: []
+      }
       product_stock_overrides: {
         Row: {
           id: string

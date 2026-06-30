@@ -12,6 +12,14 @@ import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { ChevronLeft, ShoppingCart, Truck, ShieldCheck, FlaskConical, Clock } from 'lucide-react';
 import { getProductImage } from '@/lib/productImages';
+import { pushRecentlyViewed } from '@/lib/recentlyViewed';
+import { isLowStock } from '@/lib/lowStock';
+import { getProductFaqs } from '@/data/productFaqs';
+import ProductFAQ from '@/components/ProductFAQ';
+import ProductReviews from '@/components/ProductReviews';
+import RelatedGuides from '@/components/RelatedGuides';
+import RelatedProducts from '@/components/RelatedProducts';
+import RecentlyViewed from '@/components/RecentlyViewed';
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -27,7 +35,8 @@ export default function ProductDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [slug]);
+    if (product) pushRecentlyViewed(product.id);
+  }, [slug, product]);
 
   if (!product) {
     return (
@@ -143,11 +152,21 @@ export default function ProductDetail() {
               alt={`${product.name} research peptide vial — UK domestic`}
               className="max-h-[280px] object-contain"
             />
-            {product.stockBadge && (
-              <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 border border-ice-blue/20 px-2.5 py-1 rounded">
-                {product.stockBadge}
-              </span>
-            )}
+            {(() => {
+              const { low, count } = isLowStock(product);
+              if (low && count !== null) {
+                return (
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/40 px-2.5 py-1 rounded animate-pulse">
+                    Only {count} left
+                  </span>
+                );
+              }
+              return product.stockBadge ? (
+                <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 border border-ice-blue/20 px-2.5 py-1 rounded">
+                  {product.stockBadge}
+                </span>
+              ) : null;
+            })()}
           </div>
 
           {/* Buy box */}
@@ -260,7 +279,14 @@ export default function ProductDetail() {
             For in-vitro research use only. Not for human or animal consumption. By purchasing you agree to our <Link to="/research-disclaimer">research disclaimer</Link>.
           </p>
         </section>
+
+        <ProductReviews productId={product.id} productName={product.name} />
+        <ProductFAQ faqs={getProductFaqs(product)} productName={product.name} />
+        <RelatedGuides productId={product.id} />
+        <RelatedProducts current={product} />
+        <RecentlyViewed excludeId={product.id} />
       </main>
+
 
       <Footer />
     </div>

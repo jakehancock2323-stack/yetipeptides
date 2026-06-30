@@ -90,7 +90,9 @@ export default function Checkout() {
   const iceElixirSubtotal = items
     .filter(i => i.product.id === "frostskin-serum")
     .reduce((sum, i) => sum + i.variant.price * i.quantity, 0);
-  const promoDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
+  const hairyDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
+  const firstOrderDiscount = appliedPromo === "FIRST5" ? +(calculateSubtotal() * 0.05).toFixed(2) : 0;
+  const promoDiscount = hairyDiscount + firstOrderDiscount;
   const btcFee = paymentMethod === "btc" ? (calculateSubtotal() + deliveryFee - promoDiscount) * 0.04 : 0;
   const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee - promoDiscount;
 
@@ -238,18 +240,39 @@ export default function Checkout() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const applyPromo = () => {
+  const applyPromo = async () => {
     const code = promoInput.trim().toUpperCase();
-    if (code !== "HAIRYYETI") {
-      toast.error("Invalid promo code");
+    if (code === "HAIRYYETI") {
+      if (iceElixirSubtotal <= 0) {
+        toast.error("HAIRYYETI only applies to Ice Elixir");
+        return;
+      }
+      setAppliedPromo("HAIRYYETI");
+      toast.success("Promo applied — 7% off Ice Elixir");
       return;
     }
-    if (iceElixirSubtotal <= 0) {
-      toast.error("HAIRYYETI only applies to Ice Elixir");
+    if (code === "FIRST5") {
+      if (!user) {
+        toast.error("Sign in to your account to use FIRST5");
+        return;
+      }
+      const { count, error } = await supabase
+        .from("orders")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", user.id);
+      if (error) {
+        toast.error("Could not verify first-order status — try again");
+        return;
+      }
+      if ((count ?? 0) > 0) {
+        toast.error("FIRST5 is for your first order only");
+        return;
+      }
+      setAppliedPromo("FIRST5");
+      toast.success("Welcome! 5% off your first order applied");
       return;
     }
-    setAppliedPromo("HAIRYYETI");
-    toast.success("Promo applied — 7% off Ice Elixir");
+    toast.error("Invalid promo code");
   };
 
   const removePromo = () => {
@@ -477,25 +500,32 @@ export default function Checkout() {
                   )}
                 </div>
 
-                {iceElixirSubtotal > 0 && (
-                  <div className="pt-3 border-t border-border/30">
-                    {appliedPromo ? (
-                      <div className="flex items-center justify-between gap-2 p-2 rounded-lg border border-[hsl(var(--ice-blue))]/30 bg-[hsl(var(--ice-blue))]/[0.06]">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <Check className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))] flex-shrink-0" />
-                          <span className="text-xs font-semibold truncate">{appliedPromo}</span>
-                          <span className="text-[10px] text-muted-foreground">— 7% off Ice Elixir</span>
-                        </div>
-                        <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Remove</button>
+                <div className="pt-3 border-t border-border/30">
+                  {appliedPromo ? (
+                    <div className="flex items-center justify-between gap-2 p-2 rounded-lg border border-[hsl(var(--ice-blue))]/30 bg-[hsl(var(--ice-blue))]/[0.06]">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <Check className="w-3.5 h-3.5 text-[hsl(var(--ice-blue))] flex-shrink-0" />
+                        <span className="text-xs font-semibold truncate">{appliedPromo}</span>
+                        <span className="text-[10px] text-muted-foreground">
+                          — {appliedPromo === "FIRST5" ? "5% off first order" : "7% off Ice Elixir"}
+                        </span>
                       </div>
-                    ) : (
+                      <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Remove</button>
+                    </div>
+                  ) : (
+                    <>
                       <div className="flex gap-2">
                         <Input value={promoInput} onChange={(e) => setPromoInput(e.target.value)} placeholder="Promo code" className="h-9 bg-secondary/20 border-border/30 text-xs" />
                         <Button type="button" onClick={applyPromo} variant="outline" size="sm" className="h-9 border-[hsl(var(--ice-blue))]/30 text-xs">Apply</Button>
                       </div>
-                    )}
-                  </div>
-                )}
+                      {user && (
+                        <p className="text-[10px] text-muted-foreground mt-1.5 pl-1">
+                          New customer? Try <span className="font-semibold text-[hsl(var(--ice-blue))]">FIRST5</span> for 5% off your first order.
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
 
                 <div className="space-y-2 pt-3 border-t border-border/30">
                   <div className="flex justify-between text-xs text-muted-foreground">
