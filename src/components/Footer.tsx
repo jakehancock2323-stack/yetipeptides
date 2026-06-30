@@ -45,7 +45,6 @@ export default function Footer() {
               {[
                 { to: '/', label: 'Home' },
                 { to: '/products', label: 'Catalogue' },
-                { to: '/track-order', label: 'Track Order' },
                 { to: '/about', label: 'About Us' },
                 { to: '/contact', label: 'Contact' },
               ].map(link => (
