@@ -143,7 +143,7 @@ export const products: Product[] = [
     region: 'UK Domestic',
     currency: 'GBP',
     stockBadge: '6 vials left',
-    variants: [{ specification: '10mg × 1 vial', price: 18 }],
+    variants: [{ specification: '10mg × 1 vial', price: 16 }],
   },
   {
     id: 'uk-tesamorelin-10mg',
