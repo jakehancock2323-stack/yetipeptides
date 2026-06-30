@@ -71,36 +71,6 @@ export default function Index() {
       )}
       {!showDiscordBanner && <div className="pt-[60px]" />}
 
-      {/* Ice Elixir banner */}
-      <AnimateOnScroll animation="fade-up">
-        <div className="container mx-auto px-4 pt-6">
-          <Link to="/products?product=frostskin-serum" className="block group">
-            <div className="relative rounded-xl overflow-hidden bg-gradient-to-r from-ice-blue/10 via-glacier/5 to-arctic-teal/10 border border-ice-blue/20 glow-border hover:border-ice-blue/40 transition-all duration-300">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-ice-blue/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-              <div className="relative z-10 px-6 py-4 md:px-8 md:py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-ice-blue/15 flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-5 h-5 text-ice-blue" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-ice-blue bg-ice-blue/10 px-2 py-0.5 rounded">New</span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-destructive bg-destructive/10 px-2 py-0.5 rounded">Limited</span>
-                    </div>
-                    <p className="text-sm md:text-base font-medium mt-1">
-                      <span className="text-foreground">Ice Elixir</span>
-                      <span className="text-muted-foreground"> — GHK-Cu 3.33% Facial Serum. Only 13 units in stock.</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-ice-blue font-semibold text-sm whitespace-nowrap group-hover:gap-3 transition-all">
-                  Shop Now <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </AnimateOnScroll>
 
       {/* HERO — editorial UK postal masthead */}
       <section className="relative overflow-hidden border-b border-border/20">
