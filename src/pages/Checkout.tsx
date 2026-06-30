@@ -90,7 +90,9 @@ export default function Checkout() {
   const iceElixirSubtotal = items
     .filter(i => i.product.id === "frostskin-serum")
     .reduce((sum, i) => sum + i.variant.price * i.quantity, 0);
-  const promoDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
+  const hairyDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
+  const firstOrderDiscount = appliedPromo === "FIRST5" ? +(calculateSubtotal() * 0.05).toFixed(2) : 0;
+  const promoDiscount = hairyDiscount + firstOrderDiscount;
   const btcFee = paymentMethod === "btc" ? (calculateSubtotal() + deliveryFee - promoDiscount) * 0.04 : 0;
   const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee - promoDiscount;
 
@@ -238,18 +240,39 @@ export default function Checkout() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const applyPromo = () => {
+  const applyPromo = async () => {
     const code = promoInput.trim().toUpperCase();
-    if (code !== "HAIRYYETI") {
-      toast.error("Invalid promo code");
+    if (code === "HAIRYYETI") {
+      if (iceElixirSubtotal <= 0) {
+        toast.error("HAIRYYETI only applies to Ice Elixir");
+        return;
+      }
+      setAppliedPromo("HAIRYYETI");
+      toast.success("Promo applied — 7% off Ice Elixir");
       return;
     }
-    if (iceElixirSubtotal <= 0) {
-      toast.error("HAIRYYETI only applies to Ice Elixir");
+    if (code === "FIRST5") {
+      if (!user) {
+        toast.error("Sign in to your account to use FIRST5");
+        return;
+      }
+      const { count, error } = await supabase
+        .from("orders")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", user.id);
+      if (error) {
+        toast.error("Could not verify first-order status — try again");
+        return;
+      }
+      if ((count ?? 0) > 0) {
+        toast.error("FIRST5 is for your first order only");
+        return;
+      }
+      setAppliedPromo("FIRST5");
+      toast.success("Welcome! 5% off your first order applied");
       return;
     }
-    setAppliedPromo("HAIRYYETI");
-    toast.success("Promo applied — 7% off Ice Elixir");
+    toast.error("Invalid promo code");
   };
 
   const removePromo = () => {
