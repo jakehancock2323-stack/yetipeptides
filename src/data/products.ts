@@ -185,5 +185,27 @@ export const products: Product[] = [
       'GHK-Cu – 50mg',
     ],
   },
+  {
+    id: 'uk-cjc-ipamorelin-10mg',
+    name: 'CJC-1295 No DAC + Ipamorelin',
+    category: 'Peptides',
+    region: 'UK Domestic',
+    currency: 'GBP',
+    stockBadge: 'In Stock',
+    variants: [{ specification: '10mg blend (5mg CJC-1295 No DAC + 5mg Ipamorelin) × 1 vial', price: 19 }],
+    ingredients: [
+      'CJC-1295 No DAC – 5mg',
+      'Ipamorelin – 5mg',
+    ],
+  },
+  {
+    id: 'uk-mt1-10mg',
+    name: 'MT-1',
+    category: 'Peptides',
+    region: 'UK Domestic',
+    currency: 'GBP',
+    stockBadge: 'In Stock',
+    variants: [{ specification: '10mg × 1 vial', price: 16 }],
+  },
 ];
 
