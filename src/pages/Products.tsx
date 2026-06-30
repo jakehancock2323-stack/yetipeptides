@@ -8,7 +8,7 @@ import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
 import { products, categories } from '@/data/products';
-import { Search, FlaskConical, Package, Truck } from 'lucide-react';
+import { Search, FlaskConical, Package, Truck, Flame } from 'lucide-react';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -123,7 +123,21 @@ export default function Products() {
               </div>
             </div>
           </div>
-        </AnimateOnScroll>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={110}>
+              <button
+                onClick={toggleBestSellers}
+                className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 border ${
+                  bestSellersOnly
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-background border-amber-400 shadow-[0_0_18px_-6px] shadow-amber-500/60'
+                    : 'bg-card/30 text-amber-300 border-amber-500/30 hover:bg-amber-500/10'
+                }`}
+              >
+                <Flame className="w-3.5 h-3.5" />
+                {bestSellersOnly ? 'Showing Best Sellers' : 'Best Sellers Only'}
+              </button>
+            </AnimateOnScroll>
 
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Sticky sidebar */}
