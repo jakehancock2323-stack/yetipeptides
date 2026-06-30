@@ -279,7 +279,14 @@ export default function ProductDetail() {
             For in-vitro research use only. Not for human or animal consumption. By purchasing you agree to our <Link to="/research-disclaimer">research disclaimer</Link>.
           </p>
         </section>
+
+        <ProductReviews productId={product.id} productName={product.name} />
+        <ProductFAQ faqs={getProductFaqs(product)} productName={product.name} />
+        <RelatedGuides productId={product.id} />
+        <RelatedProducts current={product} />
+        <RecentlyViewed excludeId={product.id} />
       </main>
+
 
       <Footer />
     </div>
