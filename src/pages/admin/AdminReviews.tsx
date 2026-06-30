@@ -58,16 +58,23 @@ export default function AdminReviews() {
       toast.error('Customer name and review body are required');
       return;
     }
+    if (selectedProductIds.length === 0) {
+      toast.error('Select at least one product');
+      return;
+    }
     setSubmitting(true);
+    const payload = selectedProductIds.map((pid) => ({ ...form, product_id: pid }));
     const { error } = await supabase
       .from('product_reviews' as never)
-      .insert(form as never);
+      .insert(payload as never);
     setSubmitting(false);
     if (error) {
       toast.error(error.message);
       return;
     }
-    toast.success('Review added');
+    toast.success(
+      `Review added to ${selectedProductIds.length} product${selectedProductIds.length > 1 ? 's' : ''}`
+    );
     setForm({
       ...form,
       customer_name: '',
@@ -76,6 +83,12 @@ export default function AdminReviews() {
       rating: 5,
     });
     load();
+  };
+
+  const toggleProduct = (id: string) => {
+    setSelectedProductIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
   };
 
   const togglePublish = async (row: ReviewRow) => {
