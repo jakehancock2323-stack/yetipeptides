@@ -27,6 +27,8 @@ export default function Navbar() {
     { to: '/', label: 'Home' },
     { to: '/products', label: 'Catalogue' },
     { to: '/calculator', label: 'Calculator' },
+    { to: '/guides', label: 'Guides' },
+
     { to: '/how-to-pay-crypto', label: 'How to Pay' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
