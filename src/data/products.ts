@@ -68,6 +68,7 @@ export const products: Product[] = [
     region: 'UK Domestic',
     currency: 'GBP',
     stockBadge: 'LIMITED STOCK — Only 13 available',
+    popular: true,
     badges: ['Cruelty Free Standards', 'Small Batch Clinical Purity'],
     usage: 'Apply 1-2 full droppers to face & massage in.',
     variants: [
@@ -119,6 +120,7 @@ export const products: Product[] = [
     region: 'UK Domestic',
     currency: 'GBP',
     outOfStock: true,
+    popular: true,
     stockBadge: '30mg: Out of stock',
     variants: [
       { specification: '30mg × 1 vial — Out of stock', price: 28, outOfStock: true },
@@ -131,6 +133,7 @@ export const products: Product[] = [
     region: 'UK Domestic',
     currency: 'GBP',
     outOfStock: true,
+    popular: true,
     stockBadge: '30mg: Out of stock',
     variants: [
       { specification: '30mg × 1 vial — Out of stock', price: 23, outOfStock: true },
@@ -174,6 +177,7 @@ export const products: Product[] = [
     currency: 'GBP',
     stockBadge: 'Out of Stock',
     outOfStock: true,
+    popular: true,
     variants: [{ specification: 'Blend × 1 vial', price: 28 }],
     ingredients: [
       'TB-500 – 10mg',

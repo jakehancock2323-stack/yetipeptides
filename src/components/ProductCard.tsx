@@ -84,7 +84,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {product.popular && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-background text-[11px] font-bold uppercase tracking-wider shadow-md">
           <Flame className="w-3 h-3" />
-          Most Popular
+          Best Seller
         </div>
       )}
 
