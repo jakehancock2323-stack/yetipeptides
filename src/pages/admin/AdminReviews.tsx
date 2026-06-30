@@ -130,25 +130,28 @@ export default function AdminReviews() {
           <Plus className="w-4 h-4 text-ice-blue" /> Add a review
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">Product</Label>
-            <Select
-              value={form.product_id}
-              onValueChange={(v) => setForm({ ...form, product_id: v })}
-            >
-              <SelectTrigger className="mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {products.map((p) => (
-                  <SelectItem key={p.id} value={p.id}>
-                    {p.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <div>
+          <Label className="text-xs text-muted-foreground">
+            Products ({selectedProductIds.length} selected)
+          </Label>
+          <p className="text-[11px] text-muted-foreground mt-0.5 mb-2">
+            Tick every product this review should appear on — customers often buy several.
+          </p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-56 overflow-y-auto rounded-lg border border-border/30 p-3 bg-background/40">
+            {products.map((p) => (
+              <label
+                key={p.id}
+                className="flex items-center gap-2 text-sm cursor-pointer hover:text-ice-blue"
+              >
+                <Checkbox
+                  checked={selectedProductIds.includes(p.id)}
+                  onCheckedChange={() => toggleProduct(p.id)}
+                />
+                <span className="truncate">{p.name}</span>
+              </label>
+            ))}
           </div>
+        </div>
           <div>
             <Label className="text-xs text-muted-foreground">Customer name</Label>
             <Input
