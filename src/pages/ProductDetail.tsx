@@ -12,6 +12,14 @@ import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import { ChevronLeft, ShoppingCart, Truck, ShieldCheck, FlaskConical, Clock } from 'lucide-react';
 import { getProductImage } from '@/lib/productImages';
+import { pushRecentlyViewed } from '@/lib/recentlyViewed';
+import { isLowStock } from '@/lib/lowStock';
+import { getProductFaqs } from '@/data/productFaqs';
+import ProductFAQ from '@/components/ProductFAQ';
+import ProductReviews from '@/components/ProductReviews';
+import RelatedGuides from '@/components/RelatedGuides';
+import RelatedProducts from '@/components/RelatedProducts';
+import RecentlyViewed from '@/components/RecentlyViewed';
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -27,7 +35,8 @@ export default function ProductDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [slug]);
+    if (product) pushRecentlyViewed(product.id);
+  }, [slug, product]);
 
   if (!product) {
     return (
