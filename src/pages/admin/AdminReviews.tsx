@@ -25,8 +25,10 @@ interface ReviewRow {
 export default function AdminReviews() {
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProductIds, setSelectedProductIds] = useState<string[]>(
+    products[0] ? [products[0].id] : []
+  );
   const [form, setForm] = useState({
-    product_id: products[0]?.id ?? '',
     customer_name: '',
     rating: 5,
     title: '',
