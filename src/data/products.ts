@@ -148,6 +148,17 @@ export const products: Product[] = [
     variants: [{ specification: '10mg × 1 vial', price: 16 }],
   },
   {
+    id: 'uk-mt1-10mg',
+    name: 'MT-1',
+    category: 'Peptides',
+    region: 'UK Domestic',
+    currency: 'GBP',
+    stockBadge: 'Coming Soon',
+    outOfStock: true,
+    comingSoon: true,
+    variants: [{ specification: '10mg × 1 vial', price: 16, outOfStock: true }],
+  },
+  {
     id: 'uk-tesamorelin-10mg',
     name: 'Tesamorelin',
     category: 'Peptides',
@@ -200,17 +211,7 @@ export const products: Product[] = [
       'Ipamorelin – 5mg',
     ],
   },
-  {
-    id: 'uk-mt1-10mg',
-    name: 'MT-1',
-    category: 'Peptides',
-    region: 'UK Domestic',
-    currency: 'GBP',
-    stockBadge: 'Coming Soon',
-    outOfStock: true,
-    comingSoon: true,
-    variants: [{ specification: '10mg × 1 vial', price: 16, outOfStock: true }],
-  },
+
   {
     id: 'uk-motsc-10mg',
     name: 'MOTS-c',
