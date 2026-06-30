@@ -217,6 +217,9 @@ export const products: Product[] = [
     name: 'MOTS-c',
     category: 'Peptides',
     region: 'UK Domestic',
+    stockBadge: 'Coming Soon'
+    outOfStock: true,
+    comingSoon: true,
     currency: 'GBP',
     stockBadge: 'In Stock',
     variants: [{ specification: '10mg × 1 vial', price: 15 }],
