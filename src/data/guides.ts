@@ -145,58 +145,60 @@ export const guides: Guide[] = [
     `,
   },
   {
-    slug: 'bpc-157-tb-500-research-overview',
-    title: 'BPC-157 and TB-500: A Research Overview',
+    slug: 'ghk-cu-copper-peptide-research-overview',
+    title: 'GHK-Cu: A Research Overview of the Copper Tripeptide',
     description:
-      'Mechanistic and preclinical evidence for BPC-157 and TB-500 (Thymosin β4 fragment), citing the foundational tendon, gastrointestinal and actin-binding literature.',
+      'Mechanistic and preclinical evidence for GHK-Cu (copper-binding tripeptide), covering gene-expression modulation, ECM remodelling and the foundational Pickart literature.',
     excerpt:
-      'BPC-157 and TB-500 are the two most-cited regenerative research peptides. Here is what the foundational preclinical literature actually established.',
-    readTime: '7 min read',
+      'GHK-Cu is one of the most extensively studied small peptides in regenerative research. Here is what the published literature actually shows.',
+    readTime: '6 min read',
     category: 'Peptide Science',
     publishedAt: '2026-06-15',
     keywords: [
-      'BPC-157 research UK',
-      'TB-500 thymosin beta 4',
-      'KLOW blend',
-      'regenerative peptides',
+      'GHK-Cu research',
+      'copper peptide UK',
+      'GHK gene expression',
+      'Pickart copper tripeptide',
     ],
     contentHtml: `
-      <p>BPC-157 and TB-500 are the two most-studied regenerative research peptides in the preclinical literature. Both have been investigated for over two decades, primarily in rodent injury models, and both have well-characterised molecular targets.</p>
+      <p>GHK is a naturally occurring human tripeptide with the sequence <strong>glycyl-L-histidyl-L-lysine</strong> (Gly-His-Lys). It was first isolated from human plasma by Loren Pickart in 1973 and identified as a factor that restored the function of aged hepatocytes in culture. GHK has a high binding affinity for copper(II), and the resulting <strong>GHK-Cu</strong> complex is the bioactive form studied in most of the published regenerative literature.<sup>[1]</sup></p>
 
-      <h2>BPC-157 (Body Protection Compound 157)</h2>
-      <p>BPC-157 is a stable synthetic <strong>pentadecapeptide</strong> with the sequence <code>GEPPPGKPADDAGLVV</code> (MW 1419), derived from a 15-amino-acid sequence of a protective protein isolated from human gastric juice.<sup>[1]</sup> It is unusual among peptides in that it remains stable in human gastric juice, which is why it has been studied via oral and intraperitoneal routes in rodent models.</p>
-      <p><strong>Tendon and ligament models.</strong> Staresinic et al. (J. Orthop. Res. 2003) demonstrated that BPC-157 accelerated healing of transected rat Achilles tendons relative to control, with measurable improvements in tendon function on biomechanical testing.<sup>[1]</sup> Krivic et al. (2006) extended this to a tendon-to-bone reattachment model and reported that BPC-157 opposed the impairment of healing caused by concurrent corticosteroid administration.<sup>[2]</sup></p>
-      <p><strong>Mechanistic data.</strong> A 2014 study (Chang et al., Molecules) reported that BPC-157 upregulates growth hormone receptor expression in tendon fibroblasts in vitro, suggesting one pathway by which it may modulate fibroblast proliferation and migration.<sup>[3]</sup> A 2019 review in Cell and Tissue Research summarised the evidence base for BPC-157 in musculoskeletal soft tissue healing.<sup>[4]</sup></p>
-      <p><strong>Status.</strong> The vast majority of BPC-157 data is preclinical. It is not an approved medicine in the UK, US or EU and remains an investigational research compound.</p>
+      <h2>Concentration and age</h2>
+      <p>Plasma GHK concentration declines with age — from roughly 200 ng/ml at age 20 to around 80 ng/ml by age 60 — which is one of the observations that drove early interest in its role in tissue maintenance.<sup>[1]</sup></p>
 
-      <h2>TB-500 (Thymosin β4 fragment)</h2>
-      <p>TB-500 is a synthetic peptide corresponding to the active region of <strong>Thymosin β4</strong> (Tβ4), a naturally occurring 43-amino-acid peptide that is the principal G-actin–sequestering molecule in mammalian cells.<sup>[5]</sup> Tβ4 binds G-actin in a 1:1 stoichiometry and regulates the cellular pool of polymerisable actin, which underlies its role in cell migration, angiogenesis and tissue regeneration.</p>
-      <p>Multiple reviews have summarised Tβ4's roles in dermal wound healing, corneal repair and cardiac tissue regeneration in preclinical and early-phase clinical work (Crockford, Ann. NY Acad. Sci. 2010; Goldstein & Kleinman, Expert Opin. Biol. Ther. 2015).<sup>[5][6]</sup> A 2021 Frontiers review summarised its application across wound healing, neuroprotection and cardiovascular models.<sup>[7]</sup></p>
+      <h2>Mechanistic data</h2>
+      <p>GHK-Cu's biological activity is best characterised at the level of gene expression. A 2010 Broad Institute Connectivity Map analysis (referenced extensively by Pickart and Margolina) identified GHK as a small molecule capable of modulating the expression of <strong>over 4,000 human genes</strong> — broadly resetting transcription patterns toward those of younger tissue, including upregulation of DNA repair, antioxidant and ubiquitin–proteasome pathway genes.<sup>[2]</sup></p>
+      <p>At the tissue level, GHK-Cu has been shown in vitro and in animal models to:</p>
+      <ul>
+        <li>Stimulate collagen, elastin, glycosaminoglycan and proteoglycan synthesis in dermal fibroblasts.<sup>[3]</sup></li>
+        <li>Modulate metalloproteinase activity (MMP-2 upregulation, TIMP-1 and TIMP-2 modulation), supporting extracellular matrix remodelling.<sup>[3]</sup></li>
+        <li>Promote angiogenesis in wound models via VEGF-mediated pathways.<sup>[2]</sup></li>
+        <li>Exhibit antioxidant activity through copper sequestration, preventing copper-catalysed Fenton-reaction oxidative damage.<sup>[2]</sup></li>
+      </ul>
+
+      <h2>Preclinical wound and tissue models</h2>
+      <p>GHK-Cu has been studied in rodent and porcine wound models, with reported improvements in granulation tissue formation, angiogenesis and re-epithelialisation rates relative to control.<sup>[3]</sup> It is one of the few research peptides that has crossed into widespread cosmetic and dermatological topical use — though those applications are downstream of the foundational research literature, not the subject of this guide.</p>
+
+      <h2>Status</h2>
+      <p>GHK-Cu is not an approved medicine in the UK, US or EU. The body of evidence consists primarily of in vitro mechanistic studies and preclinical animal models, with a smaller number of small-scale human dermatological studies.</p>
 
       <h2>The KLOW research blend</h2>
-      <p>Our <a href="/products?product=uk-klow">KLOW research blend</a> combines four regenerative-research peptides in a single vial:</p>
-      <ul>
-        <li><strong>TB-500</strong> — 10 mg (Thymosin β4 active fragment)</li>
-        <li><strong>BPC-157</strong> — 10 mg</li>
-        <li><strong>KPV</strong> — 10 mg (C-terminal tripeptide of α-MSH, studied for anti-inflammatory activity)</li>
-        <li><strong>GHK-Cu</strong> — 50 mg (copper-binding tripeptide, studied for ECM remodelling)</li>
-      </ul>
-      <p>KLOW is currently out of stock; check the product page for restock updates.</p>
+      <p>Our <a href="/products?product=uk-klow">KLOW research blend</a> combines GHK-Cu (50 mg) with TB-500, BPC-157 and KPV in a single research vial. Standalone <a href="/products?product=uk-ghk-cu">GHK-Cu 50 mg</a> is also available domestically.</p>
+
+      <h2>Handling notes</h2>
+      <p>GHK-Cu solutions are characteristically <strong>blue</strong> due to the copper coordination complex — this is expected and does not indicate degradation. Copper-containing peptides are generally more sensitive to solution-phase degradation than uncomplexed peptides; we recommend a shorter in-use window (14–21 days at 2–8 °C) than the 28-day rule of thumb used for many other peptides. See our <a href="/guides/storing-research-peptides-uk">storage guide</a> for full protocol.</p>
 
       <h2>References</h2>
       <ol class="references">
-        <li>Staresinic, M. et al. <em>Gastric pentadecapeptide BPC 157 accelerates healing of transected rat Achilles tendon.</em> J. Orthop. Res. 21, 976–983 (2003).</li>
-        <li>Krivic, A. et al. <em>Achilles detachment in rat and stable gastric pentadecapeptide BPC 157.</em> J. Orthop. Res. 24, 982–989 (2006).</li>
-        <li>Chang, C. H. et al. <em>Pentadecapeptide BPC 157 Enhances the Growth Hormone Receptor Expression in Tendon Fibroblasts.</em> Molecules 19, 19066–19077 (2014).</li>
-        <li>Gwyer, D. et al. <em>Gastric pentadecapeptide BPC 157 and musculoskeletal soft tissue healing.</em> Cell Tissue Res. 377, 153–159 (2019).</li>
-        <li>Crockford, D. et al. <em>Thymosin β4: structure, function, and biological properties.</em> Ann. NY Acad. Sci. 1194, 179–189 (2010).</li>
-        <li>Goldstein, A. L. & Kleinman, H. K. <em>Advances in the basic and clinical applications of thymosin β4.</em> Expert Opin. Biol. Ther. 15, S139–145 (2015).</li>
-        <li>Ye, Y. et al. <em>Progress on the Function and Application of Thymosin β4.</em> Front. Endocrinol. 12, 767785 (2021).</li>
+        <li>Pickart, L. & Margolina, A. <em>Regenerative and Protective Actions of the GHK-Cu Peptide in the Light of the New Gene Data.</em> Int. J. Mol. Sci. 19, 1987 (2018). PMC6073405.</li>
+        <li>Pickart, L., Vasquez-Soltero, J. M. & Margolina, A. <em>GHK Peptide as a Natural Modulator of Multiple Cellular Pathways in Skin Regeneration.</em> BioMed Res. Int. 2015, 648108 (2015). PMC4508379.</li>
+        <li>Pickart, L. <em>The human tri-peptide GHK and tissue remodeling.</em> J. Biomater. Sci. Polym. Ed. 19, 969–988 (2008).</li>
       </ol>
 
       <p class="disclaimer">For in-vitro research use only. Not for human consumption. This article summarises published preclinical literature for educational purposes.</p>
     `,
   },
+
   {
     slug: 'storing-research-peptides-uk',
     title: 'Storing Research Peptides Correctly: A Stability-Based Guide',
