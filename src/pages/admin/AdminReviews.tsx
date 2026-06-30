@@ -5,13 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { Star, Trash2, Plus, Eye, EyeOff } from 'lucide-react';
@@ -31,8 +25,10 @@ interface ReviewRow {
 export default function AdminReviews() {
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProductIds, setSelectedProductIds] = useState<string[]>(
+    products[0] ? [products[0].id] : []
+  );
   const [form, setForm] = useState({
-    product_id: products[0]?.id ?? '',
     customer_name: '',
     rating: 5,
     title: '',
@@ -62,16 +58,23 @@ export default function AdminReviews() {
       toast.error('Customer name and review body are required');
       return;
     }
+    if (selectedProductIds.length === 0) {
+      toast.error('Select at least one product');
+      return;
+    }
     setSubmitting(true);
+    const payload = selectedProductIds.map((pid) => ({ ...form, product_id: pid }));
     const { error } = await supabase
       .from('product_reviews' as never)
-      .insert(form as never);
+      .insert(payload as never);
     setSubmitting(false);
     if (error) {
       toast.error(error.message);
       return;
     }
-    toast.success('Review added');
+    toast.success(
+      `Review added to ${selectedProductIds.length} product${selectedProductIds.length > 1 ? 's' : ''}`
+    );
     setForm({
       ...form,
       customer_name: '',
@@ -80,6 +83,12 @@ export default function AdminReviews() {
       rating: 5,
     });
     load();
+  };
+
+  const toggleProduct = (id: string) => {
+    setSelectedProductIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
   };
 
   const togglePublish = async (row: ReviewRow) => {
@@ -121,34 +130,36 @@ export default function AdminReviews() {
           <Plus className="w-4 h-4 text-ice-blue" /> Add a review
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">Product</Label>
-            <Select
-              value={form.product_id}
-              onValueChange={(v) => setForm({ ...form, product_id: v })}
-            >
-              <SelectTrigger className="mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {products.map((p) => (
-                  <SelectItem key={p.id} value={p.id}>
-                    {p.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <div>
+          <Label className="text-xs text-muted-foreground">
+            Products ({selectedProductIds.length} selected)
+          </Label>
+          <p className="text-[11px] text-muted-foreground mt-0.5 mb-2">
+            Tick every product this review should appear on — customers often buy several.
+          </p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-56 overflow-y-auto rounded-lg border border-border/30 p-3 bg-background/40">
+            {products.map((p) => (
+              <label
+                key={p.id}
+                className="flex items-center gap-2 text-sm cursor-pointer hover:text-ice-blue"
+              >
+                <Checkbox
+                  checked={selectedProductIds.includes(p.id)}
+                  onCheckedChange={() => toggleProduct(p.id)}
+                />
+                <span className="truncate">{p.name}</span>
+              </label>
+            ))}
           </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Customer name</Label>
-            <Input
-              value={form.customer_name}
-              onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
-              placeholder="e.g. James M."
-              className="mt-1"
-            />
-          </div>
+        </div>
+        <div>
+          <Label className="text-xs text-muted-foreground">Customer name</Label>
+          <Input
+            value={form.customer_name}
+            onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
+            placeholder="e.g. James M."
+            className="mt-1"
+          />
         </div>
 
         <div className="grid md:grid-cols-2 gap-3">
