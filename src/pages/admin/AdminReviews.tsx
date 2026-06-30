@@ -152,15 +152,14 @@ export default function AdminReviews() {
             ))}
           </div>
         </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Customer name</Label>
-            <Input
-              value={form.customer_name}
-              onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
-              placeholder="e.g. James M."
-              className="mt-1"
-            />
-          </div>
+        <div>
+          <Label className="text-xs text-muted-foreground">Customer name</Label>
+          <Input
+            value={form.customer_name}
+            onChange={(e) => setForm({ ...form, customer_name: e.target.value })}
+            placeholder="e.g. James M."
+            className="mt-1"
+          />
         </div>
 
         <div className="grid md:grid-cols-2 gap-3">
