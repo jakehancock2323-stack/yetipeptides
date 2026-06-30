@@ -97,10 +97,6 @@ export default {
         },
         "spin-slow": { to: { transform: "rotate(360deg)" } },
         "spin-reverse": { to: { transform: "rotate(-360deg)" } },
-        "page-in": {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,7 +104,6 @@ export default {
         "spin-slow": "spin-slow 30s linear infinite",
         "spin-reverse": "spin-reverse 22s linear infinite",
         "spin-medium": "spin-slow 18s linear infinite",
-        "page-in": "page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
 
     },

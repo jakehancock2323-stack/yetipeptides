@@ -72,7 +72,6 @@ const App = () => {
                   <ScrollToTop />
                   <BackToTop />
                   
-                  <PageTransition>
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/products" element={<Products />} />
@@ -116,7 +115,6 @@ const App = () => {
                     </Route>
                     <Route path="*" element={<NotFound />} />
                   </Routes>
-                  </PageTransition>
                 </BrowserRouter>
               )}
             </CartProvider>
