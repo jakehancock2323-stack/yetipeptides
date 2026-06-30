@@ -152,11 +152,21 @@ export default function ProductDetail() {
               alt={`${product.name} research peptide vial — UK domestic`}
               className="max-h-[280px] object-contain"
             />
-            {product.stockBadge && (
-              <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 border border-ice-blue/20 px-2.5 py-1 rounded">
-                {product.stockBadge}
-              </span>
-            )}
+            {(() => {
+              const { low, count } = isLowStock(product);
+              if (low && count !== null) {
+                return (
+                  <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/40 px-2.5 py-1 rounded animate-pulse">
+                    Only {count} left
+                  </span>
+                );
+              }
+              return product.stockBadge ? (
+                <span className="absolute top-4 right-4 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 border border-ice-blue/20 px-2.5 py-1 rounded">
+                  {product.stockBadge}
+                </span>
+              ) : null;
+            })()}
           </div>
 
           {/* Buy box */}
