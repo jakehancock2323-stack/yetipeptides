@@ -191,8 +191,10 @@ export const products: Product[] = [
     category: 'Peptides',
     region: 'UK Domestic',
     currency: 'GBP',
-    stockBadge: 'In Stock',
-    variants: [{ specification: '10mg blend (5mg CJC-1295 No DAC + 5mg Ipamorelin) × 1 vial', price: 19 }],
+    stockBadge: 'Coming Soon',
+    outOfStock: true,
+    comingSoon: true,
+    variants: [{ specification: '10mg blend (5mg CJC-1295 No DAC + 5mg Ipamorelin) × 1 vial', price: 19, outOfStock: true }],
     ingredients: [
       'CJC-1295 No DAC – 5mg',
       'Ipamorelin – 5mg',
@@ -204,8 +206,10 @@ export const products: Product[] = [
     category: 'Peptides',
     region: 'UK Domestic',
     currency: 'GBP',
-    stockBadge: 'In Stock',
-    variants: [{ specification: '10mg × 1 vial', price: 16 }],
+    stockBadge: 'Coming Soon',
+    outOfStock: true,
+    comingSoon: true,
+    variants: [{ specification: '10mg × 1 vial', price: 16, outOfStock: true }],
   },
 ];
 
