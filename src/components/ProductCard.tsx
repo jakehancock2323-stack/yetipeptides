@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from './ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
-import { ShoppingCart, Flame, Clock } from 'lucide-react';
+import { ShoppingCart, Flame, Clock, AlertCircle } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
@@ -15,6 +15,7 @@ import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
 import frostSkinImage from '@/assets/ice-elixir.png';
 import tretinoinCreamImage from '@/assets/tretinoin-cream.png';
 import { formatGbpEstimate } from '@/lib/currency';
+import { isLowStock } from '@/lib/lowStock';
 
 interface ProductCardProps {
   product: Product;
@@ -100,20 +101,38 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
 
 
-        {allVariantsOutOfStock ? (
-          <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
-            {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
-          </span>
-        ) : isPreOrder ? (
-          <span className="absolute top-3 right-3 z-20 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
-            <Clock className="w-3 h-3" />
-            Pre-Order
-          </span>
-        ) : product.stockBadge ? (
-          <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
-            {product.stockBadge}
-          </span>
-        ) : null}
+        {(() => {
+          const { low, count } = isLowStock(product);
+          if (allVariantsOutOfStock) {
+            return (
+              <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
+                {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
+              </span>
+            );
+          }
+          if (isPreOrder) {
+            return (
+              <span className="absolute top-3 right-3 z-20 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 backdrop-blur-sm px-2 py-0.5 rounded">
+                <Clock className="w-3 h-3" /> Pre-Order
+              </span>
+            );
+          }
+          if (low && count !== null) {
+            return (
+              <span className="absolute top-3 right-3 z-20 flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-amber-300 bg-amber-500/15 border border-amber-400/40 backdrop-blur-sm px-2 py-0.5 rounded animate-pulse">
+                <AlertCircle className="w-3 h-3" /> Only {count} left
+              </span>
+            );
+          }
+          if (product.stockBadge) {
+            return (
+              <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-ice-blue bg-ice-blue/10 backdrop-blur-sm px-2 py-0.5 rounded">
+                {product.stockBadge}
+              </span>
+            );
+          }
+          return null;
+        })()}
       </div>
 
       {/* Content */}
