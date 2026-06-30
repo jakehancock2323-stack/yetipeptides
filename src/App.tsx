@@ -16,12 +16,16 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
+import Guides from "./pages/Guides";
+import GuideDetail from "./pages/GuideDetail";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import Contact from "./pages/Contact";
 import PeptideCalculator from "./pages/PeptideCalculator";
 import AboutUs from "./pages/AboutUs";
+
 
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
