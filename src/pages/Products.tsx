@@ -8,7 +8,7 @@ import SEO from '@/components/SEO';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { Input } from '@/components/ui/input';
 import { products, categories } from '@/data/products';
-import { Search, FlaskConical, Package, Truck } from 'lucide-react';
+import { Search, FlaskConical, Package, Truck, Flame } from 'lucide-react';
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +16,13 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     searchParams.get('category') || 'All'
   );
+  const [bestSellersOnly, setBestSellersOnly] = useState<boolean>(
+    searchParams.get('filter') === 'best-sellers'
+  );
+
+  useEffect(() => {
+    setBestSellersOnly(searchParams.get('filter') === 'best-sellers');
+  }, [searchParams]);
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -39,12 +46,23 @@ export default function Products() {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesBestSellers = !bestSellersOnly || product.popular;
+    return matchesSearch && matchesCategory && matchesBestSellers;
   });
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setSearchParams({ category });
+    const params: Record<string, string> = { category };
+    if (bestSellersOnly) params.filter = 'best-sellers';
+    setSearchParams(params);
+  };
+
+  const toggleBestSellers = () => {
+    const next = !bestSellersOnly;
+    setBestSellersOnly(next);
+    const params: Record<string, string> = { category: selectedCategory };
+    if (next) params.filter = 'best-sellers';
+    setSearchParams(params);
   };
 
   const productsSchema = {
@@ -105,7 +123,8 @@ export default function Products() {
               </div>
             </div>
           </div>
-        </AnimateOnScroll>
+          </AnimateOnScroll>
+
 
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Sticky sidebar */}
@@ -123,7 +142,22 @@ export default function Products() {
               </div>
             </AnimateOnScroll>
 
+            <AnimateOnScroll delay={110}>
+              <button
+                onClick={toggleBestSellers}
+                className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 border ${
+                  bestSellersOnly
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-background border-amber-400 shadow-[0_0_18px_-6px] shadow-amber-500/60'
+                    : 'bg-card/30 text-amber-300 border-amber-500/30 hover:bg-amber-500/10'
+                }`}
+              >
+                <Flame className="w-3.5 h-3.5" />
+                {bestSellersOnly ? 'Showing Best Sellers' : 'Best Sellers Only'}
+              </button>
+            </AnimateOnScroll>
+
             <AnimateOnScroll delay={100}>
+
               <div className="rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm p-3">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2.5 px-1">Categories</div>
                 <div className="flex flex-wrap lg:flex-col gap-1.5">

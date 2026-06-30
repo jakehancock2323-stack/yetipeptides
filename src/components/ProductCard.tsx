@@ -98,11 +98,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
 
 
-        {isUkDomestic && (
-          <span className="absolute top-3 left-1/2 -translate-x-1/2 text-base bg-black/30 backdrop-blur-sm px-1.5 py-0.5 rounded leading-none z-20" title="UK Domestic">
-            🇬🇧
-          </span>
-        )}
         {allVariantsOutOfStock ? (
           <span className="absolute top-3 right-3 z-20 text-[11px] uppercase tracking-wider font-bold text-destructive bg-destructive/10 backdrop-blur-sm px-2 py-0.5 rounded">
             {isUkDomesticOutOfStock ? 'Coming soon' : 'Out of Stock'}
