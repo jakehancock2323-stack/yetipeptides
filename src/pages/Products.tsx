@@ -16,6 +16,13 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     searchParams.get('category') || 'All'
   );
+  const [bestSellersOnly, setBestSellersOnly] = useState<boolean>(
+    searchParams.get('filter') === 'best-sellers'
+  );
+
+  useEffect(() => {
+    setBestSellersOnly(searchParams.get('filter') === 'best-sellers');
+  }, [searchParams]);
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -39,12 +46,23 @@ export default function Products() {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesBestSellers = !bestSellersOnly || product.popular;
+    return matchesSearch && matchesCategory && matchesBestSellers;
   });
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setSearchParams({ category });
+    const params: Record<string, string> = { category };
+    if (bestSellersOnly) params.filter = 'best-sellers';
+    setSearchParams(params);
+  };
+
+  const toggleBestSellers = () => {
+    const next = !bestSellersOnly;
+    setBestSellersOnly(next);
+    const params: Record<string, string> = { category: selectedCategory };
+    if (next) params.filter = 'best-sellers';
+    setSearchParams(params);
   };
 
   const productsSchema = {
