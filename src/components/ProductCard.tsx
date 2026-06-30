@@ -126,8 +126,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Name + Price */}
         <div className="flex items-start justify-between gap-2 -mt-1">
           <h3 className="text-base font-semibold leading-tight group-hover:text-ice-blue transition-colors">
-            {product.name}
+            <Link to={`/products/${product.id}`} className="hover:underline focus:outline-none focus:ring-2 focus:ring-ice-blue/40 rounded">
+              {product.name}
+            </Link>
           </h3>
+
           <div className="text-right whitespace-nowrap">
             <div className="flex items-baseline justify-end gap-1.5">
               {selectedVariant.originalPrice && selectedVariant.originalPrice > selectedVariant.price && (
