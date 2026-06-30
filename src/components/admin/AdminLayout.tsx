@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { adminSignOut } from "@/lib/adminAuth";
-import { LayoutDashboard, Package, BarChart3, Users, Mail, LogOut, Menu, X, Truck } from "lucide-react";
+import { LayoutDashboard, Package, BarChart3, Users, Mail, LogOut, Menu, X, Truck, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -9,6 +9,7 @@ const links = [
   { to: "/admin/domestic", label: "UK Domestic", icon: Truck },
   { to: "/admin/stats", label: "Stats", icon: BarChart3 },
   { to: "/admin/customers", label: "Customers", icon: Users },
+  { to: "/admin/reviews", label: "Reviews", icon: Star },
   { to: "/admin/templates", label: "Email Templates", icon: Mail },
 ];
 

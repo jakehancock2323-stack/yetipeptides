@@ -45,6 +45,7 @@ import AdminCustomers from "./pages/admin/AdminCustomers";
 import AdminDomestic from "./pages/admin/AdminDomestic";
 
 import AdminTemplates from "./pages/admin/AdminTemplates";
+import AdminReviews from "./pages/admin/AdminReviews";
 import RequireAdmin from "./components/admin/RequireAdmin";
 import AdminLayout from "./components/admin/AdminLayout";
 
@@ -110,6 +111,7 @@ const App = () => {
                       <Route path="customers" element={<AdminCustomers />} />
                       
                       <Route path="templates" element={<AdminTemplates />} />
+                      <Route path="reviews" element={<AdminReviews />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                   </Routes>
