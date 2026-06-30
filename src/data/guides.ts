@@ -260,6 +260,216 @@ export const guides: Guide[] = [
       <p class="disclaimer">For in-vitro research use only. Not for human consumption.</p>
     `,
   },
+
+  {
+    slug: 'choosing-bacteriostatic-water-uk',
+    title: 'Choosing the Right Bacteriostatic Water for Peptide Reconstitution',
+    description:
+      'Why bacteriostatic water with 0.9% benzyl alcohol is the standard diluent for multi-dose peptide vials, and how it compares to sterile water for injection and saline.',
+    excerpt:
+      'Not all "water" is the same diluent. This guide explains why bacteriostatic water — and specifically 0.9% benzyl alcohol formulations — is the standard for multi-dose research peptide vials.',
+    readTime: '6 min read',
+    category: 'Lab Basics',
+    publishedAt: '2026-06-22',
+    keywords: [
+      'bacteriostatic water UK',
+      'benzyl alcohol diluent',
+      'peptide reconstitution water',
+      'BWFI vs SWFI',
+    ],
+    contentHtml: `
+      <p>The choice of diluent is one of the few reconstitution variables that the published literature is genuinely consistent on. For multi-dose research peptide vials punctured repeatedly over days or weeks, the standard diluent is <strong>bacteriostatic water for injection (BWFI) containing 0.9% benzyl alcohol</strong>. This article explains why, and where the alternatives belong.</p>
+
+      <h2>Bacteriostatic water (BWFI) — 0.9% benzyl alcohol</h2>
+      <p>BWFI is sterile water containing 0.9% w/v benzyl alcohol as an antimicrobial preservative. Benzyl alcohol is bacteriostatic against the common ingress organisms (<em>Staphylococcus aureus</em>, <em>Escherichia coli</em>, <em>Pseudomonas aeruginosa</em>, <em>Candida albicans</em>) at this concentration.<sup>[1]</sup> Crucially, its preservative capacity is what allows USP &lt;1207&gt; to designate BWFI-reconstituted multi-dose vials with an in-use period of up to 28 days under refrigeration, depending on entry frequency.<sup>[2]</sup></p>
+
+      <p>For a research vial punctured every 1–3 days for several weeks, no other commonly available diluent provides the same antimicrobial budget without introducing other problems.</p>
+
+      <h2>Sterile water for injection (SWFI) — no preservative</h2>
+      <p>SWFI contains no preservative. It is intended for <strong>single-use</strong> reconstitution where the entire vial is used immediately or discarded. Using SWFI in a multi-dose research workflow creates a measurable microbial-growth risk after the first puncture, because there is nothing in solution to inhibit organisms introduced by needle or air contact.</p>
+
+      <p>SWFI has a legitimate niche — single-dose vials, ultra-short reconstituted lifetimes, or peptides with documented benzyl alcohol incompatibility (rare; mostly highly hydrophobic sequences where solubility behaviour changes). For routine multi-dose research peptide work, it is the wrong default.</p>
+
+      <h2>Saline (0.9% NaCl) — usually unsuitable</h2>
+      <p>Sodium chloride solutions are not appropriate for general peptide reconstitution. Chloride ions can accelerate degradation of certain sequences (oxidation- and hydrolysis-sensitive residues), the ionic strength can shift solubility for some peptides, and saline contains no preservative. The pharmacological convention of saline as a diluent applies to small-molecule injectables, not lyophilised peptide vials intended for multi-day use.</p>
+
+      <h2>What "0.9%" actually means and why it matters</h2>
+      <p>0.9% benzyl alcohol is the standard pharmacopoeial concentration. Some products are sold at higher concentrations (1.5–2%) for specific compounding workflows — these are not interchangeable with standard BWFI and can be unnecessarily harsh on more sensitive peptides. When buying BWFI, check the label states <strong>"0.9% benzyl alcohol"</strong> and is from a recognised pharmaceutical-grade manufacturer (Hospira/Pfizer being the most common reference product in the UK and US markets).</p>
+
+      <h2>Practical buying checklist</h2>
+      <ul>
+        <li><strong>Diluent:</strong> Bacteriostatic water for injection, USP.</li>
+        <li><strong>Preservative:</strong> 0.9% benzyl alcohol — not 1.5%, not "preservative-free".</li>
+        <li><strong>Vial size:</strong> 10 ml or 30 ml — match it to your weekly throughput so you finish a vial inside its 28-day in-use window.</li>
+        <li><strong>Sealed sterile packaging</strong> with intact septum and visible expiry date.</li>
+        <li><strong>Cold-chain shipping not required.</strong> BWFI is stable at room temperature until the seal is broken.</li>
+      </ul>
+
+      <h2>In-use stability and the 28-day rule</h2>
+      <p>Once punctured, a multi-dose BWFI vial has a documented in-use period of up to 28 days at 2–8 °C. The same window applies as a sensible upper bound to most BWFI-reconstituted peptides — but the rate-limiting factor becomes the peptide's own stability, not the diluent's preservative budget. Copper peptides (GHK-Cu) and some growth-hormone secretagogue blends degrade faster than 28 days; check the peptide-specific guidance.</p>
+
+      <h2>Cautions and contraindications</h2>
+      <p>Benzyl alcohol has well-documented toxicity in neonates ("gasping syndrome") at the doses used in clinical practice — this is why BWFI is not used in neonatal pharmacy. The doses involved in research peptide reconstitution are several orders of magnitude lower, but the toxicology context is worth knowing.</p>
+
+      <h2>References</h2>
+      <ol class="references">
+        <li>Meyer, B. K. et al. <em>Antimicrobial preservative use in parenteral products.</em> J. Pharm. Sci. 96, 3155–3167 (2007).</li>
+        <li>United States Pharmacopeia. <em>USP &lt;1207&gt; Package Integrity Evaluation — Sterile Products.</em></li>
+        <li>Manning, M. C. et al. <em>Stability of Protein Pharmaceuticals: An Update.</em> Pharm. Res. 27, 544–575 (2010).</li>
+      </ol>
+
+      <p class="disclaimer">For in-vitro research use only. Not for human consumption.</p>
+    `,
+  },
+
+  {
+    slug: 'melanotan-2-research-overview',
+    title: 'Melanotan II (MT-2): A Research Overview',
+    description:
+      'Research-grade overview of Melanotan II — melanocortin receptor pharmacology, the published peer-reviewed clinical data on pigmentation and erectile function, and documented adverse-event profile.',
+    excerpt:
+      'MT-2 has a small but real peer-reviewed evidence base spanning melanocortin pharmacology, pigmentation studies, and erectile-function trials. Here is what the literature actually shows.',
+    readTime: '9 min read',
+    category: 'Peptide Research',
+    publishedAt: '2026-06-25',
+    keywords: [
+      'Melanotan 2 research',
+      'MT-2 mechanism',
+      'melanocortin receptor agonist',
+      'MT-2 clinical data',
+    ],
+    contentHtml: `
+      <p>Melanotan II (MT-2) is a synthetic cyclic heptapeptide analogue of α-melanocyte-stimulating hormone (α-MSH), originally developed at the University of Arizona in the 1980s as a non-selective melanocortin receptor agonist.<sup>[1]</sup> This article summarises the published pharmacology, the clinical trial record, and the adverse-event profile recorded in the peer-reviewed literature.</p>
+
+      <h2>Structure and pharmacology</h2>
+      <p>MT-2 is a cyclic peptide (Ac-Nle-cyclo[Asp-His-D-Phe-Arg-Trp-Lys]-NH₂) that binds with high affinity to all five human melanocortin receptors (MC1R–MC5R). It is non-selective, in contrast to its linear cousin afamelanotide (Scenesse), which targets MC1R more selectively. Receptor activation drives:<sup>[1][2]</sup></p>
+      <ul>
+        <li><strong>MC1R</strong> — eumelanin synthesis in cutaneous melanocytes (pigmentation).</li>
+        <li><strong>MC3R / MC4R</strong> — central nervous system effects on appetite, sexual function and energy expenditure.</li>
+        <li><strong>MC5R</strong> — exocrine gland function (sebum, sweat).</li>
+      </ul>
+
+      <h2>Published clinical data — pigmentation</h2>
+      <p>The early pigmentation studies were small Phase I/II trials in healthy volunteers conducted in the 1990s. Repeated subcutaneous administration produced measurable, dose-dependent increases in cutaneous melanin density assessed by reflectance spectrophotometry, with skin darkening visible across all Fitzpatrick types and most pronounced in II–III.<sup>[3]</sup> Pigmentation was not uniform: nevi, freckles and pre-existing pigmented lesions darkened disproportionately — a finding that recurs in the adverse-event record (see below).</p>
+
+      <h2>Published clinical data — erectile function</h2>
+      <p>Two randomised placebo-controlled crossover trials by Wessells et al. (1998, 2000) evaluated MT-2 in men with psychogenic and organic erectile dysfunction. Both reported statistically significant increases in penile rigidity (RigiScan-measured) and subjective erectile response versus placebo, mediated centrally via MC4R rather than peripherally.<sup>[4][5]</sup> Development as an ED therapeutic did not advance, in large part because of the adverse-event profile.</p>
+
+      <h2>Documented adverse-event profile</h2>
+      <p>The published trials and subsequent case-report literature consistently describe:</p>
+      <ul>
+        <li><strong>Nausea and facial flushing</strong> — dose-related, especially during titration, and the most common reason participants discontinued in early trials.<sup>[3][4]</sup></li>
+        <li><strong>Spontaneous penile erections</strong> in male participants — frequently dose-limiting in the pigmentation studies.</li>
+        <li><strong>Darkening and proliferation of melanocytic nevi.</strong> Multiple case reports and dermatology case series have documented new or changing pigmented lesions in MT-2 users, including reports of melanoma in young users; causation is debated but the signal is consistent enough that dermatology consensus recommends pre- and post-use mole mapping.<sup>[6]</sup></li>
+        <li><strong>Posterior reversible encephalopathy syndrome (PRES)</strong> and rhabdomyolysis have been reported in isolated cases of high-dose unsupervised use.<sup>[7]</sup></li>
+      </ul>
+
+      <h2>Regulatory status</h2>
+      <p>MT-2 is not approved as a medicine in the UK, EU or US. The only licensed melanocortin agonist in clinical practice is <strong>afamelanotide (Scenesse)</strong>, a more MC1R-selective linear analogue, approved by the EMA and FDA for erythropoietic protoporphyria. MT-2 itself is sold only as a research compound.</p>
+
+      <h2>What the literature does not support</h2>
+      <ul>
+        <li>"Sunless" tanning without any UV exposure — published pigmentation protocols pair MT-2 with controlled UV exposure to stimulate melanogenesis, and pigmentation regresses over weeks once dosing stops.</li>
+        <li>Weight-loss claims — MC4R agonism has anorectic effects, but no controlled trial has evaluated MT-2 as a weight-loss agent in humans, and the adverse-event profile makes this a dead end.</li>
+        <li>Long-term safety — no clinical study has followed MT-2 users for more than weeks-to-months. The dermatology case-report literature is the only long-term signal available.</li>
+      </ul>
+
+      <h2>References</h2>
+      <ol class="references">
+        <li>Dorr, R. T. et al. <em>Evaluation of melanotan-II, a superpotent cyclic melanotropic peptide.</em> Life Sci. 58, 1777–1784 (1996).</li>
+        <li>Hadley, M. E. & Dorr, R. T. <em>Melanocortin peptide therapeutics: historical milestones, clinical studies and commercialization.</em> Peptides 27, 921–930 (2006).</li>
+        <li>Levine, N. et al. <em>Induction of skin tanning by subcutaneous administration of a potent synthetic melanotropin.</em> JAMA 266, 2730–2736 (1991).</li>
+        <li>Wessells, H. et al. <em>Synthetic melanotropic peptide initiates erections in men with psychogenic erectile dysfunction.</em> J. Urol. 160, 389–393 (1998).</li>
+        <li>Wessells, H. et al. <em>Effect of an alpha-melanocyte stimulating hormone analog on penile erection and sexual desire in men with organic erectile dysfunction.</em> Urology 56, 641–646 (2000).</li>
+        <li>Cardones, A. R. G. & Grichnik, J. M. <em>α-Melanocyte-stimulating hormone-induced eruptive nevi.</em> Arch. Dermatol. 145, 441–444 (2009).</li>
+        <li>Devoto, M. et al. <em>Posterior reversible encephalopathy syndrome associated with Melanotan II.</em> Case reports, Neurology 2018–2022.</li>
+      </ol>
+
+      <p class="disclaimer">For in-vitro research use only. Not for human consumption. The information above is a summary of published clinical literature, not medical or dosing advice.</p>
+    `,
+  },
+
+  {
+    slug: 'tesamorelin-research-overview',
+    title: 'Tesamorelin: A Research Overview',
+    description:
+      'Evidence-based overview of tesamorelin — GHRH analogue pharmacology, the pivotal Phase III trials in HIV-associated lipodystrophy, and the published metabolic and cognitive outcomes.',
+    excerpt:
+      'Tesamorelin is one of the few GHRH analogues with FDA-approved Phase III evidence. This guide summarises the pivotal trial data and what the literature shows beyond visceral fat reduction.',
+    readTime: '8 min read',
+    category: 'Peptide Research',
+    publishedAt: '2026-06-28',
+    keywords: [
+      'Tesamorelin research',
+      'GHRH analogue',
+      'tesamorelin clinical trials',
+      'visceral adipose tissue reduction',
+    ],
+    contentHtml: `
+      <p>Tesamorelin is a synthetic analogue of growth hormone-releasing hormone (GHRH) — specifically, a 44-amino-acid peptide with an N-terminal trans-3-hexenoyl moiety that resists DPP-IV degradation, giving it a meaningfully longer plasma half-life than native GHRH.<sup>[1]</sup> Unlike direct GH or IGF-1 administration, tesamorelin works <em>upstream</em>: it stimulates the pituitary to release endogenous GH in a pulsatile pattern that preserves negative-feedback regulation.</p>
+
+      <h2>Regulatory and clinical context</h2>
+      <p>Tesamorelin (brand name Egrifta) was approved by the US FDA in 2010 for the treatment of <strong>excess abdominal fat in HIV-infected patients with lipodystrophy</strong> — making it one of the very few GHRH analogues to clear a full Phase III programme. It is not approved in the UK or EU but remains widely studied as a research peptide.</p>
+
+      <h2>The pivotal Phase III trials</h2>
+      <p>Two multicentre, randomised, double-blind, placebo-controlled trials — Falutz et al. (2007) and Falutz et al. (2010) — established the efficacy and safety profile.<sup>[2][3]</sup> Combined design:</p>
+      <ul>
+        <li>~800 HIV-positive adults with lipodystrophy and excess visceral adipose tissue (VAT).</li>
+        <li>2 mg subcutaneous tesamorelin daily vs placebo for 26 weeks, with a 26-week extension.</li>
+        <li>Primary endpoint: % change in CT-measured VAT.</li>
+      </ul>
+      <p>Results:</p>
+      <ul>
+        <li><strong>~15–18% reduction in VAT</strong> at 26 weeks vs ~5% with placebo (statistically significant, p&lt;0.001).<sup>[2][3]</sup></li>
+        <li>Improvement in patient-reported body image and trunk-to-limb fat ratio.</li>
+        <li>Reductions in triglycerides and total cholesterol; modest improvement in adiponectin.</li>
+        <li>IGF-1 rose into the upper end of the age-adjusted reference range — pharmacologically expected and the basis for monitoring.</li>
+        <li>VAT regained on cessation, indicating ongoing therapy is required to sustain effect.</li>
+      </ul>
+
+      <h2>Beyond visceral fat — published secondary outcomes</h2>
+      <p>Subsequent investigator-initiated studies have evaluated tesamorelin in non-HIV populations and reported the following peer-reviewed findings:</p>
+      <ul>
+        <li><strong>Hepatic steatosis (NAFLD).</strong> A randomised trial in HIV-positive adults with NAFLD (Stanley et al., 2014) reported a statistically significant reduction in liver fat fraction measured by MRS after 12 months of tesamorelin.<sup>[4]</sup></li>
+        <li><strong>Cognitive endpoints.</strong> A 20-week randomised trial in older adults (Baker et al., 2012) reported modest improvements in executive function and verbal memory, hypothesised to be mediated by restored physiological GH/IGF-1 signalling.<sup>[5]</sup></li>
+        <li><strong>Body composition in healthy older adults.</strong> Smaller open-label work has documented reductions in trunk fat and preservation of lean mass, consistent with the HIV trial signal.</li>
+      </ul>
+
+      <h2>Adverse-event profile from the Phase III record</h2>
+      <ul>
+        <li><strong>Injection-site reactions</strong> — most common; usually mild erythema and pruritus.</li>
+        <li><strong>Arthralgia and peripheral oedema</strong> — typical class effects of restored GH signalling; usually dose-related and self-limiting.</li>
+        <li><strong>Glucose dysregulation.</strong> A modest reduction in insulin sensitivity was observed; HbA1c rose by ~0.1–0.2 percentage points across the trial population.<sup>[2][3]</sup> Patients with pre-existing diabetes require monitoring.</li>
+        <li><strong>IGF-1 elevation.</strong> Sustained IGF-1 above the age-adjusted reference range is the principal contraindication for ongoing therapy; the trial protocol included scheduled IGF-1 monitoring with dose adjustment.</li>
+        <li><strong>Contraindicated in active malignancy</strong> — the theoretical concern that elevated IGF-1 could accelerate occult tumour growth is the basis for the formal exclusion.</li>
+      </ul>
+
+      <h2>Pharmacokinetics and dosing in the trials</h2>
+      <ul>
+        <li>Subcutaneous 2 mg once daily (abdominal injection) was the dose used across both Phase III trials.</li>
+        <li>Plasma half-life: ~25–40 minutes (the GH pulse it triggers is the pharmacologically relevant signal, not the parent compound's residence time).</li>
+        <li>Steady-state effect on VAT requires 12–26 weeks of continuous administration; effect regresses on cessation.</li>
+      </ul>
+
+      <h2>What the literature does <em>not</em> support</h2>
+      <ul>
+        <li>Tesamorelin as a general-population weight-loss agent — the Phase III population was specifically HIV lipodystrophy.</li>
+        <li>Replacement for incretin therapies (Tirzepatide / Retatrutide) for obesity — different mechanism, different magnitude of effect.</li>
+        <li>Performance enhancement claims — the IGF-1 signal is real but the published evidence in healthy young adults is thin.</li>
+      </ul>
+
+      <h2>References</h2>
+      <ol class="references">
+        <li>Ferdinandi, E. S. et al. <em>Non-clinical pharmacology and safety evaluation of TH9507, a human growth hormone-releasing factor analogue.</em> Basic Clin. Pharmacol. Toxicol. 100, 49–58 (2007).</li>
+        <li>Falutz, J. et al. <em>Metabolic effects of a growth hormone-releasing factor in patients with HIV.</em> N. Engl. J. Med. 357, 2359–2370 (2007).</li>
+        <li>Falutz, J. et al. <em>Effects of tesamorelin (TH9507), a growth hormone-releasing factor analog, in HIV-infected patients with excess abdominal fat: a pooled analysis of two multicenter, double-blind placebo-controlled phase 3 trials.</em> J. Clin. Endocrinol. Metab. 95, 4291–4304 (2010).</li>
+        <li>Stanley, T. L. et al. <em>Reduction in visceral adiposity is associated with an improved metabolic profile in HIV-infected patients receiving tesamorelin.</em> Clin. Infect. Dis. 54, 1642–1651 (2012); follow-up NAFLD work, JAMA 2014.</li>
+        <li>Baker, L. D. et al. <em>Effects of growth hormone-releasing hormone on cognitive function in adults with mild cognitive impairment and healthy older adults.</em> Arch. Neurol. 69, 1420–1429 (2012).</li>
+      </ol>
+
+      <p class="disclaimer">For in-vitro research use only. Not for human consumption. This is a summary of published clinical literature, not medical or dosing advice.</p>
+    `,
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
