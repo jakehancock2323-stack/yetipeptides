@@ -112,7 +112,7 @@ export const products: Product[] = [
     outOfStock: true,
     popular: true,
     stockBadge: "30mg: Out of stock",
-    variants: [{ specification: "30mg × 1 vial — Out of stock", price: 28, outOfStock: true }],
+    variants: [{ specification: "30mg × 1 vial — Out of stock", price: 26, outOfStock: true }],
   },
   {
     id: "uk-tirzepatide-30mg",
@@ -123,7 +123,7 @@ export const products: Product[] = [
     outOfStock: true,
     popular: true,
     stockBadge: "30mg: Out of stock",
-    variants: [{ specification: "30mg × 1 vial — Out of stock", price: 23, outOfStock: true }],
+    variants: [{ specification: "30mg × 1 vial — Out of stock", price: 21, outOfStock: true }],
   },
   {
     id: "uk-mt2-10mg",
@@ -132,7 +132,7 @@ export const products: Product[] = [
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "6 vials left",
-    variants: [{ specification: "10mg × 1 vial", price: 16 }],
+    variants: [{ specification: "10mg × 1 vial", price: 13 }],
   },
   {
     id: "uk-mt1-10mg",
@@ -143,7 +143,7 @@ export const products: Product[] = [
     stockBadge: "Coming Soon",
     outOfStock: true,
     comingSoon: true,
-    variants: [{ specification: "10mg × 1 vial", price: 16, outOfStock: true }],
+    variants: [{ specification: "10mg × 1 vial", price: 13, outOfStock: true }],
   },
   {
     id: "uk-tesamorelin-10mg",
@@ -153,7 +153,7 @@ export const products: Product[] = [
     currency: "GBP",
     outOfStock: true,
     stockBadge: "Out of stock",
-    variants: [{ specification: "10mg × 1 vial", price: 26, outOfStock: true }],
+    variants: [{ specification: "10mg × 1 vial", price: 25, outOfStock: true }],
   },
   {
     id: "uk-ghkcu-100mg",
@@ -162,7 +162,7 @@ export const products: Product[] = [
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "11 vials left",
-    variants: [{ specification: "100mg × 1 vial", price: 18 }],
+    variants: [{ specification: "100mg × 1 vial", price: 16 }],
   },
   {
     id: "uk-klow",
