@@ -136,10 +136,17 @@ const handler = async (req: Request): Promise<Response> => {
                   ${escapeHtml(customerDetails.country)}
                 </td>
               </tr>
+              ${customerDetails.discord ? `
+              <tr>
+                <td style="padding: 8px 0;"><strong>Discord:</strong></td>
+                <td style="padding: 8px 0;">${escapeHtml(customerDetails.discord)}</td>
+              </tr>
+              ` : ''}
               <tr>
                 <td style="padding: 8px 0;"><strong>Payment Method:</strong></td>
-                <td style="padding: 8px 0;">${escapeHtml(paymentMethod).toUpperCase()}</td>
+                <td style="padding: 8px 0; ${paymentMethod === 'bank' ? 'color: #b45309; font-weight: 700;' : ''}">${paymentMethod === 'bank' ? '🏦 BANK TRANSFER — customer awaiting details' : escapeHtml(paymentMethod).toUpperCase()}</td>
               </tr>
+
               <tr>
                 <td style="padding: 8px 0;"><strong>Shipping Region:</strong></td>
                 <td style="padding: 8px 0; font-weight: 600; ${shippingRegion === 'UK Domestic' ? 'color: #f59e0b;' : ''}">${escapeHtml(shippingRegion || 'International')}</td>
