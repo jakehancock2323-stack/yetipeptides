@@ -41,6 +41,7 @@ export default function Checkout() {
     fullName: "",
     email: "",
     phone: "",
+    discord: "",
     street: "",
     city: "",
     region: "",
@@ -48,6 +49,7 @@ export default function Checkout() {
     country: "United Kingdom",
     notes: "",
   });
+
 
   useEffect(() => {
     if (user?.email && !formData.email) {
@@ -62,8 +64,9 @@ export default function Checkout() {
   }
 
   const validateDetails = () => {
-    const requiredFields = Object.entries(formData).filter(([key]) => key !== "notes");
+    const requiredFields = Object.entries(formData).filter(([key]) => key !== "notes" && key !== "discord");
     for (const [key, value] of requiredFields) {
+
       if (!value.trim()) {
         toast.error(`Please fill in ${key.replace(/([A-Z])/g, " $1").toLowerCase()}`);
         return false;
@@ -93,8 +96,16 @@ export default function Checkout() {
   const hairyDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
   const firstOrderDiscount = appliedPromo === "FIRST5" ? +(calculateSubtotal() * 0.05).toFixed(2) : 0;
   const promoDiscount = hairyDiscount + firstOrderDiscount;
-  const btcFee = paymentMethod === "btc" ? (calculateSubtotal() + deliveryFee - promoDiscount) * 0.04 : 0;
+  const preBankTotal = calculateSubtotal() + deliveryFee - promoDiscount;
+  const bankTransferAllowed = preBankTotal < 50;
+  useEffect(() => {
+    if (paymentMethod === "bank" && !bankTransferAllowed) {
+      setPaymentMethod("usdt");
+    }
+  }, [bankTransferAllowed, paymentMethod]);
+  const btcFee = paymentMethod === "btc" ? preBankTotal * 0.04 : 0;
   const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee - promoDiscount;
+
 
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
@@ -139,7 +150,13 @@ export default function Checkout() {
           region: formData.region,
           postcode: formData.postcode,
           country: formData.country,
-          customer_notes: [`Shipping: ${shippingMethodLabel}`, formData.notes].filter(Boolean).join(" | ") || null,
+          customer_notes: [
+            `Shipping: ${shippingMethodLabel}`,
+            formData.discord ? `Discord: ${formData.discord}` : "",
+            paymentMethod === "bank" ? "Payment: BANK TRANSFER — awaiting details" : "",
+            formData.notes,
+          ].filter(Boolean).join(" | ") || null,
+
           shipping_region: "UK Domestic",
           payment_method: paymentMethod,
           items: orderData.items as unknown as Json,
@@ -173,10 +190,14 @@ export default function Checkout() {
           usdt: "USDT (ERC-20)",
           usdc: "USDC (ERC-20)",
           btc: "Bitcoin (BTC)",
+          bank: "Bank Transfer",
         };
         let walletAddress = "";
         let paymentInstructions = "";
-        if (pm.includes("btc")) {
+        if (pm === "bank") {
+          walletAddress = "Bank Transfer — we'll email you the account details shortly.";
+          paymentInstructions = "You've selected Bank Transfer. Our team will contact you at this email address with the account details to complete your payment.";
+        } else if (pm.includes("btc")) {
           walletAddress = "BTC: bc1qw9wyge8sp336wleanczaa6j70w57nlwvm6efnw";
           paymentInstructions = "Send the exact total above in BTC to the address. Reply to this email with your transaction hash (TXID) once sent.";
         } else if (pm.includes("usdc")) {
@@ -186,6 +207,7 @@ export default function Checkout() {
           walletAddress = "USDT (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624";
           paymentInstructions = "Send the exact total in USDT on the ERC-20 (Ethereum) network. Reply with your TXID once sent.";
         }
+
 
         const shippingAddress = [
           formData.street,
@@ -348,6 +370,14 @@ export default function Checkout() {
                 </div>
 
                 <div>
+                  <Label htmlFor="discord" className="text-xs text-muted-foreground">Discord Username (optional)</Label>
+                  <Input id="discord" name="discord" value={formData.discord} onChange={handleChange} placeholder="e.g. yetiuser or yetiuser#1234" className="mt-1 bg-secondary/20 border-border/30 focus:border-[hsl(var(--ice-blue))]/50" />
+                  <p className="text-[10px] text-muted-foreground mt-1">So we can reach you on Discord if needed.</p>
+                </div>
+
+
+
+                <div>
                   <Label htmlFor="street" className="text-xs text-muted-foreground">Street Address *</Label>
                   <Input id="street" name="street" value={formData.street} onChange={handleChange} required className="mt-1 bg-secondary/20 border-border/30 focus:border-[hsl(var(--ice-blue))]/50" />
                 </div>
@@ -451,7 +481,17 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
                   </div>
                 </label>
+                {bankTransferAllowed && (
+                  <label htmlFor="bank" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'bank' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                    <RadioGroupItem value="bank" id="bank" />
+                    <div>
+                      <span className="text-sm font-medium">Bank Transfer</span>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Available on orders under £50. We'll email you the account details after checkout.</p>
+                    </div>
+                  </label>
+                )}
               </RadioGroup>
+
 
               <div className="mt-5 p-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.04] flex gap-2">
                 <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
