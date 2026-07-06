@@ -41,6 +41,7 @@ export default function Checkout() {
     fullName: "",
     email: "",
     phone: "",
+    discord: "",
     street: "",
     city: "",
     region: "",
@@ -48,6 +49,7 @@ export default function Checkout() {
     country: "United Kingdom",
     notes: "",
   });
+
 
   useEffect(() => {
     if (user?.email && !formData.email) {
