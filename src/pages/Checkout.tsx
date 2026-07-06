@@ -370,6 +370,14 @@ export default function Checkout() {
                 </div>
 
                 <div>
+                  <Label htmlFor="discord" className="text-xs text-muted-foreground">Discord Username (optional)</Label>
+                  <Input id="discord" name="discord" value={formData.discord} onChange={handleChange} placeholder="e.g. yetiuser or yetiuser#1234" className="mt-1 bg-secondary/20 border-border/30 focus:border-[hsl(var(--ice-blue))]/50" />
+                  <p className="text-[10px] text-muted-foreground mt-1">So we can reach you on Discord if needed.</p>
+                </div>
+
+
+
+                <div>
                   <Label htmlFor="street" className="text-xs text-muted-foreground">Street Address *</Label>
                   <Input id="street" name="street" value={formData.street} onChange={handleChange} required className="mt-1 bg-secondary/20 border-border/30 focus:border-[hsl(var(--ice-blue))]/50" />
                 </div>
