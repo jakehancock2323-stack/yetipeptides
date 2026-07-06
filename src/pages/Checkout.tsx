@@ -150,7 +150,13 @@ export default function Checkout() {
           region: formData.region,
           postcode: formData.postcode,
           country: formData.country,
-          customer_notes: [`Shipping: ${shippingMethodLabel}`, formData.notes].filter(Boolean).join(" | ") || null,
+          customer_notes: [
+            `Shipping: ${shippingMethodLabel}`,
+            formData.discord ? `Discord: ${formData.discord}` : "",
+            paymentMethod === "bank" ? "Payment: BANK TRANSFER — awaiting details" : "",
+            formData.notes,
+          ].filter(Boolean).join(" | ") || null,
+
           shipping_region: "UK Domestic",
           payment_method: paymentMethod,
           items: orderData.items as unknown as Json,
