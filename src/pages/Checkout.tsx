@@ -190,10 +190,14 @@ export default function Checkout() {
           usdt: "USDT (ERC-20)",
           usdc: "USDC (ERC-20)",
           btc: "Bitcoin (BTC)",
+          bank: "Bank Transfer",
         };
         let walletAddress = "";
         let paymentInstructions = "";
-        if (pm.includes("btc")) {
+        if (pm === "bank") {
+          walletAddress = "Bank Transfer — we'll email you the account details shortly.";
+          paymentInstructions = "You've selected Bank Transfer. Our team will contact you at this email address with the account details to complete your payment.";
+        } else if (pm.includes("btc")) {
           walletAddress = "BTC: bc1qw9wyge8sp336wleanczaa6j70w57nlwvm6efnw";
           paymentInstructions = "Send the exact total above in BTC to the address. Reply to this email with your transaction hash (TXID) once sent.";
         } else if (pm.includes("usdc")) {
@@ -203,6 +207,7 @@ export default function Checkout() {
           walletAddress = "USDT (ERC-20): 0x804ec5D58F8B1643c0706c95e0064bBb5E970624";
           paymentInstructions = "Send the exact total in USDT on the ERC-20 (Ethereum) network. Reply with your TXID once sent.";
         }
+
 
         const shippingAddress = [
           formData.street,
