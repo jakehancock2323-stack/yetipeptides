@@ -64,8 +64,9 @@ export default function Checkout() {
   }
 
   const validateDetails = () => {
-    const requiredFields = Object.entries(formData).filter(([key]) => key !== "notes");
+    const requiredFields = Object.entries(formData).filter(([key]) => key !== "notes" && key !== "discord");
     for (const [key, value] of requiredFields) {
+
       if (!value.trim()) {
         toast.error(`Please fill in ${key.replace(/([A-Z])/g, " $1").toLowerCase()}`);
         return false;
