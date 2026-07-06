@@ -96,8 +96,16 @@ export default function Checkout() {
   const hairyDiscount = appliedPromo === "HAIRYYETI" ? +(iceElixirSubtotal * 0.07).toFixed(2) : 0;
   const firstOrderDiscount = appliedPromo === "FIRST5" ? +(calculateSubtotal() * 0.05).toFixed(2) : 0;
   const promoDiscount = hairyDiscount + firstOrderDiscount;
-  const btcFee = paymentMethod === "btc" ? (calculateSubtotal() + deliveryFee - promoDiscount) * 0.04 : 0;
+  const preBankTotal = calculateSubtotal() + deliveryFee - promoDiscount;
+  const bankTransferAllowed = preBankTotal < 50;
+  useEffect(() => {
+    if (paymentMethod === "bank" && !bankTransferAllowed) {
+      setPaymentMethod("usdt");
+    }
+  }, [bankTransferAllowed, paymentMethod]);
+  const btcFee = paymentMethod === "btc" ? preBankTotal * 0.04 : 0;
   const calculateTotal = () => calculateSubtotal() + deliveryFee + btcFee - promoDiscount;
+
 
   const handlePlaceOrder = async () => {
     if (isSubmitting) return;
