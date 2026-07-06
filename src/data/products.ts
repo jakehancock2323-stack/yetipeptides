@@ -171,10 +171,10 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "Out of Stock",
-    outOfStock: true,
+    stockBadge: "Pre-Order",
+    preOrder: true,
     popular: true,
-    variants: [{ specification: "Blend × 1 vial", price: 28 }],
+    variants: [{ specification: "Blend × 1 vial — Pre-Order", price: 28 }],
     ingredients: ["TB-500 – 10mg", "BPC-157 – 10mg", "KPV – 10mg", "GHK-Cu – 50mg"],
   },
   {
