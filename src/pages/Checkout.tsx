@@ -481,7 +481,17 @@ export default function Checkout() {
                     <p className="text-[10px] text-muted-foreground mt-0.5">A 4% processing fee applies to all Bitcoin payments</p>
                   </div>
                 </label>
+                {bankTransferAllowed && (
+                  <label htmlFor="bank" className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${paymentMethod === 'bank' ? 'border-[hsl(var(--ice-blue))]/40 bg-[hsl(var(--ice-blue))]/[0.05]' : 'border-border/30 hover:border-border/60'}`}>
+                    <RadioGroupItem value="bank" id="bank" />
+                    <div>
+                      <span className="text-sm font-medium">Bank Transfer</span>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Available on orders under £50. We'll email you the account details after checkout.</p>
+                    </div>
+                  </label>
+                )}
               </RadioGroup>
+
 
               <div className="mt-5 p-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.04] flex gap-2">
                 <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
