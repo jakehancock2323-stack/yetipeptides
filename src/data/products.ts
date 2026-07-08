@@ -109,10 +109,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    preOrder: true,
     popular: true,
-    stockBadge: "Pre-Order",
-    variants: [{ specification: "30mg × 1 vial — Pre-Order", price: 26 }],
+    stockBadge: "5 vials left",
+    variants: [{ specification: "30mg × 1 vial", price: 26 }],
   },
   {
     id: "uk-tirzepatide-30mg",
@@ -120,10 +119,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    preOrder: true,
     popular: true,
-    stockBadge: "Pre-Order",
-    variants: [{ specification: "30mg × 1 vial — Pre-Order", price: 21 }],
+    stockBadge: "In Stock",
+    variants: [{ specification: "30mg × 1 vial", price: 21 }],
   },
 
   {
@@ -171,10 +169,9 @@ export const products: Product[] = [
     category: "Peptides",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "Pre-Order",
-    preOrder: true,
+    stockBadge: "In Stock",
     popular: true,
-    variants: [{ specification: "Blend × 1 vial — Pre-Order", price: 28 }],
+    variants: [{ specification: "Blend × 1 vial", price: 28 }],
     ingredients: ["TB-500 – 10mg", "BPC-157 – 10mg", "KPV – 10mg", "GHK-Cu – 50mg"],
   },
   {
