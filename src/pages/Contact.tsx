@@ -94,7 +94,7 @@ export default function Contact() {
               {[
                 { icon: Mail, label: 'Email', value: 'yetipeptides@protonmail.com', href: 'mailto:yetipeptides@protonmail.com' },
                 { icon: Send, label: 'Telegram', value: '@yetipeptides', href: 'https://t.me/yetipeptides', external: true },
-                { icon: MessageCircle, label: 'Discord', value: 'Join Server', href: 'https://discord.gg/seDb5c9XkM', external: true },
+                { icon: MessageCircle, label: 'Discord', value: 'Join Server', href: 'https://discord.gg/5AVhbfjg3', external: true },
               ].map(({ icon: Icon, label, value, href, external }) => (
                 <a
                   key={label}
