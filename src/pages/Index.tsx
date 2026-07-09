@@ -26,7 +26,7 @@ export default function Index() {
     'description': 'UK domestic research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
     'areaServed': 'United Kingdom',
-    'sameAs': ['https://discord.gg/seDb5c9XkM', 'https://t.me/yetipeptides'],
+    'sameAs': ['https://discord.gg/5AVhbfjg3', 'https://t.me/yetipeptides'],
     'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.9', 'reviewCount': '150' },
   };
 
@@ -56,10 +56,10 @@ export default function Index() {
       {/* Discord Banner */}
       {showDiscordBanner && (
         <div className="pt-[60px]">
-          <div className="relative bg-[#5865F2] py-2.5 px-4">
-            <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="block">
+          <div className="relative bg-amber-600 py-2.5 px-4">
+            <a href="https://discord.gg/5AVhbfjg3" target="_blank" rel="noopener noreferrer" className="block">
               <div className="container mx-auto flex items-center justify-center gap-3 text-white pr-8">
-                <span className="text-sm font-medium">Join our Discord community — connect with researchers & get support</span>
+                <span className="text-sm font-medium">Our Discord server got shut down — click here for the new invite</span>
                 <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 hidden sm:block" />
               </div>
             </a>
@@ -271,7 +271,7 @@ export default function Index() {
       <AnimateOnScroll animation="scale-in">
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="block group">
+            <a href="https://discord.gg/5AVhbfjg3" target="_blank" rel="noopener noreferrer" className="block group">
               <div className="relative rounded-2xl overflow-hidden bg-[#5865F2] p-8 md:p-12 text-center hover:shadow-[0_0_40px_rgba(88,101,242,0.3)] transition-all duration-500">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#5865F2] via-[#4752C4] to-[#3C45A5]" />
                 <div className="relative z-10">

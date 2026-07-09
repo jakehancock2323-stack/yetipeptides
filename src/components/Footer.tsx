@@ -26,7 +26,7 @@ export default function Footer() {
               <div className="flex items-center gap-2"><Package className="w-3.5 h-3.5 text-aurora" /><span>InPost Lockers — anonymous</span></div>
             </div>
             <div className="flex gap-3">
-              <a href="https://discord.gg/seDb5c9XkM" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+              <a href="https://discord.gg/5AVhbfjg3" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" target="_blank" rel="noopener noreferrer" aria-label="Discord">
                 <MessageCircle className="w-4 h-4" />
               </a>
               <a href="https://t.me/yetipeptides" className="w-9 h-9 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-ice-blue hover:bg-secondary transition-all" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
@@ -85,7 +85,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://discord.gg/seDb5c9XkM" className="text-muted-foreground hover:text-ice-blue transition-colors flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.gg/5AVhbfjg3" className="text-muted-foreground hover:text-ice-blue transition-colors flex items-center gap-2" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-4 h-4 flex-shrink-0" /><span>Discord Community</span>
                 </a>
               </li>

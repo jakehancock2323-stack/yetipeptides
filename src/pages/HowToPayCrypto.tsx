@@ -495,7 +495,7 @@ export default function HowToPayCrypto() {
                     yetipeptides@protonmail.com
                   </a>{' '}
                   or reach out on{' '}
-                  <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="text-ice-blue hover:underline">
+                  <a href="https://discord.gg/5AVhbfjg3" target="_blank" rel="noopener noreferrer" className="text-ice-blue hover:underline">
                     Discord
                   </a>{' '}
                   to get started.

@@ -56,7 +56,7 @@ export default function USShippingNotice() {
               <span className="font-semibold text-foreground">Already ordered?</span> If your order hasn't been processed yet, we can issue a full refund — just contact us. If it's already been processed and shipped out, you'll need to wait until US shipping resumes.
             </span>
             <span className="block text-xs text-muted-foreground">
-              Live updates and reopening announcements will be posted in our <a href="https://discord.gg/seDb5c9XkM" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--ice-blue))] font-semibold hover:underline">Discord community</a>. We'll resume US shipping as soon as the situation clears — thank you for your patience.
+              Live updates and reopening announcements will be posted in our <a href="https://discord.gg/5AVhbfjg3" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--ice-blue))] font-semibold hover:underline">Discord community</a>. We'll resume US shipping as soon as the situation clears — thank you for your patience.
             </span>
           </DialogDescription>
         </DialogHeader>
