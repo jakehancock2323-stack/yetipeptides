@@ -56,10 +56,10 @@ export default function Index() {
       {/* Discord Banner */}
       {showDiscordBanner && (
         <div className="pt-[60px]">
-          <div className="relative bg-[#5865F2] py-2.5 px-4">
+          <div className="relative bg-amber-600 py-2.5 px-4">
             <a href="https://discord.gg/5AVhbfjg3" target="_blank" rel="noopener noreferrer" className="block">
               <div className="container mx-auto flex items-center justify-center gap-3 text-white pr-8">
-                <span className="text-sm font-medium">Join our Discord community — connect with researchers & get support</span>
+                <span className="text-sm font-medium">Our Discord server got shut down — click here for the new invite</span>
                 <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 hidden sm:block" />
               </div>
             </a>
