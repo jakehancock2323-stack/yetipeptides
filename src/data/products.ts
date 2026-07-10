@@ -110,8 +110,9 @@ export const products: Product[] = [
     region: "UK Domestic",
     currency: "GBP",
     popular: true,
-    stockBadge: "5 vials left",
-    variants: [{ specification: "30mg × 1 vial", price: 26 }],
+    outOfStock: true,
+    stockBadge: "Out of stock",
+    variants: [{ specification: "30mg × 1 vial", price: 26, outOfStock: true }],
   },
   {
     id: "uk-tirzepatide-30mg",
