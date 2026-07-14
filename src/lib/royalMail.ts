@@ -92,7 +92,7 @@ export function buildRoyalMailCsv(
     "",
     service,
     format,
-    "Yeti Peptides",
+    "Yeti Pep",
     order.customer_notes ?? "",
   ];
 

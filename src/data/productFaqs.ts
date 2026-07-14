@@ -31,12 +31,12 @@ export function getProductFaqs(product: Product): FaqItem[] {
     {
       question: 'Is this product for human use?',
       answer:
-        'No. All Yeti Peptides products are supplied strictly for in-vitro laboratory research use only. They are not intended, labelled, or sold for human or veterinary consumption.',
+        'No. All Yeti Pep products are supplied strictly for in-vitro laboratory research use only. They are not intended, labelled, or sold for human or veterinary consumption.',
     },
   ];
 
   const categorySpecific: FaqItem[] =
-    product.category === 'Peptides'
+    product.category === 'Pep'
       ? [
           {
             question: 'How should this peptide be stored?',

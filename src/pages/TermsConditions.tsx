@@ -7,9 +7,9 @@ export default function TermsConditions() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Terms & Conditions - Research Peptides Policy | Yeti Peptides"
-        description="Terms and conditions for purchasing research-grade peptides from Yeti Peptides. Read our policies on research use, ordering, shipping, and legal compliance."
-        keywords="peptide terms and conditions, research peptides policy, peptide purchase terms"
+        title="Terms & Conditions - Research Pep Policy | Yeti Pep"
+        description="Terms and conditions for purchasing research-grade pep from Yeti Pep. Read our policies on research use, ordering, shipping, and legal compliance."
+        keywords="peptide terms and conditions, research pep policy, peptide purchase terms"
         canonical="https://yetipeptides.com/terms-conditions"
       />
       <Snowfall />
@@ -33,7 +33,7 @@ export default function TermsConditions() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">1. Research Use Only</h2>
             <p className="text-muted-foreground leading-relaxed">
-              All products sold by Yeti Peptides ("Company", "we", "us", "our") are supplied strictly for in vitro laboratory research purposes only by suitably qualified professionals. They are not intended for human consumption, veterinary use, or for use as food additives, medicines, cosmetics, or household chemicals.
+              All products sold by Yeti Pep ("Company", "we", "us", "our") are supplied strictly for in vitro laboratory research purposes only by suitably qualified professionals. They are not intended for human consumption, veterinary use, or for use as food additives, medicines, cosmetics, or household chemicals.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-3">
               By placing an order, you confirm that you are a qualified researcher or purchasing on behalf of a business or institution for legitimate scientific research purposes. You accept full responsibility for the safe handling, storage, use, and disposal of all products.

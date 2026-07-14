@@ -51,7 +51,7 @@ const reviews = [
     name: "Dr. R. Thompson",
     location: "Research Institute, USA",
     rating: 5,
-    text: "Exceptional quality peptides with comprehensive COA documentation. The purity levels match exactly what's stated, and the cold-chain shipping ensured product integrity. Will continue ordering for our research programs.",
+    text: "Exceptional quality pep with comprehensive COA documentation. The purity levels match exactly what's stated, and the cold-chain shipping ensured product integrity. Will continue ordering for our research programs.",
     date: "November 2024",
     verified: true
   },
@@ -59,7 +59,7 @@ const reviews = [
     name: "Laboratory Services UK",
     location: "Manchester, UK",
     rating: 5,
-    text: "We've been sourcing from Yeti Peptides for our research facility. Consistent batch quality, reliable delivery times, and responsive technical support. The COA verification process is straightforward.",
+    text: "We've been sourcing from Yeti Pep for our research facility. Consistent batch quality, reliable delivery times, and responsive technical support. The COA verification process is straightforward.",
     date: "November 2024",
     verified: true
   },
@@ -75,7 +75,7 @@ const reviews = [
     name: "BioResearch Labs",
     location: "Netherlands",
     rating: 5,
-    text: "Yeti Peptides has become our preferred supplier for GLP-1 compounds. Competitive pricing, consistent quality, and the customer service team is knowledgeable and helpful with enquiries.",
+    text: "Yeti Pep has become our preferred supplier for GLP-1 compounds. Competitive pricing, consistent quality, and the customer service team is knowledgeable and helpful with enquiries.",
     date: "September 2024",
     verified: true
   },
@@ -110,9 +110,9 @@ export default function Reviews() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Yeti Peptides Research-Grade Peptides",
+    "name": "Yeti Pep Research-Grade Pep",
     "description": "Premium research-grade peptide compounds for laboratory use",
-    "brand": { "@type": "Brand", "name": "Yeti Peptides" },
+    "brand": { "@type": "Brand", "name": "Yeti Pep" },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",

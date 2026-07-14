@@ -38,7 +38,7 @@ export default function TrackOrder() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Track Your Order – Yeti Peptides"
+        title="Track Your Order – Yeti Pep"
         description="Track your research peptide order in real-time. Supports all major carriers including USPS, Royal Mail, DHL, FedEx, and more. Worldwide tracking for UK and international shipments."
         keywords="track order, peptide shipping tracking, parcel tracking, international shipping tracker"
         canonical="https://yetipeptides.com/track-order"

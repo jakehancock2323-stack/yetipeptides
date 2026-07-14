@@ -17,7 +17,7 @@ const BOOT_LINES = [
   { text: '> Frost engine: ENABLED', delay: 2300 },
   { text: '', delay: 2500 },
   { text: '> ALL SYSTEMS OPERATIONAL', delay: 2600, highlight: true },
-  { text: '> Welcome to Yeti Peptides.', delay: 2900, highlight: true },
+  { text: '> Welcome to Yeti Pep.', delay: 2900, highlight: true },
 ];
 
 export default function BootScreen({ onComplete }: BootScreenProps) {
@@ -179,7 +179,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
         <div className="absolute inset-0 rounded-full bg-[hsl(var(--ice-blue))] opacity-[0.1] blur-[40px] scale-[2]" />
         <img
           src={yetiLogo}
-          alt="Yeti Peptides"
+          alt="Yeti Pep"
           className="w-20 h-20 md:w-24 md:h-24 object-contain relative z-10"
           style={{
             animation: 'pulse 2s ease-in-out infinite',
@@ -250,7 +250,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
 
       {/* Bottom brand */}
       <p className="absolute bottom-6 text-[9px] uppercase tracking-[0.35em] text-muted-foreground/20 font-medium font-mono">
-        Yeti Peptides™ Systems
+        Yeti Pep™ Systems
       </p>
 
       <style>{`

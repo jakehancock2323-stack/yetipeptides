@@ -70,8 +70,8 @@ export default function Auth() {
   return (
     <div className="min-h-screen pb-20">
       <SEO
-        title={`${mode === "signup" ? "Create Account" : "Sign In"} – Yeti Peptides`}
-        description="Sign in to your Yeti Peptides account to view past orders and track shipments."
+        title={`${mode === "signup" ? "Create Account" : "Sign In"} – Yeti Pep`}
+        description="Sign in to your Yeti Pep account to view past orders and track shipments."
         canonical={`https://yetipeptides.com/auth`}
       />
       <Snowfall />

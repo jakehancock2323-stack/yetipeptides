@@ -42,11 +42,11 @@ export default function Navbar() {
             <Link to="/" className="flex items-center gap-3 group">
               <img
                 src={yetiLogo}
-                alt="Yeti Peptides logo - UK research peptide supplier"
+                alt="Yeti Pep logo - UK research peptide supplier"
                 className="w-10 h-10 object-contain drop-shadow-[0_0_15px_rgba(71,217,217,0.3)] group-hover:drop-shadow-[0_0_25px_rgba(71,217,217,0.5)] transition-all duration-300"
               />
               <div className="leading-none">
-                <span className="block text-lg md:text-xl font-bold text-ice-blue tracking-wider">YETI PEPTIDES</span>
+                <span className="block text-lg md:text-xl font-bold text-ice-blue tracking-wider">YETI PEP</span>
                 <span className="hidden sm:block text-[9px] uppercase tracking-[0.3em] text-muted-foreground mt-1">UK Domestic · 🇬🇧</span>
               </div>
             </Link>

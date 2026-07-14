@@ -81,7 +81,7 @@ Deno.serve(async (req) => {
           {
             role: "system",
             content:
-              "You extract structured order data from screenshots of order confirmation emails for Yeti Peptides. Read all visible text carefully. If a field is not visible, omit it. Always include the items list with unit price and quantity. UK Domestic uses GBP & bank transfer; International uses USD & crypto (usdt/usdc/btc). Default delivery_fee is 65 if not clearly shown.",
+              "You extract structured order data from screenshots of order confirmation emails for Yeti Pep. Read all visible text carefully. If a field is not visible, omit it. Always include the items list with unit price and quantity. UK Domestic uses GBP & bank transfer; International uses USD & crypto (usdt/usdc/btc). Default delivery_fee is 65 if not clearly shown.",
           },
           {
             role: "user",

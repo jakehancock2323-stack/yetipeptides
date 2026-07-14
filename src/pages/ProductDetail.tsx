@@ -73,7 +73,7 @@ export default function ProductDetail() {
     name: product.name,
     description,
     category: product.category,
-    brand: { '@type': 'Brand', name: 'Yeti Peptides' },
+    brand: { '@type': 'Brand', name: 'Yeti Pep' },
     image: 'https://yetipeptides.com/og-image.png',
     offers: product.variants.map((v) => ({
       '@type': 'Offer',
@@ -86,7 +86,7 @@ export default function ProductDetail() {
         ? 'https://schema.org/PreOrder'
         : 'https://schema.org/InStock',
       url: canonical,
-      seller: { '@type': 'Organization', name: 'Yeti Peptides' },
+      seller: { '@type': 'Organization', name: 'Yeti Pep' },
     })),
   };
 

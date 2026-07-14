@@ -65,7 +65,7 @@ export default function Unsubscribe() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-background">
       <div className="max-w-md w-full border border-border rounded-lg p-8 bg-card text-center">
         <h1 className="text-2xl font-bold mb-2 text-foreground" style={{ fontFamily: 'Orbitron, sans-serif' }}>
-          YETI PEPTIDES
+          YETI PEP
         </h1>
         <p className="text-xs uppercase tracking-widest text-muted-foreground mb-6">Email Preferences</p>
 
@@ -75,7 +75,7 @@ export default function Unsubscribe() {
           <>
             <h2 className="text-lg font-semibold mb-3 text-foreground">Unsubscribe from emails</h2>
             <p className="text-sm text-muted-foreground mb-6">
-              You'll stop receiving order and notification emails from Yeti Peptides.
+              You'll stop receiving order and notification emails from Yeti Pep.
             </p>
             <Button onClick={confirm} disabled={submitting} className="w-full">
               {submitting ? 'Processing…' : 'Confirm Unsubscribe'}

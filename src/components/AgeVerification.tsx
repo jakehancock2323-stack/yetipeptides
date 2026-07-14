@@ -66,7 +66,7 @@ export default function AgeVerification({ onVerified }: AgeVerificationProps) {
               <div className="absolute inset-0 rounded-full bg-[hsl(var(--ice-blue))] opacity-[0.12] blur-[50px] scale-150" />
               <img
                 src={yetiLogo}
-                alt="Yeti Peptides Logo"
+                alt="Yeti Pep Logo"
                 className="w-28 h-28 md:w-36 md:h-36 object-contain relative z-10"
                 style={{ animation: 'float 6s ease-in-out infinite' }}
               />
@@ -123,7 +123,7 @@ export default function AgeVerification({ onVerified }: AgeVerificationProps) {
 
           {/* Bottom brand */}
           <p className="text-center mt-8 text-[9px] uppercase tracking-[0.35em] text-muted-foreground/30 font-medium">
-            Yeti Peptides™
+            Yeti Pep™
           </p>
         </div>
       </div>

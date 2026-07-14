@@ -27,7 +27,7 @@ export interface Product {
 
 // We currently ship UK Domestic only. The international catalog is preserved
 // in `src/data/internationalCatalogArchive.ts` for later restoration.
-export const categories = ["All", "Peptides", "Peptide Supplies", "Cosmetics"];
+export const categories = ["All", "Pep", "Peptide Supplies", "Cosmetics"];
 
 // Kept for backwards-compatible imports.
 export const domesticCategories = categories;
@@ -65,7 +65,7 @@ export const products: Product[] = [
     popular: true,
     badges: ["Cruelty Free Standards", "Small Batch Clinical Purity"],
     usage: "Apply 1-2 full droppers to face & massage in.",
-    variants: [{ specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25, originalPrice: 28 }],
+    variants: [{ specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 22 }],
     ingredients: [
       "Aqua",
       "Sodium Hyaluronate",
@@ -106,7 +106,7 @@ export const products: Product[] = [
   {
     id: "uk-retatrutide-30mg",
     name: "Retatrutide",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     popular: true,
@@ -117,7 +117,7 @@ export const products: Product[] = [
   {
     id: "uk-tirzepatide-30mg",
     name: "Tirzepatide",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     popular: true,
@@ -128,7 +128,7 @@ export const products: Product[] = [
   {
     id: "uk-mt2-10mg",
     name: "MT-2",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "6 vials left",
@@ -137,7 +137,7 @@ export const products: Product[] = [
   {
     id: "uk-mt1-10mg",
     name: "MT-1",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "Coming Soon",
@@ -148,7 +148,7 @@ export const products: Product[] = [
   {
     id: "uk-tesamorelin-10mg",
     name: "Tesamorelin",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     outOfStock: true,
@@ -158,7 +158,7 @@ export const products: Product[] = [
   {
     id: "uk-ghkcu-100mg",
     name: "GHK-Cu",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "11 vials left",
@@ -167,7 +167,7 @@ export const products: Product[] = [
   {
     id: "uk-klow",
     name: "KLOW",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "In Stock",
@@ -178,7 +178,7 @@ export const products: Product[] = [
   {
     id: "uk-cjc-ipamorelin-10mg",
     name: "CJC-1295 No DAC + Ipamorelin",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
     stockBadge: "Coming Soon",
@@ -193,7 +193,7 @@ export const products: Product[] = [
   {
     id: "uk-motsc-10mg",
     name: "MOTS-c",
-    category: "Peptides",
+    category: "Pep",
     region: "UK Domestic",
     stockBadge: "Coming Soon",
     outOfStock: true,

@@ -88,8 +88,8 @@ export default function Account() {
   return (
     <div className="min-h-screen pb-20">
       <SEO
-        title="My Account – Yeti Peptides"
-        description="View your Yeti Peptides order history, track current shipments and manage your account."
+        title="My Account – Yeti Pep"
+        description="View your Yeti Pep order history, track current shipments and manage your account."
         canonical="https://yetipeptides.com/account"
       />
       <Snowfall />
