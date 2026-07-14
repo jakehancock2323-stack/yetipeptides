@@ -186,7 +186,7 @@ export const guides: Guide[] = [
       <p>Our <a href="/products?product=uk-klow">KLOW research blend</a> combines GHK-Cu (50 mg) with TB-500, BPC-157 and KPV in a single research vial. Standalone <a href="/products?product=uk-ghk-cu">GHK-Cu 50 mg</a> is also available domestically.</p>
 
       <h2>Handling notes</h2>
-      <p>GHK-Cu solutions are characteristically <strong>blue</strong> due to the copper coordination complex — this is expected and does not indicate degradation. Copper-containing pep are generally more sensitive to solution-phase degradation than uncomplexed pep; we recommend a shorter in-use window (14–21 days at 2–8 °C) than the 28-day rule of thumb used for many other pep. See our <a href="/guides/storing-research-peptides-uk">storage guide</a> for full protocol.</p>
+      <p>GHK-Cu solutions are characteristically <strong>blue</strong> due to the copper coordination complex — this is expected and does not indicate degradation. Copper-containing pep products are generally more sensitive to solution-phase degradation than uncomplexed compounds; we recommend a shorter in-use window (14–21 days at 2–8 °C) than the 28-day rule of thumb used for many other products. See our <a href="/guides/storing-research-peptides-uk">storage guide</a> for full protocol.</p>
 
       <h2>References</h2>
       <ol class="references">
