@@ -17,7 +17,7 @@ export default function SEO({
   type = 'website',
   schema
 }: SEOProps) {
-  const fullTitle = title.includes('Yeti Peptides') ? title : `${title} | Yeti Peptides`;
+  const fullTitle = title.includes('Yeti Pep') ? title : `${title} | Yeti Pep`;
   const siteUrl = 'https://yetipeptides.com';
 
   return (
@@ -28,7 +28,7 @@ export default function SEO({
       {canonical && <link rel="canonical" href={canonical} />}
       
       {/* Open Graph */}
-      <meta property="og:site_name" content="Yeti Peptides" />
+      <meta property="og:site_name" content="Yeti Pep" />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
@@ -42,7 +42,7 @@ export default function SEO({
 
       {/* Additional SEO */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="author" content="Yeti Peptides" />
+      <meta name="author" content="Yeti Pep" />
       <meta name="language" content="English" />
       <meta name="geo.region" content="GB" />
       <meta name="geo.placename" content="United Kingdom" />

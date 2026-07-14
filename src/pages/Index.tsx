@@ -20,7 +20,7 @@ export default function Index() {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    'name': 'Yeti Peptides',
+    'name': 'Yeti Pep',
     'url': 'https://yetipeptides.com',
     'logo': 'https://yetipeptides.com/yeti-logo.png',
     'description': 'UK domestic research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
@@ -43,10 +43,10 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Yeti Peptides – UK Domestic Research Peptides | Royal Mail 24 & InPost"
+        title="Yeti Pep – UK Domestic Research Pep | Royal Mail 24 & InPost"
         description="UK domestic research peptide supplier. 99%+ purity. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto-only checkout. Shipped from the UK."
 
-        keywords="UK research peptides, royal mail peptides, inpost peptide delivery, domestic peptide UK, GHK-Cu UK, MT-2 UK, tretinoin UK, GLP-1 UK"
+        keywords="UK research pep, royal mail pep, inpost peptide delivery, domestic peptide UK, GHK-Cu UK, MT-2 UK, tretinoin UK, GLP-1 UK"
         canonical="https://yetipeptides.com/"
         schema={organizationSchema}
       />

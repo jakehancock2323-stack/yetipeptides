@@ -8,9 +8,9 @@ export default function ResearchDisclaimer() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Research Use Disclaimer - Laboratory Peptides Only"
-        description="Important disclaimer: All peptides are for research use only. Not for human consumption. Read safety information and legal compliance requirements."
-        keywords="research use only, laboratory peptides, research disclaimer, peptide safety information"
+        title="Research Use Disclaimer - Laboratory Pep Only"
+        description="Important disclaimer: All pep are for research use only. Not for human consumption. Read safety information and legal compliance requirements."
+        keywords="research use only, laboratory pep, research disclaimer, peptide safety information"
         canonical="https://yetipeptides.com/research-disclaimer"
       />
       <Snowfall />
@@ -38,7 +38,7 @@ export default function ResearchDisclaimer() {
                 FOR RESEARCH USE ONLY – NOT FOR HUMAN CONSUMPTION
               </p>
               <p className="text-sm">
-                All products sold by Yeti Peptides are strictly intended for laboratory research purposes only. 
+                All products sold by Yeti Pep are strictly intended for laboratory research purposes only. 
                 These products are NOT intended for human or animal consumption, diagnostic use, or therapeutic applications.
               </p>
             </div>
@@ -46,7 +46,7 @@ export default function ResearchDisclaimer() {
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">Legal Compliance</h2>
               <p>
-                By purchasing products from Yeti Peptides, you confirm and agree that:
+                By purchasing products from Yeti Pep, you confirm and agree that:
               </p>
               <ul className="list-disc pl-6 mt-2 space-y-2">
                 <li>You are a qualified researcher, scientist, or authorized representative of a research institution</li>
@@ -73,7 +73,7 @@ export default function ResearchDisclaimer() {
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">No Medical Claims</h2>
               <p>
-                Yeti Peptides makes no medical claims about any of our products. The information provided on our website, 
+                Yeti Pep makes no medical claims about any of our products. The information provided on our website, 
                 product descriptions, and documentation is for research reference only and should not be construed as 
                 medical advice or endorsement for any particular use.
               </p>
@@ -82,7 +82,7 @@ export default function ResearchDisclaimer() {
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">Limitation of Liability</h2>
               <p>
-                Yeti Peptides shall not be held liable for any misuse of products, adverse effects, legal violations, 
+                Yeti Pep shall not be held liable for any misuse of products, adverse effects, legal violations, 
                 or any other consequences resulting from the purchase or use of our products. The buyer assumes all 
                 responsibility and risk associated with the use, handling, and storage of these research compounds.
               </p>
@@ -91,7 +91,7 @@ export default function ResearchDisclaimer() {
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">Age Requirement</h2>
               <p>
-                You must be at least 18 years of age to purchase products from Yeti Peptides. By placing an order, 
+                You must be at least 18 years of age to purchase products from Yeti Pep. By placing an order, 
                 you confirm that you meet this age requirement.
               </p>
             </section>
@@ -101,7 +101,7 @@ export default function ResearchDisclaimer() {
               <p>
                 By proceeding with a purchase, you acknowledge that you have read, understood, and agree to comply 
                 with this Research Use Disclaimer. If you do not agree with any part of this disclaimer, you must 
-                not purchase or use any products from Yeti Peptides.
+                not purchase or use any products from Yeti Pep.
               </p>
             </section>
 

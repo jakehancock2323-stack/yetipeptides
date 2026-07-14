@@ -13,8 +13,8 @@ export default function OrderSuccess() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Order Confirmed – Yeti Peptides"
-        description="Your research peptide order has been successfully placed. Thank you for choosing Yeti Peptides, your trusted UK research supplier."
+        title="Order Confirmed – Yeti Pep"
+        description="Your research peptide order has been successfully placed. Thank you for choosing Yeti Pep, your trusted UK research supplier."
         keywords="peptide order confirmation, research peptide purchase"
         canonical="https://yetipeptides.com/order-success"
       />

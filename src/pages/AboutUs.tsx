@@ -12,7 +12,7 @@ export default function AboutUs() {
   const aboutSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    'name': 'Yeti Peptides',
+    'name': 'Yeti Pep',
     'url': 'https://yetipeptides.com',
     'description': 'UK-based research peptide supplier. Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. Crypto checkout only.',
     'email': 'yetipeptides@protonmail.com',
@@ -22,7 +22,7 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen pb-20">
       <SEO
-        title="About Yeti Peptides – UK Research Peptide Supplier"
+        title="About Yeti Pep – UK Research Peptide Supplier"
         description="A small UK-based research peptide outfit. 99%+ purity, plain packaging, Royal Mail 24 tracked or anonymous InPost lockers."
         canonical="https://yetipeptides.com/about"
         schema={aboutSchema}
@@ -34,13 +34,13 @@ export default function AboutUs() {
         {/* Editorial masthead */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-16 md:mb-20 max-w-6xl mx-auto border-b border-border/30 pb-10">
           <AnimateOnScroll animation="fade-right" className="lg:col-span-8">
-            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-4">Yeti Peptides · UK Domestic</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-aurora mb-4">Yeti Pep · UK Domestic</div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] mb-6">
               A small UK bench. <span className="bg-gradient-to-r from-ice-blue to-aurora bg-clip-text text-transparent">Done properly.</span>
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
               No empire, no hype. One UK-based outfit running a tight despatch of research-grade
-              peptides — posted via Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
+              pep — posted via Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers, paid in crypto.
 
             </p>
           </AnimateOnScroll>
@@ -73,7 +73,7 @@ export default function AboutUs() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { icon: Microscope, title: 'Analytical Testing', desc: 'Identity and purity verified before release. Nothing below spec leaves the bench.' },
-                { icon: BadgeCheck, title: 'Purity Standards', desc: 'A strict 99%+ purity threshold across all peptides. Anything below spec doesn\'t leave the bench.' },
+                { icon: BadgeCheck, title: 'Purity Standards', desc: 'A strict 99%+ purity threshold across all pep. Anything below spec doesn\'t leave the bench.' },
                 { icon: ClipboardCheck, title: 'Research Grade', desc: 'Prepared and handled to research-grade standards — strictly for laboratory use.' },
                 { icon: FileText, title: 'COA on Request', desc: 'Certificates of Analysis available on request, for verification before or after delivery.' },
               ].map(({ icon: Icon, title, desc }, i) => (
@@ -106,7 +106,7 @@ export default function AboutUs() {
               {[
                 { icon: Truck, title: 'Royal Mail 24', desc: 'Tracked, flat £6. Drop at the local sorting office before 14:00 — typically arrives within 2 days.' },
                 { icon: Package, title: 'InPost Lockers', desc: 'For people who want anonymity — send us a locker QR, we post, you collect. You pay InPost\'s fee directly.' },
-                { icon: MapPin, title: 'Plain Packaging', desc: 'No external markings. No "Yeti Peptides" on the label. Nothing that suggests what\'s inside.' },
+                { icon: MapPin, title: 'Plain Packaging', desc: 'No external markings. No "Yeti Pep" on the label. Nothing that suggests what\'s inside.' },
               ].map(({ icon: Icon, title, desc }, i) => (
                 <AnimateOnScroll key={title} delay={i * 100}>
                   <div className="frosted-glass rounded-xl p-6 hover:bg-card/70 transition-all duration-300 h-full">

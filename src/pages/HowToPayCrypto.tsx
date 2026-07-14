@@ -114,8 +114,8 @@ export default function HowToPayCrypto() {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="How to Pay with Crypto | Yeti Peptides"
-        description="Step-by-step guide to paying with cryptocurrency at Yeti Peptides. Learn how to use Bitcoin, USDT, or USDC for secure checkout."
+        title="How to Pay with Crypto | Yeti Pep"
+        description="Step-by-step guide to paying with cryptocurrency at Yeti Pep. Learn how to use Bitcoin, USDT, or USDC for secure checkout."
         keywords="crypto payment, bitcoin payment, USDT payment, cryptocurrency checkout, how to pay crypto"
         canonical="https://yetipeptides.com/how-to-pay-crypto"
       />

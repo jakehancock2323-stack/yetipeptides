@@ -89,9 +89,9 @@ export default function Products() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="UK Research Peptides – Royal Mail 24 & InPost | Yeti Peptides"
-        description="UK domestic research peptides. Shipped same-day via Royal Mail 24 Tracked (typically 2 days) or anonymous InPost lockers. GBP pricing, crypto checkout."
-        keywords="UK peptides, research peptides UK, royal mail peptides, inpost peptides, GHK-Cu UK, MT-2 UK, tretinoin UK, domestic peptide supplier"
+        title="UK Research Pep – Royal Mail 24 & InPost | Yeti Pep"
+        description="UK domestic research pep. Shipped same-day via Royal Mail 24 Tracked (typically 2 days) or anonymous InPost lockers. GBP pricing, crypto checkout."
+        keywords="UK pep, research pep UK, royal mail pep, inpost pep, GHK-Cu UK, MT-2 UK, tretinoin UK, domestic peptide supplier"
         canonical="https://yetipeptides.com/products"
         schema={productsSchema}
       />

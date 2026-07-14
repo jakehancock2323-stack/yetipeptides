@@ -11,14 +11,14 @@ export default function Guides() {
     <div className="min-h-screen bg-background text-foreground">
       <Snowfall />
       <SEO
-        title="Research Peptide Guides & Articles | Yeti Peptides UK"
+        title="Research Peptide Guides & Articles | Yeti Pep UK"
         description="Plain-English guides for UK peptide researchers. Reconstitution, storage, dosing maths, and peptide-by-peptide research overviews."
         canonical="https://yetipeptides.com/guides"
-        keywords="peptide research guides UK, how to reconstitute peptides, peptide storage UK, retatrutide tirzepatide, BPC-157 research"
+        keywords="peptide research guides UK, how to reconstitute pep, peptide storage UK, retatrutide tirzepatide, BPC-157 research"
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Yeti Peptides Research Guides',
+          name: 'Yeti Pep Research Guides',
           url: 'https://yetipeptides.com/guides',
         }}
       />

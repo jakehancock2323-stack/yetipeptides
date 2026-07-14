@@ -9,7 +9,7 @@ export default function ShippingReturns() {
   return (
     <div className="min-h-screen pb-20">
       <SEO
-        title="Shipping & Returns – UK Domestic Delivery | Yeti Peptides"
+        title="Shipping & Returns – UK Domestic Delivery | Yeti Pep"
         description="Royal Mail 24 tracked (typically 2 days) or anonymous InPost lockers. UK domestic peptide delivery. Returns & damaged goods policy."
         canonical="https://yetipeptides.com/shipping-returns"
       />

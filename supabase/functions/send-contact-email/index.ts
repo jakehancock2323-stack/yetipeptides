@@ -74,12 +74,12 @@ const handler = async (req: Request): Promise<Response> => {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>Contact Form - Yeti Peptides</title>
+          <title>Contact Form - Yeti Pep</title>
         </head>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #1a2332 0%, #0d1520 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
             <h1 style="color: #47d9d9; margin: 0; font-size: 28px;">💬 New Contact Form Message</h1>
-            <p style="color: #b0c4de; margin: 10px 0 0 0;">Yeti Peptides</p>
+            <p style="color: #b0c4de; margin: 10px 0 0 0;">Yeti Pep</p>
           </div>
           
           <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
@@ -106,7 +106,7 @@ const handler = async (req: Request): Promise<Response> => {
           </div>
           
           <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
-            <p>Yeti Peptides - Premium Research Peptides</p>
+            <p>Yeti Pep - Premium Research Pep</p>
             <p>This is an automated contact form notification</p>
           </div>
         </body>
@@ -120,7 +120,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Yeti Peptides <onboarding@resend.dev>",
+        from: "Yeti Pep <onboarding@resend.dev>",
         to: ["yetipeptides@protonmail.com"],
         subject: `💬 Contact Form: ${safeName}`,
         html: emailHTML,

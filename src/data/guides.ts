@@ -14,16 +14,16 @@ export interface Guide {
 export const guides: Guide[] = [
   {
     slug: 'how-to-reconstitute-peptides-uk',
-    title: 'How to Reconstitute Lyophilised Peptides: A UK Research Guide',
+    title: 'How to Reconstitute Lyophilised Pep: A UK Research Guide',
     description:
-      'Evidence-based protocol for reconstituting lyophilised research peptides with bacteriostatic water, covering aseptic technique, dosing maths, and storage backed by stability literature.',
+      'Evidence-based protocol for reconstituting lyophilised research pep with bacteriostatic water, covering aseptic technique, dosing maths, and storage backed by stability literature.',
     excerpt:
       'Reconstitution is the single most error-prone step in a peptide workflow. This guide grounds the protocol in stability and aseptic-technique literature instead of folklore.',
     readTime: '8 min read',
     category: 'Lab Basics',
     publishedAt: '2026-06-01',
     keywords: [
-      'how to reconstitute peptides',
+      'how to reconstitute pep',
       'bacteriostatic water UK',
       'lyophilised peptide protocol',
       'peptide dosing calculator',
@@ -31,7 +31,7 @@ export const guides: Guide[] = [
     contentHtml: `
       <p>Reconstitution is the process of dissolving a lyophilised (freeze-dried) peptide in a sterile aqueous diluent. The standard diluent for multi-use research vials is <strong>bacteriostatic water containing 0.9% benzyl alcohol</strong>, an antimicrobial preservative that permits repeated needle entries over the in-use period of the vial (USP &lt;1207&gt; multi-dose container guidance).</p>
 
-      <p>The freeze-drying process itself removes ≥95% of water by ice sublimation under reduced pressure, which is why lyophilised peptides are stable at refrigeration temperatures for extended periods — the solvent that enables hydrolysis, deamidation and aggregation pathways has been removed.<sup>[1]</sup> Reintroducing water restarts those degradation kinetics, so technique matters.</p>
+      <p>The freeze-drying process itself removes ≥95% of water by ice sublimation under reduced pressure, which is why lyophilised pep are stable at refrigeration temperatures for extended periods — the solvent that enables hydrolysis, deamidation and aggregation pathways has been removed.<sup>[1]</sup> Reintroducing water restarts those degradation kinetics, so technique matters.</p>
 
       <h2>Materials</h2>
       <ul>
@@ -66,7 +66,7 @@ export const guides: Guide[] = [
 
       <h2>Common protocol failures</h2>
       <ul>
-        <li><strong>Shaking the vial.</strong> Mechanical agitation generates the air–liquid interface that drives aggregation of structured peptides.</li>
+        <li><strong>Shaking the vial.</strong> Mechanical agitation generates the air–liquid interface that drives aggregation of structured pep.</li>
         <li><strong>Using non-bacteriostatic diluent in a multi-use vial.</strong> Sterile water and saline have no preservative; microbial ingress over a 28-day use period is a real risk.</li>
         <li><strong>Storing reconstituted vials at room temperature.</strong> Solution-phase degradation follows Arrhenius kinetics — broadly, each 10 °C rise in temperature roughly doubles or quadruples the degradation rate.<sup>[1]</sup></li>
         <li><strong>Re-using syringes between vials.</strong> A documented contamination pathway; always single-use.</li>
@@ -80,7 +80,7 @@ export const guides: Guide[] = [
         <li>Hawe, A. et al. <em>Forced degradation of therapeutic proteins.</em> J. Pharm. Sci. 101, 895–913 (2012).</li>
       </ol>
 
-      <p class="disclaimer">All Yeti Peptides products are supplied strictly for in-vitro research use only and are not intended for human or animal consumption.</p>
+      <p class="disclaimer">All Yeti Pep products are supplied strictly for in-vitro research use only and are not intended for human or animal consumption.</p>
     `,
   },
   {
@@ -89,7 +89,7 @@ export const guides: Guide[] = [
     description:
       'Side-by-side comparison of Retatrutide and Tirzepatide grounded in the published NEJM, Lancet and SURPASS/SURMOUNT trial data — receptor activity, weight loss, HbA1c reduction, and safety signals.',
     excerpt:
-      'Two of the most-studied incretin-based research peptides. Here is what the registered Phase 2 and Phase 3 datasets actually reported.',
+      'Two of the most-studied incretin-based research pep. Here is what the registered Phase 2 and Phase 3 datasets actually reported.',
     readTime: '9 min read',
     category: 'Peptide Science',
     publishedAt: '2026-06-10',
@@ -100,7 +100,7 @@ export const guides: Guide[] = [
       'GLP-1 GIP glucagon agonist',
     ],
     contentHtml: `
-      <p>Retatrutide (LY3437943) and Tirzepatide (LY3298176) are two incretin-based investigational peptides developed by Eli Lilly. Both have generated substantial peer-reviewed clinical literature in the last five years. They are <strong>not interchangeable</strong>: they bind different receptors and the published trial endpoints differ meaningfully.</p>
+      <p>Retatrutide (LY3437943) and Tirzepatide (LY3298176) are two incretin-based investigational pep developed by Eli Lilly. Both have generated substantial peer-reviewed clinical literature in the last five years. They are <strong>not interchangeable</strong>: they bind different receptors and the published trial endpoints differ meaningfully.</p>
 
       <h2>Receptor pharmacology</h2>
       <ul>
@@ -129,9 +129,9 @@ export const guides: Guide[] = [
       <p>The Phase 3 Retatrutide programme (TRIUMPH) is ongoing as of publication and final readouts have not been incorporated here.</p>
 
       <h2>Handling and reconstitution</h2>
-      <p>Both peptides ship as a lyophilised powder and are reconstituted identically with bacteriostatic water. See our <a href="/guides/how-to-reconstitute-peptides-uk">reconstitution guide</a> for protocol and dosing maths.</p>
+      <p>Both pep ship as a lyophilised powder and are reconstituted identically with bacteriostatic water. See our <a href="/guides/how-to-reconstitute-peptides-uk">reconstitution guide</a> for protocol and dosing maths.</p>
 
-      <h2>Availability at Yeti Peptides</h2>
+      <h2>Availability at Yeti Pep</h2>
       <p>We supply UK-domestic research-grade <a href="/products?product=uk-retatrutide-30mg">Retatrutide 30 mg</a> and <a href="/products?product=uk-tirzepatide-30mg">Tirzepatide 30 mg</a>, posted via Royal Mail Tracked from West Yorkshire.</p>
 
       <h2>References</h2>
@@ -150,7 +150,7 @@ export const guides: Guide[] = [
     description:
       'Mechanistic and preclinical evidence for GHK-Cu (copper-binding tripeptide), covering gene-expression modulation, ECM remodelling and the foundational Pickart literature.',
     excerpt:
-      'GHK-Cu is one of the most extensively studied small peptides in regenerative research. Here is what the published literature actually shows.',
+      'GHK-Cu is one of the most extensively studied small pep in regenerative research. Here is what the published literature actually shows.',
     readTime: '6 min read',
     category: 'Peptide Science',
     publishedAt: '2026-06-15',
@@ -177,7 +177,7 @@ export const guides: Guide[] = [
       </ul>
 
       <h2>Preclinical wound and tissue models</h2>
-      <p>GHK-Cu has been studied in rodent and porcine wound models, with reported improvements in granulation tissue formation, angiogenesis and re-epithelialisation rates relative to control.<sup>[3]</sup> It is one of the few research peptides that has crossed into widespread cosmetic and dermatological topical use — though those applications are downstream of the foundational research literature, not the subject of this guide.</p>
+      <p>GHK-Cu has been studied in rodent and porcine wound models, with reported improvements in granulation tissue formation, angiogenesis and re-epithelialisation rates relative to control.<sup>[3]</sup> It is one of the few research pep that has crossed into widespread cosmetic and dermatological topical use — though those applications are downstream of the foundational research literature, not the subject of this guide.</p>
 
       <h2>Status</h2>
       <p>GHK-Cu is not an approved medicine in the UK, US or EU. The body of evidence consists primarily of in vitro mechanistic studies and preclinical animal models, with a smaller number of small-scale human dermatological studies.</p>
@@ -186,7 +186,7 @@ export const guides: Guide[] = [
       <p>Our <a href="/products?product=uk-klow">KLOW research blend</a> combines GHK-Cu (50 mg) with TB-500, BPC-157 and KPV in a single research vial. Standalone <a href="/products?product=uk-ghk-cu">GHK-Cu 50 mg</a> is also available domestically.</p>
 
       <h2>Handling notes</h2>
-      <p>GHK-Cu solutions are characteristically <strong>blue</strong> due to the copper coordination complex — this is expected and does not indicate degradation. Copper-containing peptides are generally more sensitive to solution-phase degradation than uncomplexed peptides; we recommend a shorter in-use window (14–21 days at 2–8 °C) than the 28-day rule of thumb used for many other peptides. See our <a href="/guides/storing-research-peptides-uk">storage guide</a> for full protocol.</p>
+      <p>GHK-Cu solutions are characteristically <strong>blue</strong> due to the copper coordination complex — this is expected and does not indicate degradation. Copper-containing pep are generally more sensitive to solution-phase degradation than uncomplexed pep; we recommend a shorter in-use window (14–21 days at 2–8 °C) than the 28-day rule of thumb used for many other pep. See our <a href="/guides/storing-research-peptides-uk">storage guide</a> for full protocol.</p>
 
       <h2>References</h2>
       <ol class="references">
@@ -201,16 +201,16 @@ export const guides: Guide[] = [
 
   {
     slug: 'storing-research-peptides-uk',
-    title: 'Storing Research Peptides Correctly: A Stability-Based Guide',
+    title: 'Storing Research Pep Correctly: A Stability-Based Guide',
     description:
-      'Evidence-based storage protocol for lyophilised and reconstituted research peptides, grounded in published Arrhenius kinetics and freeze–thaw aggregation data.',
+      'Evidence-based storage protocol for lyophilised and reconstituted research pep, grounded in published Arrhenius kinetics and freeze–thaw aggregation data.',
     excerpt:
       'Peptide stability is governed by temperature, water activity, light and interface exposure. Here is the storage protocol the literature actually supports.',
     readTime: '6 min read',
     category: 'Lab Basics',
     publishedAt: '2026-06-20',
     keywords: [
-      'storing peptides UK',
+      'storing pep UK',
       'peptide stability Arrhenius',
       'lyophilised peptide shelf life',
       'reconstituted peptide storage',
@@ -219,7 +219,7 @@ export const guides: Guide[] = [
       <p>Peptide stability is governed by four primary variables: <strong>temperature, water activity, light exposure, and air–liquid interface contact</strong>. Each maps to a documented degradation pathway — hydrolysis, deamidation (asparagine, glutamine), oxidation (methionine, cysteine, tryptophan) and physical aggregation. Storage protocols are designed to slow all four.</p>
 
       <h2>Temperature and Arrhenius kinetics</h2>
-      <p>Peptide degradation rates broadly follow Arrhenius kinetics: each 10 °C reduction in temperature typically slows the dominant degradation reactions by a factor of 2–4.<sup>[1]</sup> This is why lyophilised peptides stable for ~7 days at +25 °C are typically stable for 6–18 months at −20 °C and several years at −80 °C.<sup>[1]</sup> Asparagine-containing sequences in particular show measurable deamidation within 48 hours at room temperature but no detectable HPLC change after 18 months at −80 °C.</p>
+      <p>Peptide degradation rates broadly follow Arrhenius kinetics: each 10 °C reduction in temperature typically slows the dominant degradation reactions by a factor of 2–4.<sup>[1]</sup> This is why lyophilised pep stable for ~7 days at +25 °C are typically stable for 6–18 months at −20 °C and several years at −80 °C.<sup>[1]</sup> Asparagine-containing sequences in particular show measurable deamidation within 48 hours at room temperature but no detectable HPLC change after 18 months at −80 °C.</p>
 
       <h2>Lyophilised (unreconstituted) vials</h2>
       <ul>
@@ -232,12 +232,12 @@ export const guides: Guide[] = [
       <h2>Reconstituted vials</h2>
       <ul>
         <li><strong>Refrigerate at 2–8 °C immediately after reconstitution.</strong></li>
-        <li><strong>In-use window:</strong> the standard rule of thumb is 28 days for bacteriostatic-water reconstituted peptides at 2–8 °C, mirroring the in-use period for multi-dose pharmaceutical vials preserved with benzyl alcohol. Sequences with rapid solution-phase degradation (e.g. some GHK-Cu and copper-bound blends) are typically shorter.</li>
+        <li><strong>In-use window:</strong> the standard rule of thumb is 28 days for bacteriostatic-water reconstituted pep at 2–8 °C, mirroring the in-use period for multi-dose pharmaceutical vials preserved with benzyl alcohol. Sequences with rapid solution-phase degradation (e.g. some GHK-Cu and copper-bound blends) are typically shorter.</li>
         <li><strong>Do not freeze reconstituted material.</strong> Ice formation and freeze-concentration of solutes drive denaturation and aggregation; repeated freeze–thaw cycles measurably increase aggregation in aqueous peptide solutions.<sup>[2][3]</sup></li>
         <li><strong>Minimise headspace agitation.</strong> The air–liquid interface is a documented driver of physical aggregation in peptide solutions.<sup>[4]</sup></li>
       </ul>
 
-      <h2>What actively destroys peptides</h2>
+      <h2>What actively destroys pep</h2>
       <ul>
         <li><strong>Heat excursions.</strong> A vial left on a desk over a warm weekend accumulates degradation that cannot be reversed by returning it to the fridge.</li>
         <li><strong>Light, especially UV.</strong> Drives oxidation of Met, Trp, Cys.</li>
@@ -247,7 +247,7 @@ export const guides: Guide[] = [
       </ul>
 
       <h2>Shipping considerations</h2>
-      <p>Lyophilised peptides tolerate brief excursions to UK ambient temperatures during Royal Mail Tracked transit; the dry powder format means the dominant solution-phase degradation pathways are not active. On arrival, move vials directly to refrigeration (short-term use) or freezer storage (long-term).</p>
+      <p>Lyophilised pep tolerate brief excursions to UK ambient temperatures during Royal Mail Tracked transit; the dry powder format means the dominant solution-phase degradation pathways are not active. On arrival, move vials directly to refrigeration (short-term use) or freezer storage (long-term).</p>
 
       <h2>References</h2>
       <ol class="references">
@@ -288,13 +288,13 @@ export const guides: Guide[] = [
       <h2>Sterile water for injection (SWFI) — no preservative</h2>
       <p>SWFI contains no preservative. It is intended for <strong>single-use</strong> reconstitution where the entire vial is used immediately or discarded. Using SWFI in a multi-dose research workflow creates a measurable microbial-growth risk after the first puncture, because there is nothing in solution to inhibit organisms introduced by needle or air contact.</p>
 
-      <p>SWFI has a legitimate niche — single-dose vials, ultra-short reconstituted lifetimes, or peptides with documented benzyl alcohol incompatibility (rare; mostly highly hydrophobic sequences where solubility behaviour changes). For routine multi-dose research peptide work, it is the wrong default.</p>
+      <p>SWFI has a legitimate niche — single-dose vials, ultra-short reconstituted lifetimes, or pep with documented benzyl alcohol incompatibility (rare; mostly highly hydrophobic sequences where solubility behaviour changes). For routine multi-dose research peptide work, it is the wrong default.</p>
 
       <h2>Saline (0.9% NaCl) — usually unsuitable</h2>
-      <p>Sodium chloride solutions are not appropriate for general peptide reconstitution. Chloride ions can accelerate degradation of certain sequences (oxidation- and hydrolysis-sensitive residues), the ionic strength can shift solubility for some peptides, and saline contains no preservative. The pharmacological convention of saline as a diluent applies to small-molecule injectables, not lyophilised peptide vials intended for multi-day use.</p>
+      <p>Sodium chloride solutions are not appropriate for general peptide reconstitution. Chloride ions can accelerate degradation of certain sequences (oxidation- and hydrolysis-sensitive residues), the ionic strength can shift solubility for some pep, and saline contains no preservative. The pharmacological convention of saline as a diluent applies to small-molecule injectables, not lyophilised peptide vials intended for multi-day use.</p>
 
       <h2>What "0.9%" actually means and why it matters</h2>
-      <p>0.9% benzyl alcohol is the standard pharmacopoeial concentration. Some products are sold at higher concentrations (1.5–2%) for specific compounding workflows — these are not interchangeable with standard BWFI and can be unnecessarily harsh on more sensitive peptides. When buying BWFI, check the label states <strong>"0.9% benzyl alcohol"</strong> and is from a recognised pharmaceutical-grade manufacturer (Hospira/Pfizer being the most common reference product in the UK and US markets).</p>
+      <p>0.9% benzyl alcohol is the standard pharmacopoeial concentration. Some products are sold at higher concentrations (1.5–2%) for specific compounding workflows — these are not interchangeable with standard BWFI and can be unnecessarily harsh on more sensitive pep. When buying BWFI, check the label states <strong>"0.9% benzyl alcohol"</strong> and is from a recognised pharmaceutical-grade manufacturer (Hospira/Pfizer being the most common reference product in the UK and US markets).</p>
 
       <h2>Practical buying checklist</h2>
       <ul>
@@ -306,7 +306,7 @@ export const guides: Guide[] = [
       </ul>
 
       <h2>In-use stability and the 28-day rule</h2>
-      <p>Once punctured, a multi-dose BWFI vial has a documented in-use period of up to 28 days at 2–8 °C. The same window applies as a sensible upper bound to most BWFI-reconstituted peptides — but the rate-limiting factor becomes the peptide's own stability, not the diluent's preservative budget. Copper peptides (GHK-Cu) and some growth-hormone secretagogue blends degrade faster than 28 days; check the peptide-specific guidance.</p>
+      <p>Once punctured, a multi-dose BWFI vial has a documented in-use period of up to 28 days at 2–8 °C. The same window applies as a sensible upper bound to most BWFI-reconstituted pep — but the rate-limiting factor becomes the peptide's own stability, not the diluent's preservative budget. Copper pep (GHK-Cu) and some growth-hormone secretagogue blends degrade faster than 28 days; check the peptide-specific guidance.</p>
 
       <h2>Cautions and contraindications</h2>
       <p>Benzyl alcohol has well-documented toxicity in neonates ("gasping syndrome") at the doses used in clinical practice — this is why BWFI is not used in neonatal pharmacy. The doses involved in research peptide reconstitution are several orders of magnitude lower, but the toxicology context is worth knowing.</p>
@@ -377,7 +377,7 @@ export const guides: Guide[] = [
       <h2>References</h2>
       <ol class="references">
         <li>Dorr, R. T. et al. <em>Evaluation of melanotan-II, a superpotent cyclic melanotropic peptide.</em> Life Sci. 58, 1777–1784 (1996).</li>
-        <li>Hadley, M. E. & Dorr, R. T. <em>Melanocortin peptide therapeutics: historical milestones, clinical studies and commercialization.</em> Peptides 27, 921–930 (2006).</li>
+        <li>Hadley, M. E. & Dorr, R. T. <em>Melanocortin peptide therapeutics: historical milestones, clinical studies and commercialization.</em> Pep 27, 921–930 (2006).</li>
         <li>Levine, N. et al. <em>Induction of skin tanning by subcutaneous administration of a potent synthetic melanotropin.</em> JAMA 266, 2730–2736 (1991).</li>
         <li>Wessells, H. et al. <em>Synthetic melanotropic peptide initiates erections in men with psychogenic erectile dysfunction.</em> J. Urol. 160, 389–393 (1998).</li>
         <li>Wessells, H. et al. <em>Effect of an alpha-melanocyte stimulating hormone analog on penile erection and sexual desire in men with organic erectile dysfunction.</em> Urology 56, 641–646 (2000).</li>

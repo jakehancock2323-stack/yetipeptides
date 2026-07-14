@@ -7,8 +7,8 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Privacy Policy - Data Protection | Yeti Peptides"
-        description="Yeti Peptides privacy policy. Learn how we protect your personal data, handle information securely, and maintain confidentiality."
+        title="Privacy Policy - Data Protection | Yeti Pep"
+        description="Yeti Pep privacy policy. Learn how we protect your personal data, handle information securely, and maintain confidentiality."
         keywords="peptide supplier privacy policy, data protection, privacy"
         canonical="https://yetipeptides.com/privacy-policy"
       />

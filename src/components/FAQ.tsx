@@ -17,17 +17,17 @@ const faqs = [
     answer: "UK domestic only. Royal Mail 24 Tracked is a flat £6 — posted same day if you order before 14:00, and typically arrives within 2 days. Anonymous InPost locker drop-off is also available; you pay the InPost fee directly."
   },
   {
-    question: "What purity are your peptides?",
-    answer: "All our peptides are manufactured to a minimum purity of 99%+. Certificate of Analysis (COA) documentation is available upon request for any product."
+    question: "What purity are your pep?",
+    answer: "All our pep are manufactured to a minimum purity of 99%+. Certificate of Analysis (COA) documentation is available upon request for any product."
   },
 
   {
-    question: "How should I store the peptides?",
-    answer: "Lyophilised (freeze-dried) peptides should be stored at -20°C and protected from light. After reconstitution, store at 2-8°C and use within 14 days. Avoid repeated freeze-thaw cycles."
+    question: "How should I store the pep?",
+    answer: "Lyophilised (freeze-dried) pep should be stored at -20°C and protected from light. After reconstitution, store at 2-8°C and use within 14 days. Avoid repeated freeze-thaw cycles."
   },
   {
-    question: "Are these peptides for human use?",
-    answer: "No. All products sold by Yeti Peptides are strictly for laboratory and research purposes only. They are not intended for human or veterinary use, and should only be handled by qualified researchers."
+    question: "Are these pep for human use?",
+    answer: "No. All products sold by Yeti Pep are strictly for laboratory and research purposes only. They are not intended for human or veterinary use, and should only be handled by qualified researchers."
   },
   {
     question: "How can I contact customer support?",

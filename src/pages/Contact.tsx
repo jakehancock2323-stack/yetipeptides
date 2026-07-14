@@ -65,9 +65,9 @@ export default function Contact() {
   return (
     <div className="min-h-screen pb-20">
       <SEO 
-        title="Contact Us - Research Peptide Inquiries | Yeti Peptides"
-        description="Contact Yeti Peptides for research peptide inquiries, COA requests, and support. UK & worldwide peptide supplier. Email, Telegram, and Discord support available."
-        keywords="contact peptide supplier, peptide inquiries, research peptides support, COA request, peptide vendor contact"
+        title="Contact Us - Research Peptide Inquiries | Yeti Pep"
+        description="Contact Yeti Pep for research peptide inquiries, COA requests, and support. UK & worldwide peptide supplier. Email, Telegram, and Discord support available."
+        keywords="contact peptide supplier, peptide inquiries, research pep support, COA request, peptide vendor contact"
         canonical="https://yetipeptides.com/contact"
       />
       <Snowfall />

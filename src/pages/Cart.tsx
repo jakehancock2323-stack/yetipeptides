@@ -20,7 +20,7 @@ export default function Cart() {
     return (
       <div className="min-h-screen">
         <SEO
-          title="Shopping Basket – Yeti Peptides"
+          title="Shopping Basket – Yeti Pep"
           description="Review your research peptide order. Royal Mail 24 tracked UK domestic delivery."
           canonical="https://yetipeptides.com/cart"
         />
@@ -33,7 +33,7 @@ export default function Cart() {
                 <ShoppingBag className="w-10 h-10 text-muted-foreground" />
               </div>
               <h2 className="text-2xl font-bold mb-2">Your basket is empty</h2>
-              <p className="text-sm text-muted-foreground mb-8">Browse our research-grade peptides to get started.</p>
+              <p className="text-sm text-muted-foreground mb-8">Browse our research-grade pep to get started.</p>
               <Link to="/products">
                 <Button className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background gap-2">
                   Browse Products
@@ -51,7 +51,7 @@ export default function Cart() {
   return (
     <div className="min-h-screen pb-20">
       <SEO
-        title="Shopping Basket – Yeti Peptides"
+        title="Shopping Basket – Yeti Pep"
         description="Review your research peptide order. Royal Mail 24 tracked UK domestic delivery."
         canonical="https://yetipeptides.com/cart"
       />

@@ -12,7 +12,7 @@ import {
 } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
-const SITE_NAME = 'Yeti Peptides'
+const SITE_NAME = 'Yeti Pep'
 
 interface OrderItem {
   name: string
@@ -62,8 +62,8 @@ const OrderConfirmationEmail = ({
     <Preview>Your {SITE_NAME} order {orderId} — payment instructions inside</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={brand}>YETI PEPTIDES</Heading>
-        <Text style={tagline}>Research-grade peptides · For research use only</Text>
+        <Heading style={brand}>YETI PEP</Heading>
+        <Text style={tagline}>Research-grade pep · For research use only</Text>
 
         <Hr style={hr} />
 
@@ -166,7 +166,7 @@ const OrderConfirmationEmail = ({
 export const template = {
   component: OrderConfirmationEmail,
   subject: (data: Record<string, any>) =>
-    `Your Yeti Peptides Order #${data?.orderId ?? ''} — Payment Instructions`.trim(),
+    `Your Yeti Pep Order #${data?.orderId ?? ''} — Payment Instructions`.trim(),
   displayName: 'Order confirmation',
   previewData: {
     orderId: 'A1B2C3D4',

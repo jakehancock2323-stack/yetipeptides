@@ -47,7 +47,7 @@ export default function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
               <ShoppingBag className="w-9 h-9 text-muted-foreground" />
             </div>
             <h3 className="text-base font-bold mb-1">Your basket is empty</h3>
-            <p className="text-xs text-muted-foreground mb-6 max-w-[240px]">Browse our research-grade peptides and start your order.</p>
+            <p className="text-xs text-muted-foreground mb-6 max-w-[240px]">Browse our research-grade pep and start your order.</p>
             <Button
               onClick={() => onOpenChange(false)}
               className="bg-[hsl(var(--ice-blue))] hover:bg-[hsl(var(--ice-blue))]/90 text-background gap-2"

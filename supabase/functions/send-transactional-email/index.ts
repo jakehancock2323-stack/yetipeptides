@@ -308,7 +308,7 @@ Deno.serve(async (req) => {
     payload: {
       message_id: messageId,
       to: effectiveRecipient,
-      from: `Yeti Peptides <orders@${FROM_DOMAIN}>`,
+      from: `Yeti Pep <orders@${FROM_DOMAIN}>`,
       reply_to: 'yetipeptides@protonmail.com',
       sender_domain: SENDER_DOMAIN,
       subject: resolvedSubject,

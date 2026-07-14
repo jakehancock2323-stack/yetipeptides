@@ -10,9 +10,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-4">
             <div className="flex items-center gap-3 mb-4">
-              <img src={yetiLogo} alt="Yeti Peptides" className="w-8 h-8 object-contain" />
+              <img src={yetiLogo} alt="Yeti Pep" className="w-8 h-8 object-contain" />
               <div className="leading-none">
-                <span className="block text-lg font-bold text-ice-blue tracking-wider">YETI PEPTIDES</span>
+                <span className="block text-lg font-bold text-ice-blue tracking-wider">YETI PEP</span>
                 <span className="block text-[9px] uppercase tracking-[0.3em] text-muted-foreground mt-1">UK Domestic · 🇬🇧</span>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function Footer() {
             </p>
           </div>
           <p className="text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Yeti Peptides. UK domestic only. All rights reserved.
+            © {new Date().getFullYear()} Yeti Pep. UK domestic only. All rights reserved.
           </p>
         </div>
       </div>

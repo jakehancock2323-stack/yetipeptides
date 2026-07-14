@@ -12,8 +12,8 @@ const NotFound = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <SEO 
-        title="404 – Page Not Found | Yeti Peptides"
-        description="The page you're looking for doesn't exist. Browse our premium research-grade peptides or return to the homepage."
+        title="404 – Page Not Found | Yeti Pep"
+        description="The page you're looking for doesn't exist. Browse our premium research-grade pep or return to the homepage."
         canonical="https://yetipeptides.com/404"
       />
       <div className="text-center">
