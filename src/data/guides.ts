@@ -129,7 +129,7 @@ export const guides: Guide[] = [
       <p>The Phase 3 Retatrutide programme (TRIUMPH) is ongoing as of publication and final readouts have not been incorporated here.</p>
 
       <h2>Handling and reconstitution</h2>
-      <p>Both pep ship as a lyophilised powder and are reconstituted identically with bacteriostatic water. See our <a href="/guides/how-to-reconstitute-peptides-uk">reconstitution guide</a> for protocol and dosing maths.</p>
+      <p>Both pep products ship as a lyophilised powder and are reconstituted identically with bacteriostatic water. See our <a href="/guides/how-to-reconstitute-peptides-uk">reconstitution guide</a> for protocol and dosing maths.</p>
 
       <h2>Availability at Yeti Pep</h2>
       <p>We supply UK-domestic research-grade <a href="/products?product=uk-retatrutide-30mg">Retatrutide 30 mg</a> and <a href="/products?product=uk-tirzepatide-30mg">Tirzepatide 30 mg</a>, posted via Royal Mail Tracked from West Yorkshire.</p>
