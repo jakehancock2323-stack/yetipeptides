@@ -65,7 +65,7 @@ export const products: Product[] = [
     popular: true,
     badges: ["Cruelty Free Standards", "Small Batch Clinical Purity"],
     usage: "Apply 1-2 full droppers to face & massage in.",
-    variants: [{ specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 22 }],
+    variants: [{ specification: "GHK-Cu 3.33% Facial Serum • 30ml dropper", price: 25 }],
     ingredients: [
       "Aqua",
       "Sodium Hyaluronate",
@@ -79,20 +79,6 @@ export const products: Product[] = [
       "Transcutol",
       "Phenoxyethanol",
     ],
-  },
-  {
-    id: "hospira-bac-water",
-    name: "Hospira Bacteriostatic Water",
-    category: "Peptide Supplies",
-    region: "UK Domestic",
-    currency: "GBP",
-    outOfStock: true,
-    stockBadge: "Out of stock",
-    variants: [
-      { specification: "10mL Multidose Sterile Solution • USP Grade", price: 6, outOfStock: true },
-      { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12, outOfStock: true },
-    ],
-    image: "hospira-bac-water",
   },
   {
     id: "bac-water",

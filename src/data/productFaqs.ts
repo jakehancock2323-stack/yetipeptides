@@ -101,13 +101,6 @@ export function getProductFaqs(product: Product): FaqItem[] {
           'A 3.33% GHK-Cu copper-tripeptide facial serum in a base of sodium hyaluronate, niacinamide, N-acetyl glucosamine, panthenol, hydrolyzed silk protein, ectoin and propanediol. Apply 1–2 droppers to face & neck and massage in.',
       },
     ],
-    'hospira-bac-water': [
-      {
-        question: 'Why use bacteriostatic water rather than sterile water?',
-        answer:
-          'Bacteriostatic water (BWFI) contains 0.9% benzyl alcohol as a preservative, allowing repeated needle entries over the in-use period of a multi-dose vial. Sterile water for injection (SWFI) has no preservative and is intended for single-use reconstitution only — see USP <1207>.',
-      },
-    ],
   };
 
   return [...(productSpecific[product.id] ?? []), ...categorySpecific, ...shared];

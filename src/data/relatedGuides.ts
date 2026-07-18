@@ -33,10 +33,6 @@ export const RELATED_GUIDES: Record<string, string[]> = {
     'storing-research-peptides-uk',
   ],
   'frostskin-serum': ['ghk-cu-copper-peptide-research-overview'],
-  'hospira-bac-water': [
-    'choosing-bacteriostatic-water-uk',
-    'how-to-reconstitute-peptides-uk',
-  ],
   'uk-cjc-ipamorelin-10mg': [
     'how-to-reconstitute-peptides-uk',
     'storing-research-peptides-uk',
