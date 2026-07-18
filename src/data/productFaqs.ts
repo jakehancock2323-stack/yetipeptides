@@ -52,7 +52,7 @@ export function getProductFaqs(product: Product): FaqItem[] {
       : [];
 
   const productSpecific: Record<string, FaqItem[]> = {
-    'uk-retatrutide-30mg': [
+    'uk-retatrutide': [
       {
         question: 'What is Retatrutide?',
         answer:
