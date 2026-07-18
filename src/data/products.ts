@@ -86,8 +86,11 @@ export const products: Product[] = [
     category: "Peptide Supplies",
     region: "UK Domestic",
     currency: "GBP",
-    outOfStock: true,
-    variants: [{ specification: "30mL Multidose Sterile Solution • USP Grade", price: 12, outOfStock: true }],
+    stockBadge: "28 left",
+    variants: [
+      { specification: "10mL Multidose Sterile Solution • USP Grade", price: 6 },
+      { specification: "30mL Multidose Sterile Solution • USP Grade", price: 12, outOfStock: true },
+    ],
     image: "hospira-bac-water",
   },
   {
