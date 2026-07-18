@@ -11,7 +11,7 @@ import { ShoppingCart, Flame, Clock, AlertCircle } from 'lucide-react';
 import yetiVial from '@/assets/yeti-vial.png';
 import v1PenImage from '@/assets/v1-pen.png';
 import penCartridgeImage from '@/assets/pen-cartridge.png';
-import hospiraBacWaterImage from '@/assets/bac-water-hospira.png';
+
 import frostSkinImage from '@/assets/ice-elixir.png';
 import tretinoinCreamImage from '@/assets/tretinoin-cream.png';
 import { formatGbpEstimate } from '@/lib/currency';
@@ -32,7 +32,7 @@ const NICKNAME_MAP: Record<string, string> = {
   'tretinoin-cream': 'TRET',
   'v1-pen': 'V1',
   '3ml-pen-cartridge': '3ML',
-  'hospira-bac-water': 'BAC',
+  
 };
 
 function getNickname(product: Product): string {
@@ -56,7 +56,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const allVariantsOutOfStock = !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
   const isGbp = product.currency === 'GBP';
   const currencySymbol = isGbp ? '£' : '$';
-  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'hospira-bac-water' ? hospiraBacWaterImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
+  const productImage = product.id === 'v1-pen' ? v1PenImage : product.id === '3ml-pen-cartridge' ? penCartridgeImage : product.id === 'frostskin-serum' ? frostSkinImage : product.id === 'tretinoin-cream' ? tretinoinCreamImage : yetiVial;
   const isUkDomesticOutOfStock = product.region === 'UK Domestic' && !isPreOrder && (product.outOfStock || product.variants.every(v => v.outOfStock));
 
   const handleAddToCart = async () => {
@@ -96,7 +96,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img 
           src={productImage} 
           alt={`${product.name} - Research Product`}
-          className={`relative z-10 ${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'hospira-bac-water' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
+          className={`relative z-10 ${product.id === 'v1-pen' || product.id === '3ml-pen-cartridge' || product.id === 'frostskin-serum' || product.id === 'tretinoin-cream' ? 'max-w-[9rem] max-h-[9rem]' : 'max-w-[5rem] max-h-[7rem]'} object-contain transition-transform duration-500 group-hover:scale-110 ${allVariantsOutOfStock ? 'opacity-40 grayscale' : ''}`}
           loading="lazy"
         />
 
