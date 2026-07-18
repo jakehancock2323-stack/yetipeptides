@@ -132,7 +132,7 @@ export const guides: Guide[] = [
       <p>Both pep products ship as a lyophilised powder and are reconstituted identically with bacteriostatic water. See our <a href="/guides/how-to-reconstitute-peptides-uk">reconstitution guide</a> for protocol and dosing maths.</p>
 
       <h2>Availability at Yeti Pep</h2>
-      <p>We supply UK-domestic research-grade <a href="/products?product=uk-retatrutide-30mg">Retatrutide 30 mg</a> and <a href="/products?product=uk-tirzepatide-30mg">Tirzepatide 30 mg</a>, posted via Royal Mail Tracked from West Yorkshire.</p>
+      <p>We supply UK-domestic research-grade <a href="/products?product=uk-retatrutide">Retatrutide</a> and <a href="/products?product=uk-tirzepatide-30mg">Tirzepatide 30 mg</a>, posted via Royal Mail Tracked from West Yorkshire.</p>
 
       <h2>References</h2>
       <ol class="references">

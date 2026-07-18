@@ -3,7 +3,7 @@
  * Used by ProductDetail to surface internal links (SEO + UX).
  */
 export const RELATED_GUIDES: Record<string, string[]> = {
-  'uk-retatrutide-30mg': [
+  'uk-retatrutide': [
     'retatrutide-vs-tirzepatide-research-comparison',
     'how-to-reconstitute-peptides-uk',
     'storing-research-peptides-uk',

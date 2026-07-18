@@ -22,7 +22,7 @@ interface ProductCardProps {
 }
 
 const NICKNAME_MAP: Record<string, string> = {
-  'uk-retatrutide-30mg': 'RETA',
+  'uk-retatrutide': 'RETA',
   'uk-tirzepatide-30mg': 'TIRZ',
   'uk-tesamorelin-10mg': 'TESA',
   'uk-ghkcu-100mg': 'GHK',
@@ -32,7 +32,6 @@ const NICKNAME_MAP: Record<string, string> = {
   'tretinoin-cream': 'TRET',
   'v1-pen': 'V1',
   '3ml-pen-cartridge': '3ML',
-  
 };
 
 function getNickname(product: Product): string {
