@@ -29,7 +29,25 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
     const saved = localStorage.getItem('cart');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed: CartItem[] = JSON.parse(saved);
+      // Rehydrate product + variant from the current catalog so cached prices,
+      // names, and stock flags don't go stale after catalog updates.
+      return parsed
+        .map((item) => {
+          const currentProduct = products.find((p) => p.id === item.product.id);
+          if (!currentProduct) return null;
+          const currentVariant = currentProduct.variants.find(
+            (v) => v.specification === item.variant.specification,
+          );
+          if (!currentVariant) return null;
+          return { product: currentProduct, variant: currentVariant, quantity: item.quantity };
+        })
+        .filter((i): i is CartItem => i !== null);
+    } catch {
+      return [];
+    }
   });
   const itemsRef = useRef<CartItem[]>(items);
 
