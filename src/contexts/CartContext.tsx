@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { Product, ProductVariant } from '@/data/products';
+import { Product, ProductVariant, products } from '@/data/products';
 import { toast } from 'sonner';
 import { CartRegion, getProductRegion } from '@/lib/cartRegion';
 
