@@ -126,7 +126,10 @@ export const products: Product[] = [
     currency: "GBP",
     popular: true,
     stockBadge: "In Stock",
-    variants: [{ specification: "30mg × 1 vial", price: 21 }],
+    variants: [
+      { specification: "30mg × 1 vial", price: 21 },
+      { specification: "40mg × 1 vial", price: 28, outOfStock: true },
+    ],
   },
 
   {
@@ -165,7 +168,7 @@ export const products: Product[] = [
     category: "Pep",
     region: "UK Domestic",
     currency: "GBP",
-    stockBadge: "11 vials left",
+    stockBadge: "3 vials left",
     variants: [{ specification: "100mg × 1 vial", price: 16 }],
   },
   {
